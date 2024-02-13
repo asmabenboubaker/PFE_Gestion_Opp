@@ -1,0 +1,8 @@
+
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ó³ğËùÿÿÿÿ
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Ó³ğËùÿÿÿÿ
+r
+java:S1128"URemove this unused import 'org.springframework.boot.autoconfigure.domain.EntityScan'.(›Ù¯8ªíÓÍ×1
+B
+java:S1068"'Remove this unused "log" private field.(¥İë‹şÿÿÿÿ

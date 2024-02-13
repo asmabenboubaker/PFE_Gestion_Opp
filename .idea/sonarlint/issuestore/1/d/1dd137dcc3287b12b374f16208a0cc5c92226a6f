@@ -1,0 +1,12 @@
+
+*
+java:S1700="Rename field "event"(áîïÇ
+h	java:S116"SRename this field "CallRest" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤‹äî
+l
+java:S1206 "PThis class overrides "equals()" and should therefore also override "hashCode()".(Ý¢êÍýÿÿÿÿ
+x
+java:S4144ª"\Update this method so that its implementation is not identical to "getPlanDate" on line 101.(ãŸÌ˜þÿÿÿÿ
+v
+java:S4144—"ZUpdate this method so that its implementation is not identical to "isProcess" on line 215.(þ®Ìºüÿÿÿÿ
+?
+java:S2201Q"*The return value of "concat" must be used.(Ù€ÝK
