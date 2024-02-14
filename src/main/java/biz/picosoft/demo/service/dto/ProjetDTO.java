@@ -1,7 +1,8 @@
 package biz.picosoft.demo.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,9 +14,9 @@ public class ProjetDTO implements Serializable {
 
     private String nom;
 
-    private Instant dateDebut;
+    private Date dateDebut;
 
-    private Instant dateFin;
+    private Date dateFin;
 
     private String responsable;
 
@@ -39,19 +40,19 @@ public class ProjetDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Instant dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Instant getDateFin() {
+    public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Instant dateFin) {
+    public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 

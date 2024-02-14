@@ -5,13 +5,14 @@ import biz.picosoft.demo.domain.Projet;
 import biz.picosoft.demo.service.dto.PVDTO;
 import biz.picosoft.demo.service.dto.ProjetDTO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-08T10:29:09+0100",
+    date = "2024-02-13T11:17:46+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -26,7 +27,9 @@ public class PVMapperImpl implements PVMapper {
         PV pV = new PV();
 
         pV.setId( dto.getId() );
-        pV.setDatePV( dto.getDatePV() );
+        if ( dto.getDatePV() != null ) {
+            pV.setDatePV( dto.getDatePV().toInstant() );
+        }
         pV.setContenu( dto.getContenu() );
         pV.setParticipants( dto.getParticipants() );
         pV.setStatut( dto.getStatut() );
@@ -73,7 +76,7 @@ public class PVMapperImpl implements PVMapper {
             entity.setId( dto.getId() );
         }
         if ( dto.getDatePV() != null ) {
-            entity.setDatePV( dto.getDatePV() );
+            entity.setDatePV( dto.getDatePV().toInstant() );
         }
         if ( dto.getContenu() != null ) {
             entity.setContenu( dto.getContenu() );
@@ -102,7 +105,9 @@ public class PVMapperImpl implements PVMapper {
 
         pVDTO.setProjet( toDtoProjetId( s.getProjet() ) );
         pVDTO.setId( s.getId() );
-        pVDTO.setDatePV( s.getDatePV() );
+        if ( s.getDatePV() != null ) {
+            pVDTO.setDatePV( Date.from( s.getDatePV() ) );
+        }
         pVDTO.setContenu( s.getContenu() );
         pVDTO.setParticipants( s.getParticipants() );
         pVDTO.setStatut( s.getStatut() );
@@ -132,8 +137,12 @@ public class PVMapperImpl implements PVMapper {
 
         projet.setId( projetDTO.getId() );
         projet.setNom( projetDTO.getNom() );
-        projet.setDateDebut( projetDTO.getDateDebut() );
-        projet.setDateFin( projetDTO.getDateFin() );
+        if ( projetDTO.getDateDebut() != null ) {
+            projet.setDateDebut( projetDTO.getDateDebut().toInstant() );
+        }
+        if ( projetDTO.getDateFin() != null ) {
+            projet.setDateFin( projetDTO.getDateFin().toInstant() );
+        }
         projet.setResponsable( projetDTO.getResponsable() );
         projet.setDescription( projetDTO.getDescription() );
         projet.setParticipants( projetDTO.getParticipants() );
@@ -153,10 +162,10 @@ public class PVMapperImpl implements PVMapper {
             mappingTarget.setNom( projetDTO.getNom() );
         }
         if ( projetDTO.getDateDebut() != null ) {
-            mappingTarget.setDateDebut( projetDTO.getDateDebut() );
+            mappingTarget.setDateDebut( projetDTO.getDateDebut().toInstant() );
         }
         if ( projetDTO.getDateFin() != null ) {
-            mappingTarget.setDateFin( projetDTO.getDateFin() );
+            mappingTarget.setDateFin( projetDTO.getDateFin().toInstant() );
         }
         if ( projetDTO.getResponsable() != null ) {
             mappingTarget.setResponsable( projetDTO.getResponsable() );

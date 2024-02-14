@@ -4,7 +4,8 @@ package biz.picosoft.demo.service.dto;
 import biz.picosoft.demo.domain.enumeration.StatutProjet;
 
 import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public class PVDTO implements Serializable {
 
     private Long id;
 
-    private Instant datePV;
+    private Date datePV;
 
     private String contenu;
 
@@ -32,11 +33,11 @@ public class PVDTO implements Serializable {
         this.id = id;
     }
 
-    public Instant getDatePV() {
+    public Date getDatePV() {
         return datePV;
     }
 
-    public void setDatePV(Instant datePV) {
+    public void setDatePV(Date datePV) {
         this.datePV = datePV;
     }
 

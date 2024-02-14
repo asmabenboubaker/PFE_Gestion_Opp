@@ -3,10 +3,12 @@ package biz.picosoft.demo.config;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -18,14 +20,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+@Component
 public class JWTAutorizationFilter extends OncePerRequestFilter {
 
-    protected void filter(
+    protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain chain)
 
             throws ServletException, IOException {
+
+        String securityKey = BeanUtil.getBean(Environment.class).getProperty("spring.security.key");
+
 
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,PUT,OPTIONS");
@@ -43,22 +49,23 @@ public class JWTAutorizationFilter extends OncePerRequestFilter {
         String username = "system";
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         if (jwt == null) {
-            String api = request.getHeader(biz.picosoft.demo.config.SecurityConstants.HEADER_API_STRING);
+            String api = request.getHeader(SecurityConstants.HEADER_API_STRING);
             if (api == null) {
                 chain.doFilter(request, response);
                 return;
             }
             else {
                 jwt=BeanUtil.getBean(KernelService.class).getToken(api);
+                System.out.println("MM Token//"+jwt+"From apikey"+api);
             }
 
         }
-        if (!jwt.startsWith(biz.picosoft.demo.config.SecurityConstants.TOCKEN_PREFIX)) {
+        else if (!jwt.startsWith(SecurityConstants.TOCKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
         } else {
-            Claims claims = Jwts.parser().setSigningKey(biz.picosoft.demo.config.SecurityConstants.SECRET)
-                    .parseClaimsJws(jwt.replace(biz.picosoft.demo.config.SecurityConstants.TOCKEN_PREFIX, "")).getBody();
+            Claims claims = Jwts.parser().setSigningKey(securityKey)
+                    .parseClaimsJws(jwt.replace(SecurityConstants.TOCKEN_PREFIX, "")).getBody();
 
             username = claims.getSubject();
 
@@ -69,9 +76,6 @@ public class JWTAutorizationFilter extends OncePerRequestFilter {
             }));
             authorities.add(new SimpleGrantedAuthority("Admin_Acl"));
         }
-
-
-
         UsernamePasswordAuthenticationToken authenticatedUser = new UsernamePasswordAuthenticationToken(username, null,
                 authorities);
         SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
@@ -79,11 +83,5 @@ public class JWTAutorizationFilter extends OncePerRequestFilter {
 
     }
 
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
-        filter(request, response, chain);
-    }
 
 }

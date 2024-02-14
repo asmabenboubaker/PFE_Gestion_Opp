@@ -1,7 +1,8 @@
 package biz.picosoft.demo.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -21,7 +22,7 @@ public class ClientDTO implements Serializable {
 
     private String nom;
 
-    private Instant dateInscription;
+    private Date dateInscription;
 
     private String typeClient;
 
@@ -75,11 +76,11 @@ public class ClientDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateInscription() {
+    public Date getDateInscription() {
         return dateInscription;
     }
 
-    public void setDateInscription(Instant dateInscription) {
+    public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
 

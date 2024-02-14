@@ -1,6 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.Cache;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,9 +36,9 @@ public class Demande implements Serializable {
 
     @Column(name = "nom")
     private String nom;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_de_creation")
-    private Instant dateDeCreation;
+    private Date dateDeCreation;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
@@ -115,16 +117,16 @@ public class Demande implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateDeCreation() {
+    public Date getDateDeCreation() {
         return this.dateDeCreation;
     }
 
-    public Demande dateDeCreation(Instant dateDeCreation) {
+    public Demande dateDeCreation(Date dateDeCreation) {
         this.setDateDeCreation(dateDeCreation);
         return this;
     }
 
-    public void setDateDeCreation(Instant dateDeCreation) {
+    public void setDateDeCreation(Date dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

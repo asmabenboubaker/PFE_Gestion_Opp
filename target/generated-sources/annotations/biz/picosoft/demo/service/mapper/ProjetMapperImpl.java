@@ -3,13 +3,14 @@ package biz.picosoft.demo.service.mapper;
 import biz.picosoft.demo.domain.Projet;
 import biz.picosoft.demo.service.dto.ProjetDTO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-08T10:29:10+0100",
+    date = "2024-02-13T11:17:46+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -25,8 +26,12 @@ public class ProjetMapperImpl implements ProjetMapper {
 
         projet.setId( dto.getId() );
         projet.setNom( dto.getNom() );
-        projet.setDateDebut( dto.getDateDebut() );
-        projet.setDateFin( dto.getDateFin() );
+        if ( dto.getDateDebut() != null ) {
+            projet.setDateDebut( dto.getDateDebut().toInstant() );
+        }
+        if ( dto.getDateFin() != null ) {
+            projet.setDateFin( dto.getDateFin().toInstant() );
+        }
         projet.setResponsable( dto.getResponsable() );
         projet.setDescription( dto.getDescription() );
         projet.setParticipants( dto.getParticipants() );
@@ -44,8 +49,12 @@ public class ProjetMapperImpl implements ProjetMapper {
 
         projetDTO.setId( entity.getId() );
         projetDTO.setNom( entity.getNom() );
-        projetDTO.setDateDebut( entity.getDateDebut() );
-        projetDTO.setDateFin( entity.getDateFin() );
+        if ( entity.getDateDebut() != null ) {
+            projetDTO.setDateDebut( Date.from( entity.getDateDebut() ) );
+        }
+        if ( entity.getDateFin() != null ) {
+            projetDTO.setDateFin( Date.from( entity.getDateFin() ) );
+        }
         projetDTO.setResponsable( entity.getResponsable() );
         projetDTO.setDescription( entity.getDescription() );
         projetDTO.setParticipants( entity.getParticipants() );
@@ -94,10 +103,10 @@ public class ProjetMapperImpl implements ProjetMapper {
             entity.setNom( dto.getNom() );
         }
         if ( dto.getDateDebut() != null ) {
-            entity.setDateDebut( dto.getDateDebut() );
+            entity.setDateDebut( dto.getDateDebut().toInstant() );
         }
         if ( dto.getDateFin() != null ) {
-            entity.setDateFin( dto.getDateFin() );
+            entity.setDateFin( dto.getDateFin().toInstant() );
         }
         if ( dto.getResponsable() != null ) {
             entity.setResponsable( dto.getResponsable() );

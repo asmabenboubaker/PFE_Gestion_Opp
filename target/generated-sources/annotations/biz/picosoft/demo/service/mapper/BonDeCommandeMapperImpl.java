@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-08T10:29:10+0100",
+    date = "2024-02-13T11:17:46+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -266,8 +266,12 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         projet.setId( projetDTO.getId() );
         projet.setNom( projetDTO.getNom() );
-        projet.setDateDebut( projetDTO.getDateDebut() );
-        projet.setDateFin( projetDTO.getDateFin() );
+        if ( projetDTO.getDateDebut() != null ) {
+            projet.setDateDebut( projetDTO.getDateDebut().toInstant() );
+        }
+        if ( projetDTO.getDateFin() != null ) {
+            projet.setDateFin( projetDTO.getDateFin().toInstant() );
+        }
         projet.setResponsable( projetDTO.getResponsable() );
         projet.setDescription( projetDTO.getDescription() );
         projet.setParticipants( projetDTO.getParticipants() );
@@ -424,10 +428,10 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             mappingTarget.setNom( projetDTO.getNom() );
         }
         if ( projetDTO.getDateDebut() != null ) {
-            mappingTarget.setDateDebut( projetDTO.getDateDebut() );
+            mappingTarget.setDateDebut( projetDTO.getDateDebut().toInstant() );
         }
         if ( projetDTO.getDateFin() != null ) {
-            mappingTarget.setDateFin( projetDTO.getDateFin() );
+            mappingTarget.setDateFin( projetDTO.getDateFin().toInstant() );
         }
         if ( projetDTO.getResponsable() != null ) {
             mappingTarget.setResponsable( projetDTO.getResponsable() );

@@ -7,13 +7,14 @@ import biz.picosoft.demo.service.dto.FactureDTO;
 import biz.picosoft.demo.service.dto.PVDTO;
 import biz.picosoft.demo.service.dto.ProjetDTO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-08T10:29:10+0100",
+    date = "2024-02-13T11:17:45+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -28,7 +29,9 @@ public class FactureMapperImpl implements FactureMapper {
         Facture facture = new Facture();
 
         facture.setId( dto.getId() );
-        facture.setDateFacture( dto.getDateFacture() );
+        if ( dto.getDateFacture() != null ) {
+            facture.setDateFacture( dto.getDateFacture().toInstant() );
+        }
         facture.setDescription( dto.getDescription() );
         facture.setServiceFournis( dto.getServiceFournis() );
         facture.pv( pVDTOToPV( dto.getPv() ) );
@@ -74,7 +77,7 @@ public class FactureMapperImpl implements FactureMapper {
             entity.setId( dto.getId() );
         }
         if ( dto.getDateFacture() != null ) {
-            entity.setDateFacture( dto.getDateFacture() );
+            entity.setDateFacture( dto.getDateFacture().toInstant() );
         }
         if ( dto.getDescription() != null ) {
             entity.setDescription( dto.getDescription() );
@@ -100,7 +103,9 @@ public class FactureMapperImpl implements FactureMapper {
 
         factureDTO.setPv( toDtoPVId( s.getPv() ) );
         factureDTO.setId( s.getId() );
-        factureDTO.setDateFacture( s.getDateFacture() );
+        if ( s.getDateFacture() != null ) {
+            factureDTO.setDateFacture( Date.from( s.getDateFacture() ) );
+        }
         factureDTO.setDescription( s.getDescription() );
         factureDTO.setServiceFournis( s.getServiceFournis() );
 
@@ -129,8 +134,12 @@ public class FactureMapperImpl implements FactureMapper {
 
         projet.setId( projetDTO.getId() );
         projet.setNom( projetDTO.getNom() );
-        projet.setDateDebut( projetDTO.getDateDebut() );
-        projet.setDateFin( projetDTO.getDateFin() );
+        if ( projetDTO.getDateDebut() != null ) {
+            projet.setDateDebut( projetDTO.getDateDebut().toInstant() );
+        }
+        if ( projetDTO.getDateFin() != null ) {
+            projet.setDateFin( projetDTO.getDateFin().toInstant() );
+        }
         projet.setResponsable( projetDTO.getResponsable() );
         projet.setDescription( projetDTO.getDescription() );
         projet.setParticipants( projetDTO.getParticipants() );
@@ -146,7 +155,9 @@ public class FactureMapperImpl implements FactureMapper {
         PV pV = new PV();
 
         pV.setId( pVDTO.getId() );
-        pV.setDatePV( pVDTO.getDatePV() );
+        if ( pVDTO.getDatePV() != null ) {
+            pV.setDatePV( pVDTO.getDatePV().toInstant() );
+        }
         pV.setContenu( pVDTO.getContenu() );
         pV.setParticipants( pVDTO.getParticipants() );
         pV.setStatut( pVDTO.getStatut() );
@@ -167,10 +178,10 @@ public class FactureMapperImpl implements FactureMapper {
             mappingTarget.setNom( projetDTO.getNom() );
         }
         if ( projetDTO.getDateDebut() != null ) {
-            mappingTarget.setDateDebut( projetDTO.getDateDebut() );
+            mappingTarget.setDateDebut( projetDTO.getDateDebut().toInstant() );
         }
         if ( projetDTO.getDateFin() != null ) {
-            mappingTarget.setDateFin( projetDTO.getDateFin() );
+            mappingTarget.setDateFin( projetDTO.getDateFin().toInstant() );
         }
         if ( projetDTO.getResponsable() != null ) {
             mappingTarget.setResponsable( projetDTO.getResponsable() );
@@ -192,7 +203,7 @@ public class FactureMapperImpl implements FactureMapper {
             mappingTarget.setId( pVDTO.getId() );
         }
         if ( pVDTO.getDatePV() != null ) {
-            mappingTarget.setDatePV( pVDTO.getDatePV() );
+            mappingTarget.setDatePV( pVDTO.getDatePV().toInstant() );
         }
         if ( pVDTO.getContenu() != null ) {
             mappingTarget.setContenu( pVDTO.getContenu() );

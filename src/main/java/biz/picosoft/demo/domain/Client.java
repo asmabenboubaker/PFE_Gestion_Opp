@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Client implements Serializable {
     private String nom;
 
     @Column(name = "date_inscription")
-    private Instant dateInscription;
+    private Date dateInscription;
 
     @Column(name = "type_client")
     private String typeClient;
@@ -134,16 +135,16 @@ public class Client implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateInscription() {
+    public Date getDateInscription() {
         return this.dateInscription;
     }
 
-    public Client dateInscription(Instant dateInscription) {
+    public Client dateInscription(Date dateInscription) {
         this.setDateInscription(dateInscription);
         return this;
     }
 
-    public void setDateInscription(Instant dateInscription) {
+    public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
 

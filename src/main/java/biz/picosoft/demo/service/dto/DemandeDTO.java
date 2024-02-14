@@ -3,9 +3,11 @@ package biz.picosoft.demo.service.dto;
 
 
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,8 +24,8 @@ public class DemandeDTO implements Serializable {
     private String description;
 
     private String nom;
-
-    private Instant dateDeCreation;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dateDeCreation;
 
     private StatutDemande statut;
 
@@ -63,11 +65,11 @@ public class DemandeDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateDeCreation() {
+    public Date getDateDeCreation() {
         return dateDeCreation;
     }
 
-    public void setDateDeCreation(Instant dateDeCreation) {
+    public void setDateDeCreation(Date dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

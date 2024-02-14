@@ -1,7 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
-import java.time.Instant;
+import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -12,7 +12,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Demande_ {
 
 	public static volatile SingularAttribute<Demande, String> statutDemande;
-	public static volatile SingularAttribute<Demande, Instant> dateDeCreation;
+	public static volatile SingularAttribute<Demande, Date> dateDeCreation;
 	public static volatile SetAttribute<Demande, Domaine> domaines;
 	public static volatile SetAttribute<Demande, Opportunite> opportunites;
 	public static volatile SingularAttribute<Demande, String> description;

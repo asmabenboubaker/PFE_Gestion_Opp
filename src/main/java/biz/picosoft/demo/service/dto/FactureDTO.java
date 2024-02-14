@@ -1,7 +1,8 @@
 package biz.picosoft.demo.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -11,7 +12,7 @@ public class FactureDTO implements Serializable {
 
     private Long id;
 
-    private Instant dateFacture;
+    private Date dateFacture;
 
     private String description;
 
@@ -27,11 +28,11 @@ public class FactureDTO implements Serializable {
         this.id = id;
     }
 
-    public Instant getDateFacture() {
+    public Date getDateFacture() {
         return dateFacture;
     }
 
-    public void setDateFacture(Instant dateFacture) {
+    public void setDateFacture(Date dateFacture) {
         this.dateFacture = dateFacture;
     }
 

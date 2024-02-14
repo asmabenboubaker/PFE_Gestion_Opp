@@ -100,9 +100,9 @@ public class DemandeQueryService extends QueryService<Demande> {
             if (criteria.getNom() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNom(), Demande_.nom));
             }
-            if (criteria.getDateDeCreation() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDateDeCreation(), Demande_.dateDeCreation));
-            }
+//            if (criteria.getDateDeCreation() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDateDeCreation(), Demande_.dateDeCreation));
+//            }
 
             if (criteria.getOpportuniteId() != null) {
                 specification =
