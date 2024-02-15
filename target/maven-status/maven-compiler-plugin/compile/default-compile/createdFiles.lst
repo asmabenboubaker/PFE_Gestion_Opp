@@ -116,6 +116,7 @@ biz\picosoft\demo\domain\Domaine_.class
 biz\picosoft\demo\service\criteria\EtudeOppCriteria.class
 biz\picosoft\demo\controller\ProjetResource.class
 biz\picosoft\demo\service\DomaineQueryService.class
+biz\picosoft\demo\config\BeanConfiguration.class
 biz\picosoft\demo\service\criteria\PVCriteria$StatutProjetFilter.class
 biz\picosoft\demo\service\impl\ProjetServiceImpl.class
 biz\picosoft\demo\service\mapper\DomaineMapper.class

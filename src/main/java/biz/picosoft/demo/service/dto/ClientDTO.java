@@ -1,7 +1,10 @@
 package biz.picosoft.demo.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,8 +24,8 @@ public class ClientDTO implements Serializable {
     private String description;
 
     private String nom;
-
-    private Date dateInscription;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
+    private ZonedDateTime  dateInscription;
 
     private String typeClient;
 
@@ -76,11 +79,11 @@ public class ClientDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Date getDateInscription() {
+    public ZonedDateTime getDateInscription() {
         return dateInscription;
     }
 
-    public void setDateInscription(Date dateInscription) {
+    public void setDateInscription(ZonedDateTime  dateInscription) {
         this.dateInscription = dateInscription;
     }
 

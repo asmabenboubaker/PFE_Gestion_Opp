@@ -3,10 +3,10 @@ package biz.picosoft.demo.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+import java.time.ZonedDateTime;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,7 @@ import java.util.Set;
  * A Client.
  */
 @Entity
+
 @Table(name = "client",schema = "opportunite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Client implements Serializable {
@@ -42,7 +43,8 @@ public class Client implements Serializable {
     private String nom;
 
     @Column(name = "date_inscription")
-    private Date dateInscription;
+
+    private ZonedDateTime dateInscription;
 
     @Column(name = "type_client")
     private String typeClient;
@@ -135,16 +137,16 @@ public class Client implements Serializable {
         this.nom = nom;
     }
 
-    public Date getDateInscription() {
+    public ZonedDateTime getDateInscription() {
         return this.dateInscription;
     }
 
-    public Client dateInscription(Date dateInscription) {
+    public Client dateInscription(ZonedDateTime dateInscription) {
         this.setDateInscription(dateInscription);
         return this;
     }
 
-    public void setDateInscription(Date dateInscription) {
+    public void setDateInscription(ZonedDateTime dateInscription) {
         this.dateInscription = dateInscription;
     }
 
