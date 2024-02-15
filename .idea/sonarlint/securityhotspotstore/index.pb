@@ -275,3 +275,5 @@ p
 Msrc/main/java/biz/picosoft/demo/config/slf4j/Slf4jMDCFilterConfiguration.java,8\5\858b08dcc3e715fdda21e073a0c9bed63d5e7d36
 g
 7src/main/java/biz/picosoft/demo/config/PSTranslate.java,7\6\763dea2939da66aad63ede51f1e691bd2e0eae1a
+u
+Esrc/main/java/biz/picosoft/demo/domain/enumeration/StatutDemande.java,4\6\46c628de03fd515b5fffc31d55374bac959b3ea7
