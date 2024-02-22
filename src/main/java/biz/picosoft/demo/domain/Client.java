@@ -3,11 +3,11 @@ package biz.picosoft.demo.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
+
+import java.time.LocalDate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,8 +43,8 @@ public class Client implements Serializable {
     private String nom;
 
     @Column(name = "date_inscription")
-
-    private ZonedDateTime dateInscription;
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
+    private LocalDate dateInscription;
 
     @Column(name = "type_client")
     private String typeClient;
@@ -137,16 +137,16 @@ public class Client implements Serializable {
         this.nom = nom;
     }
 
-    public ZonedDateTime getDateInscription() {
+    public LocalDate getDateInscription() {
         return this.dateInscription;
     }
 
-    public Client dateInscription(ZonedDateTime dateInscription) {
+    public Client dateInscription(LocalDate dateInscription) {
         this.setDateInscription(dateInscription);
         return this;
     }
 
-    public void setDateInscription(ZonedDateTime dateInscription) {
+    public void setDateInscription(LocalDate dateInscription) {
         this.dateInscription = dateInscription;
     }
 

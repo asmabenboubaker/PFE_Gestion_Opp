@@ -1,6 +1,6 @@
 package biz.picosoft.demo.domain;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -12,7 +12,7 @@ public abstract class Client_ {
 
 	public static volatile SingularAttribute<Client, String> notes;
 	public static volatile SingularAttribute<Client, String> telephne;
-	public static volatile SingularAttribute<Client, ZonedDateTime> dateInscription;
+	public static volatile SingularAttribute<Client, LocalDate> dateInscription;
 	public static volatile SingularAttribute<Client, String> typeClient;
 	public static volatile SingularAttribute<Client, String> adresse;
 	public static volatile SingularAttribute<Client, String> description;

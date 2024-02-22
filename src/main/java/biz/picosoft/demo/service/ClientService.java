@@ -25,7 +25,7 @@ public interface ClientService {
      * @param clientDTO the entity to update.
      * @return the persisted entity.
      */
-    ClientDTO update(ClientDTO clientDTO);
+    ClientDTO update(ClientDTO clientDTO,Long id);
 
     /**
      * Partially updates a client.

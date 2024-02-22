@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -35,6 +38,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDTO save(ClientDTO clientDTO) {
+     
         log.debug("Request to save Client : {}", clientDTO);
         Client client = clientMapper.toEntity(clientDTO);
         client = clientRepository.save(client);
@@ -42,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDTO update(ClientDTO clientDTO) {
+    public ClientDTO update(ClientDTO clientDTO,Long id) {
         log.debug("Request to save Client : {}", clientDTO);
         Client client = clientMapper.toEntity(clientDTO);
         client = clientRepository.save(client);

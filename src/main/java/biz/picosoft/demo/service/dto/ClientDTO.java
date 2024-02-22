@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -24,8 +24,8 @@ public class ClientDTO implements Serializable {
     private String description;
 
     private String nom;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
-    private ZonedDateTime  dateInscription;
+//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
+    private LocalDate  dateInscription;
 
     private String typeClient;
 
@@ -79,11 +79,11 @@ public class ClientDTO implements Serializable {
         this.nom = nom;
     }
 
-    public ZonedDateTime getDateInscription() {
+    public LocalDate getDateInscription() {
         return dateInscription;
     }
 
-    public void setDateInscription(ZonedDateTime  dateInscription) {
+    public void setDateInscription(LocalDate  dateInscription) {
         this.dateInscription = dateInscription;
     }
 
