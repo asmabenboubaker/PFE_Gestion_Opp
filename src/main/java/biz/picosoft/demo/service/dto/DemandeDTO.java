@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public class DemandeDTO implements Serializable {
 
     private String nom;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateDeCreation;
+    private LocalDate dateDeCreation;
 
     private StatutDemande statut;
 
@@ -65,11 +66,11 @@ public class DemandeDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Date getDateDeCreation() {
+    public LocalDate getDateDeCreation() {
         return dateDeCreation;
     }
 
-    public void setDateDeCreation(Date dateDeCreation) {
+    public void setDateDeCreation(LocalDate dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

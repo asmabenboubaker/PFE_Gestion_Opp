@@ -148,14 +148,14 @@ public class ClientResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clients in body.
      */
     @GetMapping("/clients")
-    public ResponseEntity<List<ClientDTO>> getAllClients(
+    public ResponseEntity<Page<ClientDTO>> getAllClients(
         ClientCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Clients by criteria: {}", criteria);
         Page<ClientDTO> page = clientQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

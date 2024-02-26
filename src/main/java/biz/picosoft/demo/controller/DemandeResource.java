@@ -1,6 +1,7 @@
 package biz.picosoft.demo.controller;
 
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.DemandeQueryService;
 import biz.picosoft.demo.service.DemandeService;
@@ -22,9 +23,11 @@ import tech.jhipster.web.util.ResponseUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link biz.picosoft.demo.domain.Demande}.
@@ -150,14 +153,14 @@ public class DemandeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of demandes in body.
      */
     @GetMapping("/demandes")
-    public ResponseEntity<List<DemandeDTO>> getAllDemandes(
+    public ResponseEntity<Page<DemandeDTO>> getAllDemandes(
         DemandeCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Demandes by criteria: {}", criteria);
         Page<DemandeDTO> page = demandeQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**
@@ -199,5 +202,13 @@ public class DemandeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+    @GetMapping("/list")
+    public ResponseEntity<List<String>> getStatusList() {
+        List<String> statusList = Arrays.stream(StatutDemande.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(statusList);
     }
 }

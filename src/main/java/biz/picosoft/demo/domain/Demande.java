@@ -10,6 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class Demande implements Serializable {
     private String nom;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_de_creation")
-    private Date dateDeCreation;
+    private LocalDate dateDeCreation;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
@@ -117,16 +118,16 @@ public class Demande implements Serializable {
         this.nom = nom;
     }
 
-    public Date getDateDeCreation() {
+    public LocalDate getDateDeCreation() {
         return this.dateDeCreation;
     }
 
-    public Demande dateDeCreation(Date dateDeCreation) {
+    public Demande dateDeCreation(LocalDate dateDeCreation) {
         this.setDateDeCreation(dateDeCreation);
         return this;
     }
 
-    public void setDateDeCreation(Date dateDeCreation) {
+    public void setDateDeCreation(LocalDate dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

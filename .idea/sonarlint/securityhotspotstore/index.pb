@@ -277,3 +277,5 @@ g
 7src/main/java/biz/picosoft/demo/config/PSTranslate.java,7\6\763dea2939da66aad63ede51f1e691bd2e0eae1a
 u
 Esrc/main/java/biz/picosoft/demo/domain/enumeration/StatutDemande.java,4\6\46c628de03fd515b5fffc31d55374bac959b3ea7
+q
+Asrc/test/java/biz/picosoft/demo/controller/ExempleResourceIT.java,5\9\59fae093c3b8adab45dc265a334025ccfc5a7c0f
