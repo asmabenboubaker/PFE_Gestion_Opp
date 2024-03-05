@@ -4,6 +4,7 @@ import biz.picosoft.demo.DemoApplication;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
+import biz.picosoft.demo.domain.Demande;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -21,12 +22,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import javax.persistence.Table;
 import javax.validation.constraints.Null;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -108,12 +111,42 @@ public class KernelService {
             List<String> className = new ArrayList<>();
             //className.add(PoBox.class.getName());
 
-            initModule.setDefaultName("Demo");
+            initModule.setDefaultName("Opp");
             initModule.setPackageName(DemoApplication.packagename);
             initModule.setAclClass(className);
-            initModule.setSchema("demo");
+            initModule.setSchema("opportunite");
             initModule.setVersion(getBuildNumber());
             kernelInterface.initModule(initModule);
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+    }
+
+
+
+    @Bean
+    public void addClassDemande() {
+        try {
+            InitClass initClass = new InitClass();
+            initClass.setSimpleName(Demande.class.getSimpleName());
+            initClass.setName(Demande.class.getName());
+
+            HashMap<String, String> event = new HashMap<>();
+            HashMap<String, String> state = new HashMap<>();
+//
+//            for (RequestCaseStatut s : RequestCaseStatut.values()) {
+//                state.put(s.name(), s.getLabel());
+//            }
+//            for (RequestCaseEvent s : RequestCaseEvent.values()) {
+//                event.put(s.name(), s.getLabel());
+//            }
+            initClass.setEvent(event);
+            initClass.setState(state);
+//            initClass.setDefaultState(RequestCaseStatut.DRAFT.name());
+
+            String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
+            String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();
+            initClass(initClass, tableName, schemaName);
         } catch (Exception e) {
             log.error(e.toString());
         }

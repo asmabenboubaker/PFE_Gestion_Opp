@@ -150,14 +150,14 @@ public class OffreResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of offres in body.
      */
     @GetMapping("/offres")
-    public ResponseEntity<List<OffreDTO>> getAllOffres(
+    public ResponseEntity<Page<OffreDTO>> getAllOffres(
         OffreCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Offres by criteria: {}", criteria);
         Page<OffreDTO> page = offreQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

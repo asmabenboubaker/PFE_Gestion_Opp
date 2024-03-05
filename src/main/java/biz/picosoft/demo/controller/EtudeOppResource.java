@@ -153,14 +153,14 @@ public class EtudeOppResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of etudeOpps in body.
      */
     @GetMapping("/etude-opps")
-    public ResponseEntity<List<EtudeOppDTO>> getAllEtudeOpps(
+    public ResponseEntity<Page<EtudeOppDTO>> getAllEtudeOpps(
         EtudeOppCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get EtudeOpps by criteria: {}", criteria);
         Page<EtudeOppDTO> page = etudeOppQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

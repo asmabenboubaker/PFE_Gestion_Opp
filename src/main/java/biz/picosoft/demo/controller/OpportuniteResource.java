@@ -154,14 +154,14 @@ public class OpportuniteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of opportunites in body.
      */
     @GetMapping("/opportunites")
-    public ResponseEntity<List<OpportuniteDTO>> getAllOpportunites(
+    public ResponseEntity<Page<OpportuniteDTO>> getAllOpportunites(
         OpportuniteCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Opportunites by criteria: {}", criteria);
         Page<OpportuniteDTO> page = opportuniteQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

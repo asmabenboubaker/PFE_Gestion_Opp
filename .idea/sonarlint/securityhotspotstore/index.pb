@@ -279,3 +279,11 @@ u
 Esrc/main/java/biz/picosoft/demo/domain/enumeration/StatutDemande.java,4\6\46c628de03fd515b5fffc31d55374bac959b3ea7
 q
 Asrc/test/java/biz/picosoft/demo/controller/ExempleResourceIT.java,5\9\59fae093c3b8adab45dc265a334025ccfc5a7c0f
+s
+Csrc/main/java/biz/picosoft/demo/service/dto/ContentResponseDto.java,8\6\86c5ecb3505bcebe4031d11dbb2e58765550b9d3
+w
+Gsrc/main/java/biz/picosoft/demo/controller/ContentExtractorControl.java,e\0\e02fddf1e1a3703f01a13e6081ab5be0b35bd20a
+8
+mvnw.cmd,1\f\1f1763f358c257ea3515417352b82b0165647ad1
+x
+Hsrc/main/java/biz/picosoft/demo/controller/ContentExtractorBoundary.java,f\e\fee1f9449bec8bc1401a9a9d1a99a48671b76c7e

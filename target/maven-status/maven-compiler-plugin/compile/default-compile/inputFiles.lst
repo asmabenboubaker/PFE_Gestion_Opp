@@ -100,6 +100,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\EtudeO
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\EtudeOppQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DemandeQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\PVRepository.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\ContentExtractorBoundary.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\PV.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\OpportuniteServiceImpl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DomaineDTO.java
@@ -113,6 +114,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\C
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\FactureDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\DemoApplication.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Domaine.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\ContentExtractorControl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DomaineQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\global\RefSequenceFormat.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\ClientService.java
@@ -127,6 +129,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\BeanUtil.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\PSTranslate.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\ClientRepository.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\ContentResponseDto.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\BonDeCommandeRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\acl\AclClass.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\BonDeCommandeQueryService.java

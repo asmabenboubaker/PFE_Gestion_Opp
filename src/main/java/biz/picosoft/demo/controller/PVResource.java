@@ -146,11 +146,11 @@ public class PVResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pVS in body.
      */
     @GetMapping("/pvs")
-    public ResponseEntity<List<PVDTO>> getAllPVS(PVCriteria criteria, @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<Page<PVDTO>> getAllPVS(PVCriteria criteria, @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get PVS by criteria: {}", criteria);
         Page<PVDTO> page = pVQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

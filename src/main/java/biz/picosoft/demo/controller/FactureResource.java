@@ -150,14 +150,14 @@ public class FactureResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of factures in body.
      */
     @GetMapping("/factures")
-    public ResponseEntity<List<FactureDTO>> getAllFactures(
+    public ResponseEntity<Page<FactureDTO>> getAllFactures(
         FactureCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Factures by criteria: {}", criteria);
         Page<FactureDTO> page = factureQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

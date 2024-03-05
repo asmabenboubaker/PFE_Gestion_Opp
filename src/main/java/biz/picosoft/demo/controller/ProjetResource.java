@@ -150,14 +150,14 @@ public class ProjetResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projets in body.
      */
     @GetMapping("/projets")
-    public ResponseEntity<List<ProjetDTO>> getAllProjets(
+    public ResponseEntity<Page<ProjetDTO>> getAllProjets(
         ProjetCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Projets by criteria: {}", criteria);
         Page<ProjetDTO> page = projetQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**

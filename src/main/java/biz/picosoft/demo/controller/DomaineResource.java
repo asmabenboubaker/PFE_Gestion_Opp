@@ -150,14 +150,14 @@ public class DomaineResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of domaines in body.
      */
     @GetMapping("/domaines")
-    public ResponseEntity<List<DomaineDTO>> getAllDomaines(
+    public ResponseEntity<Page<DomaineDTO>> getAllDomaines(
         DomaineCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get Domaines by criteria: {}", criteria);
         Page<DomaineDTO> page = domaineQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
 
     /**
