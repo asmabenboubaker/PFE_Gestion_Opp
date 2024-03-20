@@ -1,0 +1,79 @@
+
+a	java:S112?"FDefine and throw a dedicated exception instead of using a generic one.(†¿78à‡¬Äá1
+n
+java:S1192Ê"KDefine a constant instead of duplicating this literal "endProcess" 3 times.(Â³á¼úÿÿÿÿ8ç‘€Şã1
+k
+java:S1192Ş"HDefine a constant instead of duplicating this literal "demande" 3 times.(éÒöÖşÿÿÿÿ8ê‡¬Äá1
+k
+java:S1192É"MDefine a constant instead of duplicating this literal "activityName" 3 times.(€óÙ‡8é‘€Şã1
+m
+java:S1192È"JDefine a constant instead of duplicating this literal "processID" 3 times.(Œ”Õùÿÿÿÿ8ê‘€Şã1
+l
+java:S1192Ì"IDefine a constant instead of duplicating this literal "assignee" 4 times.(Ø™Äàüÿÿÿÿ8ê‘€Şã1
+F
+java:S5411®"(Use a primitive boolean expression here.(à»°ô8õ‡¬Äá1
+i
+java:S2259Æ"FA "NullPointerException" could be thrown; "aclClass" is nullable here.(éš‚öûÿÿÿÿ8ì¤¾Éá1
+n
+java:S3655¶"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ï€ø¡8…‹¬Äá1
+Z
+java:S1854"<Remove this useless assignment to local variable "nameRule".(€ò«ƒ8‹¬Äá1
+X	java:S125c"<This block of commented-out lines of code should be removed.(¤§¯Ö8”‹¬Äá1
+]	java:S125h"<This block of commented-out lines of code should be removed.(Õ‰Ñÿÿÿÿÿ8•‹¬Äá1
+T
+java:S1135g"2Complete the task associated to this TODO comment.(ÖºÚÚúÿÿÿÿ8•‹¬Äá1
+M	java:S106…"+Replace this use of System.out by a logger.(¾Ş«ùÿÿÿÿ8™‹¬Äá1
+f
+java:S5361†"HReplace this call to "replaceAll()" by a call to the "replace()" method.(İƒòç8š‹¬Äá1
+f
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(€ò«ƒ8›‹¬Äá1
+^	java:S125"<This block of commented-out lines of code should be removed.(ªÁŞ­şÿÿÿÿ8›‹¬Äá1
+^	java:S125‘"<This block of commented-out lines of code should be removed.(×É§Ñüÿÿÿÿ8œ‹¬Äá1
+d
+java:S1117À"ARename "demandeMapper" which hides the field declared at line 48.(ûßÖÆûÿÿÿÿ8Ú‹¬Äá1
+¯
+java:S1130Ø"‹Remove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonProcessingException', as it cannot be thrown from method's body.(ÕåëÍøÿÿÿÿ8ã‹¬Äá1
+H	java:S106Ü"+Replace this use of System.out by a logger.(Ù®¼É8ÔŸ€Şã1
+G	java:S106è"+Replace this use of System.out by a logger.(ß«¢98æ‹¬Äá1
+S
+java:S2209î"5Change this instance-reference to a static reference.(ÒéÆÜ8é‹¬Äá1
+H	java:S106ï"+Replace this use of System.out by a logger.(×”Û°8ê‹¬Äá1
+H	java:S106ñ"+Replace this use of System.out by a logger.(”ş8º¤¬Äá1
+M	java:S106ó"+Replace this use of System.out by a logger.(ËÄùµúÿÿÿÿ8âŸ€Şã1
+M	java:S106ô"+Replace this use of System.out by a logger.(š”©ûÿÿÿÿ8ãŸ€Şã1
+p
+java:S3776ı"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(Áéõ€8ë‹¬Äá1
+a
+java:S1854™">Remove this useless assignment to local variable "authorsSid".(ş®Ÿ÷ıÿÿÿÿ8ì‹¬Äá1
+\
+java:S1854">Remove this useless assignment to local variable "authorsSid".(¶Ü·ø8ì‹¬Äá1
+M	java:S106…"+Replace this use of System.out by a logger.(‘ù¹Öüÿÿÿÿ8¥¸¼Éá1
+M	java:S106”"+Replace this use of System.out by a logger.(£ıô²şÿÿÿÿ8Ë €Şã1
+R
+java:S1481™"/Remove this unused "authorsSid" local variable.(ş®Ÿ÷ıÿÿÿÿ8ö‹¬Äá1
+^	java:S125¨"<This block of commented-out lines of code should be removed.(ÏÜî¬üÿÿÿÿ8ü‹¬Äá1
+U
+java:S1135§"2Complete the task associated to this TODO comment.(§í¾áüÿÿÿÿ8ü‹¬Äá1
+H	java:S106¾"+Replace this use of System.out by a logger.(Õ³æî8é €Şã1
+P
+java:S1135Ë"2Complete the task associated to this TODO comment.(Ûñíú8ƒŒ¬Äá1
+G	java:S106‰"+Replace this use of System.out by a logger.(åÏ8½¡€Şã1
+M	java:S106‹"+Replace this use of System.out by a logger.(òÒÜèûÿÿÿÿ8¿¡€Şã1
+^	java:S125Œ"<This block of commented-out lines of code should be removed.(šÿá¼şÿÿÿÿ8¿¡€Şã1
+o
+java:S3776£"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(Ç…Âr8–Œ¬Äá1
+O
+java:S1172¦"2Remove this unused method parameter "currentUser".(íÀ˜}8˜Œ¬Äá1
+E
+java:S1125®"'Remove the unnecessary boolean literal.(à»°ô8™Œ¬Äá1
+Y	java:S125´"<This block of commented-out lines of code should be removed.(ŠíÄó8šŒ¬Äá1
+^	java:S125·"<This block of commented-out lines of code should be removed.(¾¹²îûÿÿÿÿ8›Œ¬Äá1
+P
+java:S1135¿"2Complete the task associated to this TODO comment.(ØÔ›ı8Œ¬Äá1
+^	java:S125Ì"<This block of commented-out lines of code should be removed.(ÙÜâöøÿÿÿÿ8 Œ¬Äá1
+F	java:S108Î")Either remove or fill this block of code.(”ı¾8 Œ¬Äá1
+^	java:S125Ó"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ8¡Œ¬Äá1
+P
+java:S1135Ò"2Complete the task associated to this TODO comment.(Îï»×8¡Œ¬Äá1
+Y
+java:S1128"7Remove this unused import 'org.json.simple.JSONObject'.(‚ƒç‘ÿÿÿÿÿ8ÿ¡€Şã1

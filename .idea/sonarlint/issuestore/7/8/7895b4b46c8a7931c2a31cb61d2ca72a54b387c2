@@ -1,3 +1,9 @@
 
-l
-java:S1128"ORemove this unused import 'org.springframework.beans.factory.annotation.Value'.(ìø›8ÈÃßŠİ1
+x
+java:S2629\"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(‰‚=8ü¼ò÷à1
+1
+java:S3457E"Not enough arguments.(ƒÄÍ8½ò÷à1
+2
+java:S3457N"Not enough arguments.(úÇ¤»8½ò÷à1
+]
+java:S3457\"AFormat specifiers should be used instead of string concatenation.(‰‚=8¡½ò÷à1

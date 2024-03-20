@@ -4,6 +4,8 @@ import biz.picosoft.demo.DemoApplication;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
+import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.domain.Demande;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.Table;
 import javax.validation.constraints.Null;
@@ -28,18 +31,47 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 
 @Service
 public class KernelService {
+    public static final String anf_invoice_role_canCreatedemande = "canCreatedemande";
+    public static final String anf_invoice_role_canReaddemande = "canReaddemande";
+    public static final String anf_invoice_role_canEditdemande = "canEditdemande";
 
+    public static final String VAR_PROFILE_ANF_INVOICE_USER = "ANF_INVOICE_USER";
+    public static final String VAR_PROFILE_ANF_INVOICE_BOC = "ANF_INVOICE_BOC";
+    public String checkSecurity(String simpleName, Long id, List<String> sids) {
+        return kernelInterface.checkSecurity(simpleName, id, sids);
+    }
+    public org.json.simple.JSONObject _nextTask(Map<String, Object> variables) {
+        return kernelInterface._nextTask(variables);
+    }
+    public String getInput(String processInstanceId, String name, String type) {
+        return kernelInterface.getInput(processInstanceId, name, type);
+    }
+    public List<String> roles = Arrays.asList(
+            anf_invoice_role_canCreatedemande,
+            anf_invoice_role_canReaddemande,
+            anf_invoice_role_canEditdemande);
     //public static final String SEQ_TENANT = "seq_tenant";
     //public static final String VAR_ROLE_ADMIN = "r";
+    public void adjustAttachmentSecurity(Long classId,
+                                         Long objectId,
+                                         Integer objectDatasecuriteLevel) {
+        kernelInterface.adjustAttachmentSecurity(classId, objectId, objectDatasecuriteLevel);
+    }
+    public Optional<ObjectState> getObjectState(Long objectId, String classname) {
+        return kernelInterface.getObjectState(classname, objectId);
+    }
+    public org.json.simple.JSONObject startProcessInstance(Map<String, Object> variables) {
+        return kernelInterface.startProcessInstance(variables);
+    }
 
+    public String encryptFileAccessToken(String strToEncrypt) {
+        return kernelInterface.encryptFileAccessToken(strToEncrypt);
+    }
     private final Logger log = LoggerFactory.getLogger(KernelService.class);
     private final KernelInterface kernelInterface;
 
@@ -56,6 +88,9 @@ public class KernelService {
 
     public CurrentUser getCurrentUser() {
         return kernelInterface.getCurrentUser();
+    }
+    public List<Role> findAllByProfiles(@RequestParam String name) {
+        return kernelInterface.findAllByProfiles(name);
     }
 
     public String getToken(String apiKey) {
@@ -98,6 +133,16 @@ public class KernelService {
 
     public StateWorkflow getCurrentState(String className, Long objectId) {
         return kernelInterface.getCurrentState(className, objectId);
+    }
+
+    public Boolean applySecurity(String clazz, Long id,
+                                 List<String> authors,
+                                 List<String> readers,
+                                 List<String> tempReaders,
+                                 String clazzParent, Long idParent,
+                                 Boolean isCreated, Boolean isCumulative) {
+        return kernelInterface.applySecurity(
+                clazz, id, authors, readers, tempReaders, clazzParent, idParent, isCreated, isCumulative);
     }
 
     public void setDefaultState(Long objectId, String className) {

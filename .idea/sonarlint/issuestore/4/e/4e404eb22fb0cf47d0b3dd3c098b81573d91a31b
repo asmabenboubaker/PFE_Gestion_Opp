@@ -1,17 +1,24 @@
 
 r
-java:S1488R"\Immediately return this expression instead of assigning it to the temporary variable "json".(ë¹–Á
+java:S1488u"\Immediately return this expression instead of assigning it to the temporary variable "json".(ë¹–Á
 y
-java:S1488¤"]Immediately return this expression instead of assigning it to the temporary variable "build".(ð‡Ñ·üÿÿÿÿ
+java:S1488Ñ"]Immediately return this expression instead of assigning it to the temporary variable "build".(ð‡Ñ·üÿÿÿÿ
+s
+java:S11046"QMake roles a static final constant or non-public and provide accessors if needed.(üÒ¾üþÿÿÿÿ8ã’Ýðà1
 d
-java:S2095Ÿ"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(§ð›à
-Q	java:S125("<This block of commented-out lines of code should be removed.(ŠÇÍË
-Q	java:S125."<This block of commented-out lines of code should be removed.(£ŒÖ
-c	java:S1005"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ½‰á
-h	java:S100J"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó÷µÐþÿÿÿÿ
-V	java:S125p"<This block of commented-out lines of code should be removed.(ÕÚâÆùÿÿÿÿ
-^	java:S125‰"<This block of commented-out lines of code should be removed.(«©¥Äýÿÿÿÿ8”ôÏà1
-Y	java:S125‘"<This block of commented-out lines of code should be removed.(ƒá¹‚8¨¯ôÏà1
-R	java:S125©"<This block of commented-out lines of code should be removed.(úôµ
-R	java:S125¾"<This block of commented-out lines of code should be removed.(•­™…
-R	java:S125Ò"<This block of commented-out lines of code should be removed.(¢„ÕÂ
+java:S2095Ì"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(§ð›à
+{	java:S115'"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(­£ˆÊûÿÿÿÿ8È“Ýðà1
+v	java:S115("ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(É¸‰£8É“Ýðà1
+{	java:S115)"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(âõ°‰þÿÿÿÿ8É“Ýðà1
+^	java:S107Š"<Method has 9 parameters, which is greater than 7 authorized.(ÊºÀæûÿÿÿÿ8—ä¸õà1
+o	java:S1000"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ó¦©üÿÿÿÿ8õÒ÷à1
+Q	java:S125:"<This block of commented-out lines of code should be removed.(ŠÇÍË
+Q	java:S125N"<This block of commented-out lines of code should be removed.(£ŒÖ
+c	java:S100U"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ½‰á
+h	java:S100m"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó÷µÐþÿÿÿÿ
+W	java:S125"<This block of commented-out lines of code should be removed.(ÕÚâÆùÿÿÿÿ
+^	java:S125¶"<This block of commented-out lines of code should be removed.(«©¥Äýÿÿÿÿ8”ôÏà1
+Y	java:S125¾"<This block of commented-out lines of code should be removed.(ƒá¹‚8¨¯ôÏà1
+R	java:S125Ö"<This block of commented-out lines of code should be removed.(úôµ
+R	java:S125ë"<This block of commented-out lines of code should be removed.(•­™…
+R	java:S125ÿ"<This block of commented-out lines of code should be removed.(¢„ÕÂ

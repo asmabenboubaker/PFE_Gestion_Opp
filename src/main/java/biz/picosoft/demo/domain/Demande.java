@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -28,10 +29,24 @@ public class Demande implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Size(min = 0, max = 50)
+    @Column(name = "identifiant", length = 50, nullable = true)
+    private String identifiant;
+    @Column(name = "activity_name")
+    private String activityName;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "wf_process_id")
+    private String wfProcessID;
     @Column(name = "statut_demande")
     private String statutDemande;
+    @Column(name = "securite_level")
+    private Integer securiteLevel;
+    @Column(name = "assignee")
+    private String assignee;
 
+    @Column(name = "end_process")
+    private Boolean endProcess;
     @Column(name = "description")
     private String description;
 
@@ -40,6 +55,8 @@ public class Demande implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_de_creation")
     private LocalDate dateDeCreation;
+
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
@@ -65,7 +82,20 @@ public class Demande implements Serializable {
     private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Boolean getEndProcess() {
+        return endProcess;
+    }
+    public String getAssignee() {
+        return assignee;
+    }
 
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public void setEndProcess(Boolean endProcess) {
+        this.endProcess = endProcess;
+    }
     public Long getId() {
         return this.id;
     }
@@ -73,6 +103,36 @@ public class Demande implements Serializable {
     public Demande id(Long id) {
         this.setId(id);
         return this;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Integer getSecuriteLevel() {
+        return securiteLevel;
+    }
+
+    public void setSecuriteLevel(Integer securiteLevel) {
+        this.securiteLevel = securiteLevel;
+    }
+    public String getWfProcessID() {
+        return wfProcessID;
+    }
+
+    public void setWfProcessID(String wfProcessID) {
+        this.wfProcessID = wfProcessID;
     }
 
     public void setId(Long id) {
@@ -173,6 +233,13 @@ public class Demande implements Serializable {
         this.opportunites.remove(opportunite);
         opportunite.setDemande(null);
         return this;
+    }
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
     }
 
     public Set<Domaine> getDomaines() {

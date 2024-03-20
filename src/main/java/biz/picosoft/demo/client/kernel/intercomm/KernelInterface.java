@@ -4,8 +4,12 @@ import biz.picosoft.demo.client.config.FeignConfig;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectDTO;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectsDTO;
 import biz.picosoft.demo.client.kernel.model.objects.StateMetric;
 import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
+import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.client.kernel.model.pm.UserActivity;
 import org.json.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,20 +20,62 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
 @FeignClient(value = "${feign.kernel.name}", url = "${feign.kernel.url}", configuration = FeignConfig.class)
 public interface KernelInterface {
+    @RequestMapping(method = RequestMethod.POST, value = "/workflow/_nextTask")
+    org.json.simple.JSONObject _nextTask(@RequestBody Map<String, Object> variables);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getInput")
+    String getInput(@RequestParam("processInstanceId")String processInstanceId, @RequestParam("name")String name,@RequestParam("type")String type);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/applySecurity")
+    Boolean applySecurity(
+            @RequestParam("clazz") String clazz, @RequestParam("id") Long id,
+            @RequestParam("authors") List<String> authors,
+            @RequestParam("readers") List<String> readers,
+            @RequestParam("tempReaders") List<String> tempReaders,
+            @RequestParam(value = "clazzParent", required = false) String clazzParent,
+            @RequestParam(value = "idParent", required = false) Long idParent,
+            @RequestParam("isCreated") Boolean isCreated, @RequestParam("isCumulative") Boolean isCumulative);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/objectState")
+    Optional<ObjectState> getObjectState(@RequestParam String businessClass, @RequestParam Long objectId);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/attachements/count")
+    Long countAttachements(@RequestParam(value = "objectId") Long objectId,
+                           @RequestParam(value = "classId") Long classId);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/workflow/startProcessInstance")
+    org.json.simple.JSONObject startProcessInstance(@RequestBody Map<String, Object> variables);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/encryptFileAccessToken")
+    String encryptFileAccessToken(@RequestParam(value = "strToEncrypt") String strToEncrypt);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/checkSecurity")
+    String checkSecurity(@RequestParam("simpleName") String simpleName, @RequestParam("id") Long id, @RequestParam("sids") List<String> sids);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/roles_name")
+    List<Role> findAllByProfiles(@RequestParam String name);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getToken")
     String getToken(@RequestParam("apiKey") String apiKey);
 
     @RequestMapping(method = RequestMethod.GET, value = "/currentUser")
     CurrentUser getCurrentUser();
+    @RequestMapping(method = RequestMethod.POST, value = "/objects")
+    ObjectsDTO getobjectsDto(@RequestBody ObjectDTO objectDTO);
 
     @PostMapping(value = "/Authenticate")
     String Authorize(@RequestBody AuthUser a);
+    @RequestMapping(method = RequestMethod.PUT, value = "/adjustAttachmentSecurity")
+    void adjustAttachmentSecurity(@RequestParam("classId")Long classId,
+                                  @RequestParam("objectId") Long objectId,
+                                  @RequestParam("objectDatasecuriteLevel")Integer objectDatasecuriteLevel);
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/events")
     Event addEvent(

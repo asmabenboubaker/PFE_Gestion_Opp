@@ -1,16 +1,21 @@
 package biz.picosoft.demo.controller;
 
+import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
+import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.DemandeQueryService;
+import biz.picosoft.demo.service.DemandeSer;
 import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.criteria.DemandeCriteria;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +26,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -44,15 +50,56 @@ public class DemandeResource {
     private String applicationName;
 
     private final DemandeService demandeService;
+    private final DemandeSer demandeSer;
+    private final KernelInterface kernelInterface;
 
     private final DemandeRepository demandeRepository;
 
     private final DemandeQueryService demandeQueryService;
 
-    public DemandeResource(DemandeService demandeService, DemandeRepository demandeRepository, DemandeQueryService demandeQueryService) {
+    public DemandeResource(DemandeService demandeService, DemandeSer demandeSer, KernelInterface kernelInterface, DemandeRepository demandeRepository, DemandeQueryService demandeQueryService) {
         this.demandeService = demandeService;
+        this.demandeSer = demandeSer;
+        this.kernelInterface = kernelInterface;
         this.demandeRepository = demandeRepository;
         this.demandeQueryService = demandeQueryService;
+    }
+    @PatchMapping("/initDemande")
+    public ResponseEntity<DemandeDTO> initDemande() throws JsonProcessingException {
+        log.debug("REST request to init Demande : {}");
+        DemandeDTO result = demandeSer.initDemande();
+
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
+    @PutMapping(value = {"/save-demande"})
+    public ResponseEntity<Void> putBPMDemande(@RequestBody String stringInvoice) throws ParseException, JsonProcessingException {
+        log.debug("REST request to Save Demande : {}");
+
+        demandeSer.putBPMDemande(stringInvoice, Demande.class.getName());
+
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).build();
+
+    }
+    /**
+     * {@code PATCH  /submitInvoice} : submit invoice.
+     *
+     * @return the {@link ResponseEntity<DemandeDTO>}  with status {@code 201 (Created)} and with body the identified invoice recement initiated, or with status {@code 400 (Bad Request)} if the invoice no already has an ID.
+     */
+    @PatchMapping("/submitInvoice")
+    public ResponseEntity<DemandeDTO> submitDemande(@Valid @RequestBody DemandeDTO demandeDTO) throws Exception {
+        log.debug("REST request to submit demande: " + demandeDTO.toString());
+
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Demande.class.getName());
+
+        Long id = demandeSer.submitInvoice(demandeDTO, aclClass);
+
+        DemandeDTO result=demandeSer.findOneById(id, aclClass);
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+
     }
 
     /**

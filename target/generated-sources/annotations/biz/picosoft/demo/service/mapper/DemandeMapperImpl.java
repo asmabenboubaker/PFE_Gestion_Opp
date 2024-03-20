@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-04T12:26:59+0100",
+    date = "2024-03-07T15:17:25+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -55,8 +55,26 @@ public class DemandeMapperImpl implements DemandeMapper {
             return;
         }
 
+        if ( dto.getAssignee() != null ) {
+            entity.setAssignee( dto.getAssignee() );
+        }
+        if ( dto.getEndProcess() != null ) {
+            entity.setEndProcess( dto.getEndProcess() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
+        }
+        if ( dto.getStatus() != null ) {
+            entity.setStatus( dto.getStatus() );
+        }
+        if ( dto.getActivityName() != null ) {
+            entity.setActivityName( dto.getActivityName() );
+        }
+        if ( dto.getSecuriteLevel() != null ) {
+            entity.setSecuriteLevel( dto.getSecuriteLevel() );
+        }
+        if ( dto.getWfProcessID() != null ) {
+            entity.setWfProcessID( dto.getWfProcessID() );
         }
         if ( dto.getStatutDemande() != null ) {
             entity.setStatutDemande( dto.getStatutDemande() );
@@ -104,6 +122,12 @@ public class DemandeMapperImpl implements DemandeMapper {
 
         demandeDTO.setDomaines( toDtoDomaineIdSet( s.getDomaines() ) );
         demandeDTO.setClient( toDtoClientId( s.getClient() ) );
+        demandeDTO.setWfProcessID( s.getWfProcessID() );
+        demandeDTO.setActivityName( s.getActivityName() );
+        demandeDTO.setEndProcess( s.getEndProcess() );
+        demandeDTO.setAssignee( s.getAssignee() );
+        demandeDTO.setStatus( s.getStatus() );
+        demandeDTO.setSecuriteLevel( s.getSecuriteLevel() );
         demandeDTO.setId( s.getId() );
         demandeDTO.setStatutDemande( s.getStatutDemande() );
         demandeDTO.setDescription( s.getDescription() );
@@ -122,7 +146,13 @@ public class DemandeMapperImpl implements DemandeMapper {
 
         Demande demande = new Demande();
 
+        demande.setAssignee( demandeDTO.getAssignee() );
+        demande.setEndProcess( demandeDTO.getEndProcess() );
         demande.setId( demandeDTO.getId() );
+        demande.setStatus( demandeDTO.getStatus() );
+        demande.setActivityName( demandeDTO.getActivityName() );
+        demande.setSecuriteLevel( demandeDTO.getSecuriteLevel() );
+        demande.setWfProcessID( demandeDTO.getWfProcessID() );
         demande.setStatutDemande( demandeDTO.getStatutDemande() );
         demande.setDescription( demandeDTO.getDescription() );
         demande.setNom( demandeDTO.getNom() );

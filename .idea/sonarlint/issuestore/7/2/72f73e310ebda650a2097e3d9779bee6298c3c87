@@ -1,0 +1,14 @@
+
+~	java:S116"dRename this field "MandatoryTemplateFileName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(η΅ύÿÿÿÿ
+x	java:S116"cRename this field "OptionalTemplateFileName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ΰε
+w	java:S116!"bRename this field "DefaultTemplateFileName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Έ¦’ι
+E
+java:S1948"(Make "events" transient or serializable.(¨»ΜΙ8‹―€ήγ1
+P
+java:S1948".Make "currentState" transient or serializable.(–Ν§γÿÿÿÿÿ8―€ήγ1
+\
+java:S1948"?Make "remaingRequestFileDefinitions" transient or serializable.(Υζαά8―€ήγ1
+G
+java:S1948"*Make "security" transient or serializable.(²Κ™Χ8―€ήγ1
+I
+java:S1948",Make "components" transient or serializable.(λ‡‡‡8―€ήγ1

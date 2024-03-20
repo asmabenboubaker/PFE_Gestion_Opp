@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-04T12:26:59+0100",
+    date = "2024-03-07T15:17:25+0100",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -210,7 +210,13 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Demande demande = new Demande();
 
+        demande.setAssignee( demandeDTO.getAssignee() );
+        demande.setEndProcess( demandeDTO.getEndProcess() );
         demande.setId( demandeDTO.getId() );
+        demande.setStatus( demandeDTO.getStatus() );
+        demande.setActivityName( demandeDTO.getActivityName() );
+        demande.setSecuriteLevel( demandeDTO.getSecuriteLevel() );
+        demande.setWfProcessID( demandeDTO.getWfProcessID() );
         demande.setStatutDemande( demandeDTO.getStatutDemande() );
         demande.setDescription( demandeDTO.getDescription() );
         demande.setNom( demandeDTO.getNom() );
@@ -318,8 +324,26 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( demandeDTO.getAssignee() != null ) {
+            mappingTarget.setAssignee( demandeDTO.getAssignee() );
+        }
+        if ( demandeDTO.getEndProcess() != null ) {
+            mappingTarget.setEndProcess( demandeDTO.getEndProcess() );
+        }
         if ( demandeDTO.getId() != null ) {
             mappingTarget.setId( demandeDTO.getId() );
+        }
+        if ( demandeDTO.getStatus() != null ) {
+            mappingTarget.setStatus( demandeDTO.getStatus() );
+        }
+        if ( demandeDTO.getActivityName() != null ) {
+            mappingTarget.setActivityName( demandeDTO.getActivityName() );
+        }
+        if ( demandeDTO.getSecuriteLevel() != null ) {
+            mappingTarget.setSecuriteLevel( demandeDTO.getSecuriteLevel() );
+        }
+        if ( demandeDTO.getWfProcessID() != null ) {
+            mappingTarget.setWfProcessID( demandeDTO.getWfProcessID() );
         }
         if ( demandeDTO.getStatutDemande() != null ) {
             mappingTarget.setStatutDemande( demandeDTO.getStatutDemande() );
