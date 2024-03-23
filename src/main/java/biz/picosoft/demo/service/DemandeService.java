@@ -1,6 +1,7 @@
 package biz.picosoft.demo.service;
 
 
+import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -65,5 +66,7 @@ public interface DemandeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
-
+     Demande saveAndAssignToClient(DemandeDTO demandeDTO, Long clientId);
+     Page<Demande> findAllDemande(Pageable pageable);
+     Demande getById(Long id);
 }

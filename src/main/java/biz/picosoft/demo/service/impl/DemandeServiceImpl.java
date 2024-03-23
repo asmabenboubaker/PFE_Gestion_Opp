@@ -1,6 +1,8 @@
 package biz.picosoft.demo.service.impl;
 
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.repository.ClientRepository;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.dto.DemandeDTO;
@@ -25,12 +27,14 @@ public class DemandeServiceImpl implements DemandeService {
     private final Logger log = LoggerFactory.getLogger(DemandeServiceImpl.class);
 
     private final DemandeRepository demandeRepository;
-
+    private final ClientRepository clientRepository;
     private final DemandeMapper demandeMapper;
 
-    public DemandeServiceImpl(DemandeRepository demandeRepository, DemandeMapper demandeMapper) {
+    public DemandeServiceImpl(DemandeRepository demandeRepository, DemandeMapper demandeMapper,ClientRepository clientRepository) {
         this.demandeRepository = demandeRepository;
         this.demandeMapper = demandeMapper;
+        this.clientRepository=clientRepository;
+
     }
 
     @Override
@@ -71,6 +75,7 @@ public class DemandeServiceImpl implements DemandeService {
         return demandeRepository.findAll(pageable).map(demandeMapper::toDto);
     }
 
+
     public Page<DemandeDTO> findAllWithEagerRelationships(Pageable pageable) {
         return demandeRepository.findAllWithEagerRelationships(pageable).map(demandeMapper::toDto);
     }
@@ -87,4 +92,36 @@ public class DemandeServiceImpl implements DemandeService {
         log.debug("Request to delete Demande : {}", id);
         demandeRepository.deleteById(id);
     }
+
+    @Override
+    public Demande saveAndAssignToClient(DemandeDTO demandeDTO, Long clientId) {
+        log.debug("Request to save Demande and assign to Client: {}", demandeDTO);
+        Demande demande = demandeMapper.toEntity(demandeDTO);
+
+        // Fetch the Client from the database
+        Client client = clientRepository.findById(clientId).get();
+        if (client!=null) {
+            demande.setClient(client);
+            demandeRepository.save(demande);
+        } else {
+            throw new IllegalArgumentException("Client with id " + clientId + " not found.");
+        }
+
+        return demande;
+    }
+
+    @Override
+    public Page<Demande> findAllDemande(Pageable pageable) {
+        return demandeRepository.findAll(pageable);
+    }
+
+    @Override
+    public Demande getById(Long id) {
+        log.debug("Request to get Demande : {}", id);
+        return demandeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Demande with id " + id + " not found."));
+
+    }
+
+
 }

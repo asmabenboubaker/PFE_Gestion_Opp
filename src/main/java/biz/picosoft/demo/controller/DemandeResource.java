@@ -6,10 +6,12 @@ import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.DemandeRepository;
+import biz.picosoft.demo.service.ClientService;
 import biz.picosoft.demo.service.DemandeQueryService;
 import biz.picosoft.demo.service.DemandeSer;
 import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.criteria.DemandeCriteria;
+import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,6 +52,7 @@ public class DemandeResource {
     private String applicationName;
 
     private final DemandeService demandeService;
+    private final ClientService clientService;
     private final DemandeSer demandeSer;
     private final KernelInterface kernelInterface;
 
@@ -57,12 +60,13 @@ public class DemandeResource {
 
     private final DemandeQueryService demandeQueryService;
 
-    public DemandeResource(DemandeService demandeService, DemandeSer demandeSer, KernelInterface kernelInterface, DemandeRepository demandeRepository, DemandeQueryService demandeQueryService) {
+    public DemandeResource(DemandeService demandeService, DemandeSer demandeSer, KernelInterface kernelInterface, DemandeRepository demandeRepository, DemandeQueryService demandeQueryService,ClientService clientService) {
         this.demandeService = demandeService;
         this.demandeSer = demandeSer;
         this.kernelInterface = kernelInterface;
         this.demandeRepository = demandeRepository;
         this.demandeQueryService = demandeQueryService;
+        this.clientService=clientService;
     }
     @PatchMapping("/initDemande")
     public ResponseEntity<DemandeDTO> initDemande() throws JsonProcessingException {
@@ -209,7 +213,22 @@ public class DemandeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page);
     }
-
+    @GetMapping("/demandes/WithoutPages")
+    public ResponseEntity<List<DemandeDTO>> getAllDemandesWithoutPages(
+            DemandeCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Demandes by criteria: {}", criteria);
+        Page<DemandeDTO> page = demandeQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    @GetMapping("/demandes/list")
+    public ResponseEntity<List<Demande>> getAllDemandeslist() {
+        log.debug("REST request to get all Demandes");
+        List<Demande> demandes = demandeRepository.findAll();
+        return ResponseEntity.ok().body(demandes);
+    }
     /**
      * {@code GET  /demandes/count} : count all the demandes.
      *
@@ -221,6 +240,7 @@ public class DemandeResource {
         log.debug("REST request to count Demandes by criteria: {}", criteria);
         return ResponseEntity.ok().body(demandeQueryService.countByCriteria(criteria));
     }
+
 
     /**
      * {@code GET  /demandes/:id} : get the "id" demande.
@@ -257,5 +277,34 @@ public class DemandeResource {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(statusList);
+    }
+
+    /**
+     * {@code POST  /demandes} : Create a new demande and assign it to a client.
+     *
+     * @param demandeDTO the demandeDTO to create.
+     * @param clientId   the ID of the client to assign the demande to.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new demandeDTO, or with status {@code 400 (Bad Request)} if the demande has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/demandes/client")
+    public Demande createDemandeAndAssignToClient(@RequestBody DemandeDTO demandeDTO, @RequestParam Long clientId) throws URISyntaxException {
+        log.debug("REST request to save Demande and assign to Client: {}", demandeDTO);
+        if (demandeDTO.getId() != null) {
+            throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        // Call the service method to save and assign the Demande to the Client
+        Demande result = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+
+        return result;
+    }
+
+
+    @GetMapping("/demandes/byid/{id}")
+    public ResponseEntity<Demande> getDemandebyid(@PathVariable Long id) {
+        log.debug("REST request to get Demande : {}", id);
+        Demande demande = demandeService.getById(id);
+        return ResponseEntity.ok().body(demande);
     }
 }
