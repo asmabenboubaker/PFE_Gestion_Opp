@@ -294,7 +294,6 @@ public class DemandeResource {
             throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        // Call the service method to save and assign the Demande to the Client
         Demande result = demandeService.saveAndAssignToClient(demandeDTO, clientId);
 
         return result;
@@ -306,5 +305,25 @@ public class DemandeResource {
         log.debug("REST request to get Demande : {}", id);
         Demande demande = demandeService.getById(id);
         return ResponseEntity.ok().body(demande);
+    }
+
+    @PutMapping("/demandes/assign-client/{id}/{clientId}")
+    public ResponseEntity<Demande> updateAndAssignToClient(
+            @PathVariable Long id,
+            @PathVariable Long clientId,
+            @RequestBody DemandeDTO demande
+    ) throws URISyntaxException {
+        log.debug("REST request to update Demande with ID {} and assign to Client with ID {}", id, clientId);
+
+
+        if (!demandeRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Demande result = demandeService.updateAndAssignToClient(id, clientId, demande);
+        return ResponseEntity
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, demande.getId().toString()))
+                .body(result);
     }
 }

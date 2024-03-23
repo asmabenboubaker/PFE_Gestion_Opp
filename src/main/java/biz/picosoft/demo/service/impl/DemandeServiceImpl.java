@@ -123,5 +123,28 @@ public class DemandeServiceImpl implements DemandeService {
 
     }
 
+    @Override
+    public Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO) {
+        log.debug("Request to update Demande with ID {} and assign to Client with ID {}", demandeId, clientId);
+
+        // Fetch the existing demand from the database
+        Demande existingDemande = demandeRepository.findById(demandeId)
+                .orElseThrow(() -> new IllegalArgumentException("Demande with id " + demandeId + " not found."));
+
+        // Fetch the client from the database
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id " + clientId + " not found."));
+
+        // Update the demand with new information
+        Demande updatedDemande = demandeMapper.toEntity(updatedDemandeDTO);
+        updatedDemande.setId(demandeId); // Ensure the ID is set to the correct value
+
+        // Assign the demand to the fetched client
+        updatedDemande.setClient(client);
+
+        // Save the updated demand
+        return demandeRepository.save(updatedDemande);
+    }
+
 
 }

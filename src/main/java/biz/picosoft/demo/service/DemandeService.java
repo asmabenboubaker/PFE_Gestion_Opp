@@ -69,4 +69,5 @@ public interface DemandeService {
      Demande saveAndAssignToClient(DemandeDTO demandeDTO, Long clientId);
      Page<Demande> findAllDemande(Pageable pageable);
      Demande getById(Long id);
+     Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
 }
