@@ -94,20 +94,20 @@ public class DemandeServiceImpl implements DemandeService {
     }
 
     @Override
-    public Demande saveAndAssignToClient(DemandeDTO demandeDTO, Long clientId) {
+    public Demande saveAndAssignToClient(Demande demandeDTO, Long clientId) {
         log.debug("Request to save Demande and assign to Client: {}", demandeDTO);
-        Demande demande = demandeMapper.toEntity(demandeDTO);
+       // Demande demande = demandeMapper.toEntity(demandeDTO);
 
         // Fetch the Client from the database
         Client client = clientRepository.findById(clientId).get();
         if (client!=null) {
-            demande.setClient(client);
-            demandeRepository.save(demande);
+            demandeDTO.setClient(client);
+            demandeRepository.save(demandeDTO);
         } else {
             throw new IllegalArgumentException("Client with id " + clientId + " not found.");
         }
 
-        return demande;
+        return demandeDTO;
     }
 
     @Override

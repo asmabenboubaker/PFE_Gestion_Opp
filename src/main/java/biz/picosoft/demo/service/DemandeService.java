@@ -66,7 +66,7 @@ public interface DemandeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
-     Demande saveAndAssignToClient(DemandeDTO demandeDTO, Long clientId);
+     Demande saveAndAssignToClient(Demande demandeDTO, Long clientId);
      Page<Demande> findAllDemande(Pageable pageable);
      Demande getById(Long id);
      Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);

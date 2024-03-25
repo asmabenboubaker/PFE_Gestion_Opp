@@ -12,6 +12,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Demande_ {
 
 	public static volatile SingularAttribute<Demande, String> statutDemande;
+	public static volatile SetAttribute<Demande, FileModel> images;
 	public static volatile SetAttribute<Demande, Domaine> domaines;
 	public static volatile SingularAttribute<Demande, String> identifiant;
 	public static volatile SingularAttribute<Demande, String> activityName;
@@ -29,6 +30,7 @@ public abstract class Demande_ {
 	public static volatile SingularAttribute<Demande, String> status;
 
 	public static final String STATUT_DEMANDE = "statutDemande";
+	public static final String IMAGES = "images";
 	public static final String DOMAINES = "domaines";
 	public static final String IDENTIFIANT = "identifiant";
 	public static final String ACTIVITY_NAME = "activityName";

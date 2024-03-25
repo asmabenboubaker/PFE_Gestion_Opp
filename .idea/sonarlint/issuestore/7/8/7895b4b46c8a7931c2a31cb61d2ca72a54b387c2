@@ -1,13 +1,21 @@
 
+n
+java:S1192™"KDefine a constant instead of duplicating this literal "idnotfound" 3 times.(Ú»ıÿÿÿÿ8ïì´äæ1
+t
+java:S1192™"QDefine a constant instead of duplicating this literal "Entity not found" 3 times.(Ú»ıÿÿÿÿ8ïì´äæ1
+|
+java:S1488©"^Immediately return this expression instead of assigning it to the temporary variable "result".(ŒóÁ¯8İ±âæ1
 x
-java:S2629`"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(‰‚=8õäÙ±æ1
+java:S2629`"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(‰‚=8±­Âİæ1
 1
-java:S3457I"Not enough arguments.(ƒÄÍ8ÀåÙ±æ1
+java:S3457I"Not enough arguments.(ƒÄÍ8®Âİæ1
 2
-java:S3457R"Not enough arguments.(úÇ¤»8ÄåÙ±æ1
+java:S3457R"Not enough arguments.(úÇ¤»8¡®Âİæ1
 ]
-java:S3457`"AFormat specifiers should be used instead of string concatenation.(‰‚=8ËåÙ±æ1
+java:S3457`"AFormat specifiers should be used instead of string concatenation.(‰‚=8©®Âİæ1
+’
+java:S1130»"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(Øß‰·8õªûäæ1
 a
-java:S1128"DRemove this unused import 'biz.picosoft.demo.service.dto.ClientDTO'.(™¢æ8¨æè¾æ1
+java:S1128"DRemove this unused import 'biz.picosoft.demo.service.dto.ClientDTO'.(™¢æ8ùªûäæ1
 S
-java:S10687"1Remove this unused "clientService" private field.(ø®ê¼øÿÿÿÿ8´ûè±æ1
+java:S10687"1Remove this unused "clientService" private field.(ø®ê¼øÿÿÿÿ8Ø®Âİæ1

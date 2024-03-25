@@ -1,3 +1,11 @@
 
+i
+java:S1192k"LDefine a constant instead of duplicating this literal " not found." 4 times.(´›á©8‹ð¨äæ1
+r
+java:S3655f"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(íí— øÿÿÿÿ8šô…Ýæ1
 q
-java:S41441"TUpdate this method so that its implementation is not identical to "save" on line 41.(Á’»ñ8˜ÁÝ±æ1
+java:S41441"TUpdate this method so that its implementation is not identical to "save" on line 41.(Á’»ñ8ßàðÜæ1
+a
+java:S1854ƒ"CRemove this useless assignment to local variable "existingDemande".(Äó°½8½ð¨äæ1
+R
+java:S1481ƒ"4Remove this unused "existingDemande" local variable.(Äó°½8¿ð¨äæ1

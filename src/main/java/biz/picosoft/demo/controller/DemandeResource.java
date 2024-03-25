@@ -4,6 +4,7 @@ import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.FileModel;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.ClientService;
@@ -15,26 +16,27 @@ import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -279,27 +281,84 @@ public class DemandeResource {
         return ResponseEntity.ok(statusList);
     }
 
-    /**
-     * {@code POST  /demandes} : Create a new demande and assign it to a client.
-     *
-     * @param demandeDTO the demandeDTO to create.
-     * @param clientId   the ID of the client to assign the demande to.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new demandeDTO, or with status {@code 400 (Bad Request)} if the demande has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/demandes/client")
-    public Demande createDemandeAndAssignToClient(@RequestBody DemandeDTO demandeDTO, @RequestParam Long clientId) throws URISyntaxException {
-        log.debug("REST request to save Demande and assign to Client: {}", demandeDTO);
+//    /**
+//     * {@code POST  /demandes} : Create a new demande and assign it to a client.
+//     *
+//     * @param demandeDTO the demandeDTO to create.
+//     * @param clientId   the ID of the client to assign the demande to.
+//     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new demandeDTO, or with status {@code 400 (Bad Request)} if the demande has already an ID.
+//     * @throws URISyntaxException if the Location URI syntax is incorrect.
+//     */
+//
+//
+//
+//    @RequestMapping(value = "/demandes/client", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+//    public Demande createDemandeAndAssignToClient(@RequestBody Demande demandeDTO, @RequestParam Long clientId,@RequestPart("imageFile")MultipartFile[] file) throws URISyntaxException {
+//        log.debug("REST request to save Demande and assign to Client: {}", demandeDTO);
+//        if (demandeDTO.getId() != null) {
+//            throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
+//        }
+//        try{
+//            // Set<ImageModel> images= uploadImage
+//            Set<FileModel> images=uploadFile(file);
+//            demandeDTO.setImages(images);
+//            return demandeService.saveAndAssignToClient(demandeDTO, clientId);
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//       // Demande result = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+//
+//
+//    }
+
+
+    @PostMapping(value = "/demandes/client", consumes = {"multipart/form-data"})
+    public ResponseEntity<Demande> createDemandeAndAssignToClient(
+            @RequestParam("demandeDTO") String demandeDTOJson,
+            @RequestParam("clientId") Long clientId,
+            @RequestPart("imageFile") MultipartFile[] file) throws URISyntaxException {
+        log.debug("REST request to save Demande and assign to Client: {}", demandeDTOJson);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Demande demandeDTO = null;
+        try {
+            demandeDTO = objectMapper.readValue(demandeDTOJson, Demande.class);
+        } catch (IOException e) {
+            // Handle JSON parsing exception
+            e.printStackTrace();
+        }
+
         if (demandeDTO.getId() != null) {
             throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
-        Demande result = demandeService.saveAndAssignToClient(demandeDTO, clientId);
-
-        return result;
+        try {
+            Set<FileModel> images = uploadFile(file);
+            demandeDTO.setImages(images);
+            Demande savedDemande = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+            return ResponseEntity
+                    .created(new URI("/api/demandes/" + savedDemande.getId()))
+                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, savedDemande.getId().toString()))
+                    .body(savedDemande);
+        } catch (Exception e) {
+            // Handle file upload exception
+            log.error("Error occurred while processing file upload: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
-
-
+    public Set<FileModel>  uploadFile(MultipartFile[] multipartFiles) throws IOException, IOException {
+        Set<FileModel> imageModels=new HashSet<>();
+        for(MultipartFile file:multipartFiles){
+            FileModel imageModel=new FileModel(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes()
+            );
+            imageModels.add(imageModel);
+        }
+        return imageModels;
+    }
     @GetMapping("/demandes/byid/{id}")
     public ResponseEntity<Demande> getDemandebyid(@PathVariable Long id) {
         log.debug("REST request to get Demande : {}", id);

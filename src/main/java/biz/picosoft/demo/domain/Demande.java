@@ -57,7 +57,23 @@ public class Demande implements Serializable {
     private LocalDate dateDeCreation;
 
 
+    @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "demande", allowSetters = true)
+    private Set<FileModel> images = new HashSet<>();
 
+    public Set<FileModel> getImages() {
+        return this.images;
+    }
+
+    public void setImages(Set<FileModel> images) {
+        if (this.images == null) {
+            this.images = new HashSet<>();
+        }
+        if (images != null) {
+            this.images.clear();
+            this.images.addAll(images);
+        }
+    }
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
     private StatutDemande statut;
@@ -80,6 +96,10 @@ public class Demande implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "demandes" }, allowSetters = true)
     private Client client;
+
+    public Demande() {
+    }
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Boolean getEndProcess() {
