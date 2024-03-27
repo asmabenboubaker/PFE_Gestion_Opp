@@ -1,0 +1,542 @@
+
+[	java:S112¯"FDefine and throw a dedicated exception instead of using a generic one.(ÕÚÙF
+\	java:S112ç"FDefine and throw a dedicated exception instead of using a generic one.(ûÂœ”
+a	java:S112Î"FDefine and throw a dedicated exception instead of using a generic one.(ßÅšúÿÿÿÿ
+a	java:S112÷"FDefine and throw a dedicated exception instead of using a generic one.(–ƒ†éÿÿÿÿÿ
+\	java:S112Ä"FDefine and throw a dedicated exception instead of using a generic one.(¯úªÚ
+\	java:S112Š"FDefine and throw a dedicated exception instead of using a generic one.(® ½
+\	java:S112å"FDefine and throw a dedicated exception instead of using a generic one.(²“˜ë
+\	java:S112¤	"FDefine and throw a dedicated exception instead of using a generic one.(„ÈŞ×
+a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ô¤Ôİÿÿÿÿÿ
+\	java:S112è"FDefine and throw a dedicated exception instead of using a generic one.(Ë²ãã
+\	java:S112°"FDefine and throw a dedicated exception instead of using a generic one.(âÏ€
+a	java:S112Ä"FDefine and throw a dedicated exception instead of using a generic one.(‡¼×œüÿÿÿÿ
+K
+java:S3740Ü"/Provide the parametrized type for this generic.(ÿŸ­©úÿÿÿÿ
+E
+java:S3740·"/Provide the parametrized type for this generic.(Ù©ÛS
+K
+java:S3740õ"/Provide the parametrized type for this generic.(¨§…­øÿÿÿÿ
+K
+java:S3740ı"/Provide the parametrized type for this generic.(ƒ¯ÕŸøÿÿÿÿ
+F
+java:S3740"/Provide the parametrized type for this generic.(ƒ÷¡Í
+F
+java:S3740–"/Provide the parametrized type for this generic.(‰µø
+F
+java:S3740˜"/Provide the parametrized type for this generic.(€Ê†¬
+K
+java:S3740ç"/Provide the parametrized type for this generic.(€³›“øÿÿÿÿ
+F
+java:S3740û"/Provide the parametrized type for this generic.(×ªØ
+K
+java:S3740ä"/Provide the parametrized type for this generic.(éã‹ûøÿÿÿÿ
+K
+java:S3740æ"/Provide the parametrized type for this generic.(€³›“øÿÿÿÿ
+o
+java:S2293Ã"YReplace the type specification in this constructor call with the diamond operator ("<>").(»¹
+p
+java:S2293 "YReplace the type specification in this constructor call with the diamond operator ("<>").(‚›Åå
+p
+java:S2293é"YReplace the type specification in this constructor call with the diamond operator ("<>").(‚›Åå
+p
+java:S2293˜"YReplace the type specification in this constructor call with the diamond operator ("<>").(‚›Åå
+p
+java:S2293ú"YReplace the type specification in this constructor call with the diamond operator ("<>").(åïâû
+u
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÄÄ÷¢ÿÿÿÿÿ
+u
+java:S2293Ú	"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ‚›¢şÿÿÿÿ
+u
+java:S2293ú	"YReplace the type specification in this constructor call with the diamond operator ("<>").(®óñüÿÿÿÿ
+o
+java:S2293î"YReplace the type specification in this constructor call with the diamond operator ("<>").(¹‡'
+u
+java:S2293‡"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ‚›¢şÿÿÿÿ
+u
+java:S2293¤"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ‚›¢şÿÿÿÿ
+u
+java:S2293¼"YReplace the type specification in this constructor call with the diamond operator ("<>").(Î÷Ìµşÿÿÿÿ
+u
+java:S2293è"YReplace the type specification in this constructor call with the diamond operator ("<>").(Œ‚›¢şÿÿÿÿ
+u
+java:S2293ç"YReplace the type specification in this constructor call with the diamond operator ("<>").(õ°£åıÿÿÿÿ
+u
+java:S2293ƒ"YReplace the type specification in this constructor call with the diamond operator ("<>").(õ°£åıÿÿÿÿ
+u
+java:S2293˜"YReplace the type specification in this constructor call with the diamond operator ("<>").(¤ãœÕüÿÿÿÿ
+u
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ë¥µçıÿÿÿÿ
+u
+java:S2293£"YReplace the type specification in this constructor call with the diamond operator ("<>").(°İª¼øÿÿÿÿ
+_
+java:S1192"HDefine a constant instead of duplicating this literal "endDate" 3 times.( ê©ˆ
+e
+java:S1192Œ"IDefine a constant instead of duplicating this literal "endEvent" 5 times.(ÜÔ·åøÿÿÿÿ
+`
+java:S1192"IDefine a constant instead of duplicating this literal "property" 4 times.(É«¾
+`
+java:S1192î"IDefine a constant instead of duplicating this literal "Assignee" 3 times.(¶æî 
+h
+java:S1192­"LDefine a constant instead of duplicating this literal "nbreEnCours" 3 times.(ÙÇıûşÿÿÿÿ
+^
+java:S1192¦"GDefine a constant instead of duplicating this literal "active" 5 times.(†İ—Ç
+d
+java:S1192¯"HDefine a constant instead of duplicating this literal "version" 6 times.(ÃêÍñúÿÿÿÿ
+o
+java:S1192ü"SDefine a constant instead of duplicating this literal "processInstanceIds" 4 times.(’°Êáÿÿÿÿÿ
+b
+java:S1192®"KDefine a constant instead of duplicating this literal "nbreFermer" 3 times.(ÆÑêá
+a
+java:S1192…"JDefine a constant instead of duplicating this literal "startDate" 3 times.(áÃØ™
+`
+java:S1192Ì"IDefine a constant instead of duplicating this literal "authors" 15 times.(äª²‘
+
+java:S1192"qDefine a constant instead of duplicating this literal "SELECT TEXT_ FROM act_hi_varinst WHERE NAME_ = '" 6 times.(Îàø’ıÿÿÿÿ
+c
+java:S1192–"LDefine a constant instead of duplicating this literal ".bpmn20.xml" 6 times.(Ìü“­
+f
+java:S1192ß"JDefine a constant instead of duplicating this literal "className" 5 times.(ü¹²Àûÿÿÿÿ
+m
+java:S1192«"QDefine a constant instead of duplicating this literal "deployement_time" 6 times.(ßç¶Ïıÿÿÿÿ
+k
+java:S1192º"ODefine a constant instead of duplicating this literal " :authentifier" 8 times.(¿ƒæ‰ıÿÿÿÿ
+_
+java:S1192É"HDefine a constant instead of duplicating this literal "current" 5 times.(ÔÊÃ”
+e
+java:S1192Ó"IDefine a constant instead of duplicating this literal "classId" 20 times.(€ñı©ûÿÿÿÿ
+g
+java:S1192²"KDefine a constant instead of duplicating this literal "processKey" 5 times.(œŞ÷·ıÿÿÿÿ
+m
+java:S1192¬"VDefine a constant instead of duplicating this literal "processes_undeployed/" 6 times.(òº™ë
+o
+java:S1192û"XDefine a constant instead of duplicating this literal "condidate_starter_users" 8 times.(Óˆê
+a
+java:S1192™"JDefine a constant instead of duplicating this literal "Decision" 12 times.(ã¤‹ò
+`
+java:S1192Ï"IDefine a constant instead of duplicating this literal "readers" 15 times.(’ß«
+j
+java:S1192•"NDefine a constant instead of duplicating this literal " :description" 3 times.(‰Ÿò—ÿÿÿÿÿ
+h
+java:S1192Ñ"LDefine a constant instead of duplicating this literal "wfProcessID" 6 times.(ºæ¯îøÿÿÿÿ
+l
+java:S1192½"PDefine a constant instead of duplicating this literal " :effectiveUser" 3 times.(›óáùÿÿÿÿ
+`
+java:S1192ı"IDefine a constant instead of duplicating this literal "WORKFLOW" 4 times.(ùøÖ“
+i
+java:S1192™"MDefine a constant instead of duplicating this literal "sequenceFlow" 4 times.(Î„í€ùÿÿÿÿ
+g
+java:S1192"KDefine a constant instead of duplicating this literal " :decision" 4 times.(Îàø’ıÿÿÿÿ
+p
+java:S1192ú"YDefine a constant instead of duplicating this literal "condidate_starter_groups" 4 times.(†á÷ò
+h
+java:S1192™"LDefine a constant instead of duplicating this literal "inputOutput" 6 times.(á•ÂÙÿÿÿÿÿ
+c
+java:S1192Û"LDefine a constant instead of duplicating this literal "processName" 7 times.(÷Íğë
+f
+java:S1192²"ODefine a constant instead of duplicating this literal "candidateUsers" 3 times.(Ÿ°¾¤
+_
+java:S1192ä"HDefine a constant instead of duplicating this literal "stencil" 4 times.(Ï¾¢Ñ
+f
+java:S1192´"ODefine a constant instead of duplicating this literal "Erreur process" 3 times.(é÷³
+e
+java:S1192Ñ"IDefine a constant instead of duplicating this literal "workflow" 4 times.(ºæ¯îøÿÿÿÿ
+]
+java:S1192¡"FDefine a constant instead of duplicating this literal "entry" 3 times.(†Óé
+g
+java:S1192"PDefine a constant instead of duplicating this literal "candidateGroups" 3 times.(ÜèœÙ
+c
+java:S1192¸"GDefine a constant instead of duplicating this literal "string" 3 times.(ÍÉÈ„úÿÿÿÿ
+c
+java:S1192œ"LDefine a constant instead of duplicating this literal "description" 6 times.(ß›‡…
+g
+java:S1192Ú"KDefine a constant instead of duplicating this literal "overrideid" 3 times.(Æ¤¶äşÿÿÿÿ
+f
+java:S1192¬"ODefine a constant instead of duplicating this literal "totalProcesses" 3 times.(ÍÅ²Ë
+^
+java:S1192‘"GDefine a constant instead of duplicating this literal "value" 16 times.(Ô¤äÒ
+d
+java:S1192¼"HDefine a constant instead of duplicating this literal "process" 4 times.(Ş’öşÿÿÿÿ
+e
+java:S1192‹"IDefine a constant instead of duplicating this literal "userTask" 5 times.(¹æ±¥ÿÿÿÿÿ
+
+java:S1192æ"€Define a constant instead of duplicating this literal "processInstance.getProcessDefinitionName()   Routage Workflow  " 4 times.(’ª’„ıÿÿÿÿ
+b
+java:S1192÷"KDefine a constant instead of duplicating this literal "actionaire" 3 times.(ç·ª•
+d
+java:S1192ş"MDefine a constant instead of duplicating this literal "childShapes" 12 times.(ÚÌ¤÷
+c
+java:S1192"LDefine a constant instead of duplicating this literal "properties" 22 times.(ÄÂ—»
+F
+java:S1066ú"/Merge this if statement with the enclosing one.(ğÛì
+K
+java:S1066û"/Merge this if statement with the enclosing one.(ŞÒ³Úüÿÿÿÿ
+E
+java:S1066ƒ"/Merge this if statement with the enclosing one.(Ì„l
+F
+java:S1066„"/Merge this if statement with the enclosing one.(¨Á¹ 
+F
+java:S1066‹"/Merge this if statement with the enclosing one.(ğÛì
+F
+java:S1066â"/Merge this if statement with the enclosing one.(ğÛì
+F
+java:S1066˜"/Merge this if statement with the enclosing one.(‹«Ïè
+K
+java:S1066™"/Merge this if statement with the enclosing one.(á•ÂÙÿÿÿÿÿ
+F
+java:S1066á"/Merge this if statement with the enclosing one.(‹«Ïè
+K
+java:S1066â"/Merge this if statement with the enclosing one.(á•ÂÙÿÿÿÿÿ
+F
+java:S1066"/Merge this if statement with the enclosing one.(‹«Ïè
+K
+java:S1066"/Merge this if statement with the enclosing one.(á•ÂÙÿÿÿÿÿ
+K
+java:S1066à"/Merge this if statement with the enclosing one.(‰Çùùÿÿÿÿ
+F
+java:S1066á"/Merge this if statement with the enclosing one.(£©›ß
+K
+java:S1066Ä"/Merge this if statement with the enclosing one.(‡¶è±ùÿÿÿÿ
+E
+java:S1066Ì"/Merge this if statement with the enclosing one.(—·¸
+F
+java:S1066Í"/Merge this if statement with the enclosing one.(ğÛì
+K
+java:S1066µ"/Merge this if statement with the enclosing one.(úÒ¦üÿÿÿÿ
+K
+java:S1066¶"/Merge this if statement with the enclosing one.(­¥ìıÿÿÿÿ
+E
+java:S1066®"/Merge this if statement with the enclosing one.(»…û~
+F
+java:S1066Æ"/Merge this if statement with the enclosing one.(£©›ß
+K
+java:S1066¼"/Merge this if statement with the enclosing one.(©¿ßÛúÿÿÿÿ
+F
+java:S1066ş"/Merge this if statement with the enclosing one.(ğÛì
+F
+java:S1066º"/Merge this if statement with the enclosing one.(©û î
+‡
+java:S1319–"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(‰µø
+Q
+java:S1141—"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+l	java:S117ã"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤‘è¾øÿÿÿÿ
+l	java:S117Ú	"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ‚›¢şÿÿÿÿ
+l	java:S117¢"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï™öíÿÿÿÿÿ
+g	java:S117æ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼‘ğ•
+l	java:S117‡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ‚›¢şÿÿÿÿ
+l	java:S117¤"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ‚›¢şÿÿÿÿ
+l	java:S117¼"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î÷Ìµşÿÿÿÿ
+l	java:S117è"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ‚›¢şÿÿÿÿ
+l	java:S117ç"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ°£åıÿÿÿÿ
+l	java:S117ƒ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õ°£åıÿÿÿÿ
+l	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í¹˜èúÿÿÿÿ
+l	java:S117ô"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï™öíÿÿÿÿÿ
+l	java:S117•"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í¹˜èúÿÿÿÿ
+l	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë¥µçıÿÿÿÿ
+l	java:S117½"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÆÌõ‰ÿÿÿÿÿ
+g	java:S117Ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á•¨¾
+l	java:S117ï"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï™öíÿÿÿÿÿ
+g	java:S117ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÁÛŞ
+g	java:S117¾"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„£Ï¹
+l	java:S117Û"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï™öíÿÿÿÿÿ
+g	java:S117Ü"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÁÛŞ
+g	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒøÇÔ
+g	java:S117ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ß’›
+g	java:S117ş"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¥’š
+D
+java:S1604Æ"(Make this anonymous inner class a lambda(Òû£èÿÿÿÿÿ
+D
+java:S1604Õ"(Make this anonymous inner class a lambda(Òû£èÿÿÿÿÿ
+b
+java:S1301¥"KReplace this "switch" statement by "if" statements to increase readability.(†ÓÅ
+b
+java:S1301 "KReplace this "switch" statement by "if" statements to increase readability.(†ÓÅ
+u
+java:S1488º"^Immediately return this expression instead of assigning it to the temporary variable "result".(½ªİÁ
+u
+java:S1488ı"^Immediately return this expression instead of assigning it to the temporary variable "result".(½ªİÁ
+u
+java:S1488²"^Immediately return this expression instead of assigning it to the temporary variable "result".(½ªİÁ
+v
+java:S1488æ"_Immediately return this expression instead of assigning it to the temporary variable "process".(Ã¢Ë
+{
+java:S1488ë"_Immediately return this expression instead of assigning it to the temporary variable "process".(ÊÚ…úÿÿÿÿ
+Œ
+java:S1488ğ"pImmediately return this expression instead of assigning it to the temporary variable "historicActivityInstance".(ÍßÈüÿÿÿÿ
+r
+java:S1488Ş"[Immediately return this expression instead of assigning it to the temporary variable "doc".(£¾¶ü
+?
+java:S5411‚"(Use a primitive boolean expression here.(´Ú§³
+?
+java:S5411Å"(Use a primitive boolean expression here.(úâÍ
+?
+java:S5411À"(Use a primitive boolean expression here.(úâÍ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åµ¶³ùÿÿÿÿ
+b
+java:S2259ƒ"FA "NullPointerException" could be thrown; "document" is nullable here.(—ô¸€ıÿÿÿÿ
+_
+java:S2259¡"CA "NullPointerException" could be thrown; "param" is nullable here.(ñ¡üÌÿÿÿÿÿ
+]
+java:S2259¼"AA "NullPointerException" could be thrown; "doc" is nullable here.(Ş’öşÿÿÿÿ
+e
+java:S2095 "NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ƒøÇÔ
+g
+java:S3655¨"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¢Ùò¿
+l
+java:S3655®
+"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ºµ¢µüÿÿÿÿ
+g
+java:S3655ß"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¢Ùò¿
+l
+java:S3655î
+"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ºµ¢µüÿÿÿÿ
+g
+java:S3655õ"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¢Ùò¿
+g
+java:S3655Ç	"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¢Ùò¿
+g
+java:S3655ˆ	"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¢Ùò¿
+l
+java:S3655Ç"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¬î©üÿÿÿÿ
+l
+java:S3655Ì"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¬î©üÿÿÿÿ
+O
+java:S2755Š"3Disable access to external entities in XML parsing.(ƒ¶ŠÊûÿÿÿÿ
+J
+java:S2755Ô"3Disable access to external entities in XML parsing.(ğ¨ºî
+M
+java:S2589‡"7Remove this expression which always evaluates to "true"(ûù±
+7
+java:S1170t"!Make this final field static too.(¶´û¹
+7
+java:S1170u"!Make this final field static too.(§öå
+
+java:S4144’"tUpdate this method so that its implementation is not identical to "_processingActivityInstanceChanges" on line 1431.(éˆ„…şÿÿÿÿ
+F	java:S106Ú"+Replace this use of System.out by a logger.(†Ú¬Åøÿÿÿÿ
+o
+java:S3776Ü"SRefactor this method to reduce its Cognitive Complexity from 136 to the 15 allowed.(ÿŸ­©úÿÿÿÿ
+Y
+java:S1854ã"=Remove this useless assignment to local variable "task_name".(¤‘è¾øÿÿÿÿ
+J
+java:S1481ã".Remove this unused "task_name" local variable.(¤‘è¾øÿÿÿÿ
+D	java:S108œ")Either remove or fill this block of code.(ÒÌâ–øÿÿÿÿ
+n
+java:S3776Â"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(¤ò«œúÿÿÿÿ
+’
+java:S1130Â"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(¤ò«œúÿÿÿÿ
+B
+java:S1172ø"+Remove this unused method parameter "page".(ŒÅâš
+i
+java:S3776‡"RRefactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.(šÅÖå
+o
+java:S3776Í"SRefactor this method to reduce its Cognitive Complexity from 158 to the 15 allowed.(òñˆ ûÿÿÿÿ
+R	java:S125Ğ"<This block of commented-out lines of code should be removed.(åè®µ
+i
+java:S3776Î"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ÀÚİ”
+Z
+java:S1155à">Use isEmpty() to check whether the collection is empty or not.(‰Çùùÿÿÿÿ
+Z
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Îàø’ıÿÿÿÿ
+D	java:S108—")Either remove or fill this block of code.(¬Àáªøÿÿÿÿ
+U
+java:S1155š">Use isEmpty() to check whether the collection is empty or not.(ğ€šä
+?	java:S108")Either remove or fill this block of code.(”ı¾
+D	java:S108§")Either remove or fill this block of code.(¬Àáªøÿÿÿÿ
+i	java:S100Î"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÅšúÿÿÿÿ
+N
+java:S1135Í"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+F	java:S106æ"+Replace this use of System.out by a logger.(’ª’„ıÿÿÿÿ
+i	java:S100÷"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ƒ†éÿÿÿÿÿ
+N
+java:S1135ö"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+F	java:S106¯"+Replace this use of System.out by a logger.(’ª’„ıÿÿÿÿ
+d	java:S100Ä"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯úªÚ
+N
+java:S1135Ã"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+d	java:S100Š"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(® ½
+N
+java:S1135‰"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+d	java:S100å"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²“˜ë
+N
+java:S1135ä"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+F	java:S106	"+Replace this use of System.out by a logger.(’ª’„ıÿÿÿÿ
+d	java:S100¤	"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„ÈŞ×
+N
+java:S1135£	"2Complete the task associated to this TODO comment.(€Åøÿÿÿÿ
+d	java:S100×	"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Û£¹
+i	java:S100÷	"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ¥”‰ûÿÿÿÿ
+d	java:S100–
+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úºšË
+\
+java:S1854©
+"@Remove this useless assignment to local variable "parentObject".(óî™øÿÿÿÿ
+d	java:S100Ö
+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆÚè¹
+\
+java:S1854é
+"@Remove this useless assignment to local variable "parentObject".(óî™øÿÿÿÿ
+i	java:S100—"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’Ü÷¢ùÿÿÿÿ
+8	java:S131¥""Add a default case to this switch.(†ÓÅ
+i	java:S100’"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éˆ„…şÿÿÿÿ
+8	java:S131 ""Add a default case to this switch.(†ÓÅ
+i	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô¤Ôİÿÿÿÿÿ
+ˆ
+java:S1130"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(ô¤Ôİÿÿÿÿÿ
+[
+java:S1854¾"ERemove this useless assignment to local variable "listActiveProcess".(€àˆ#
+F
+java:S1172¼"*Remove this unused method parameter "key".(ÎòÔ™şÿÿÿÿ
+L
+java:S1481¾"6Remove this unused "listActiveProcess" local variable.(€àˆ#
+Z
+java:S1155’">Use isEmpty() to check whether the collection is empty or not.(Çù…÷şÿÿÿÿ
+d	java:S100À"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ¡Öú
+•
+java:S1130À"~Remove the declaration of thrown exception 'org.json.simple.parser.ParseException', as it cannot be thrown from method's body.(ğ¡Öú
+R	java:S125É"<This block of commented-out lines of code should be removed.(§©š´
+U
+java:S1117Ï">Rename "formatter" which hides the field declared at line 112.(£å¦×
+•
+java:S1130æ"~Remove the declaration of thrown exception 'org.json.simple.parser.ParseException', as it cannot be thrown from method's body.(¼‘ğ•
+W	java:S125–"<This block of commented-out lines of code should be removed.(ÓÀ˜Êşÿÿÿÿ
+W	java:S125ô"<This block of commented-out lines of code should be removed.(®Çóşÿÿÿÿ
+i	java:S100¬"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯–î—øÿÿÿÿ
+@
+java:S5413°")Verify that "remove()" is used correctly.(ó­Âß
+@
+java:S5413°")Verify that "remove()" is used correctly.(ó­Âß
+Y
+java:S1854„"=Remove this useless assignment to local variable "task_name".(í¹˜èúÿÿÿÿ
+T
+java:S1854"8Remove this useless assignment to local variable "task".(‘Ú“éûÿÿÿÿ
+E
+java:S1481")Remove this unused "task" local variable.(‘Ú“éûÿÿÿÿ
+J
+java:S1481„".Remove this unused "task_name" local variable.(í¹˜èúÿÿÿÿ
+i	java:S100²"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸–„Ïúÿÿÿÿ
+n
+java:S3776²"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(¸–„Ïúÿÿÿÿ
+R	java:S125‡"<This block of commented-out lines of code should be removed.(ˆÆ»å
+i
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 91 to the 15 allowed.(ƒ÷¡Í
+Y
+java:S1854•"=Remove this useless assignment to local variable "task_name".(í¹˜èúÿÿÿÿ
+J
+java:S1481•".Remove this unused "task_name" local variable.(í¹˜èúÿÿÿÿ
+ƒ
+java:S1130Ø"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(˜ö®Š
+U
+java:S1155Ú">Use isEmpty() to check whether the collection is empty or not.(Ã·şü
+’
+java:S1130İ"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(¹Ûçşùÿÿÿÿ
+’
+java:S1130ù"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(°®ñ€ÿÿÿÿÿ
+[
+java:S1764‡"ECorrect one of the identical sub-expressions on both sides of equals.(ûù±
+i
+java:S3776–"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(‰µø
+
+java:S1130–"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(‰µø
+ƒ
+java:S1130Ø"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(†Şé®
+i	java:S100ä"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰Î£²üÿÿÿÿ
+U
+java:S1854ç"9Remove this useless assignment to local variable "liste".(€³›“øÿÿÿÿ
+F
+java:S1481ç"*Remove this unused "liste" local variable.(€³›“øÿÿÿÿ
+
+java:S1130û"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(×ªØ
+U
+java:S1854Â">Remove this useless assignment to local variable "deployment".(†¨Ì
+
+java:S1130½"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(ÆÌõ‰ÿÿÿÿÿ
+F
+java:S1481Â"/Remove this unused "deployment" local variable.(†¨Ì
+Z
+java:S1854×">Remove this useless assignment to local variable "deployment".(ãÍ‚Åüÿÿÿÿ
+ƒ
+java:S1130Ò"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(á•¨¾
+‹
+java:S1130Ò"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(á•¨¾
+K
+java:S1481×"/Remove this unused "deployment" local variable.(ãÍ‚Åüÿÿÿÿ
+’
+java:S1130æ"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(³Êø¶øÿÿÿÿ
+[
+java:S4143ü"DVerify this is the key that was intended; it was already set before.(Óˆê
+`
+java:S4143Œ"DVerify this is the key that was intended; it was already set before.(‘Ãïêûÿÿÿÿ
+W	java:S125“"<This block of commented-out lines of code should be removed.(’èÉ¢üÿÿÿÿ
+R	java:S125ª"<This block of commented-out lines of code should be removed.(«‰¸ 
+[
+java:S4143é"DVerify this is the key that was intended; it was already set before.(Óˆê
+`
+java:S4143ü"DVerify this is the key that was intended; it was already set before.(‘Ãïêûÿÿÿÿ
+R	java:S125…"<This block of commented-out lines of code should be removed.(ˆÆ»å
+]	java:S899"BDo something with the "boolean" value returned by "createNewFile".(Üäıÿÿÿÿ
+d	java:S100±"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íñºÓ
+U
+java:S1854â">Remove this useless assignment to local variable "deployment".(Ê½çó
+ˆ
+java:S1130Ş"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(¼‚×Éøÿÿÿÿ
+F
+java:S1481â"/Remove this unused "deployment" local variable.(Ê½çó
+ƒ
+java:S1130Ç"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(İæî±
+R	java:S125•"<This block of commented-out lines of code should be removed.(„Çæ¶
+Q	java:S899É";Do something with the "boolean" value returned by "delete".(§·ˆ•
+e
+java:S4042É"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(§·ˆ•
+X
+java:S1854ñ"<Remove this useless assignment to local variable "jsonNode".(çã£øÿÿÿÿ
+^
+java:S1854‰"BRemove this useless assignment to local variable "jsonObjectTemp".(ùíüŒûÿÿÿÿ
+I
+java:S1481ñ"-Remove this unused "jsonNode" local variable.(çã£øÿÿÿÿ
+X
+java:S1854¹"<Remove this useless assignment to local variable "jsonNode".(çã£øÿÿÿÿ
+I
+java:S1481¹"-Remove this unused "jsonNode" local variable.(çã£øÿÿÿÿ
+j
+java:S3776ß"SRefactor this method to reduce its Cognitive Complexity from 151 to the 15 allowed.(’Â·š
+U
+java:S1155ı">Use isEmpty() to check whether the collection is empty or not.(ÍĞªÌ
+R	java:S125­"<This block of commented-out lines of code should be removed.(Å¶Ë×
+R	java:S125Ä"<This block of commented-out lines of code should be removed.(Å¶Ë×
+H
+java:S5261Ì"1Add explicit curly braces to avoid dangling else.(å¥‡
+^
+java:S1126Ê"BReplace this if-then-else statement by a single method invocation.(§¸û»üÿÿÿÿ
+N
+java:S1135ˆ"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+V
+java:S1854¹":Remove this useless assignment to local variable "result".(”†ÿûÿÿÿÿ
+G
+java:S1481¹"+Remove this unused "result" local variable.(”†ÿûÿÿÿÿ
+F	java:S106ê"+Replace this use of System.out by a logger.(’ª’„ıÿÿÿÿ
+Q	java:S125…"<This block of commented-out lines of code should be removed.(ŠåëB
+n
+java:S3776ä"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(éã‹ûøÿÿÿÿ
+U
+java:S1854æ"9Remove this useless assignment to local variable "liste".(€³›“øÿÿÿÿ
+’
+java:S1130ä"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(éã‹ûøÿÿÿÿ
+F
+java:S1481æ"*Remove this unused "liste" local variable.(€³›“øÿÿÿÿ
+’
+java:S1130"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(”ÈˆŸÿÿÿÿÿ
+’
+java:S1130¦"vRemove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from method's body.(•ˆ§Éıÿÿÿÿ
+š
+java:S1130¦"~Remove the declaration of thrown exception 'org.json.simple.parser.ParseException', as it cannot be thrown from method's body.(•ˆ§Éıÿÿÿÿ
+J
+java:S1172¦".Remove this unused method parameter "dateOut".(•ˆ§Éıÿÿÿÿ
+Z
+java:S1117©">Rename "formatter" which hides the field declared at line 112.(Â¤™÷ıÿÿÿÿ
+W	java:S125¶"<This block of commented-out lines of code should be removed.(…úè«øÿÿÿÿ
+ã
+java:S6541Ü"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 76 to 64, Complexity from 24 to 14, Nesting Level from 13 to 2, Number of Variables from 20 to 6.(ÿŸ­©úÿÿÿÿ
+ã
+java:S6541Í"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 84 to 64, Complexity from 28 to 14, Nesting Level from 11 to 2, Number of Variables from 23 to 6.(òñˆ ûÿÿÿÿ
+Ş
+java:S6541ß"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 144 to 64, Complexity from 36 to 14, Nesting Level from 9 to 2, Number of Variables from 41 to 6.(’Â·š

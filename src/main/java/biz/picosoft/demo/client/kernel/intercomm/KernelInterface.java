@@ -18,19 +18,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 
 @FeignClient(value = "${feign.kernel.name}", url = "${feign.kernel.url}", configuration = FeignConfig.class)
 public interface KernelInterface {
     @RequestMapping(method = RequestMethod.POST, value = "/workflow/_nextTask")
     org.json.simple.JSONObject _nextTask(@RequestBody Map<String, Object> variables);
+    @GetMapping("/computValidator")
+    public List<String> computValidator();
+
+    @GetMapping("/findEmail")
+    public Set<String> findEmail(String sid);
+    @RequestMapping(method = RequestMethod.GET, value = "/sequence_number_by_name")
+    String getSequenceNumberByName(@RequestParam("jsonObject") JSONObject jsonObject, @RequestParam("sequanceName") String sequanceName);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getInput")
     String getInput(@RequestParam("processInstanceId")String processInstanceId, @RequestParam("name")String name,@RequestParam("type")String type);
+    @PostMapping("/events")
+    ResponseEntity<Event> createEvent(@RequestParam String eventName, @RequestParam(required = false) JSONObject data,
+                                      @RequestParam Long objectID, @RequestParam String classname,
+                                      @RequestParam(required = false) String[] filePath,
+                                      @RequestParam(required = false) MultipartFile[] multipartFiles,
+                                      @RequestParam(required = false) LocalDate referenceDate,
+                                      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime remindDate);
 
     @RequestMapping(method = RequestMethod.GET, value = "/applySecurity")
     Boolean applySecurity(
@@ -124,6 +140,10 @@ public interface KernelInterface {
 
     @GetMapping("/getCurrentState")
     StateWorkflow getCurrentState(@RequestParam String className, @RequestParam Long objectId);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/save-objectState")
+    ObjectState saveObjectState(@RequestBody ObjectState objectState);
+
 }
 
 

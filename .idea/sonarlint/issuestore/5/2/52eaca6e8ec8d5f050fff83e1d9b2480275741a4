@@ -1,0 +1,7 @@
+
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Éê–úÿÿÿÿ
+d
+java:S1192!"NDefine a constant instead of duplicating this literal "mmTaskDTOList" 4 times.(¸ø·¡
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åµ¶³ùÿÿÿÿ
+]
+java:S3973!"GUse indentation to denote the code conditionally executed by this "if".(¸ø·¡

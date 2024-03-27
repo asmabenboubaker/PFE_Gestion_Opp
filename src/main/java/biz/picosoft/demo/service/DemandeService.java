@@ -70,4 +70,6 @@ public interface DemandeService {
      Page<Demande> findAllDemande(Pageable pageable);
      Demande getById(Long id);
      Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
+     Boolean checkRole(String profile, String roleName);
+
 }

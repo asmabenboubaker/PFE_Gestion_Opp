@@ -10,9 +10,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
+
+import java.time.ZonedDateTime;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +34,10 @@ public class Demande implements Serializable {
     private String identifiant;
     @Column(name = "activity_name")
     private String activityName;
+    @Column(name = "number_of_attachments")
+    private Long numberOfattachments = 0L;
+    @Column(name = "exclude_from_view")
+    private Boolean excludeFromView = true;
     @Column(name = "status")
     private String status;
     @Column(name = "wf_process_id")
@@ -52,11 +56,12 @@ public class Demande implements Serializable {
 
     @Column(name = "nom")
     private String nom;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+
     @Column(name = "date_de_creation")
-    private LocalDate dateDeCreation;
+    private ZonedDateTime dateDeCreation;
 
-
+    @Column(name = "demande_number")
+    private String demandeNumber;
     @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "demande", allowSetters = true)
     private Set<FileModel> images = new HashSet<>();
@@ -180,6 +185,13 @@ public class Demande implements Serializable {
         this.setDescription(description);
         return this;
     }
+    public String getDemandeNumber() {
+        return demandeNumber;
+    }
+
+    public void setDemandeNumber(String DemandeNumber) {
+        this.demandeNumber = DemandeNumber;
+    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -198,16 +210,16 @@ public class Demande implements Serializable {
         this.nom = nom;
     }
 
-    public LocalDate getDateDeCreation() {
+    public ZonedDateTime getDateDeCreation() {
         return this.dateDeCreation;
     }
 
-    public Demande dateDeCreation(LocalDate dateDeCreation) {
+    public Demande dateDeCreation(ZonedDateTime dateDeCreation) {
         this.setDateDeCreation(dateDeCreation);
         return this;
     }
 
-    public void setDateDeCreation(LocalDate dateDeCreation) {
+    public void setDateDeCreation(ZonedDateTime dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 
@@ -318,7 +330,21 @@ public class Demande implements Serializable {
         // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
+    public Boolean isExcludeFromView() {
+        return excludeFromView;
+    }
 
+    public void setExcludeFromView(Boolean excludeFromView) {
+        this.excludeFromView = excludeFromView;
+    }
+
+    public Long getNumberOfattachments() {
+        return numberOfattachments;
+    }
+
+    public void setNumberOfattachments(Long numberOfattachments) {
+        this.numberOfattachments = numberOfattachments;
+    }
     // prettier-ignore
     @Override
     public String toString() {

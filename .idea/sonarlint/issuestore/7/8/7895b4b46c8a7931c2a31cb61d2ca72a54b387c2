@@ -1,21 +1,23 @@
 
 n
-java:S1192™"KDefine a constant instead of duplicating this literal "idnotfound" 3 times.(Ú»ıÿÿÿÿ8ïì´äæ1
+java:S1192’"KDefine a constant instead of duplicating this literal "idnotfound" 3 times.(Ú»ıÿÿÿÿ8ë—’éç1
 t
-java:S1192™"QDefine a constant instead of duplicating this literal "Entity not found" 3 times.(Ú»ıÿÿÿÿ8ïì´äæ1
-|
-java:S1488©"^Immediately return this expression instead of assigning it to the temporary variable "result".(ŒóÁ¯8İ±âæ1
-x
-java:S2629`"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(‰‚=8±­Âİæ1
-1
-java:S3457I"Not enough arguments.(ƒÄÍ8®Âİæ1
-2
-java:S3457R"Not enough arguments.(úÇ¤»8¡®Âİæ1
-]
-java:S3457`"AFormat specifiers should be used instead of string concatenation.(‰‚=8©®Âİæ1
+java:S1192’"QDefine a constant instead of duplicating this literal "Entity not found" 3 times.(Ú»ıÿÿÿÿ8ğ—’éç1
+]	java:S107G"AConstructor has 8 parameters, which is greater than 7 authorized.(¹ŞÑÊ8¡—™åç1
+W
+java:S2209]"5Change this instance-reference to a static reference.(í´ÛÎşÿÿÿÿ8ñ˜’éç1
+c
+java:S4684µ"@Replace this persistent entity with a simple POJO or DTO object.(‚Äßùÿÿÿÿ8Ì™’éç1
+Y	java:S125Ÿ"<This block of commented-out lines of code should be removed.(ïìïª8Í™’éç1
+n
+java:S1130Ê"KRemove the redundant 'java.io.IOException' thrown exception declaration(s).(”óş‹ıÿÿÿÿ8Õ™’éç1
 ’
-java:S1130»"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(Øß‰·8õªûäæ1
-a
-java:S1128"DRemove this unused import 'biz.picosoft.demo.service.dto.ClientDTO'.(™¢æ8ùªûäæ1
+java:S1130â"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(Øß‰·8Ù™’éç1
+q
+java:S1128"ORemove this unused import 'com.fasterxml.jackson.core.JsonProcessingException'.(ßÔïÇûÿÿÿÿ8ƒä´çç1
+_
+java:S1128"BRemove this unused import 'org.json.simple.parser.ParseException'.(ƒÁ‡8…ä´çç1
+U
+java:S1128%"3Remove this unused import 'javax.validation.Valid'.(æ¤ñ÷úÿÿÿÿ8†ä´çç1
 S
-java:S10687"1Remove this unused "clientService" private field.(ø®ê¼øÿÿÿÿ8Ø®Âİæ1
+java:S1068;"1Remove this unused "clientService" private field.(ø®ê¼øÿÿÿÿ8º—™åç1

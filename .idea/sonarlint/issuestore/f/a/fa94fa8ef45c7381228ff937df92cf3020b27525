@@ -1,11 +1,36 @@
 
-i
-java:S1192k"LDefine a constant instead of duplicating this literal " not found." 4 times.(´›á©8‹ð¨äæ1
-r
-java:S3655f"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(íí— øÿÿÿÿ8šô…Ýæ1
+j
+java:S1192‹"LDefine a constant instead of duplicating this literal " not found." 4 times.(´›á©8üÕçãç1
+‚
+java:S1488ÿ"dImmediately return this expression instead of assigning it to the temporary variable "requestCase1".(¯¦¬·8þÕçãç1
+~
+java:S1488î"`Immediately return this expression instead of assigning it to the temporary variable "demande1".(’¤õ‡8×Ü°äç1
+K
+java:S5411Ÿ"(Use a primitive boolean expression here.(Ð¿¢Éùÿÿÿÿ8ÿÕçãç1
+K
+java:S5411³"(Use a primitive boolean expression here.(±ÚØ÷ýÿÿÿÿ8ÝîÆçç1
+s
+java:S3655†"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(íí— øÿÿÿÿ8‘Öçãç1
+n
+java:S3655«"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ÅåÝˆ8ÍòÆçç1
 q
-java:S41441"TUpdate this method so that its implementation is not identical to "save" on line 41.(Á’»ñ8ßàðÜæ1
+java:S4144Q"TUpdate this method so that its implementation is not identical to "save" on line 73.(Á’»ñ8“Öçãç1
+^	java:S125ƒ"<This block of commented-out lines of code should be removed.(œ©ªÂÿÿÿÿÿ8žÖçãç1
 a
-java:S1854ƒ"CRemove this useless assignment to local variable "existingDemande".(Äó°½8½ð¨äæ1
+java:S1854£"CRemove this useless assignment to local variable "existingDemande".(Äó°½8¢Öçãç1
 R
-java:S1481ƒ"4Remove this unused "existingDemande" local variable.(Äó°½8¿ð¨äæ1
+java:S1481£"4Remove this unused "existingDemande" local variable.(Äó°½8£Öçãç1
+Y	java:S125Õ"<This block of commented-out lines of code should be removed.(âÍéò8àÉØèç1
+Y	java:S125"<This block of commented-out lines of code should be removed.(ãªù8­Öçãç1
+u
+java:S3776œ"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(„ÅÏÎúÿÿÿÿ8®Öçãç1
+d
+java:S3457À"AFormat specifiers should be used instead of string concatenation.(­•Ž¯øÿÿÿÿ8²Öçãç1
+Y	java:S125è"<This block of commented-out lines of code should be removed.(°Ñ¾ë8¿““äç1
+Y	java:S125ñ"<This block of commented-out lines of code should be removed.(ãªù8¸°äç1
+e
+java:S1128"IRemove this unused import 'biz.picosoft.demo.controller.errors.ECErrors'.(‡µ?8ŽóÆçç1
+u
+java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡ž¸Îùÿÿÿÿ8óÆçç1
+R
+java:S1128!"0Remove this unused import 'java.time.LocalDate'.(›‘¬èýÿÿÿÿ8ŒÊØèç1

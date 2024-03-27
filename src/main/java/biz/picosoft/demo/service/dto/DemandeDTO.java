@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 
-import java.time.LocalDate;
+
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,7 +18,7 @@ import java.util.Set;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Demande} entity.
  */
-public class DemandeDTO  extends ObjectsDTO implements Serializable {
+public class DemandeDTO  implements Serializable {
 
     private Long id;
     private String decision;
@@ -37,8 +38,8 @@ public class DemandeDTO  extends ObjectsDTO implements Serializable {
     private Boolean draft;
     private String wfCurrentComment;
     private String nom;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateDeCreation;
+
+    private ZonedDateTime dateDeCreation;
 
     private StatutDemande statut;
 
@@ -156,11 +157,11 @@ public class DemandeDTO  extends ObjectsDTO implements Serializable {
         this.nom = nom;
     }
 
-    public LocalDate getDateDeCreation() {
+    public ZonedDateTime getDateDeCreation() {
         return dateDeCreation;
     }
 
-    public void setDateDeCreation(LocalDate dateDeCreation) {
+    public void setDateDeCreation(ZonedDateTime dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

@@ -4,12 +4,10 @@ import biz.picosoft.demo.domain.enumeration.StatutDemande;
 
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.InstantFilter;
-import tech.jhipster.service.filter.LongFilter;
-import tech.jhipster.service.filter.StringFilter;
+import tech.jhipster.service.filter.*;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -51,7 +49,7 @@ public class DemandeCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
-    private InstantFilter dateDeCreation;
+    private ZonedDateTimeFilter dateDeCreation;
 
     private StatutDemandeFilter statut;
 
@@ -143,18 +141,18 @@ public class DemandeCriteria implements Serializable, Criteria {
         this.nom = nom;
     }
 
-    public InstantFilter getDateDeCreation() {
+    public ZonedDateTimeFilter getDateDeCreation() {
         return dateDeCreation;
     }
 
-    public InstantFilter dateDeCreation() {
+    public ZonedDateTimeFilter dateDeCreation() {
         if (dateDeCreation == null) {
-            dateDeCreation = new InstantFilter();
+            dateDeCreation = new ZonedDateTimeFilter();
         }
         return dateDeCreation;
     }
 
-    public void setDateDeCreation(InstantFilter dateDeCreation) {
+    public void setDateDeCreation(ZonedDateTimeFilter dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

@@ -1,7 +1,9 @@
 package biz.picosoft.demo.controller;
 
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
+import biz.picosoft.demo.client.kernel.intercomm.KernelService;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.FileModel;
@@ -9,14 +11,13 @@ import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.ClientService;
 import biz.picosoft.demo.service.DemandeQueryService;
-import biz.picosoft.demo.service.DemandeSer;
 import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.criteria.DemandeCriteria;
-import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+import biz.picosoft.demo.service.impl.DemandeServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,56 +57,45 @@ public class DemandeResource {
 
     private final DemandeService demandeService;
     private final ClientService clientService;
-    private final DemandeSer demandeSer;
+
     private final KernelInterface kernelInterface;
 
     private final DemandeRepository demandeRepository;
 
     private final DemandeQueryService demandeQueryService;
+    private final CurrentUser currentUser;
 
-    public DemandeResource(DemandeService demandeService, DemandeSer demandeSer, KernelInterface kernelInterface, DemandeRepository demandeRepository, DemandeQueryService demandeQueryService,ClientService clientService) {
+    private final KernelService kernelService;
+    private final DemandeServiceImpl demandeServiceImp;
+
+    public DemandeResource(DemandeService demandeService, KernelInterface kernelInterface, DemandeRepository demandeRepository,
+                           DemandeQueryService demandeQueryService,ClientService clientService,CurrentUser currentUser,
+                           KernelService kernelService,DemandeServiceImpl demandeServiceImp) {
         this.demandeService = demandeService;
-        this.demandeSer = demandeSer;
+
         this.kernelInterface = kernelInterface;
         this.demandeRepository = demandeRepository;
         this.demandeQueryService = demandeQueryService;
         this.clientService=clientService;
-    }
-    @PatchMapping("/initDemande")
-    public ResponseEntity<DemandeDTO> initDemande() throws JsonProcessingException {
-        log.debug("REST request to init Demande : {}");
-        DemandeDTO result = demandeSer.initDemande();
-
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                .body(result);
-    }
-    @PutMapping(value = {"/save-demande"})
-    public ResponseEntity<Void> putBPMDemande(@RequestBody String stringInvoice) throws ParseException, JsonProcessingException {
-        log.debug("REST request to Save Demande : {}");
-
-        demandeSer.putBPMDemande(stringInvoice, Demande.class.getName());
-
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, "")).build();
-
+        this.currentUser=currentUser;
+        this.kernelService=kernelService;
+        this.demandeServiceImp=demandeServiceImp;
     }
     /**
-     * {@code PATCH  /submitInvoice} : submit invoice.
+     * {@code Patch  /initRequestCase} : initiate request case.
      *
-     * @return the {@link ResponseEntity<DemandeDTO>}  with status {@code 201 (Created)} and with body the identified invoice recement initiated, or with status {@code 400 (Bad Request)} if the invoice no already has an ID.
+     * @return the {@link DemandeOutputDTO} with status {@code 200 (OK)} and with body the request case.
      */
-    @PatchMapping("/submitInvoice")
-    public ResponseEntity<DemandeDTO> submitDemande(@Valid @RequestBody DemandeDTO demandeDTO) throws Exception {
-        log.debug("REST request to submit demande: " + demandeDTO.toString());
+    @PatchMapping("/initDemande")
+    public DemandeOutputDTO initDemande() throws Exception {
 
+        // check if the conneceted person have role can create inbound
+        demandeService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreatedemande);
+
+        // extract acl class
         AclClass aclClass = kernelInterface.getaclClassByClassName(Demande.class.getName());
 
-        Long id = demandeSer.submitInvoice(demandeDTO, aclClass);
-
-        DemandeDTO result=demandeSer.findOneById(id, aclClass);
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+        return demandeServiceImp.initProcessDemande(aclClass);
 
     }
 
@@ -313,30 +304,18 @@ public class DemandeResource {
 //    }
 
 
-    @PostMapping(value = "/demandes/client", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/demandes/client",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Demande> createDemandeAndAssignToClient(
-            @RequestParam("demandeDTO") String demandeDTOJson,
+            @RequestPart(value ="demandeDTO") Demande demandeDTOJson,
             @RequestParam("clientId") Long clientId,
-            @RequestPart("imageFile") MultipartFile[] file) throws URISyntaxException {
+            @RequestPart(value = "file") MultipartFile[] file) throws URISyntaxException {
         log.debug("REST request to save Demande and assign to Client: {}", demandeDTOJson);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Demande demandeDTO = null;
-        try {
-            demandeDTO = objectMapper.readValue(demandeDTOJson, Demande.class);
-        } catch (IOException e) {
-            // Handle JSON parsing exception
-            e.printStackTrace();
-        }
-
-        if (demandeDTO.getId() != null) {
-            throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
-        }
 
         try {
             Set<FileModel> images = uploadFile(file);
-            demandeDTO.setImages(images);
-            Demande savedDemande = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+            demandeDTOJson.setImages(images);
+            Demande savedDemande = demandeService.saveAndAssignToClient(demandeDTOJson, clientId);
             return ResponseEntity
                     .created(new URI("/api/demandes/" + savedDemande.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, savedDemande.getId().toString()))
@@ -347,6 +326,7 @@ public class DemandeResource {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
     public Set<FileModel>  uploadFile(MultipartFile[] multipartFiles) throws IOException, IOException {
         Set<FileModel> imageModels=new HashSet<>();
         for(MultipartFile file:multipartFiles){

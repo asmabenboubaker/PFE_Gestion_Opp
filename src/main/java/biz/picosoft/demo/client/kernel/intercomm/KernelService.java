@@ -179,15 +179,15 @@ public class KernelService {
             HashMap<String, String> event = new HashMap<>();
             HashMap<String, String> state = new HashMap<>();
 //
-//            for (RequestCaseStatut s : RequestCaseStatut.values()) {
+//            for (DemandeStatut s : DemandeStatut.values()) {
 //                state.put(s.name(), s.getLabel());
 //            }
-//            for (RequestCaseEvent s : RequestCaseEvent.values()) {
+//            for (DemandeEvent s : DemandeEvent.values()) {
 //                event.put(s.name(), s.getLabel());
 //            }
             initClass.setEvent(event);
             initClass.setState(state);
-//            initClass.setDefaultState(RequestCaseStatut.DRAFT.name());
+//            initClass.setDefaultState(DemandeStatut.DRAFT.name());
 
             String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
             String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();
@@ -279,4 +279,14 @@ public class KernelService {
 //            log.error(e.toString());
 //        }
 //    }
+
+
+    public ObjectState saveObjectState(ObjectState objectState) {
+
+        return kernelInterface.saveObjectState(objectState);
+    }
+
+    public Optional<ObjectState> getObjectStateCourrier(Long objectId, String classname) {
+        return kernelInterface.getObjectState(classname, objectId);
+    }
 }
