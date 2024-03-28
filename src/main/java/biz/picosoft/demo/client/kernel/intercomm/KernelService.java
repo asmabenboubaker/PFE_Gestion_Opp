@@ -1,6 +1,7 @@
 package biz.picosoft.demo.client.kernel.intercomm;
 
 import biz.picosoft.demo.DemoApplication;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
@@ -288,5 +289,9 @@ public class KernelService {
 
     public Optional<ObjectState> getObjectStateCourrier(Long objectId, String classname) {
         return kernelInterface.getObjectState(classname, objectId);
+    }
+    public RulesDTO rulesByName(String ruleName) {
+        return kernelInterface.rulesByName(ruleName);
+
     }
 }

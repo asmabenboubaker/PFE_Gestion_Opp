@@ -34,7 +34,8 @@ public class DemandeInputDTO  implements Serializable {
     private ZonedDateTime dateDeCreation;
 
     private StatutDemande statut;
-
+    private String wfComment;
+    private String msg;
     private Set<DomaineDTO> domaines = new HashSet<>();
 
 
@@ -180,7 +181,21 @@ public class DemandeInputDTO  implements Serializable {
     public void setClient(ClientDTO client) {
         this.client = client;
     }
+    public String getWfComment() {
+        return wfComment;
+    }
 
+    public void setWfComment(String wfComment) {
+        this.wfComment = wfComment;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

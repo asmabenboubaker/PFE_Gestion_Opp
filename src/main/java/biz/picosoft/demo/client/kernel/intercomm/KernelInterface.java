@@ -1,6 +1,7 @@
 package biz.picosoft.demo.client.kernel.intercomm;
 
 import biz.picosoft.demo.client.config.FeignConfig;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
@@ -28,6 +29,9 @@ import java.util.Set;
 
 @FeignClient(value = "${feign.kernel.name}", url = "${feign.kernel.url}", configuration = FeignConfig.class)
 public interface KernelInterface {
+    @GetMapping(value = "/rulesByName")
+    RulesDTO rulesByName(@RequestParam String ruleName);
+
     @RequestMapping(method = RequestMethod.POST, value = "/workflow/_nextTask")
     org.json.simple.JSONObject _nextTask(@RequestBody Map<String, Object> variables);
     @GetMapping("/computValidator")

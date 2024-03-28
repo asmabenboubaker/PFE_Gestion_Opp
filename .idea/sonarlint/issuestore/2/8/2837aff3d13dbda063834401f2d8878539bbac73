@@ -1,51 +1,51 @@
 
-o	java:S100 "NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å½ûûÿÿÿÿ8‰òÔ÷à1
+o	java:S100$"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å½ûûÿÿÿÿ8‰òÔ÷à1
 `
-java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(îÂ£õ
+java:S4488#"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(îÂ£õ
 e
-java:S4488&"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‡ªö8û–ãàç1
+java:S4488*"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‡ªö8û–ãàç1
 ^
-java:S4488)"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÁƒËç
+java:S4488-"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÁƒËç
 c
-java:S44883"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ï™Ş®ÿÿÿÿÿ
+java:S44887"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ï™Ş®ÿÿÿÿÿ
 c
-java:S4488="HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Şšİıÿÿÿÿ
+java:S4488A"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Şšİıÿÿÿÿ
 e
-java:S4488@"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ç˜Ñ¼8µ¥Âòà1
+java:S4488D"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ç˜Ñ¼8µ¥Âòà1
 `
-java:S4488D"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÜĞÚÎ
+java:S4488H"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÜĞÚÎ
 e
-java:S4488G"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Õ„ŸÊÿÿÿÿÿ
+java:S4488K"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Õ„ŸÊÿÿÿÿÿ
 c
-java:S4488J"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¸ş°úÿÿÿÿ
+java:S4488N"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¸ş°úÿÿÿÿ
 j
-java:S4488M"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÙÑ©€øÿÿÿÿ8Œ—ãàç1
+java:S4488Q"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÙÑ©€øÿÿÿÿ8Œ—ãàç1
 j
-java:S4488P"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ìÁñ•ÿÿÿÿÿ8—ãàç1
+java:S4488T"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ìÁñ•ÿÿÿÿÿ8—ãàç1
 d
-java:S4488S"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ö›‡ 8›®ˆóà1
+java:S4488W"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ö›‡ 8›®ˆóà1
 `
-java:S4488U"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(—âÈ¾
-h	java:S100Y"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÍöÒúÿÿÿÿ
+java:S4488Y"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(—âÈ¾
+h	java:S100]"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÍöÒúÿÿÿÿ
 c
-java:S4488Z"HReplace "@RequestMapping(method = RequestMethod.PUT)" with "@PutMapping"(›¥‹şıÿÿÿÿ
+java:S4488^"HReplace "@RequestMapping(method = RequestMethod.PUT)" with "@PutMapping"(›¥‹şıÿÿÿÿ
 l
-java:S4488`"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ğÌû‘şÿÿÿÿ8¶Ü‰ñà1
+java:S4488d"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ğÌû‘şÿÿÿÿ8¶Ü‰ñà1
 e
-java:S4488g"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(×™­ä8Ìøóà1
+java:S4488k"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(×™­ä8Ìøóà1
 g
-java:S4488j"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ë÷’›8Í–öñà1
+java:S4488n"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ë÷’›8Í–öñà1
 j
-java:S4488n"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¤ÎİÎıÿÿÿÿ8»Æ£óà1
+java:S4488r"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¤ÎİÎıÿÿÿÿ8»Æ£óà1
 l
-java:S4488r"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ëûŠ“şÿÿÿÿ8ûíÆòà1
+java:S4488v"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ëûŠ“şÿÿÿÿ8ûíÆòà1
 l
-java:S4488w"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¤àÉüÿÿÿÿ8Éçòà1
+java:S4488{"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¤àÉüÿÿÿÿ8Éçòà1
 j
-java:S4488z"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¡–Éüÿÿÿÿ8ï¶ºõà1
+java:S4488~"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¡–Éüÿÿÿÿ8ï¶ºõà1
 m
-java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ë†‡…ÿÿÿÿÿ8ã¢Ì÷à1
+java:S4488…"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ë†‡…ÿÿÿÿÿ8ã¢Ì÷à1
 k
-java:S4488„"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÎúÉÉÿÿÿÿÿ8¤òÔ÷à1
+java:S4488ˆ"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÎúÉÉÿÿÿÿÿ8¤òÔ÷à1
 h
-java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ê÷ûç8¤ğ§äç1
+java:S4488”"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ê÷ûç8¤ğ§äç1

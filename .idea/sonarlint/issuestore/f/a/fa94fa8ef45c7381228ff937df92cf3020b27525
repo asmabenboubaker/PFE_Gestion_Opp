@@ -1,36 +1,55 @@
 
 j
-java:S1192‹"LDefine a constant instead of duplicating this literal " not found." 4 times.(´›á©8üÕçãç1
+java:S1192š"LDefine a constant instead of duplicating this literal " not found." 4 times.(´›á©8´Œ—è1
 ‚
-java:S1488ÿ"dImmediately return this expression instead of assigning it to the temporary variable "requestCase1".(¯¦¬·8şÕçãç1
+java:S1488"dImmediately return this expression instead of assigning it to the temporary variable "requestCase1".(¯¦¬·8¶Œ—è1
 ~
-java:S1488î"`Immediately return this expression instead of assigning it to the temporary variable "demande1".(’¤õ‡8×Ü°äç1
+java:S1488ı"`Immediately return this expression instead of assigning it to the temporary variable "demande1".(’¤õ‡8¶Œ—è1
 K
-java:S5411Ÿ"(Use a primitive boolean expression here.(Ğ¿¢Éùÿÿÿÿ8ÿÕçãç1
+java:S5411®"(Use a primitive boolean expression here.(Ğ¿¢Éùÿÿÿÿ8¸Œ—è1
 K
-java:S5411³"(Use a primitive boolean expression here.(±ÚØ÷ıÿÿÿÿ8İîÆçç1
-s
-java:S3655†"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(íí— øÿÿÿÿ8‘Öçãç1
+java:S5411Â"(Use a primitive boolean expression here.(±ÚØ÷ıÿÿÿÿ8¸Œ—è1
+|
+java:S3655£"^Call "demandeOptional.isPresent()" or "!demandeOptional.isEmpty()" before accessing the value.(³ÿ¨‡8—è1
 n
-java:S3655«"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Ååİˆ8ÍòÆçç1
+java:S3655º"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Ååİˆ8—è1
+s
+java:S3655•"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(íí— øÿÿÿÿ8—è1
+b
+java:S2583¦"DChange this condition so that it does not always evaluate to "false"(¢êÓß8—è1
 q
-java:S4144Q"TUpdate this method so that its implementation is not identical to "save" on line 73.(Á’»ñ8“Öçãç1
-^	java:S125ƒ"<This block of commented-out lines of code should be removed.(œ©ªÂÿÿÿÿÿ8Öçãç1
+java:S4144`"TUpdate this method so that its implementation is not identical to "save" on line 88.(Á’»ñ8ƒ—è1
+]	java:S125C"<This block of commented-out lines of code should be removed.(Çãïÿÿÿÿÿÿ8…—è1
+^	java:S125’"<This block of commented-out lines of code should be removed.(œ©ªÂÿÿÿÿÿ8Š—è1
 a
-java:S1854£"CRemove this useless assignment to local variable "existingDemande".(Äó°½8¢Öçãç1
+java:S1854²"CRemove this useless assignment to local variable "existingDemande".(Äó°½8‹—è1
 R
-java:S1481£"4Remove this unused "existingDemande" local variable.(Äó°½8£Öçãç1
-Y	java:S125Õ"<This block of commented-out lines of code should be removed.(âÍéò8àÉØèç1
-Y	java:S125"<This block of commented-out lines of code should be removed.(ãªù8­Öçãç1
+java:S1481²"4Remove this unused "existingDemande" local variable.(Äó°½8Œ—è1
+Y	java:S125ä"<This block of commented-out lines of code should be removed.(âÍéò8—è1
+M	java:S106€"+Replace this use of System.out by a logger.(Ÿ‚İøÿÿÿÿ8’—è1
+H	java:S106‚"+Replace this use of System.out by a logger.(…£ãğ8’—è1
+H	java:S106„"+Replace this use of System.out by a logger.(¢Æá»8’—è1
+H	java:S106†"+Replace this use of System.out by a logger.(ıØ¾Ø8“—è1
+X	java:S125‡"<This block of commented-out lines of code should be removed.(ÿÛæ(8“—è1
+H	java:S106Š"+Replace this use of System.out by a logger.(Ã Ï¶8“—è1
+Y	java:S125"<This block of commented-out lines of code should be removed.(ãªù8”—è1
 u
-java:S3776œ"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(„ÅÏÎúÿÿÿÿ8®Öçãç1
+java:S3776«"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(„ÅÏÎúÿÿÿÿ8”—è1
 d
-java:S3457À"AFormat specifiers should be used instead of string concatenation.(­•¯øÿÿÿÿ8²Öçãç1
-Y	java:S125è"<This block of commented-out lines of code should be removed.(°Ñ¾ë8¿““äç1
-Y	java:S125ñ"<This block of commented-out lines of code should be removed.(ãªù8¸°äç1
+java:S3457Ï"AFormat specifiers should be used instead of string concatenation.(­•¯øÿÿÿÿ8™—è1
+Y	java:S125÷"<This block of commented-out lines of code should be removed.(°Ñ¾ë8 —è1
+Y	java:S125€"<This block of commented-out lines of code should be removed.(ãªù8¡—è1
+^
+java:S1854´"@Remove this useless assignment to local variable "activityName".(ˆ“ğî8£—è1
+O
+java:S1481´"1Remove this unused "activityName" local variable.(ˆ“ğî8¦—è1
+H	java:S106ë"+Replace this use of System.out by a logger.(ÜÉ¶ñ8«—è1
+^	java:S125ì"<This block of commented-out lines of code should be removed.(ËıäÙûÿÿÿÿ8«—è1
 e
-java:S1128"IRemove this unused import 'biz.picosoft.demo.controller.errors.ECErrors'.(‡µ?8óÆçç1
-u
-java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ8óÆçç1
+java:S1128"IRemove this unused import 'biz.picosoft.demo.controller.errors.ECErrors'.(‡µ?8àÕ—è1
 R
-java:S1128!"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8ŒÊØèç1
+java:S1128"0Remove this unused import 'org.json.JSONObject'.(œÖ´üşÿÿÿÿ8àÕ—è1
+u
+java:S1128!"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ8áÕ—è1
+R
+java:S1128)"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8áÕ—è1

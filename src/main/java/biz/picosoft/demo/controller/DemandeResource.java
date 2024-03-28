@@ -15,6 +15,7 @@ import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.criteria.DemandeCriteria;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 
+import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.DemandeServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -98,6 +99,20 @@ public class DemandeResource {
         return demandeServiceImp.initProcessDemande(aclClass);
 
     }
+    @PatchMapping(value = {"/submitDemande"})
+    public DemandeOutputDTO submitRequestCase(@RequestBody DemandeInputDTO requestCaseInputDTO) throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        demandeService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreatedemande);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Demande.class.getName());
+
+        DemandeOutputDTO result = demandeServiceImp.submitProcessDemande(requestCaseInputDTO, aclClass);
+
+        return result;
+    }
+
 
     /**
      * {@code POST  /demandes} : Create a new demande.

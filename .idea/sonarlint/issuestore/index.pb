@@ -363,3 +363,9 @@ p
 @src/main/java/biz/picosoft/demo/service/dto/DemandeInputDTO.java,6\a\6a67bb3c7256d96bd65319763fdb7f9b7cbe4203
 q
 Asrc/main/java/biz/picosoft/demo/service/dto/DemandeOutputDTO.java,d\4\d4e9f3e355bba169ef596be3f4742d138e3ddcf2
+t
+Dsrc/main/java/biz/picosoft/demo/domain/ZonedDateTimeTypeAdapter.java,e\4\e47e1c8671e3cc32a6d3fc925812ebb38a694d0e
+p
+@src/main/java/biz/picosoft/demo/domain/LocalDateTypeAdapter.java,2\1\21186d624c1b645f5f4def178244101f13108ab7
+q
+Asrc/main/java/biz/picosoft/demo/client/kernel/model/RulesDTO.java,b\3\b3545ebaa16be3ec80ae4473fd5202fd1d686cc3

@@ -74,6 +74,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DomaineQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\global\RefSequenceFormat.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\ClientService.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\DemandeInputMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\audit\AuditRevisionEntity.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\ProjetQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\PSTranslate.java
@@ -98,6 +99,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\ProjetR
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\DomaineCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\ProjetServiceImpl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\Files.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\RulesDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\package-info.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\DomaineMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\WorkflowService.java
@@ -105,7 +107,6 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\package-info.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\BonDeCommandeCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\logging\AopLoggingCriteria.java
-D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DemandeSer.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\global\InitClass.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\BeanConfiguration.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\config\FlowableConfig.java
@@ -122,6 +123,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\Bon
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\enumeration\StatutProjet.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\pm\Variable.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\PVServiceImpl.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\DemandeOutputMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\intercomm\StringResourceService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\pm\User.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\objects\HistoricWF.java
@@ -129,6 +131,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\package-in
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\enumeration\package-info.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\OffreCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\DemandeRepositoryWithBagRelationships.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\LocalDateTypeAdapter.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\EtudeOppResource.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\OpportuniteService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\objects\WFDTO.java
@@ -162,6 +165,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\PVQuerySer
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\dto\KeyWordCriteriaDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\ClientDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Demande.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\ZonedDateTimeTypeAdapter.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\controller\WorkflowRessource.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\DemandeCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\WebMvcConfig.java
@@ -187,6 +191,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\C
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\DemoApplication.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Domaine.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\ContentExtractorControl.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\errors\RCErrors.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\errors\DemandeErrors.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\slf4j\Slf4jMDCFilterConfiguration.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\EtudeOppService.java
@@ -198,10 +203,13 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\BeanUtil.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\ClientRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\BonDeCommandeRepository.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DemandeInputDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\OffreResource.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DemandeOutputDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\repository\BpmJobRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\TraductionProcessor.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\slf4j\Slf4jMDCFilter.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\errors\ECErrors.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\errors\BadRequestAlertException.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\DomaineServiceImpl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\OffreService.java

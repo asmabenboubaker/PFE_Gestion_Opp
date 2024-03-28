@@ -4,9 +4,12 @@ import biz.picosoft.demo.Workflow.domain.BpmJob;
 import biz.picosoft.demo.Workflow.service.WorkflowService;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.acl.Permission;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
+import biz.picosoft.demo.client.kernel.model.objects.WFDTO;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.ECErrors;
@@ -16,8 +19,11 @@ import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.repository.ClientRepository;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.service.DemandeService;
+
 import biz.picosoft.demo.service.dto.DemandeDTO;
+import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+import biz.picosoft.demo.service.mapper.DemandeInputMapper;
 import biz.picosoft.demo.service.mapper.DemandeMapper;
 
 import biz.picosoft.demo.service.mapper.DemandeOutputMapper;
@@ -30,6 +36,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +58,20 @@ public class DemandeServiceImpl implements DemandeService {
     private final DemandeMapper demandeMapper;
 
     private final KernelInterface kernelInterface;
-    private DemandeOutputMapper demandeOutputMapper;
+    private final DemandeOutputMapper demandeOutputMapper;
+    private final DemandeInputMapper demandeInputMapper;
+    private final WorkflowService workflowService;
 
-    private WorkflowService workflowService;
+    private final CurrentUser currentUser;
 
-    private CurrentUser currentUser;
+//    private RulesService rulesService;
+
 
     public DemandeServiceImpl(DemandeRepository demandeRepository, DemandeMapper demandeMapper,ClientRepository clientRepository,DemandeOutputMapper demandeOutputMapper,
-                              WorkflowService workflowService,CurrentUser currentUser,KernelService kernelService,KernelInterface kernelInterface) {
+                              WorkflowService workflowService,CurrentUser currentUser,KernelService kernelService,KernelInterface kernelInterface,
+                              DemandeInputMapper demandeInputMapper
+//                             , RulesService rulesService
+    ) {
         this.demandeRepository = demandeRepository;
         this.demandeMapper = demandeMapper;
         this.clientRepository=clientRepository;
@@ -66,6 +80,7 @@ public class DemandeServiceImpl implements DemandeService {
         this.currentUser=currentUser;
         this.kernelInterface=kernelInterface;
         this.kernelService=kernelService;
+        this.demandeInputMapper=demandeInputMapper;
 
     }
 
@@ -390,5 +405,111 @@ public class DemandeServiceImpl implements DemandeService {
         }
         return demande;
     }
+    @PersistenceContext(unitName = "externDSEmFactory")
+    private EntityManager entityManager;
+    // submit methods
+    @Transactional
+    public DemandeOutputDTO submitProcessDemande(DemandeInputDTO demandeInputDTO, AclClass aclClass) throws Exception {
+
+        entityManager.clear();
+        // extract object by id from data base
+        Optional<Demande> demandeOptional = demandeRepository.findById(demandeInputDTO.getId());
+
+        // extract courrier
+        Demande requestCase = demandeOptional.get();
+
+        // check if the object exist in database
+        if (!demandeOptional.isPresent())
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_requestCase_null, RCErrors.Entity_requestCase, RCErrors.ERR_Key_requestCase_null);
+
+        // extract permission of the authentifier from kernel
+        String permission = kernelService.checkSecurity(aclClass.getSimpleName(), demandeInputDTO.getId(), currentUser.getSid());
+
+        // check if the authentifier has permission WRITE
+        if (!permission.equals(Permission.WRITE.name()) && !permission.equals(Permission.INH_WRITE.name()))
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_not_authorized, RCErrors.Entity_requestCase, RCErrors.ERR_Key_not_authorized);
+
+        // validate attributes courrier
+        this.validateRequestCase(aclClass, demandeInputDTO);
+
+        // extract activity name from courrier
+        String activityName = requestCase.getActivityName();
+
+        // fusion the input object and the object from database
+        demandeInputMapper.partialUpdate(requestCase, demandeInputDTO);
+
+        // map object courrier to courrier by id DTO
+        DemandeOutputDTO requestCaseOutputDTO = demandeOutputMapper.toDto(requestCase);
+
+        requestCaseOutputDTO.setClassId(aclClass.getId());
+
+        requestCaseOutputDTO.setClassName(aclClass.getClasse());
+
+        requestCaseOutputDTO.setLabelClass(aclClass.getLabel());
+
+        requestCaseOutputDTO.setSimpleClassName(aclClass.getSimpleName());
+
+        // initialize workflow information
+        WFDTO workflow = new WFDTO();
+        workflow.setWfProcessID(requestCase.getWfProcessID());
+        workflow.setActivityName(requestCase.getActivityName());
+        requestCaseOutputDTO.setWorkflow(workflow);
+
+        BpmJob bpmJob = workflowService._nextTaskWithoutEvent(requestCase.getWfProcessID(), demandeInputDTO.getDecision(), demandeInputDTO.getWfComment(), requestCaseOutputDTO, aclClass);
+
+        List<String> authors = bpmJob.getAuthors();
+
+        List<String> readers = bpmJob.getReaders();
+
+        requestCaseOutputDTO = (DemandeOutputDTO) bpmJob.getDataObject();
+
+        requestCase = demandeOutputMapper.toEntity(requestCaseOutputDTO);
+
+        requestCase.setWfProcessID(bpmJob.getProcessID());
+
+        requestCase.setActivityName(bpmJob.getActivityName());
+
+        requestCase.setEndProcess(bpmJob.getEndProcess());
+
+        requestCase.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
+
+        requestCase = saveDemande(requestCase, authors, readers, aclClass, false);
+
+        return demandeOutputMapper.toDto(requestCase);
+
+    }
+
+    public Boolean validateRequestCase(AclClass aclClass, DemandeInputDTO demandeInputDTO) {
+
+        String nameRule = "save-" + aclClass.getSimpleName();
+
+        RulesDTO rulesDTO = kernelService.rulesByName(nameRule);
+        if (rulesDTO != null && rulesDTO.getSrcCode() != null) {
+            List<Object> objectList = new ArrayList<>();
+            objectList.add(demandeInputDTO);
+            try {
+                System.out.println("zezezeze");
+                //rulesService.executeRules(objectList, rulesDTO.getSrcCode());
+            } catch (Exception e) {
+                throw new BadRequestAlertException(
+                        RCErrors.ERR_Msg_drools + ": " + nameRule,
+                        aclClass.getSimpleName(),
+                        RCErrors.ERR_Key_drools);
+            }
+
+        }
+
+        if (demandeInputDTO.getMsg() == null)
+            return true;
+        else
+            throw new BadRequestAlertException(
+                    demandeInputDTO.getMsg(),
+                    aclClass.getSimpleName(),
+                    demandeInputDTO.getMsg());
+
+
+    }
+
+
 
 }
