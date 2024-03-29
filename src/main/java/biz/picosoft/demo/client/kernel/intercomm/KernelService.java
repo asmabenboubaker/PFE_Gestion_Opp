@@ -8,6 +8,7 @@ import biz.picosoft.demo.client.kernel.model.global.*;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.enumeration.DemandeStatut;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -179,16 +180,16 @@ public class KernelService {
 
             HashMap<String, String> event = new HashMap<>();
             HashMap<String, String> state = new HashMap<>();
-//
-//            for (DemandeStatut s : DemandeStatut.values()) {
-//                state.put(s.name(), s.getLabel());
-//            }
+
+            for (DemandeStatut s : DemandeStatut.values()) {
+                state.put(s.name(), s.getLabel());
+            }
 //            for (DemandeEvent s : DemandeEvent.values()) {
 //                event.put(s.name(), s.getLabel());
 //            }
             initClass.setEvent(event);
             initClass.setState(state);
-//            initClass.setDefaultState(DemandeStatut.DRAFT.name());
+     initClass.setDefaultState(DemandeStatut.DRAFT.name());
 
             String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
             String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();

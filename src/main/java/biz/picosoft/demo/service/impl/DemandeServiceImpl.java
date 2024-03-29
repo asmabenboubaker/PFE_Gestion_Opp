@@ -39,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -225,7 +226,7 @@ public class DemandeServiceImpl implements DemandeService {
         // initiate new object Courrier
         Demande demande = new Demande();
 
-        //demande.setDateDeCreation(LocalDate.now());
+        demande.setDateDeCreation(ZonedDateTime.now());
 
         // persite the object
         demande = demandeRepository.save(demande);
@@ -260,14 +261,14 @@ public class DemandeServiceImpl implements DemandeService {
         System.out.println("bpmJob.getEndProcess()"+bpmJob.getEndProcess());
         demande.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
         System.out.println("bpmJob.getAssignee()"+bpmJob.getAssignee());
-        //demande.setDemandeNumber(kernelInterface.getSequenceNumberByName(new JSONObject(demande), aclClass.getSequenceNameFM()));
+        demande.setDemandeNumber(kernelInterface.getSequenceNumberByName(new JSONObject(demande), aclClass.getSequenceNameFM()));
 
         demande = saveDemande(demande, authors, readers, aclClass, true);
  System.out.println("demande object"+demande);
         return demandeOutputMapper.toDto(demande);
     }
-    public Demande saveDemande(Demande requestCase) {
-        Demande requestCase1 = demandeRepository.save(requestCase);
+    public Demande saveDemande(Demande demande) {
+        Demande requestCase1 = demandeRepository.save(demande);
 
 //        if (requestCase.getEntityDetails() != null) {
 //            for (EntityDetails entityDetails : requestCase.getEntityDetails()) {
