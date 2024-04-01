@@ -19,6 +19,8 @@ import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.DemandeServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import freemarker.template.TemplateException;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,6 +113,11 @@ public class DemandeResource {
         DemandeOutputDTO result = demandeServiceImp.submitProcessDemande(requestCaseInputDTO, aclClass);
 
         return result;
+    }
+    @GetMapping("/demandeDTO/{id}")
+    DemandeOutputDTO getDemandeDTO(@PathVariable Long id) throws IOException, TemplateException {
+
+        return demandeService.getbyideDTO(id);
     }
 
 
@@ -319,30 +326,55 @@ public class DemandeResource {
 //    }
 
 
-    @PostMapping(value = "/demandes/client",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Demande> createDemandeAndAssignToClient(
-            @RequestPart(value ="demandeDTO") Demande demandeDTOJson,
-            @RequestParam("clientId") Long clientId,
-            @RequestPart(value = "file") MultipartFile[] file) throws URISyntaxException {
-        log.debug("REST request to save Demande and assign to Client: {}", demandeDTOJson);
-
-
-        try {
-            Set<FileModel> images = uploadFile(file);
-            demandeDTOJson.setImages(images);
-            Demande savedDemande = demandeService.saveAndAssignToClient(demandeDTOJson, clientId);
-            return ResponseEntity
-                    .created(new URI("/api/demandes/" + savedDemande.getId()))
-                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, savedDemande.getId().toString()))
-                    .body(savedDemande);
-        } catch (Exception e) {
-            // Handle file upload exception
-            log.error("Error occurred while processing file upload: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    @PostMapping("/demandes/client")
+    public Demande createDemandeAndAssignToClient(@RequestBody Demande demandeDTO, @RequestParam Long clientId) throws URISyntaxException {
+        log.debug("REST request to save Demande and assign to Client: {}", demandeDTO);
+        if (demandeDTO.getId() != null) {
+            throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        // Call the service method to save and assign the Demande to the Client
+        Demande result = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+
+        return result;
     }
 
-    public Set<FileModel>  uploadFile(MultipartFile[] multipartFiles) throws IOException, IOException {
+//    @PostMapping(value = "/demandes/client2", consumes = {"multipart/form-data"})
+//    public ResponseEntity<Demande> createDemandeAndAssignToClient(
+//            @RequestParam("demandeDTO") String demandeDTOJson,
+//            @RequestParam("clientId") Long clientId,
+//            @RequestParam("imageFile") MultipartFile[] file) throws URISyntaxException {
+//        log.debug("REST request to save Demande and assign to Client: {}", demandeDTOJson);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Demande demandeDTO = null;
+//        try {
+//            demandeDTO = objectMapper.readValue(demandeDTOJson, Demande.class);
+//        } catch (IOException e) {
+//            // Handle JSON parsing exception
+//            e.printStackTrace();
+//        }
+//
+//        if (demandeDTO.getId() != null) {
+//            throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
+//        }
+//
+//        try {
+//            Set<FileModel> images = uploadFile(file);
+//            demandeDTO.setImages(images);
+//            Demande savedDemande = demandeService.saveAndAssignToClient(demandeDTO, clientId);
+//            return ResponseEntity
+//                    .created(new URI("/api/demandes/" + savedDemande.getId()))
+//                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, savedDemande.getId().toString()))
+//                    .body(savedDemande);
+//        } catch (Exception e) {
+//            // Handle file upload exception
+//            log.error("Error occurred while processing file upload: {}", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+    //for uploading the MULTIPLE files to the database
+     public Set<FileModel>  uploadFile(MultipartFile[] multipartFiles) throws IOException, IOException {
         Set<FileModel> imageModels=new HashSet<>();
         for(MultipartFile file:multipartFiles){
             FileModel imageModel=new FileModel(

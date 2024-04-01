@@ -12,13 +12,11 @@ public abstract class FileModel_ {
 	public static volatile SingularAttribute<FileModel, String> name;
 	public static volatile SingularAttribute<FileModel, byte[]> picByte;
 	public static volatile SingularAttribute<FileModel, String> type;
-	public static volatile SingularAttribute<FileModel, Demande> demande;
 
 	public static final String IMAGE_ID = "imageId";
 	public static final String NAME = "name";
 	public static final String PIC_BYTE = "picByte";
 	public static final String TYPE = "type";
-	public static final String DEMANDE = "demande";
 
 }
 

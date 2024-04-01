@@ -157,6 +157,7 @@ biz\picosoft\demo\Workflow\service\dto\BpmJobDTO.class
 biz\picosoft\demo\service\criteria\DemandeCriteria.class
 biz\picosoft\demo\service\impl\ClientServiceImpl.class
 biz\picosoft\demo\domain\BonDeCommande_.class
+biz\picosoft\demo\client\kernel\intercomm\KernelService$1.class
 biz\picosoft\demo\service\dto\OffreDTO.class
 biz\picosoft\demo\domain\Demande_.class
 biz\picosoft\demo\Workflow\service\BpmJobQueryService.class
@@ -259,3 +260,4 @@ biz\picosoft\demo\Workflow\service\WorkflowService$3.class
 biz\picosoft\demo\client\kernel\model\global\InitVariable$InitProfile.class
 biz\picosoft\demo\service\ClientQueryService.class
 biz\picosoft\demo\client\kernel\model\objects\UserActivityDTO.class
+biz\picosoft\demo\domain\enumeration\DemandeStatut.class

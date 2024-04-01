@@ -3,6 +3,7 @@ package biz.picosoft.demo.client.kernel.intercomm;
 import biz.picosoft.demo.client.config.FeignConfig;
 import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.acl.enumeration.Access;
 import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectDTO;
@@ -29,6 +30,21 @@ import java.util.Set;
 
 @FeignClient(value = "${feign.kernel.name}", url = "${feign.kernel.url}", configuration = FeignConfig.class)
 public interface KernelInterface {
+
+    @RequestMapping(method = RequestMethod.GET, value = "/checkAccess")
+    Access checkAccess(@RequestParam("authors") List<String> authors,
+                       @RequestParam("readers") List<String> readers,
+                       @RequestParam("securityLevel") Integer securityLevel);
+
+    @RequestMapping(method = RequestMethod.GET,value = "/findAll-temp-read-sids")
+    Set<String> findAllTempReadSids(@RequestParam("classId") Long classId,
+                                    @RequestParam("objectId") Long objectId);
+    @RequestMapping(method = RequestMethod.GET,value = "/findAll-read-sids")
+    Set<String> findAllReadSids(@RequestParam("classId") Long classId,
+                                @RequestParam("objectId") Long objectId);
+    @RequestMapping(method = RequestMethod.GET,value = "/findAll-whrite-sids")
+    Set<String> findAllWhriteSids(@RequestParam("classId") Long classId,
+                                  @RequestParam("objectId") Long objectId);
     @GetMapping(value = "/rulesByName")
     RulesDTO rulesByName(@RequestParam String ruleName);
 

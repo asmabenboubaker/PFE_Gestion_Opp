@@ -9,13 +9,15 @@ import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.enumeration.DemandeStatut;
+import ch.qos.logback.classic.LoggerContext;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
@@ -294,5 +296,26 @@ public class KernelService {
     public RulesDTO rulesByName(String ruleName) {
         return kernelInterface.rulesByName(ruleName);
 
+    }
+
+
+    public String mapObjectToString(Object o) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper()
+                .registerModule(new SimpleModule().addSerializer(LoggerContext.class, new JsonSerializer<LoggerContext>() {
+                    @Override
+                    public void serialize(LoggerContext loggerContext, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
+                    }
+                }))
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule()).setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.setDateFormat(new StdDateFormat());
+        return mapper.writeValueAsString(o);
     }
 }

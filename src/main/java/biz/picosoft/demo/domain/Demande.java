@@ -2,6 +2,7 @@ package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.Cache;
@@ -62,23 +63,24 @@ public class Demande implements Serializable {
 
     @Column(name = "demande_number")
     private String demandeNumber;
-    @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "demande", allowSetters = true)
-    private Set<FileModel> images = new HashSet<>();
+//    @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL, orphanRemoval = true)
+//  // @JsonIgnoreProperties(value = "demande", allowSetters = true)
+// @JsonIgnore
+//    private Set<FileModel> images = new HashSet<>();
 
-    public Set<FileModel> getImages() {
-        return this.images;
-    }
+//    public Set<FileModel> getImages() {
+//        return this.images;
+//    }
 
-    public void setImages(Set<FileModel> images) {
-        if (this.images == null) {
-            this.images = new HashSet<>();
-        }
-        if (images != null) {
-            this.images.clear();
-            this.images.addAll(images);
-        }
-    }
+//    public void setImages(Set<FileModel> images) {
+//        if (this.images == null) {
+//            this.images = new HashSet<>();
+//        }
+//        if (images != null) {
+//            this.images.clear();
+//            this.images.addAll(images);
+//        }
+//    }
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
     private StatutDemande statut;

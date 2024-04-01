@@ -17,6 +17,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\Etude
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\StringToZonedDateTimeConverter.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\PVMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\acl\Permission.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\enumeration\DemandeStatut.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\OffreServiceImpl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\DemandeRepositoryWithBagRelationshipsImpl.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\FactureCriteria.java
