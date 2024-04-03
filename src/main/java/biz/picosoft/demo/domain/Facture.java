@@ -31,7 +31,54 @@ public class Facture implements Serializable {
 
     @Column(name = "service_fournis")
     private String serviceFournis;
-
+    private boolean isGenerate;
+    // getter and setter isGenerate
+    public void setIsGenerate(boolean isGenerate) {
+        this.isGenerate = isGenerate;
+    }
+    public boolean getIsGenerate() {
+        return isGenerate;
+    }
+    private String nom;
+    // getter et setter nom
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public String getNom() {
+        return nom;
+    }
+private String PaymentMethod;
+// getter et setter paymetMethod
+    public void setPaymentMethod(String PaymentMethod) {
+        this.PaymentMethod = PaymentMethod;
+    }
+    public String getPaymentMethod() {
+        return PaymentMethod;
+    }
+    private float totalAmount;
+    //getter and setter totalAmount
+    public void setTotalAmount(float totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+    private String contactNumber;
+    // getter and setter contactNumber
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+    public String getContactNumber() {
+        return contactNumber;
+    }
+    private String uuid;
+    // getter and setter uuid
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+    public String getUuid() {
+        return uuid;
+    }
     @ManyToOne
     @JsonIgnoreProperties(value = { "factures", "projet" }, allowSetters = true)
     private PV pv;

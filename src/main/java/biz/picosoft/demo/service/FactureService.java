@@ -4,7 +4,9 @@ package biz.picosoft.demo.service;
 import biz.picosoft.demo.service.dto.FactureDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -57,4 +59,6 @@ public interface FactureService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    // generate facture service
+   ResponseEntity<String> generateReport(Map<String, Object> request);
 }

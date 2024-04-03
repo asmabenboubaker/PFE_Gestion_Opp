@@ -23,6 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -199,5 +200,18 @@ public class FactureResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PostMapping("/generateReportFacture")
+    public ResponseEntity<String> generateReport(@RequestBody Map<String, Object> requestMap) {
+        try {
+            return factureService.generateReport(requestMap);
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        // return somthing wrong
+        return ResponseEntity.ok().body("Something went wrong");
+
     }
 }
