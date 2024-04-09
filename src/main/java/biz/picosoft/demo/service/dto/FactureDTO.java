@@ -2,6 +2,7 @@ package biz.picosoft.demo.service.dto;
 
 import java.io.Serializable;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ public class FactureDTO implements Serializable {
 
     private Long id;
 
-    private Date dateFacture;
+    private ZonedDateTime dateFacture;
 
     private String description;
 
@@ -28,11 +29,11 @@ public class FactureDTO implements Serializable {
         this.id = id;
     }
 
-    public Date getDateFacture() {
+    public ZonedDateTime getDateFacture() {
         return dateFacture;
     }
 
-    public void setDateFacture(Date dateFacture) {
+    public void setDateFacture(ZonedDateTime dateFacture) {
         this.dateFacture = dateFacture;
     }
 

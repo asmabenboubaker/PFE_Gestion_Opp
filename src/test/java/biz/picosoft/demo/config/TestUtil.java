@@ -66,7 +66,7 @@ public final class TestUtil {
     }
 
     /**
-     * Creates a matcher that matches when the examined string represents the same instant as the reference datetime.
+     * Creates a matcher that matches when the examined string represents the same ZonedDateTime as the reference datetime.
      *
      * @param date the reference datetime against which the examined string is checked.
      */

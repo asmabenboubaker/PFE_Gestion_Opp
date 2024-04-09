@@ -2,10 +2,7 @@ package biz.picosoft.demo.service.criteria;
 
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.InstantFilter;
-import tech.jhipster.service.filter.LongFilter;
-import tech.jhipster.service.filter.StringFilter;
+import tech.jhipster.service.filter.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,7 +23,7 @@ public class FactureCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private InstantFilter dateFacture;
+    private ZonedDateTimeFilter dateFacture;
 
     private StringFilter description;
 
@@ -67,18 +64,18 @@ public class FactureCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public InstantFilter getDateFacture() {
+    public ZonedDateTimeFilter getDateFacture() {
         return dateFacture;
     }
 
-    public InstantFilter dateFacture() {
+    public ZonedDateTimeFilter dateFacture() {
         if (dateFacture == null) {
-            dateFacture = new InstantFilter();
+            dateFacture = new ZonedDateTimeFilter();
         }
         return dateFacture;
     }
 
-    public void setDateFacture(InstantFilter dateFacture) {
+    public void setDateFacture(ZonedDateTimeFilter dateFacture) {
         this.dateFacture = dateFacture;
     }
 

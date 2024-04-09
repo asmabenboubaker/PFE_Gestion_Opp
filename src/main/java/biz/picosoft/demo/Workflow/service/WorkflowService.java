@@ -1090,9 +1090,13 @@ public class WorkflowService {
           task = taskService.createTaskQuery().processInstanceId(processInstanceId).active().singleResult();
 
           Object dataObj = taskService.getVariable(task.getId(), "data");
+          Gson gson = new GsonBuilder()
+                  .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter())
+                  .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                  .create();
 
           // recuperate the object from flowable
-          object.putAll((Map) new JSONParser().parse(new Gson().toJson(dataObj)));
+          object.putAll((Map) new JSONParser().parse(gson.toJson(dataObj)));
 
           // recuperate list of authors
           List<String> listAuthors = _getCandidateGroups(task.getId());

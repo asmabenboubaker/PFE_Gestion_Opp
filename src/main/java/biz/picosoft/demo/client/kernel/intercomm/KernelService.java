@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 
@@ -59,7 +60,7 @@ public class KernelService {
             anf_invoice_role_canCreatedemande,
             anf_invoice_role_canReaddemande,
             anf_invoice_role_canEditdemande);
-    //public static final String SEQ_TENANT = "seq_tenant";
+    public static final String SEQ_DemandeOpp = "seq_demande_oppurtunite";
     //public static final String VAR_ROLE_ADMIN = "r";
     public void adjustAttachmentSecurity(Long classId,
                                          Long objectId,
@@ -80,7 +81,8 @@ public class KernelService {
     private final KernelInterface kernelInterface;
 
     //public List<String> roles = Arrays.asList(VAR_ROLE_ADMIN, VAR_ROLE_CUSTOMER);
-    //public List<String> sequanceList = Arrays.asList(SEQ_TENANT);
+//    public List<String> sequanceList = new ArrayList<>(Arrays.asList(SEQ_DemandeOpp));
+    public List<String> sequanceList = new ArrayList<>(Collections.singletonList(SEQ_DemandeOpp));
 
     public KernelService(KernelInterface kernelInterface) {
         this.kernelInterface = kernelInterface;
@@ -235,25 +237,25 @@ public class KernelService {
 //        }
 //    }
 
-//    @Bean
-//    public void initSequance() {
-//        for (String s : sequanceList) {
-//            try {
-//                String character = s.split("_")[1].substring(0, 1);
-//                RefSequenceFormat refSequenceFormat = new RefSequenceFormat();
-//                refSequenceFormat.setName(s);
-//                refSequenceFormat.setCounter(1L);
-//                refSequenceFormat.setdescription(s);
-//                refSequenceFormat.setStep(1);
-//                refSequenceFormat.setCounterDate(ZonedDateTime.now());
-//                refSequenceFormat.setResetInterval(ResetInterval.NEVER);
-//                refSequenceFormat.setFormat(character + "_${counter?string[\"0000\"]}");
-//                kernelInterface.createRefSequenceFormat(refSequenceFormat);
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//        }
-//    }
+    @Bean
+    public void initSequance() {
+        for (String s : sequanceList) {
+            try {
+                String character = s.split("_")[1].substring(0, 1);
+                RefSequenceFormat refSequenceFormat = new RefSequenceFormat();
+                refSequenceFormat.setName(s);
+                refSequenceFormat.setCounter(1L);
+                refSequenceFormat.setdescription(s);
+                refSequenceFormat.setStep(1);
+                refSequenceFormat.setCounterDate(ZonedDateTime.now());
+                refSequenceFormat.setResetInterval(ResetInterval.NEVER);
+                refSequenceFormat.setFormat(character + "_${counter?string[\"0000\"]}");
+                kernelInterface.createRefSequenceFormat(refSequenceFormat);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
 
 //    @Bean
 //    public void BeanTenant() {

@@ -18,17 +18,12 @@ import biz.picosoft.demo.service.dto.DemandeDTO;
 import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.DemandeServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +32,6 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -393,8 +387,8 @@ public class DemandeResource {
         return ResponseEntity.ok().body(demande);
     }
 
-    @PutMapping("/demandes/assign-client/{id}/{clientId}")
-    public ResponseEntity<Demande> updateAndAssignToClient(
+    @PatchMapping("/demandes/assign-client/{id}/{clientId}")
+    public ResponseEntity<DemandeDTO> updateAndAssignToClient(
             @PathVariable Long id,
             @PathVariable Long clientId,
             @RequestBody DemandeDTO demande
@@ -406,10 +400,10 @@ public class DemandeResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Demande result = demandeService.updateAndAssignToClient(id, clientId, demande);
+        DemandeDTO result = demandeService.updateAndAssignToClient(id, clientId, demande);
         return ResponseEntity
                 .ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, demande.getId().toString()))
+
                 .body(result);
     }
 }

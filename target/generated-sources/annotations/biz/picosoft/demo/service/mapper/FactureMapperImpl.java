@@ -7,14 +7,13 @@ import biz.picosoft.demo.service.dto.FactureDTO;
 import biz.picosoft.demo.service.dto.PVDTO;
 import biz.picosoft.demo.service.dto.ProjetDTO;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-03T19:38:40+0200",
+    date = "2024-04-05T12:16:02+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -29,9 +28,7 @@ public class FactureMapperImpl implements FactureMapper {
         Facture facture = new Facture();
 
         facture.setId( dto.getId() );
-        if ( dto.getDateFacture() != null ) {
-            facture.setDateFacture( dto.getDateFacture().toInstant() );
-        }
+        facture.setDateFacture( dto.getDateFacture() );
         facture.setDescription( dto.getDescription() );
         facture.setServiceFournis( dto.getServiceFournis() );
         facture.pv( pVDTOToPV( dto.getPv() ) );
@@ -77,7 +74,7 @@ public class FactureMapperImpl implements FactureMapper {
             entity.setId( dto.getId() );
         }
         if ( dto.getDateFacture() != null ) {
-            entity.setDateFacture( dto.getDateFacture().toInstant() );
+            entity.setDateFacture( dto.getDateFacture() );
         }
         if ( dto.getDescription() != null ) {
             entity.setDescription( dto.getDescription() );
@@ -103,9 +100,7 @@ public class FactureMapperImpl implements FactureMapper {
 
         factureDTO.setPv( toDtoPVId( s.getPv() ) );
         factureDTO.setId( s.getId() );
-        if ( s.getDateFacture() != null ) {
-            factureDTO.setDateFacture( Date.from( s.getDateFacture() ) );
-        }
+        factureDTO.setDateFacture( s.getDateFacture() );
         factureDTO.setDescription( s.getDescription() );
         factureDTO.setServiceFournis( s.getServiceFournis() );
 

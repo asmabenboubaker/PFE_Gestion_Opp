@@ -70,7 +70,7 @@ public interface DemandeService {
      Demande saveAndAssignToClient(Demande demandeDTO, Long clientId);
      Page<Demande> findAllDemande(Pageable pageable);
      Demande getById(Long id);
-     Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
+     DemandeDTO updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
      Boolean checkRole(String profile, String roleName);
      DemandeOutputDTO getbyideDTO(Long id);
 

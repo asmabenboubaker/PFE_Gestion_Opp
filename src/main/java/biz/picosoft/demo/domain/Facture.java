@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * A Facture.
@@ -24,7 +25,7 @@ public class Facture implements Serializable {
     private Long id;
 
     @Column(name = "date_facture")
-    private Instant dateFacture;
+    private ZonedDateTime dateFacture;
 
     @Column(name = "description")
     private String description;
@@ -98,16 +99,16 @@ private String PaymentMethod;
         this.id = id;
     }
 
-    public Instant getDateFacture() {
+    public ZonedDateTime getDateFacture() {
         return this.dateFacture;
     }
 
-    public Facture dateFacture(Instant dateFacture) {
+    public Facture dateFacture(ZonedDateTime dateFacture) {
         this.setDateFacture(dateFacture);
         return this;
     }
 
-    public void setDateFacture(Instant dateFacture) {
+    public void setDateFacture(ZonedDateTime dateFacture) {
         this.dateFacture = dateFacture;
     }
 

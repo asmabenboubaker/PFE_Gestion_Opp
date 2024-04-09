@@ -16,7 +16,6 @@ import biz.picosoft.demo.client.kernel.model.objects.WFDTO;
 import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
-import biz.picosoft.demo.controller.errors.ECErrors;
 import biz.picosoft.demo.controller.errors.RCErrors;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
@@ -32,10 +31,8 @@ import biz.picosoft.demo.service.mapper.DemandeMapper;
 
 import biz.picosoft.demo.service.mapper.DemandeOutputMapper;
 import freemarker.template.TemplateException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,7 +41,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -56,7 +52,6 @@ import java.util.Set;
  * Service Implementation for managing {@link Demande}.
  */
 @Service
-@Transactional
 public class DemandeServiceImpl implements DemandeService {
 
     private final Logger log = LoggerFactory.getLogger(DemandeServiceImpl.class);
@@ -180,7 +175,7 @@ public class DemandeServiceImpl implements DemandeService {
     }
 
     @Override
-    public Demande updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO) {
+    public DemandeDTO updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO) {
         log.debug("Request to update Demande with ID {} and assign to Client with ID {}", demandeId, clientId);
 
         // Fetch the existing demand from the database
@@ -199,7 +194,10 @@ public class DemandeServiceImpl implements DemandeService {
         updatedDemande.setClient(client);
 
         // Save the updated demand
-        return demandeRepository.save(updatedDemande);
+        updatedDemande = demandeRepository.save(updatedDemande);
+
+        // Map the updated entity back to DTO and return
+        return demandeMapper.toDto(updatedDemande);
     }
 
     @Override
@@ -396,7 +394,8 @@ public class DemandeServiceImpl implements DemandeService {
         System.out.println("bpmJob.getEndProcess()"+bpmJob.getEndProcess());
         demande.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
         System.out.println("bpmJob.getAssignee()"+bpmJob.getAssignee());
-        demande.setDemandeNumber(kernelInterface.getSequenceNumberByName(new JSONObject(demande), aclClass.getSequenceNameFM()));
+        //System.out.println("hkkkkkkkkkkkkkk"+kernelInterface.getSequenceNumberByName(new JSONObject(demande), aclClass.getSequenceNameFM()));
+//        demande.setDemandeNumber(kernelInterface.getSequenceNumberByName(new JSONObject(demande), aclClass.getSequenceNameFM()));
 
         demande = saveDemande(demande, authors, readers, aclClass, true);
  System.out.println("demande object"+demande);
