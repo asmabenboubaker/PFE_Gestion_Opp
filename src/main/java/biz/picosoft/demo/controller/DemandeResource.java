@@ -406,4 +406,24 @@ public class DemandeResource {
 
                 .body(result);
     }
+    @PutMapping("/demandemm/{id}/{idclient}")
+    public DemandeOutputDTO updateRequestCase(
+            @PathVariable(value = "id", required = false) final Long id,
+            @PathVariable(value = "idclient", required = false) final Long idclient,
+            @RequestBody DemandeInputDTO requestCaseInputDTO) throws URISyntaxException {
+        log.debug("REST request to update RequestCase : {}, {}", id, requestCaseInputDTO);
+        if (requestCaseInputDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, requestCaseInputDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!demandeRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        DemandeOutputDTO result = demandeService.update(requestCaseInputDTO,idclient);
+        return result;
+    }
 }

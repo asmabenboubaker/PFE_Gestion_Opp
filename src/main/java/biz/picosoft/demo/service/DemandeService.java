@@ -3,6 +3,7 @@ package biz.picosoft.demo.service;
 
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.service.dto.DemandeDTO;
+import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -73,5 +74,6 @@ public interface DemandeService {
      DemandeDTO updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
      Boolean checkRole(String profile, String roleName);
      DemandeOutputDTO getbyideDTO(Long id);
+     DemandeOutputDTO update(DemandeInputDTO RequestCaseDTO,Long idclient);
 
 }

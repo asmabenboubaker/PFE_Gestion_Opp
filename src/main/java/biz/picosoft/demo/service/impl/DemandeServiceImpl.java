@@ -233,6 +233,22 @@ public class DemandeServiceImpl implements DemandeService {
         return result;
 
     }
+
+    @Override
+    public DemandeOutputDTO update(DemandeInputDTO RequestCaseDTO,Long idclient) {
+        log.debug("Request to update Meeting : {}", RequestCaseDTO);
+        Client client = clientRepository.findById(idclient)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id " + idclient + " not found."));
+        Demande originalRequestCase = demandeRepository.findById(RequestCaseDTO.getId()).get();
+        originalRequestCase.setClient(client);
+        demandeInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+
+        originalRequestCase = demandeRepository.save(originalRequestCase);
+        demandeRepository.save(originalRequestCase);
+
+        return demandeOutputMapper.toDto(originalRequestCase);
+    }
+
     public DemandeOutputDTO proceedGetDemandeId(Long id) throws IOException, TemplateException {
         log.debug("Request to get MmInbound : {}", id);
 
