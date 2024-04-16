@@ -7,6 +7,7 @@ import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteQueryService;
 import biz.picosoft.demo.service.OpportuniteService;
@@ -17,6 +18,7 @@ import biz.picosoft.demo.service.dto.OpportuniteInputDTO;
 import biz.picosoft.demo.service.dto.OpportuniteOutputDTO;
 import biz.picosoft.demo.service.impl.DemandeServiceImpl;
 import biz.picosoft.demo.service.impl.OpportuniteServiceImpl;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -235,10 +238,15 @@ public class OpportuniteResource {
         opportuniteService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateopp);
 
         // extract acl class
-        AclClass aclClass = kernelInterface.getaclClassByClassName(Demande.class.getName());
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Opportunite.class.getName());
 
         return oppServiceImp.initProcessOpp(aclClass);
 
+    }
+    @GetMapping("/OpportuniteDTO/{id}")
+    OpportuniteOutputDTO getOppDTO(@PathVariable Long id) throws IOException, TemplateException {
+
+        return opportuniteService.getbyideDTO(id);
     }
 
 }
