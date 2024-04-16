@@ -13,12 +13,30 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
     private String description;
 
     private String nom;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     private ZonedDateTime createdBy;
 
     private ZonedDateTime createAt;
 
     private Float montantEstime;
+    private String wfComment;
+
+    public String getWfComment() {
+        return wfComment;
+    }
+
+    public void setWfComment(String wfComment) {
+        this.wfComment = wfComment;
+    }
 
     private DemandeDTO demande;
     private String decision;
@@ -30,7 +48,7 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
 
     private String status;
 
-    private String fileAccessToken;
+    private String  fileAccessToken;
 
     private Integer securiteLevel;
 
@@ -178,12 +196,12 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OpportuniteOutputDTO that = (OpportuniteOutputDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(nom, that.nom) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createAt, that.createAt) && Objects.equals(montantEstime, that.montantEstime) && Objects.equals(demande, that.demande) && Objects.equals(decision, that.decision) && Objects.equals(activityName, that.activityName) && Objects.equals(endProcess, that.endProcess) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(assignee, that.assignee) && Objects.equals(status, that.status) && Objects.equals(fileAccessToken, that.fileAccessToken) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(draft, that.draft) && Objects.equals(wfCurrentComment, that.wfCurrentComment);
+        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(nom, that.nom) && Objects.equals(msg, that.msg) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createAt, that.createAt) && Objects.equals(montantEstime, that.montantEstime) && Objects.equals(wfComment, that.wfComment) && Objects.equals(demande, that.demande) && Objects.equals(decision, that.decision) && Objects.equals(activityName, that.activityName) && Objects.equals(endProcess, that.endProcess) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(assignee, that.assignee) && Objects.equals(status, that.status) && Objects.equals(fileAccessToken, that.fileAccessToken) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(draft, that.draft) && Objects.equals(wfCurrentComment, that.wfCurrentComment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, nom, createdBy, createAt, montantEstime, demande, decision, activityName, endProcess, wfProcessID, assignee, status, fileAccessToken, securiteLevel, draft, wfCurrentComment);
+        return Objects.hash(id, description, nom, msg, createdBy, createAt, montantEstime, wfComment, demande, decision, activityName, endProcess, wfProcessID, assignee, status, fileAccessToken, securiteLevel, draft, wfCurrentComment);
     }
 
     @Override

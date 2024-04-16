@@ -11,12 +11,30 @@ public class OpportuniteInputDTO implements Serializable {
     private String description;
 
     private String nom;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     private ZonedDateTime createdBy;
 
     private ZonedDateTime createAt;
 
     private Float montantEstime;
+    private String wfComment;
+
+    public String getWfComment() {
+        return wfComment;
+    }
+
+    public void setWfComment(String wfComment) {
+        this.wfComment = wfComment;
+    }
 
     private DemandeDTO demande;
     private String decision;

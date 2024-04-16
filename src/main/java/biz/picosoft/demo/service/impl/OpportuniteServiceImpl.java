@@ -5,6 +5,7 @@ import biz.picosoft.demo.Workflow.domain.BpmJob;
 import biz.picosoft.demo.Workflow.service.WorkflowService;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.acl.Permission;
 import biz.picosoft.demo.client.kernel.model.acl.enumeration.Access;
@@ -21,11 +22,9 @@ import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteService;
-import biz.picosoft.demo.service.dto.DemandeInputDTO;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
-import biz.picosoft.demo.service.dto.OpportuniteDTO;
-import biz.picosoft.demo.service.dto.OpportuniteOutputDTO;
+import biz.picosoft.demo.service.dto.*;
 import biz.picosoft.demo.service.mapper.DemandeOutputMapper;
+import biz.picosoft.demo.service.mapper.OpportuniteInputMapper;
 import biz.picosoft.demo.service.mapper.OpportuniteMapper;
 import biz.picosoft.demo.service.mapper.OpportuniteOutputMapper;
 import freemarker.template.TemplateException;
@@ -36,6 +35,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -62,10 +63,11 @@ public class OpportuniteServiceImpl implements OpportuniteService {
     private final CurrentUser currentUser;
     private final KernelService kernelService;
     private final KernelInterface kernelInterface;
+    private final OpportuniteInputMapper oppInputMapper;
     public OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository, OpportuniteMapper opportuniteMapper,OpportuniteOutputMapper oppOutputMapper,
     WorkflowService workflowService, CurrentUser currentUser,
     KernelService kernelService,
-    KernelInterface kernelInterface
+    KernelInterface kernelInterface,OpportuniteInputMapper oppInputMapper
 
     ) {
         this.opportuniteRepository = opportuniteRepository;
@@ -75,6 +77,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
         this.currentUser = currentUser;
         this.kernelService = kernelService;
         this.kernelInterface = kernelInterface;
+        this.oppInputMapper = oppInputMapper;
     }
 
     @Override
@@ -486,6 +489,108 @@ public class OpportuniteServiceImpl implements OpportuniteService {
         }
         kernelInterface.addUserActivity(ActivityType.READ, id, result.getClassName(), "", "");
         return result;
+
+    }
+    @PersistenceContext(unitName = "externDSEmFactory")
+    private EntityManager entityManager;
+    @Transactional
+    public OpportuniteOutputDTO submitProcessOpp(OpportuniteInputDTO oppInputDTO, AclClass aclClass) throws Exception {
+
+        entityManager.clear();
+        // extract object by id from data base
+        Optional<Opportunite> oppOptional = opportuniteRepository.findById(oppInputDTO.getId());
+
+        // extract courrier
+        Opportunite requestCase = oppOptional.get();
+
+        // check if the object exist in database
+        if (!oppOptional.isPresent())
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_requestCase_null, RCErrors.Entity_requestCase, RCErrors.ERR_Key_requestCase_null);
+
+        // extract permission of the authentifier from kernel
+        String permission = kernelService.checkSecurity(aclClass.getSimpleName(), oppInputDTO.getId(), currentUser.getSid());
+
+        // check if the authentifier has permission WRITE
+        if (!permission.equals(Permission.WRITE.name()) && !permission.equals(Permission.INH_WRITE.name()))
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_not_authorized, RCErrors.Entity_requestCase, RCErrors.ERR_Key_not_authorized);
+
+        // validate attributes courrier
+        this.validateRequestCase(aclClass, oppInputDTO);
+
+        // extract activity name from courrier
+        String activityName = requestCase.getActivityName();
+
+        // fusion the input object and the object from database
+        oppInputMapper.partialUpdate(requestCase, oppInputDTO);
+
+        // map object courrier to courrier by id DTO
+        OpportuniteOutputDTO requestCaseOutputDTO = oppOutputMapper.toDto(requestCase);
+
+        requestCaseOutputDTO.setClassId(aclClass.getId());
+
+        requestCaseOutputDTO.setClassName(aclClass.getClasse());
+
+        requestCaseOutputDTO.setLabelClass(aclClass.getLabel());
+
+        requestCaseOutputDTO.setSimpleClassName(aclClass.getSimpleName());
+
+        // initialize workflow information
+        WFDTO workflow = new WFDTO();
+        workflow.setWfProcessID(requestCase.getWfProcessID());
+        workflow.setActivityName(requestCase.getActivityName());
+        requestCaseOutputDTO.setWorkflow(workflow);
+
+        BpmJob bpmJob = workflowService._nextTaskWithoutEvent(requestCase.getWfProcessID(), oppInputDTO.getDecision(), oppInputDTO.getWfComment(), requestCaseOutputDTO, aclClass);
+
+        List<String> authors = bpmJob.getAuthors();
+
+        List<String> readers = bpmJob.getReaders();
+
+        requestCaseOutputDTO = (OpportuniteOutputDTO) bpmJob.getDataObject();
+
+        requestCase = oppOutputMapper.toEntity(requestCaseOutputDTO);
+
+        requestCase.setWfProcessID(bpmJob.getProcessID());
+
+        requestCase.setActivityName(bpmJob.getActivityName());
+
+        requestCase.setEndProcess(bpmJob.getEndProcess());
+
+        requestCase.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
+
+        requestCase = saveDemande(requestCase, authors, readers, aclClass, false);
+
+        return oppOutputMapper.toDto(requestCase);
+
+    }
+    public Boolean validateRequestCase(AclClass aclClass, OpportuniteInputDTO oppInputDTO) {
+
+        String nameRule = "save-" + aclClass.getSimpleName();
+
+        RulesDTO rulesDTO = kernelService.rulesByName(nameRule);
+        if (rulesDTO != null && rulesDTO.getSrcCode() != null) {
+            List<Object> objectList = new ArrayList<>();
+            objectList.add(oppInputDTO);
+            try {
+                System.out.println("zezezeze");
+                //rulesService.executeRules(objectList, rulesDTO.getSrcCode());
+            } catch (Exception e) {
+                throw new BadRequestAlertException(
+                        RCErrors.ERR_Msg_drools + ": " + nameRule,
+                        aclClass.getSimpleName(),
+                        RCErrors.ERR_Key_drools);
+            }
+
+        }
+
+        if (oppInputDTO.getMsg() == null)
+            return true;
+        else
+            throw new BadRequestAlertException(
+                    oppInputDTO.getMsg(),
+                    aclClass.getSimpleName(),
+                    oppInputDTO.getMsg());
+
 
     }
 
