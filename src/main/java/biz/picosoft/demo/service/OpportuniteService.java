@@ -1,7 +1,9 @@
 package biz.picosoft.demo.service;
 
 
-import biz.picosoft.demo.service.dto.OpportuniteDTO;
+import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Opportunite;
+import biz.picosoft.demo.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -57,4 +59,12 @@ public interface OpportuniteService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Opportunite saveAndAssignToDemande(Opportunite demandeDTO, Long demandeId);
+    Page<Opportunite> findAllOppotunite(Pageable pageable);
+    Opportunite getById(Long id);
+    OpportuniteDTO updateAndAssignTodemande(Long OpportuniteId, Long demandeId, OpportuniteDTO updatedDemandeDTO);
+    Boolean checkRole(String profile, String roleName);
+    OpportuniteOutputDTO getbyideDTO(Long id);
+    OpportuniteOutputDTO update(DemandeInputDTO demandeInputDTO, Long iddemande);
 }

@@ -1,6 +1,7 @@
 package biz.picosoft.demo.service;
 
 
+import biz.picosoft.demo.domain.Facture;
 import biz.picosoft.demo.service.dto.FactureDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -61,4 +62,8 @@ public interface FactureService {
     void delete(Long id);
     // generate facture service
    ResponseEntity<String> generateReport(Map<String, Object> request);
+
+   // create methode to affect facture to PV
+    ResponseEntity<String> affectFactureToPv(Facture facture, Long idPv);
+
 }

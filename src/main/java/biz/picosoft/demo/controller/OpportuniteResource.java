@@ -1,12 +1,22 @@
 package biz.picosoft.demo.controller;
 
 
+import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
+import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteQueryService;
 import biz.picosoft.demo.service.OpportuniteService;
 import biz.picosoft.demo.service.criteria.OpportuniteCriteria;
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.dto.OpportuniteDTO;
+import biz.picosoft.demo.service.dto.OpportuniteInputDTO;
+import biz.picosoft.demo.service.dto.OpportuniteOutputDTO;
+import biz.picosoft.demo.service.impl.DemandeServiceImpl;
+import biz.picosoft.demo.service.impl.OpportuniteServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,14 +56,27 @@ public class OpportuniteResource {
 
     private final OpportuniteQueryService opportuniteQueryService;
 
+    private final CurrentUser currentUser;
+
+    private final KernelService kernelService;
+    private final OpportuniteServiceImpl oppServiceImp;
+    private final KernelInterface kernelInterface;
     public OpportuniteResource(
         OpportuniteService opportuniteService,
         OpportuniteRepository opportuniteRepository,
-        OpportuniteQueryService opportuniteQueryService
+        OpportuniteQueryService opportuniteQueryService,
+        CurrentUser currentUser,
+        KernelService kernelService,
+        OpportuniteServiceImpl oppServiceImp,
+        KernelInterface kernelInterface
     ) {
         this.opportuniteService = opportuniteService;
         this.opportuniteRepository = opportuniteRepository;
         this.opportuniteQueryService = opportuniteQueryService;
+        this.currentUser = currentUser;
+        this.kernelService = kernelService;
+        this.oppServiceImp = oppServiceImp;
+        this.kernelInterface = kernelInterface;
     }
 
     /**
@@ -204,4 +227,18 @@ public class OpportuniteResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PatchMapping("/initOpp")
+    public OpportuniteOutputDTO initOpp() throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        opportuniteService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateopp);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Demande.class.getName());
+
+        return oppServiceImp.initProcessOpp(aclClass);
+
+    }
+
 }

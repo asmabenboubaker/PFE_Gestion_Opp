@@ -1,7 +1,7 @@
 package biz.picosoft.demo.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -15,9 +15,9 @@ public class OpportuniteDTO implements Serializable {
 
     private String nom;
 
-    private Instant createdBy;
+    private ZonedDateTime createdBy;
 
-    private Instant createAt;
+    private ZonedDateTime createAt;
 
     private Float montantEstime;
 
@@ -47,19 +47,19 @@ public class OpportuniteDTO implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getCreatedBy() {
+    public ZonedDateTime getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Instant createdBy) {
+    public void setCreatedBy(ZonedDateTime createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Instant getCreateAt() {
+    public ZonedDateTime getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Instant createAt) {
+    public void setCreateAt(ZonedDateTime createAt) {
         this.createAt = createAt;
     }
 

@@ -9,8 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Facture.class)
 public abstract class Facture_ {
 
-	public static volatile SingularAttribute<Facture, Boolean> isGenerate;
-	public static volatile SingularAttribute<Facture, Float> totalAmount;
+	public static volatile SingularAttribute<Facture, Double> totalAmount;
 	public static volatile SingularAttribute<Facture, PV> pv;
 	public static volatile SingularAttribute<Facture, String> serviceFournis;
 	public static volatile SingularAttribute<Facture, ZonedDateTime> dateFacture;
@@ -21,7 +20,6 @@ public abstract class Facture_ {
 	public static volatile SingularAttribute<Facture, String> nom;
 	public static volatile SingularAttribute<Facture, String> uuid;
 
-	public static final String IS_GENERATE = "isGenerate";
 	public static final String TOTAL_AMOUNT = "totalAmount";
 	public static final String PV = "pv";
 	public static final String SERVICE_FOURNIS = "serviceFournis";

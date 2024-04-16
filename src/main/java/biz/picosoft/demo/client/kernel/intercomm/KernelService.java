@@ -8,6 +8,8 @@ import biz.picosoft.demo.client.kernel.model.global.*;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Offre;
+import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.enumeration.DemandeStatut;
 import ch.qos.logback.classic.LoggerContext;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -42,6 +44,7 @@ import java.util.*;
 @Service
 public class KernelService {
     public static final String anf_invoice_role_canCreatedemande = "canCreatedemande";
+    public static final String anf_invoice_role_canCreateopp = "canCreateOffre";
     public static final String anf_invoice_role_canReaddemande = "canReaddemande";
     public static final String anf_invoice_role_canEditdemande = "canEditdemande";
 
@@ -202,6 +205,62 @@ public class KernelService {
             log.error(e.toString());
         }
     }
+    @Bean
+    public void addClassOpportunite() {
+        try {
+            InitClass initClass = new InitClass();
+            initClass.setSimpleName(Opportunite.class.getSimpleName());
+            initClass.setName(Opportunite.class.getName());
+
+            HashMap<String, String> event = new HashMap<>();
+            HashMap<String, String> state = new HashMap<>();
+
+            for (DemandeStatut s : DemandeStatut.values()) {
+                state.put(s.name(), s.getLabel());
+            }
+//            for (DemandeEvent s : DemandeEvent.values()) {
+//                event.put(s.name(), s.getLabel());
+//            }
+            initClass.setEvent(event);
+            initClass.setState(state);
+            initClass.setDefaultState(DemandeStatut.DRAFT.name());
+
+            String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
+            String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();
+            initClass(initClass, tableName, schemaName);
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+    }
+
+
+//    @Bean
+//    public void addClassOffre() {
+//        try {
+//            InitClass initClass = new InitClass();
+//            initClass.setSimpleName(Offre.class.getSimpleName());
+//            initClass.setName(Offre.class.getName());
+//
+//            HashMap<String, String> event = new HashMap<>();
+//            HashMap<String, String> state = new HashMap<>();
+//
+//            for (DemandeStatut s : DemandeStatut.values()) {
+//                state.put(s.name(), s.getLabel());
+//            }
+////            for (DemandeEvent s : DemandeEvent.values()) {
+////                event.put(s.name(), s.getLabel());
+////            }
+//            initClass.setEvent(event);
+//            initClass.setState(state);
+//            initClass.setDefaultState(DemandeStatut.DRAFT.name());
+//
+//            String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
+//            String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();
+//            initClass(initClass, tableName, schemaName);
+//        } catch (Exception e) {
+//            log.error(e.toString());
+//        }
+//    }
 
     public String getBuildNumber() {
         Properties properties = new Properties();

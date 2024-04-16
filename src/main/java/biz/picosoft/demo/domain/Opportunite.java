@@ -5,8 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +26,112 @@ public class Opportunite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "exclude_from_view")
+    private Boolean excludeFromView = true;
+    @Column(name = "demande_number")
+    private String oppNumber;
+
+    public String getOppNumber() {
+        return oppNumber;
+    }
+    @Column(name = "status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setOppNumber(String oppNumber) {
+        this.oppNumber = oppNumber;
+    }
+
+    @Size(min = 0, max = 50)
+    @Column(name = "identifiant", length = 50, nullable = true)
+    private String identifiant;
+    @Column(name = "activity_name")
+    private String activityName;
+    @Column(name = "number_of_attachments")
+    private Long numberOfattachments = 0L;
+
+    @Column(name = "wf_process_id")
+    private String wfProcessID;
+    @Column(name = "securite_level")
+    private Integer securiteLevel;
+    @Column(name = "assignee")
+    private String assignee;
+    @Column(name = "end_process")
+    private Boolean endProcess;
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Long getNumberOfattachments() {
+        return numberOfattachments;
+    }
+    public Boolean isExcludeFromView() {
+        return excludeFromView;
+    }
+
+    public void setNumberOfattachments(Long numberOfattachments) {
+        this.numberOfattachments = numberOfattachments;
+    }
+
+    public Boolean getExcludeFromView() {
+        return excludeFromView;
+    }
+
+    public void setExcludeFromView(Boolean excludeFromView) {
+        this.excludeFromView = excludeFromView;
+    }
+
+    public String getWfProcessID() {
+        return wfProcessID;
+    }
+
+    public void setWfProcessID(String wfProcessID) {
+        this.wfProcessID = wfProcessID;
+    }
+
+    public Integer getSecuriteLevel() {
+        return securiteLevel;
+    }
+
+    public void setSecuriteLevel(Integer securiteLevel) {
+        this.securiteLevel = securiteLevel;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public Boolean getEndProcess() {
+        return endProcess;
+    }
+
+    public void setEndProcess(Boolean endProcess) {
+        this.endProcess = endProcess;
+    }
 
     @Column(name = "description")
     private String description;
@@ -32,10 +140,10 @@ public class Opportunite implements Serializable {
     private String nom;
 
     @Column(name = "created_by")
-    private Instant createdBy;
+    private ZonedDateTime createdBy;
 
     @Column(name = "create_at")
-    private Instant createAt;
+    private ZonedDateTime createAt;
 
     @Column(name = "montant_estime")
     private Float montantEstime;
@@ -90,29 +198,29 @@ public class Opportunite implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getCreatedBy() {
+    public ZonedDateTime getCreatedBy() {
         return this.createdBy;
     }
 
-    public Opportunite createdBy(Instant createdBy) {
+    public Opportunite createdBy(ZonedDateTime createdBy) {
         this.setCreatedBy(createdBy);
         return this;
     }
 
-    public void setCreatedBy(Instant createdBy) {
+    public void setCreatedBy(ZonedDateTime createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Instant getCreateAt() {
+    public ZonedDateTime getCreateAt() {
         return this.createAt;
     }
 
-    public Opportunite createAt(Instant createAt) {
+    public Opportunite createAt(ZonedDateTime createAt) {
         this.setCreateAt(createAt);
         return this;
     }
 
-    public void setCreateAt(Instant createAt) {
+    public void setCreateAt(ZonedDateTime createAt) {
         this.createAt = createAt;
     }
 

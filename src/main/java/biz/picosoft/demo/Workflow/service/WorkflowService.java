@@ -1067,9 +1067,12 @@ public class WorkflowService {
           HistoricActivityInstance activityInstance = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityId(processInstance.getEndActivityId()).singleResult();
 
           Object dataObj = historyService.createHistoricVariableInstanceQuery().variableName("data").processInstanceId(processInstance.getId()).singleResult().getValue();
-
+          Gson gson = new GsonBuilder()
+                  .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter())
+                  .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                  .create();
           // recuperate the object from flowable
-          object.putAll((Map) new JSONParser().parse(new Gson().toJson(dataObj)));
+          object.putAll((Map) new JSONParser().parse(gson.toJson(dataObj)));
 
           BpmJob bpmJob = bpmJobService._persisteBpmJob(object, activityInstance.getActivityName(), activityInstance.getAssignee(), false, activityInstance.getProcessInstanceId(), Long.valueOf(object.get("id").toString()), Long.valueOf(aclClass.getId().toString()));
 

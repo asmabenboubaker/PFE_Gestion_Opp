@@ -2,6 +2,7 @@ package biz.picosoft.demo.controller;
 
 
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.Facture;
 import biz.picosoft.demo.repository.FactureRepository;
 import biz.picosoft.demo.service.FactureQueryService;
 import biz.picosoft.demo.service.FactureService;
@@ -152,9 +153,11 @@ public class FactureResource {
      */
     @GetMapping("/factures")
     public ResponseEntity<Page<FactureDTO>> getAllFactures(
-        FactureCriteria criteria,
+        @RequestParam(required = false) FactureCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
+
     ) {
+
         log.debug("REST request to get Factures by criteria: {}", criteria);
         Page<FactureDTO> page = factureQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -206,6 +209,19 @@ public class FactureResource {
     public ResponseEntity<String> generateReport(@RequestBody Map<String, Object> requestMap) {
         try {
             return factureService.generateReport(requestMap);
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        // return somthing wrong
+        return ResponseEntity.ok().body("Something went wrong");
+
+    }
+    //add and affecter PV
+    @PostMapping("/affectFactureToPv/{idPv}")
+    public ResponseEntity<String> affectFactureToPv(@RequestBody Facture facture, @PathVariable Long idPv) {
+        try {
+            return factureService.affectFactureToPv(facture, idPv);
         }catch (Exception ex)
         {
             ex.printStackTrace();

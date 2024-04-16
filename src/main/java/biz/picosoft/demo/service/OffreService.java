@@ -1,5 +1,10 @@
 package biz.picosoft.demo.service;
 
+import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Offre;
+import biz.picosoft.demo.service.dto.DemandeDTO;
+import biz.picosoft.demo.service.dto.DemandeInputDTO;
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.dto.OffreDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,4 +61,7 @@ public interface OffreService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+
+
 }

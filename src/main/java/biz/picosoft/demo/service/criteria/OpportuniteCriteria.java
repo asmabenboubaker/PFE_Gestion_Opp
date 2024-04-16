@@ -27,9 +27,9 @@ public class OpportuniteCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
-    private InstantFilter createdBy;
+    private ZonedDateTimeFilter createdBy;
 
-    private InstantFilter createAt;
+    private ZonedDateTimeFilter createAt;
 
     private FloatFilter montantEstime;
 
@@ -103,33 +103,33 @@ public class OpportuniteCriteria implements Serializable, Criteria {
         this.nom = nom;
     }
 
-    public InstantFilter getCreatedBy() {
+    public ZonedDateTimeFilter getCreatedBy() {
         return createdBy;
     }
 
-    public InstantFilter createdBy() {
+    public ZonedDateTimeFilter createdBy() {
         if (createdBy == null) {
-            createdBy = new InstantFilter();
+            createdBy = new ZonedDateTimeFilter();
         }
         return createdBy;
     }
 
-    public void setCreatedBy(InstantFilter createdBy) {
+    public void setCreatedBy(ZonedDateTimeFilter createdBy) {
         this.createdBy = createdBy;
     }
 
-    public InstantFilter getCreateAt() {
+    public ZonedDateTimeFilter getCreateAt() {
         return createAt;
     }
 
-    public InstantFilter createAt() {
+    public ZonedDateTimeFilter createAt() {
         if (createAt == null) {
-            createAt = new InstantFilter();
+            createAt = new ZonedDateTimeFilter();
         }
         return createAt;
     }
 
-    public void setCreateAt(InstantFilter createAt) {
+    public void setCreateAt(ZonedDateTimeFilter createAt) {
         this.createAt = createAt;
     }
 

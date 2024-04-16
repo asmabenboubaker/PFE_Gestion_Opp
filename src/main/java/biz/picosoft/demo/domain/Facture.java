@@ -32,6 +32,8 @@ public class Facture implements Serializable {
 
     @Column(name = "service_fournis")
     private String serviceFournis;
+
+    @Transient
     private boolean isGenerate;
     // getter and setter isGenerate
     public void setIsGenerate(boolean isGenerate) {
@@ -56,12 +58,12 @@ private String PaymentMethod;
     public String getPaymentMethod() {
         return PaymentMethod;
     }
-    private float totalAmount;
+    private double totalAmount;
     //getter and setter totalAmount
-    public void setTotalAmount(float totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
-    public float getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
     private String contactNumber;

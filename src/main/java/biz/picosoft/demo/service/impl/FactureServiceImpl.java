@@ -2,7 +2,9 @@ package biz.picosoft.demo.service.impl;
 
 import biz.picosoft.demo.Constants.Constants;
 import biz.picosoft.demo.domain.Facture;
+import biz.picosoft.demo.domain.PV;
 import biz.picosoft.demo.repository.FactureRepository;
+import biz.picosoft.demo.repository.PVRepository;
 import biz.picosoft.demo.service.FactureService;
 import biz.picosoft.demo.service.dto.FactureDTO;
 import biz.picosoft.demo.service.mapper.FactureMapper;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.io.FileOutputStream;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,10 +50,14 @@ public class FactureServiceImpl implements FactureService {
     private final FactureRepository factureRepository;
 
     private final FactureMapper factureMapper;
+    private final PVRepository pvRepository;
 
-    public FactureServiceImpl(FactureRepository factureRepository, FactureMapper factureMapper) {
+    public FactureServiceImpl(FactureRepository factureRepository, FactureMapper factureMapper,
+    PVRepository pvRepository
+    ) {
         this.factureRepository = factureRepository;
         this.factureMapper = factureMapper;
+        this.pvRepository= pvRepository;
     }
 
     @Override
@@ -120,17 +127,18 @@ public class FactureServiceImpl implements FactureService {
             requestMap.put("uuid",fileName);
             insertBill(requestMap);
         }
-        String data= "Name"+requestMap.get("nom")+"\n"+
-                "Description"+requestMap.get("description")+"\n"+
-                "Service Fournis"+requestMap.get("serviceFournis")+"\n"+
-                "Payment Method"+requestMap.get("PaymentMethod")+"\n"+
-                "Total Amount"+requestMap.get("totalAmount")+"\n"+
-                "Contact Number"+requestMap.get("contactNumber")+"\n";
+        String data= "Name : "+requestMap.get("nom")+"\n"+
+                "Date : "+new Date()+"\n"+
+                "Description : "+requestMap.get("description")+"\n"+
+                "Service Fournis : "+requestMap.get("serviceFournis")+"\n"+
+                "Payment Method : "+requestMap.get("PaymentMethod")+"\n"+
+                "Total Amount : "+requestMap.get("totalAmount")+"\n"+
+                "Contact Number : "+requestMap.get("contactNumber")+"\n";
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(Constants.STORE_LOCATION+"\\"+fileName+".pdf"));
         document.open();
         setRectangleInPDF(document);
-        Paragraph chunk=new Paragraph("Gestion Opportunité ",getFront("Header") );
+        Paragraph chunk=new Paragraph("Facture ",getFront("Header") );
         chunk.setAlignment(Element.ALIGN_CENTER);
         document.add(chunk);
         Paragraph paragraph=new Paragraph(data+"\n \n",getFront("Data"));
@@ -157,6 +165,17 @@ public class FactureServiceImpl implements FactureService {
             e.printStackTrace();
         }
         return ResponseEntity.badRequest().body("Error");
+    }
+
+    @Override
+    public ResponseEntity<String> affectFactureToPv(Facture facture, Long idPv) {
+        // ajouter Facture et affecter pv
+        PV pv = pvRepository.findById(idPv).get();
+        facture.setPv(pv);
+        factureRepository.save(facture);
+        return new ResponseEntity<>("Facture affectée avec succès", HttpStatus.OK);
+
+
     }
 
     private void addRows(PdfPTable table, Map<String, Object> mapFromJson) {
@@ -224,11 +243,16 @@ public class FactureServiceImpl implements FactureService {
             facture.setNom((String) requestMap.get("nom"));
             facture.setDescription((String) requestMap.get("description"));
             facture.setServiceFournis((String) requestMap.get("serviceFournis"));
+            // set date to date today
+            ZonedDateTime now = ZonedDateTime.now();
+            facture.setDateFacture(now);
+
             //facture.setDateFacture((Date) requestMap.get("dateFacture"));
             //facture.setPv((PV) requestMap.get("pv"));
             facture.setPaymentMethod((String) requestMap.get("PaymentMethod"));
             facture.setTotalAmount(((Number) requestMap.get("totalAmount")).floatValue());
             facture.setContactNumber((String) requestMap.get("contactNumber"));
+
             factureRepository.save(facture);
 
 
