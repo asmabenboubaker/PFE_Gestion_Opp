@@ -18,8 +18,10 @@ import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Opportunite;
+import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteService;
 import biz.picosoft.demo.service.dto.*;
@@ -64,10 +66,12 @@ public class OpportuniteServiceImpl implements OpportuniteService {
     private final KernelService kernelService;
     private final KernelInterface kernelInterface;
     private final OpportuniteInputMapper oppInputMapper;
+    private final DemandeRepository demandeRepository;
     public OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository, OpportuniteMapper opportuniteMapper,OpportuniteOutputMapper oppOutputMapper,
     WorkflowService workflowService, CurrentUser currentUser,
     KernelService kernelService,
-    KernelInterface kernelInterface,OpportuniteInputMapper oppInputMapper
+    KernelInterface kernelInterface,OpportuniteInputMapper oppInputMapper,
+    DemandeRepository demandeRepository
 
     ) {
         this.opportuniteRepository = opportuniteRepository;
@@ -78,6 +82,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
         this.kernelService = kernelService;
         this.kernelInterface = kernelInterface;
         this.oppInputMapper = oppInputMapper;
+        this.demandeRepository = demandeRepository;
     }
 
     @Override
@@ -595,7 +600,20 @@ public class OpportuniteServiceImpl implements OpportuniteService {
     }
 
     @Override
-    public OpportuniteOutputDTO update(DemandeInputDTO demandeInputDTO, Long iddemande) {
-        return null;
+    public OpportuniteOutputDTO update(OpportuniteInputDTO demandeInputDTO, Long iddemande) {
+
+        log.debug("Request to update Meeting : {}", demandeInputDTO);
+        Demande demande = demandeRepository.findById(iddemande)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id " + iddemande + " not found."));
+        Opportunite originalRequestCase = opportuniteRepository.findById(demandeInputDTO.getId()).get();
+        originalRequestCase.setDemande(demande);
+        oppInputMapper.partialUpdate(originalRequestCase, demandeInputDTO);
+
+        originalRequestCase = opportuniteRepository.save(originalRequestCase);
+       // opportuniteRepository.save(originalRequestCase);
+
+        return oppOutputMapper.toDto(originalRequestCase);
+
+
     }
 }

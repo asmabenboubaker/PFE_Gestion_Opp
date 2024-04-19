@@ -66,5 +66,5 @@ public interface OpportuniteService {
     OpportuniteDTO updateAndAssignTodemande(Long OpportuniteId, Long demandeId, OpportuniteDTO updatedDemandeDTO);
     Boolean checkRole(String profile, String roleName);
     OpportuniteOutputDTO getbyideDTO(Long id);
-    OpportuniteOutputDTO update(DemandeInputDTO demandeInputDTO, Long iddemande);
+    OpportuniteOutputDTO update(OpportuniteInputDTO demandeInputDTO, Long iddemande);
 }
