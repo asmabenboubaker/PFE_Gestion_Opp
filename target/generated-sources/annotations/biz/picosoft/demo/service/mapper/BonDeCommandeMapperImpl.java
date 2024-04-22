@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-16T13:06:11+0200",
+    date = "2024-04-19T18:00:23+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -270,14 +270,19 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Projet projet = new Projet();
 
+        projet.setBudget( projetDTO.getBudget() );
+        projet.setObjectif( projetDTO.getObjectif() );
+        projet.setLieu( projetDTO.getLieu() );
+        projet.setType( projetDTO.getType() );
+        projet.setPriorite( projetDTO.getPriorite() );
+        projet.setCommentaires( projetDTO.getCommentaires() );
+        projet.setDerniereMiseAJour( projetDTO.getDerniereMiseAJour() );
+        projet.setLienJira( projetDTO.getLienJira() );
+        projet.setIdJira( projetDTO.getIdJira() );
         projet.setId( projetDTO.getId() );
         projet.setNom( projetDTO.getNom() );
-        if ( projetDTO.getDateDebut() != null ) {
-            projet.setDateDebut( projetDTO.getDateDebut().toInstant() );
-        }
-        if ( projetDTO.getDateFin() != null ) {
-            projet.setDateFin( projetDTO.getDateFin().toInstant() );
-        }
+        projet.setDateDebut( projetDTO.getDateDebut() );
+        projet.setDateFin( projetDTO.getDateFin() );
         projet.setResponsable( projetDTO.getResponsable() );
         projet.setDescription( projetDTO.getDescription() );
         projet.setParticipants( projetDTO.getParticipants() );
@@ -445,6 +450,29 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        mappingTarget.setBudget( projetDTO.getBudget() );
+        if ( projetDTO.getObjectif() != null ) {
+            mappingTarget.setObjectif( projetDTO.getObjectif() );
+        }
+        if ( projetDTO.getLieu() != null ) {
+            mappingTarget.setLieu( projetDTO.getLieu() );
+        }
+        if ( projetDTO.getType() != null ) {
+            mappingTarget.setType( projetDTO.getType() );
+        }
+        mappingTarget.setPriorite( projetDTO.getPriorite() );
+        if ( projetDTO.getCommentaires() != null ) {
+            mappingTarget.setCommentaires( projetDTO.getCommentaires() );
+        }
+        if ( projetDTO.getDerniereMiseAJour() != null ) {
+            mappingTarget.setDerniereMiseAJour( projetDTO.getDerniereMiseAJour() );
+        }
+        if ( projetDTO.getLienJira() != null ) {
+            mappingTarget.setLienJira( projetDTO.getLienJira() );
+        }
+        if ( projetDTO.getIdJira() != null ) {
+            mappingTarget.setIdJira( projetDTO.getIdJira() );
+        }
         if ( projetDTO.getId() != null ) {
             mappingTarget.setId( projetDTO.getId() );
         }
@@ -452,10 +480,10 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             mappingTarget.setNom( projetDTO.getNom() );
         }
         if ( projetDTO.getDateDebut() != null ) {
-            mappingTarget.setDateDebut( projetDTO.getDateDebut().toInstant() );
+            mappingTarget.setDateDebut( projetDTO.getDateDebut() );
         }
         if ( projetDTO.getDateFin() != null ) {
-            mappingTarget.setDateFin( projetDTO.getDateFin().toInstant() );
+            mappingTarget.setDateFin( projetDTO.getDateFin() );
         }
         if ( projetDTO.getResponsable() != null ) {
             mappingTarget.setResponsable( projetDTO.getResponsable() );

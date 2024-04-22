@@ -2,10 +2,7 @@ package biz.picosoft.demo.service.criteria;
 
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.InstantFilter;
-import tech.jhipster.service.filter.LongFilter;
-import tech.jhipster.service.filter.StringFilter;
+import tech.jhipster.service.filter.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,9 +25,9 @@ public class ProjetCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
-    private InstantFilter dateDebut;
+    private ZonedDateTimeFilter dateDebut;
 
-    private InstantFilter dateFin;
+    private ZonedDateTimeFilter dateFin;
 
     private StringFilter responsable;
 
@@ -94,33 +91,33 @@ public class ProjetCriteria implements Serializable, Criteria {
         this.nom = nom;
     }
 
-    public InstantFilter getDateDebut() {
+    public ZonedDateTimeFilter getDateDebut() {
         return dateDebut;
     }
 
-    public InstantFilter dateDebut() {
+    public ZonedDateTimeFilter dateDebut() {
         if (dateDebut == null) {
-            dateDebut = new InstantFilter();
+            dateDebut = new ZonedDateTimeFilter();
         }
         return dateDebut;
     }
 
-    public void setDateDebut(InstantFilter dateDebut) {
+    public void setDateDebut(ZonedDateTimeFilter dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public InstantFilter getDateFin() {
+    public ZonedDateTimeFilter getDateFin() {
         return dateFin;
     }
 
-    public InstantFilter dateFin() {
+    public ZonedDateTimeFilter dateFin() {
         if (dateFin == null) {
-            dateFin = new InstantFilter();
+            dateFin = new ZonedDateTimeFilter();
         }
         return dateFin;
     }
 
-    public void setDateFin(InstantFilter dateFin) {
+    public void setDateFin(ZonedDateTimeFilter dateFin) {
         this.dateFin = dateFin;
     }
 

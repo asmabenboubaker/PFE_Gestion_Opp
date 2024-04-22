@@ -5,8 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,10 +31,10 @@ public class Projet implements Serializable {
     private String nom;
 
     @Column(name = "date_debut")
-    private Instant dateDebut;
+    private ZonedDateTime dateDebut;
 
     @Column(name = "date_fin")
-    private Instant dateFin;
+    private ZonedDateTime dateFin;
 
     @Column(name = "responsable")
     private String responsable;
@@ -52,8 +54,108 @@ public class Projet implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "factures", "projet" }, allowSetters = true)
     private Set<PV> pvs = new HashSet<>();
+    @Column(name = "budget")
+    private float budget;
+    @Column(name = "objectif")
+    private String objectif;
+    @Column(name = "lieu")
+    private String lieu;
+    @Column(name = "type")
+    private String type;
+    @Column(name = "priorite")
+    private int priorite;
+    @Column(name = "commentaires")
+    private String commentaires;
+    @Column(name = "derniere_mise_a_jour")
+    private ZonedDateTime derniereMiseAJour;
+    @Column(name = "lien_jira")
+    private String lienJira;
+    @Column(name = "id_jira")
+    private String idJira;
+    @Column(name = "Jira_Project",nullable = false )
+    @NotNull
+    private boolean JiraProject;
 
+    public boolean isJiraProject() {
+        return JiraProject;
+    }
+
+    public void setJiraProject(boolean jiraProject) {
+        JiraProject = jiraProject;
+    }
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public float getBudget() {
+        return budget;
+    }
+
+    public void setBudget(float budget) {
+        this.budget = budget;
+    }
+
+    public String getObjectif() {
+        return objectif;
+    }
+
+    public void setObjectif(String objectif) {
+        this.objectif = objectif;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getPriorite() {
+        return priorite;
+    }
+
+    public void setPriorite(int priorite) {
+        this.priorite = priorite;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(String commentaires) {
+        this.commentaires = commentaires;
+    }
+
+    public ZonedDateTime getDerniereMiseAJour() {
+        return derniereMiseAJour;
+    }
+
+    public void setDerniereMiseAJour(ZonedDateTime derniereMiseAJour) {
+        this.derniereMiseAJour = derniereMiseAJour;
+    }
+
+    public String getLienJira() {
+        return lienJira;
+    }
+
+    public void setLienJira(String lienJira) {
+        this.lienJira = lienJira;
+    }
+
+    public String getIdJira() {
+        return idJira;
+    }
+
+    public void setIdJira(String idJira) {
+        this.idJira = idJira;
+    }
 
     public Long getId() {
         return this.id;
@@ -81,29 +183,29 @@ public class Projet implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getDateDebut() {
+    public ZonedDateTime getDateDebut() {
         return this.dateDebut;
     }
 
-    public Projet dateDebut(Instant dateDebut) {
+    public Projet dateDebut(ZonedDateTime dateDebut) {
         this.setDateDebut(dateDebut);
         return this;
     }
 
-    public void setDateDebut(Instant dateDebut) {
+    public void setDateDebut(ZonedDateTime dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Instant getDateFin() {
+    public ZonedDateTime getDateFin() {
         return this.dateFin;
     }
 
-    public Projet dateFin(Instant dateFin) {
+    public Projet dateFin(ZonedDateTime dateFin) {
         this.setDateFin(dateFin);
         return this;
     }
 
-    public void setDateFin(Instant dateFin) {
+    public void setDateFin(ZonedDateTime dateFin) {
         this.dateFin = dateFin;
     }
 
