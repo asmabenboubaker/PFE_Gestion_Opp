@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-19T18:00:24+0200",
+    date = "2024-04-23T23:56:07+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -55,6 +55,15 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
             return;
         }
 
+        if ( dto.getSource() != null ) {
+            entity.setSource( dto.getSource() );
+        }
+        if ( dto.getCommentaires() != null ) {
+            entity.setCommentaires( dto.getCommentaires() );
+        }
+        if ( dto.getDeadline() != null ) {
+            entity.setDeadline( dto.getDeadline() );
+        }
         if ( dto.getAssignee() != null ) {
             entity.setAssignee( dto.getAssignee() );
         }
@@ -120,6 +129,9 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
 
         Demande demande = new Demande();
 
+        demande.setSource( demandeOutputDTO.getSource() );
+        demande.setCommentaires( demandeOutputDTO.getCommentaires() );
+        demande.setDeadline( demandeOutputDTO.getDeadline() );
         demande.setAssignee( demandeOutputDTO.getAssignee() );
         demande.setEndProcess( demandeOutputDTO.getEndProcess() );
         demande.setId( demandeOutputDTO.getId() );
@@ -146,6 +158,9 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
 
         DemandeOutputDTO demandeOutputDTO = new DemandeOutputDTO();
 
+        demandeOutputDTO.setDeadline( demande.getDeadline() );
+        demandeOutputDTO.setSource( demande.getSource() );
+        demandeOutputDTO.setCommentaires( demande.getCommentaires() );
         demandeOutputDTO.setWfProcessID( demande.getWfProcessID() );
         demandeOutputDTO.setActivityName( demande.getActivityName() );
         demandeOutputDTO.setEndProcess( demande.getEndProcess() );

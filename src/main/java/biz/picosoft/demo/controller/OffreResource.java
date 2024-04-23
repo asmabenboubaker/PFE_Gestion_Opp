@@ -1,12 +1,21 @@
 package biz.picosoft.demo.controller;
 
+import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
+import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.repository.OffreRepository;
 import biz.picosoft.demo.service.OffreQueryService;
 import biz.picosoft.demo.service.OffreService;
 import biz.picosoft.demo.service.criteria.OffreCriteria;
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.dto.OffreDTO;
 
+import biz.picosoft.demo.service.dto.OffreOutputDTO;
+import biz.picosoft.demo.service.impl.OffreServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,11 +54,20 @@ public class OffreResource {
     private final OffreRepository offreRepository;
 
     private final OffreQueryService offreQueryService;
+    private final CurrentUser currentUser;
 
-    public OffreResource(OffreService offreService, OffreRepository offreRepository, OffreQueryService offreQueryService) {
+    private final KernelService kernelService;
+    private final KernelInterface kernelInterface;
+    private final OffreServiceImpl offreServiceImp;
+    public OffreResource(OffreService offreService, OffreRepository offreRepository, OffreQueryService offreQueryService, CurrentUser currentUser,
+                         KernelService kernelService, KernelInterface kernelInterface, OffreServiceImpl offreServiceImp) {
         this.offreService = offreService;
         this.offreRepository = offreRepository;
         this.offreQueryService = offreQueryService;
+        this.currentUser = currentUser;
+        this.kernelService = kernelService;
+        this.kernelInterface = kernelInterface;
+        this.offreServiceImp = offreServiceImp;
     }
 
     /**
@@ -199,5 +217,19 @@ public class OffreResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    // process
+    @PatchMapping("/initOffre")
+    public OffreOutputDTO initOffre() throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        offreService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreatedemande);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Offre.class.getName());
+
+        return offreServiceImp.initProcessOffre(aclClass);
+
     }
 }

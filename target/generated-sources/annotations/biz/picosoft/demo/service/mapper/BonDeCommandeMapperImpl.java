@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-19T18:00:23+0200",
+    date = "2024-04-23T23:56:10+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -210,6 +210,9 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Demande demande = new Demande();
 
+        demande.setSource( demandeDTO.getSource() );
+        demande.setCommentaires( demandeDTO.getCommentaires() );
+        demande.setDeadline( demandeDTO.getDeadline() );
         demande.setAssignee( demandeDTO.getAssignee() );
         demande.setEndProcess( demandeDTO.getEndProcess() );
         demande.setId( demandeDTO.getId() );
@@ -253,6 +256,12 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Offre offre = new Offre();
 
+        offre.setActivityName( offreDTO.getActivityName() );
+        offre.setStatus( offreDTO.getStatus() );
+        offre.setWfProcessID( offreDTO.getWfProcessID() );
+        offre.setSecuriteLevel( offreDTO.getSecuriteLevel() );
+        offre.setAssignee( offreDTO.getAssignee() );
+        offre.setEndProcess( offreDTO.getEndProcess() );
         offre.setId( offreDTO.getId() );
         offre.setMontant( offreDTO.getMontant() );
         offre.setDateOffre( offreDTO.getDateOffre() );
@@ -329,6 +338,15 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( demandeDTO.getSource() != null ) {
+            mappingTarget.setSource( demandeDTO.getSource() );
+        }
+        if ( demandeDTO.getCommentaires() != null ) {
+            mappingTarget.setCommentaires( demandeDTO.getCommentaires() );
+        }
+        if ( demandeDTO.getDeadline() != null ) {
+            mappingTarget.setDeadline( demandeDTO.getDeadline() );
+        }
         if ( demandeDTO.getAssignee() != null ) {
             mappingTarget.setAssignee( demandeDTO.getAssignee() );
         }
@@ -422,6 +440,24 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( offreDTO.getActivityName() != null ) {
+            mappingTarget.setActivityName( offreDTO.getActivityName() );
+        }
+        if ( offreDTO.getStatus() != null ) {
+            mappingTarget.setStatus( offreDTO.getStatus() );
+        }
+        if ( offreDTO.getWfProcessID() != null ) {
+            mappingTarget.setWfProcessID( offreDTO.getWfProcessID() );
+        }
+        if ( offreDTO.getSecuriteLevel() != null ) {
+            mappingTarget.setSecuriteLevel( offreDTO.getSecuriteLevel() );
+        }
+        if ( offreDTO.getAssignee() != null ) {
+            mappingTarget.setAssignee( offreDTO.getAssignee() );
+        }
+        if ( offreDTO.getEndProcess() != null ) {
+            mappingTarget.setEndProcess( offreDTO.getEndProcess() );
+        }
         if ( offreDTO.getId() != null ) {
             mappingTarget.setId( offreDTO.getId() );
         }

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-19T18:00:24+0200",
+    date = "2024-04-23T23:56:12+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -33,6 +33,12 @@ public class OffreMapperImpl implements OffreMapper {
 
         Offre offre = new Offre();
 
+        offre.setActivityName( dto.getActivityName() );
+        offre.setStatus( dto.getStatus() );
+        offre.setWfProcessID( dto.getWfProcessID() );
+        offre.setSecuriteLevel( dto.getSecuriteLevel() );
+        offre.setAssignee( dto.getAssignee() );
+        offre.setEndProcess( dto.getEndProcess() );
         offre.setId( dto.getId() );
         offre.setMontant( dto.getMontant() );
         offre.setDateOffre( dto.getDateOffre() );
@@ -77,6 +83,24 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        if ( dto.getActivityName() != null ) {
+            entity.setActivityName( dto.getActivityName() );
+        }
+        if ( dto.getStatus() != null ) {
+            entity.setStatus( dto.getStatus() );
+        }
+        if ( dto.getWfProcessID() != null ) {
+            entity.setWfProcessID( dto.getWfProcessID() );
+        }
+        if ( dto.getSecuriteLevel() != null ) {
+            entity.setSecuriteLevel( dto.getSecuriteLevel() );
+        }
+        if ( dto.getAssignee() != null ) {
+            entity.setAssignee( dto.getAssignee() );
+        }
+        if ( dto.getEndProcess() != null ) {
+            entity.setEndProcess( dto.getEndProcess() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -109,6 +133,12 @@ public class OffreMapperImpl implements OffreMapper {
         OffreDTO offreDTO = new OffreDTO();
 
         offreDTO.setOpportunite( toDtoOpportuniteId( s.getOpportunite() ) );
+        offreDTO.setActivityName( s.getActivityName() );
+        offreDTO.setEndProcess( s.getEndProcess() );
+        offreDTO.setWfProcessID( s.getWfProcessID() );
+        offreDTO.setAssignee( s.getAssignee() );
+        offreDTO.setStatus( s.getStatus() );
+        offreDTO.setSecuriteLevel( s.getSecuriteLevel() );
         offreDTO.setId( s.getId() );
         offreDTO.setMontant( s.getMontant() );
         offreDTO.setDateOffre( s.getDateOffre() );
@@ -185,6 +215,9 @@ public class OffreMapperImpl implements OffreMapper {
 
         Demande demande = new Demande();
 
+        demande.setSource( demandeDTO.getSource() );
+        demande.setCommentaires( demandeDTO.getCommentaires() );
+        demande.setDeadline( demandeDTO.getDeadline() );
         demande.setAssignee( demandeDTO.getAssignee() );
         demande.setEndProcess( demandeDTO.getEndProcess() );
         demande.setId( demandeDTO.getId() );
@@ -260,6 +293,15 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        if ( demandeDTO.getSource() != null ) {
+            mappingTarget.setSource( demandeDTO.getSource() );
+        }
+        if ( demandeDTO.getCommentaires() != null ) {
+            mappingTarget.setCommentaires( demandeDTO.getCommentaires() );
+        }
+        if ( demandeDTO.getDeadline() != null ) {
+            mappingTarget.setDeadline( demandeDTO.getDeadline() );
+        }
         if ( demandeDTO.getAssignee() != null ) {
             mappingTarget.setAssignee( demandeDTO.getAssignee() );
         }

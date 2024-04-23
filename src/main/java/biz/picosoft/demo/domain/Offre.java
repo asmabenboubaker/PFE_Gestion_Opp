@@ -5,8 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,13 +31,13 @@ public class Offre implements Serializable {
     private Float montant;
 
     @Column(name = "date_offre")
-    private Instant dateOffre;
+    private ZonedDateTime dateOffre;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "valide_jusqu_a")
-    private Instant valideJusquA;
+    private ZonedDateTime valideJusquA;
 
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -46,7 +48,116 @@ public class Offre implements Serializable {
     @JsonIgnoreProperties(value = { "offres", "demande" }, allowSetters = true)
     private Opportunite opportunite;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    // process
+
+    @Size(min = 0, max = 50)
+    @Column(name = "identifiant", length = 50, nullable = true)
+    private String identifiant;
+    @Column(name = "activity_name")
+    private String activityName;
+    @Column(name = "number_of_attachments")
+    private Long numberOfattachments = 0L;
+
+    @Column(name = "exclude_from_view")
+    private Boolean excludeFromView = true;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "wf_process_id")
+    private String wfProcessID;
+    @Column(name = "securite_level")
+    private Integer securiteLevel;
+    @Column(name = "assignee")
+    private String assignee;
+
+    @Column(name = "end_process")
+    private Boolean endProcess;
+
+    @Column(name = "offre_number")
+    private String offreNumber;
+
+    public String getOffreNumber() {
+        return offreNumber;
+    }
+
+    public void setOffreNumber(String offreNumber) {
+        this.offreNumber = offreNumber;
+    }
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Long getNumberOfattachments() {
+        return numberOfattachments;
+    }
+
+    public void setNumberOfattachments(Long numberOfattachments) {
+        this.numberOfattachments = numberOfattachments;
+    }
+
+    public Boolean getExcludeFromView() {
+        return excludeFromView;
+    }
+
+    public void setExcludeFromView(Boolean excludeFromView) {
+        this.excludeFromView = excludeFromView;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getWfProcessID() {
+        return wfProcessID;
+    }
+
+    public void setWfProcessID(String wfProcessID) {
+        this.wfProcessID = wfProcessID;
+    }
+
+    public Integer getSecuriteLevel() {
+        return securiteLevel;
+    }
+
+    public void setSecuriteLevel(Integer securiteLevel) {
+        this.securiteLevel = securiteLevel;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public Boolean getEndProcess() {
+        return endProcess;
+    }
+
+    public void setEndProcess(Boolean endProcess) {
+        this.endProcess = endProcess;
+    }
+
+
+
+// jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;
@@ -74,16 +185,16 @@ public class Offre implements Serializable {
         this.montant = montant;
     }
 
-    public Instant getDateOffre() {
+    public ZonedDateTime getDateOffre() {
         return this.dateOffre;
     }
 
-    public Offre dateOffre(Instant dateOffre) {
+    public Offre dateOffre(ZonedDateTime dateOffre) {
         this.setDateOffre(dateOffre);
         return this;
     }
 
-    public void setDateOffre(Instant dateOffre) {
+    public void setDateOffre(ZonedDateTime dateOffre) {
         this.dateOffre = dateOffre;
     }
 
@@ -100,16 +211,16 @@ public class Offre implements Serializable {
         this.description = description;
     }
 
-    public Instant getValideJusquA() {
+    public ZonedDateTime getValideJusquA() {
         return this.valideJusquA;
     }
 
-    public Offre valideJusquA(Instant valideJusquA) {
+    public Offre valideJusquA(ZonedDateTime valideJusquA) {
         this.setValideJusquA(valideJusquA);
         return this;
     }
 
-    public void setValideJusquA(Instant valideJusquA) {
+    public void setValideJusquA(ZonedDateTime valideJusquA) {
         this.valideJusquA = valideJusquA;
     }
 
