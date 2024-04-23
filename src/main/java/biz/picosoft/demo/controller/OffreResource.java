@@ -16,6 +16,7 @@ import biz.picosoft.demo.service.dto.OffreDTO;
 
 import biz.picosoft.demo.service.dto.OffreOutputDTO;
 import biz.picosoft.demo.service.impl.OffreServiceImpl;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -232,4 +234,11 @@ public class OffreResource {
         return offreServiceImp.initProcessOffre(aclClass);
 
     }
+
+    @GetMapping("/offreById/{id}")
+    OffreOutputDTO getOffreDTO(@PathVariable Long id) throws IOException, TemplateException {
+
+        return offreServiceImp.getbyideDTO(id);
+    }
+
 }
