@@ -3,6 +3,7 @@ package biz.picosoft.demo.service.dto;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
 import java.time.ZonedDateTime;
@@ -16,6 +17,37 @@ public class DemandeInputDTO  implements Serializable {
     private String decision;
     private String statutDemande;
     private String activityName;
+
+    private ZonedDateTime deadline;
+
+    private String source;
+
+
+    private String commentaires;
+
+    public ZonedDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(ZonedDateTime deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(String commentaires) {
+        this.commentaires = commentaires;
+    }
 
     private Boolean endProcess;
     private String wfProcessID;

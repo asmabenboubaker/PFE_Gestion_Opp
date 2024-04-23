@@ -38,6 +38,36 @@ public class DemandeDTO  implements Serializable {
     private Boolean draft;
     private String wfCurrentComment;
     private String nom;
+    private ZonedDateTime deadline;
+
+    private String source;
+
+
+    private String commentaires;
+
+    public ZonedDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(ZonedDateTime deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(String commentaires) {
+        this.commentaires = commentaires;
+    }
 
     private ZonedDateTime dateDeCreation;
 

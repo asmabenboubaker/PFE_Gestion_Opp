@@ -57,6 +57,40 @@ public class Demande implements Serializable {
 
     @Column(name = "nom")
     private String nom;
+   //add deadline att
+
+    @Column(name = "deadline")
+    private ZonedDateTime deadline;
+    @Column(name = "source")
+    private String source;
+
+    @Column(name = "commentaires")
+    private String commentaires;
+    public ZonedDateTime getDeadline() {
+        return deadline;
+    }
+// add Source de la demande
+
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(String commentaires) {
+        this.commentaires = commentaires;
+    }
+
+    public void setDeadline(ZonedDateTime deadline) {
+        this.deadline = deadline;
+    }
 
     @Column(name = "date_de_creation")
     private ZonedDateTime dateDeCreation;

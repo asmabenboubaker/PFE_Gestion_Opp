@@ -19,15 +19,18 @@ public abstract class Demande_ {
 	public static volatile SingularAttribute<Demande, String> description;
 	public static volatile SingularAttribute<Demande, String> demandeNumber;
 	public static volatile SingularAttribute<Demande, Integer> securiteLevel;
+	public static volatile SingularAttribute<Demande, String> source;
 	public static volatile SingularAttribute<Demande, Boolean> excludeFromView;
 	public static volatile SingularAttribute<Demande, String> nom;
 	public static volatile SingularAttribute<Demande, ZonedDateTime> dateDeCreation;
 	public static volatile SetAttribute<Demande, Opportunite> opportunites;
 	public static volatile SingularAttribute<Demande, String> wfProcessID;
 	public static volatile SingularAttribute<Demande, Client> client;
+	public static volatile SingularAttribute<Demande, String> commentaires;
 	public static volatile SingularAttribute<Demande, Long> id;
 	public static volatile SingularAttribute<Demande, String> assignee;
 	public static volatile SingularAttribute<Demande, Long> numberOfattachments;
+	public static volatile SingularAttribute<Demande, ZonedDateTime> deadline;
 	public static volatile SingularAttribute<Demande, StatutDemande> statut;
 	public static volatile SingularAttribute<Demande, String> status;
 
@@ -39,15 +42,18 @@ public abstract class Demande_ {
 	public static final String DESCRIPTION = "description";
 	public static final String DEMANDE_NUMBER = "demandeNumber";
 	public static final String SECURITE_LEVEL = "securiteLevel";
+	public static final String SOURCE = "source";
 	public static final String EXCLUDE_FROM_VIEW = "excludeFromView";
 	public static final String NOM = "nom";
 	public static final String DATE_DE_CREATION = "dateDeCreation";
 	public static final String OPPORTUNITES = "opportunites";
 	public static final String WF_PROCESS_ID = "wfProcessID";
 	public static final String CLIENT = "client";
+	public static final String COMMENTAIRES = "commentaires";
 	public static final String ID = "id";
 	public static final String ASSIGNEE = "assignee";
 	public static final String NUMBER_OFATTACHMENTS = "numberOfattachments";
+	public static final String DEADLINE = "deadline";
 	public static final String STATUT = "statut";
 	public static final String STATUS = "status";
 
