@@ -161,7 +161,8 @@ public class DemandeResource {
         if (!demandeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        System.out.println("updateeeeeeeeeeeee====getSource"+demandeDTO.getSource());
+        System.out.println("updateeeeeeeeeeeee====setCommentaires"+demandeDTO.getCommentaires());
         DemandeDTO result = demandeService.update(demandeDTO);
         return ResponseEntity
             .ok()
@@ -422,7 +423,8 @@ public class DemandeResource {
         if (!demandeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+//        System.out.println("updateeeeeeeeeeeee====getSource"+requestCaseInputDTO.getSource());
+//        System.out.println("updateeeeeeeeeeeee====setCommentaires"+requestCaseInputDTO.getCommentaires());
         DemandeOutputDTO result = demandeService.update(requestCaseInputDTO,idclient);
         return result;
     }

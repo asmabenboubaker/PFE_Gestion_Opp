@@ -1,5 +1,7 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.enumeration.StatutOffre;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -39,7 +41,36 @@ public class OffreDTO implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
+    private String modePaiement;
 
+    private ZonedDateTime dateLivraison;
+
+
+    private StatutOffre statutOffre;
+
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
+
+    public ZonedDateTime getDateLivraison() {
+        return dateLivraison;
+    }
+
+    public void setDateLivraison(ZonedDateTime dateLivraison) {
+        this.dateLivraison = dateLivraison;
+    }
+
+    public StatutOffre getStatutOffre() {
+        return statutOffre;
+    }
+
+    public void setStatutOffre(StatutOffre statutOffre) {
+        this.statutOffre = statutOffre;
+    }
 
     public String getDecision() {
         return decision;

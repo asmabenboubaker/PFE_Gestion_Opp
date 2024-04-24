@@ -1,5 +1,10 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.enumeration.StatutOffre;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -35,6 +40,55 @@ public class OffreInputDTO  implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
+    private String wfComment;
+    private String msg;
+
+    private String modePaiement;
+
+    private ZonedDateTime dateLivraison;
+
+
+    private StatutOffre statutOffre;
+
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
+
+    public ZonedDateTime getDateLivraison() {
+        return dateLivraison;
+    }
+
+    public void setDateLivraison(ZonedDateTime dateLivraison) {
+        this.dateLivraison = dateLivraison;
+    }
+
+    public StatutOffre getStatutOffre() {
+        return statutOffre;
+    }
+
+    public void setStatutOffre(StatutOffre statutOffre) {
+        this.statutOffre = statutOffre;
+    }
+
+    public String getWfComment() {
+        return wfComment;
+    }
+
+    public void setWfComment(String wfComment) {
+        this.wfComment = wfComment;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public String getDecision() {
         return decision;

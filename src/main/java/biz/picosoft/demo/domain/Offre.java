@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import biz.picosoft.demo.domain.enumeration.StatutOffre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -71,6 +72,37 @@ public class Offre implements Serializable {
 
     @Column(name = "end_process")
     private Boolean endProcess;
+    @Column(name = "mode_paiement")
+    private String modePaiement;
+    @Column(name = "date_livraison")
+    private ZonedDateTime dateLivraison;
+    @Column(name = "statut_offre")
+    @Enumerated(EnumType.STRING)
+    private StatutOffre statutOffre;
+
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
+
+    public ZonedDateTime getDateLivraison() {
+        return dateLivraison;
+    }
+
+    public void setDateLivraison(ZonedDateTime dateLivraison) {
+        this.dateLivraison = dateLivraison;
+    }
+
+    public StatutOffre getStatutOffre() {
+        return statutOffre;
+    }
+
+    public void setStatutOffre(StatutOffre statutOffre) {
+        this.statutOffre = statutOffre;
+    }
 
     @Column(name = "offre_number")
     private String offreNumber;

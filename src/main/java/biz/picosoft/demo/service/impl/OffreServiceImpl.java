@@ -4,6 +4,7 @@ import biz.picosoft.demo.Workflow.domain.BpmJob;
 import biz.picosoft.demo.Workflow.service.WorkflowService;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.acl.Permission;
 import biz.picosoft.demo.client.kernel.model.acl.enumeration.Access;
@@ -16,14 +17,16 @@ import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Offre;
+import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OffreRepository;
+import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OffreService;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
-import biz.picosoft.demo.service.dto.OffreDTO;
-import biz.picosoft.demo.service.dto.OffreOutputDTO;
+import biz.picosoft.demo.service.dto.*;
 import biz.picosoft.demo.service.mapper.DemandeOutputMapper;
+import biz.picosoft.demo.service.mapper.OffreInputMapper;
 import biz.picosoft.demo.service.mapper.OffreMapper;
 
 import biz.picosoft.demo.service.mapper.OffreOutputMapper;
@@ -35,6 +38,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -61,11 +66,17 @@ public class OffreServiceImpl implements OffreService {
     private final CurrentUser currentUser;
     private final KernelService kernelService;
     private final KernelInterface kernelInterface;
+    //add oppRepository
+    private final OpportuniteRepository oppRepository;
+    private final OffreInputMapper offreInputMapper;
+
 
     public OffreServiceImpl(OffreRepository offreRepository, OffreMapper offreMapper, OffreOutputMapper offreOutputMapper, WorkflowService workflowService,
                             CurrentUser currentUser,
                             KernelService kernelService,
-                            KernelInterface kernelInterface
+                            KernelInterface kernelInterface,
+                            OffreInputMapper offreInputMapper,
+                            OpportuniteRepository oppRepository
 
     ) {
         this.offreRepository = offreRepository;
@@ -75,6 +86,8 @@ public class OffreServiceImpl implements OffreService {
         this.currentUser = currentUser;
         this.kernelService = kernelService;
         this.kernelInterface = kernelInterface;
+        this.offreInputMapper = offreInputMapper;
+        this.oppRepository = oppRepository;
 
     }
 
@@ -438,6 +451,125 @@ public class OffreServiceImpl implements OffreService {
 
         return requestCaseOutputDTO;
     }
+    @PersistenceContext(unitName = "externDSEmFactory")
+    private EntityManager entityManager;
+    // submit methods
+    @Transactional
+    public OffreOutputDTO submitProcessOffre(OffreInputDTO offreInputDTO, AclClass aclClass) throws Exception {
 
+        entityManager.clear();
+        // extract object by id from data base
+        Optional<Offre> offreOptional = offreRepository.findById(offreInputDTO.getId());
+
+        // extract courrier
+        Offre requestCase = offreOptional.get();
+
+        // check if the object exist in database
+        if (!offreOptional.isPresent())
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_requestCase_null, RCErrors.Entity_requestCase, RCErrors.ERR_Key_requestCase_null);
+
+        // extract permission of the authentifier from kernel
+        String permission = kernelService.checkSecurity(aclClass.getSimpleName(), offreInputDTO.getId(), currentUser.getSid());
+
+        // check if the authentifier has permission WRITE
+        if (!permission.equals(Permission.WRITE.name()) && !permission.equals(Permission.INH_WRITE.name()))
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_not_authorized, RCErrors.Entity_requestCase, RCErrors.ERR_Key_not_authorized);
+
+        // validate attributes courrier
+        this.validateRequestCase(aclClass, offreInputDTO);
+
+        // extract activity name from courrier
+        String activityName = requestCase.getActivityName();
+
+        // fusion the input object and the object from database
+        offreInputMapper.partialUpdate(requestCase, offreInputDTO);
+
+        // map object courrier to courrier by id DTO
+        OffreOutputDTO requestCaseOutputDTO = offreOutputMapper.toDto(requestCase);
+
+        requestCaseOutputDTO.setClassId(aclClass.getId());
+
+        requestCaseOutputDTO.setClassName(aclClass.getClasse());
+
+        requestCaseOutputDTO.setLabelClass(aclClass.getLabel());
+
+        requestCaseOutputDTO.setSimpleClassName(aclClass.getSimpleName());
+
+        // initialize workflow information
+        WFDTO workflow = new WFDTO();
+        workflow.setWfProcessID(requestCase.getWfProcessID());
+        workflow.setActivityName(requestCase.getActivityName());
+        requestCaseOutputDTO.setWorkflow(workflow);
+
+        BpmJob bpmJob = workflowService._nextTaskWithoutEvent(requestCase.getWfProcessID(), offreInputDTO.getDecision(), offreInputDTO.getWfComment(), requestCaseOutputDTO, aclClass);
+
+        List<String> authors = bpmJob.getAuthors();
+
+        List<String> readers = bpmJob.getReaders();
+
+        requestCaseOutputDTO = (OffreOutputDTO) bpmJob.getDataObject();
+
+        requestCase = offreOutputMapper.toEntity(requestCaseOutputDTO);
+
+        requestCase.setWfProcessID(bpmJob.getProcessID());
+
+        requestCase.setActivityName(bpmJob.getActivityName());
+
+        requestCase.setEndProcess(bpmJob.getEndProcess());
+
+        requestCase.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
+
+        requestCase = saveOffre(requestCase, authors, readers, aclClass, false);
+
+        return offreOutputMapper.toDto(requestCase);
+
+    }
+
+    public Boolean validateRequestCase(AclClass aclClass, OffreInputDTO offreInputDTO) {
+
+        String nameRule = "save-" + aclClass.getSimpleName();
+
+        RulesDTO rulesDTO = kernelService.rulesByName(nameRule);
+        if (rulesDTO != null && rulesDTO.getSrcCode() != null) {
+            List<Object> objectList = new ArrayList<>();
+            objectList.add(offreInputDTO);
+            try {
+                System.out.println("zezezeze");
+                //rulesService.executeRules(objectList, rulesDTO.getSrcCode());
+            } catch (Exception e) {
+                throw new BadRequestAlertException(
+                        RCErrors.ERR_Msg_drools + ": " + nameRule,
+                        aclClass.getSimpleName(),
+                        RCErrors.ERR_Key_drools);
+            }
+
+        }
+
+        if (offreInputDTO.getMsg() == null)
+            return true;
+        else
+            throw new BadRequestAlertException(
+                    offreInputDTO.getMsg(),
+                    aclClass.getSimpleName(),
+                    offreInputDTO.getMsg());
+
+
+    }
+
+
+    public OffreOutputDTO update(OffreInputDTO RequestCaseDTO,Long idOpp) {
+        log.debug("Request to update Meeting : {}", RequestCaseDTO);
+        Opportunite opp = oppRepository.findById(idOpp)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id " + idOpp + " not found."));
+        Offre originalRequestCase = offreRepository.findById(RequestCaseDTO.getId()).get();
+        originalRequestCase.setOpportunite(opp);
+        offreInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+
+
+        originalRequestCase = offreRepository.save(originalRequestCase);
+        offreRepository.save(originalRequestCase);
+
+        return offreOutputMapper.toDto(originalRequestCase);
+    }
 
 }

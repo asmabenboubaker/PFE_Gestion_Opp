@@ -189,7 +189,16 @@ public class OpportuniteResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page);
     }
-
+    @GetMapping("/opportunites/withoutpage")
+    public ResponseEntity<List<OpportuniteDTO>> getAllOpportunite(
+            OpportuniteCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Opportunites by criteria: {}", criteria);
+        Page<OpportuniteDTO> page = opportuniteQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * {@code GET  /opportunites/count} : count all the opportunites.
      *

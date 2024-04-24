@@ -11,10 +11,8 @@ import biz.picosoft.demo.repository.OffreRepository;
 import biz.picosoft.demo.service.OffreQueryService;
 import biz.picosoft.demo.service.OffreService;
 import biz.picosoft.demo.service.criteria.OffreCriteria;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
-import biz.picosoft.demo.service.dto.OffreDTO;
+import biz.picosoft.demo.service.dto.*;
 
-import biz.picosoft.demo.service.dto.OffreOutputDTO;
 import biz.picosoft.demo.service.impl.OffreServiceImpl;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -241,4 +239,38 @@ public class OffreResource {
         return offreServiceImp.getbyideDTO(id);
     }
 
+    @PatchMapping(value = {"/submitOffre"})
+    public OffreOutputDTO submitRequestCase(@RequestBody OffreInputDTO requestCaseInputDTO) throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        offreService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreatedemande);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Offre.class.getName());
+
+        OffreOutputDTO result = offreServiceImp.submitProcessOffre(requestCaseInputDTO, aclClass);
+
+        return result;
+    }
+    @PutMapping("/offreupdate/{id}/{idOpp}")
+    public OffreOutputDTO updateRequestCase(
+            @PathVariable(value = "id", required = false) final Long id,
+            @PathVariable(value = "idOpp", required = false) final Long idOpp,
+            @RequestBody OffreInputDTO requestCaseInputDTO) throws URISyntaxException {
+        log.debug("REST request to update RequestCase : {}, {}", id, requestCaseInputDTO);
+        if (requestCaseInputDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, requestCaseInputDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!offreRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+//        System.out.println("updateeeeeeeeeeeee====getSource"+requestCaseInputDTO.getSource());
+//        System.out.println("updateeeeeeeeeeeee====setCommentaires"+requestCaseInputDTO.getCommentaires());
+        OffreOutputDTO result = offreServiceImp.update(requestCaseInputDTO,idOpp);
+        return result;
+    }
 }

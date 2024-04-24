@@ -242,6 +242,7 @@ public class DemandeServiceImpl implements DemandeService {
         Demande originalRequestCase = demandeRepository.findById(RequestCaseDTO.getId()).get();
         originalRequestCase.setClient(client);
         demandeInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
 
         originalRequestCase = demandeRepository.save(originalRequestCase);
         demandeRepository.save(originalRequestCase);
