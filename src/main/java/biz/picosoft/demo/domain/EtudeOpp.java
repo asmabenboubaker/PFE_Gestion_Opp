@@ -39,6 +39,18 @@ public class EtudeOpp implements Serializable {
     @Column(name = "complexite")
     private String complexite;
 
+    // one to many relationship with Opportunite
+    // chaque opp peut avoir plusieurs etudes
+    @ManyToOne
+    private Opportunite opportunite;
+
+    public Opportunite getOpportunite() {
+        return opportunite;
+    }
+
+    public void setOpportunite(Opportunite opportunite) {
+        this.opportunite = opportunite;
+    }
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {

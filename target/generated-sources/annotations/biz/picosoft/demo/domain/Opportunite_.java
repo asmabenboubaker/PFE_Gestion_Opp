@@ -20,6 +20,7 @@ public abstract class Opportunite_ {
 	public static volatile SingularAttribute<Opportunite, Demande> demande;
 	public static volatile SingularAttribute<Opportunite, String> nom;
 	public static volatile SingularAttribute<Opportunite, ZonedDateTime> createAt;
+	public static volatile SetAttribute<Opportunite, EtudeOpp> etudeOpps;
 	public static volatile SingularAttribute<Opportunite, ZonedDateTime> createdBy;
 	public static volatile SingularAttribute<Opportunite, String> wfProcessID;
 	public static volatile SingularAttribute<Opportunite, Long> id;
@@ -39,6 +40,7 @@ public abstract class Opportunite_ {
 	public static final String DEMANDE = "demande";
 	public static final String NOM = "nom";
 	public static final String CREATE_AT = "createAt";
+	public static final String ETUDE_OPPS = "etudeOpps";
 	public static final String CREATED_BY = "createdBy";
 	public static final String WF_PROCESS_ID = "wfProcessID";
 	public static final String ID = "id";

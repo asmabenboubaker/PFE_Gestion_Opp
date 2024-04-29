@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-23T23:56:14+0200",
+    date = "2024-04-29T11:33:08+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -34,6 +34,9 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         Offre offre = new Offre();
 
+        offre.setModePaiement( dto.getModePaiement() );
+        offre.setDateLivraison( dto.getDateLivraison() );
+        offre.setStatutOffre( dto.getStatutOffre() );
         offre.setActivityName( dto.getActivityName() );
         offre.setStatus( dto.getStatus() );
         offre.setWfProcessID( dto.getWfProcessID() );
@@ -58,6 +61,9 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         OffreInputDTO offreInputDTO = new OffreInputDTO();
 
+        offreInputDTO.setModePaiement( entity.getModePaiement() );
+        offreInputDTO.setDateLivraison( entity.getDateLivraison() );
+        offreInputDTO.setStatutOffre( entity.getStatutOffre() );
         offreInputDTO.setActivityName( entity.getActivityName() );
         offreInputDTO.setEndProcess( entity.getEndProcess() );
         offreInputDTO.setWfProcessID( entity.getWfProcessID() );
@@ -108,6 +114,15 @@ public class OffreInputMapperImpl extends OffreInputMapper {
             return;
         }
 
+        if ( dto.getModePaiement() != null ) {
+            entity.setModePaiement( dto.getModePaiement() );
+        }
+        if ( dto.getDateLivraison() != null ) {
+            entity.setDateLivraison( dto.getDateLivraison() );
+        }
+        if ( dto.getStatutOffre() != null ) {
+            entity.setStatutOffre( dto.getStatutOffre() );
+        }
         if ( dto.getActivityName() != null ) {
             entity.setActivityName( dto.getActivityName() );
         }

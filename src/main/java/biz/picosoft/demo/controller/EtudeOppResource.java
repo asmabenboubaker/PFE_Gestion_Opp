@@ -36,7 +36,7 @@ public class EtudeOppResource {
 
     private static final String ENTITY_NAME = "etudeOpp";
 
-   // @Value("${jhipster.clientApp.name}")
+    // @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final EtudeOppService etudeOppService;
@@ -46,9 +46,9 @@ public class EtudeOppResource {
     private final EtudeOppQueryService etudeOppQueryService;
 
     public EtudeOppResource(
-        EtudeOppService etudeOppService,
-        EtudeOppRepository etudeOppRepository,
-        EtudeOppQueryService etudeOppQueryService
+            EtudeOppService etudeOppService,
+            EtudeOppRepository etudeOppRepository,
+            EtudeOppQueryService etudeOppQueryService
     ) {
         this.etudeOppService = etudeOppService;
         this.etudeOppRepository = etudeOppRepository;
@@ -70,15 +70,15 @@ public class EtudeOppResource {
         }
         EtudeOppDTO result = etudeOppService.save(etudeOppDTO);
         return ResponseEntity
-            .created(new URI("/api/etude-opps/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/etude-opps/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /etude-opps/:id} : Updates an existing etudeOpp.
      *
-     * @param id the id of the etudeOppDTO to save.
+     * @param id          the id of the etudeOppDTO to save.
      * @param etudeOppDTO the etudeOppDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated etudeOppDTO,
      * or with status {@code 400 (Bad Request)} if the etudeOppDTO is not valid,
@@ -87,8 +87,8 @@ public class EtudeOppResource {
      */
     @PutMapping("/etude-opps/{id}")
     public ResponseEntity<EtudeOppDTO> updateEtudeOpp(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody EtudeOppDTO etudeOppDTO
+            @PathVariable(value = "id", required = false) final Long id,
+            @RequestBody EtudeOppDTO etudeOppDTO
     ) throws URISyntaxException {
         log.debug("REST request to update EtudeOpp : {}, {}", id, etudeOppDTO);
         if (etudeOppDTO.getId() == null) {
@@ -104,15 +104,15 @@ public class EtudeOppResource {
 
         EtudeOppDTO result = etudeOppService.update(etudeOppDTO);
         return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, etudeOppDTO.getId().toString()))
-            .body(result);
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, etudeOppDTO.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PATCH  /etude-opps/:id} : Partial updates given fields of an existing etudeOpp, field will ignore if it is null
      *
-     * @param id the id of the etudeOppDTO to save.
+     * @param id          the id of the etudeOppDTO to save.
      * @param etudeOppDTO the etudeOppDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated etudeOppDTO,
      * or with status {@code 400 (Bad Request)} if the etudeOppDTO is not valid,
@@ -120,10 +120,10 @@ public class EtudeOppResource {
      * or with status {@code 500 (Internal Server Error)} if the etudeOppDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/etude-opps/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/etude-opps/{id}", consumes = {"application/json", "application/merge-patch+json"})
     public ResponseEntity<EtudeOppDTO> partialUpdateEtudeOpp(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody EtudeOppDTO etudeOppDTO
+            @PathVariable(value = "id", required = false) final Long id,
+            @RequestBody EtudeOppDTO etudeOppDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update EtudeOpp partially : {}, {}", id, etudeOppDTO);
         if (etudeOppDTO.getId() == null) {
@@ -140,8 +140,8 @@ public class EtudeOppResource {
         Optional<EtudeOppDTO> result = etudeOppService.partialUpdate(etudeOppDTO);
 
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, etudeOppDTO.getId().toString())
+                result,
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, etudeOppDTO.getId().toString())
         );
     }
 
@@ -154,8 +154,8 @@ public class EtudeOppResource {
      */
     @GetMapping("/etude-opps")
     public ResponseEntity<Page<EtudeOppDTO>> getAllEtudeOpps(
-        EtudeOppCriteria criteria,
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+            EtudeOppCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get EtudeOpps by criteria: {}", criteria);
         Page<EtudeOppDTO> page = etudeOppQueryService.findByCriteria(criteria, pageable);
@@ -199,8 +199,23 @@ public class EtudeOppResource {
         log.debug("REST request to delete EtudeOpp : {}", id);
         etudeOppService.delete(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
+    }
+
+    // // ajouter EtudeOpp acec affectation opportunité
+    @PostMapping("/createEtudeOppWithAffectation/{idOpportunite}")
+    public ResponseEntity<EtudeOppDTO> createEtudeOppWithAffectation(
+            @PathVariable(value = "idOpportunite", required = false) final Long idOpportunite,
+            @RequestBody EtudeOppDTO etudeOppDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to save EtudeOpp : {}, {}", idOpportunite, etudeOppDTO);
+
+        EtudeOppDTO result = etudeOppService.saveEtudeOppWithAffectation(etudeOppDTO, idOpportunite);
+        return ResponseEntity
+                .created(new URI("/api/etude-opps/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 }

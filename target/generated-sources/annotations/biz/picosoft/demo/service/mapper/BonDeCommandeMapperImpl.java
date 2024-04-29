@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-23T23:56:10+0200",
+    date = "2024-04-29T11:33:08+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -256,6 +256,9 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Offre offre = new Offre();
 
+        offre.setModePaiement( offreDTO.getModePaiement() );
+        offre.setDateLivraison( offreDTO.getDateLivraison() );
+        offre.setStatutOffre( offreDTO.getStatutOffre() );
         offre.setActivityName( offreDTO.getActivityName() );
         offre.setStatus( offreDTO.getStatus() );
         offre.setWfProcessID( offreDTO.getWfProcessID() );
@@ -440,6 +443,15 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( offreDTO.getModePaiement() != null ) {
+            mappingTarget.setModePaiement( offreDTO.getModePaiement() );
+        }
+        if ( offreDTO.getDateLivraison() != null ) {
+            mappingTarget.setDateLivraison( offreDTO.getDateLivraison() );
+        }
+        if ( offreDTO.getStatutOffre() != null ) {
+            mappingTarget.setStatutOffre( offreDTO.getStatutOffre() );
+        }
         if ( offreDTO.getActivityName() != null ) {
             mappingTarget.setActivityName( offreDTO.getActivityName() );
         }

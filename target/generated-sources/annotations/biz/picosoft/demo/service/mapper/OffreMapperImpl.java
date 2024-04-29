@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-23T23:56:12+0200",
+    date = "2024-04-29T11:33:07+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -33,6 +33,9 @@ public class OffreMapperImpl implements OffreMapper {
 
         Offre offre = new Offre();
 
+        offre.setModePaiement( dto.getModePaiement() );
+        offre.setDateLivraison( dto.getDateLivraison() );
+        offre.setStatutOffre( dto.getStatutOffre() );
         offre.setActivityName( dto.getActivityName() );
         offre.setStatus( dto.getStatus() );
         offre.setWfProcessID( dto.getWfProcessID() );
@@ -83,6 +86,15 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        if ( dto.getModePaiement() != null ) {
+            entity.setModePaiement( dto.getModePaiement() );
+        }
+        if ( dto.getDateLivraison() != null ) {
+            entity.setDateLivraison( dto.getDateLivraison() );
+        }
+        if ( dto.getStatutOffre() != null ) {
+            entity.setStatutOffre( dto.getStatutOffre() );
+        }
         if ( dto.getActivityName() != null ) {
             entity.setActivityName( dto.getActivityName() );
         }
@@ -133,6 +145,9 @@ public class OffreMapperImpl implements OffreMapper {
         OffreDTO offreDTO = new OffreDTO();
 
         offreDTO.setOpportunite( toDtoOpportuniteId( s.getOpportunite() ) );
+        offreDTO.setModePaiement( s.getModePaiement() );
+        offreDTO.setDateLivraison( s.getDateLivraison() );
+        offreDTO.setStatutOffre( s.getStatutOffre() );
         offreDTO.setActivityName( s.getActivityName() );
         offreDTO.setEndProcess( s.getEndProcess() );
         offreDTO.setWfProcessID( s.getWfProcessID() );

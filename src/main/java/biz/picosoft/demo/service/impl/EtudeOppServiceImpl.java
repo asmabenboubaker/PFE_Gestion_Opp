@@ -1,7 +1,9 @@
 package biz.picosoft.demo.service.impl;
 
 import biz.picosoft.demo.domain.EtudeOpp;
+import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.EtudeOppRepository;
+import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.EtudeOppService;
 import biz.picosoft.demo.service.dto.EtudeOppDTO;
 import biz.picosoft.demo.service.mapper.EtudeOppMapper;
@@ -27,10 +29,12 @@ public class EtudeOppServiceImpl implements EtudeOppService {
     private final EtudeOppRepository etudeOppRepository;
 
     private final EtudeOppMapper etudeOppMapper;
+    private final OpportuniteRepository opportuniteRepository;
 
-    public EtudeOppServiceImpl(EtudeOppRepository etudeOppRepository, EtudeOppMapper etudeOppMapper) {
+    public EtudeOppServiceImpl(EtudeOppRepository etudeOppRepository, EtudeOppMapper etudeOppMapper, OpportuniteRepository opportuniteRepository) {
         this.etudeOppRepository = etudeOppRepository;
         this.etudeOppMapper = etudeOppMapper;
+        this.opportuniteRepository = opportuniteRepository;
     }
 
     @Override
@@ -82,5 +86,19 @@ public class EtudeOppServiceImpl implements EtudeOppService {
     public void delete(Long id) {
         log.debug("Request to delete EtudeOpp : {}", id);
         etudeOppRepository.deleteById(id);
+    }
+
+    @Override
+    public EtudeOppDTO saveEtudeOppWithAffectation(EtudeOppDTO etudeOppDTO, Long idOpportunite) {
+        // ajouter EtudeOpp acec affectation opportunité
+        // find by id opp
+        Opportunite opp=opportuniteRepository.findById(idOpportunite).get();
+
+        // set etudeOpp to opp
+        EtudeOpp etudeOpp = etudeOppMapper.toEntity(etudeOppDTO);
+        etudeOpp.setOpportunite(opp);
+        etudeOpp = etudeOppRepository.save(etudeOpp);
+        return etudeOppMapper.toDto(etudeOpp);
+
     }
 }

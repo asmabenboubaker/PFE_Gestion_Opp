@@ -156,8 +156,21 @@ public class Opportunite implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "opportunites", "domaines", "client" }, allowSetters = true)
     private Demande demande;
+    // relation one to many avec etude
+    @OneToMany(mappedBy = "opportunite")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "opportunite" }, allowSetters = true)
+    private Set<EtudeOpp> etudeOpps = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    public Set<EtudeOpp> getEtudeOpps() {
+        return etudeOpps;
+    }
+
+    public void setEtudeOpps(Set<EtudeOpp> etudeOpps) {
+        this.etudeOpps = etudeOpps;
+    }
+
+// jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;

@@ -57,4 +57,7 @@ public interface EtudeOppService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    // ajouter EtudeOpp acec affectation opportunité
+    EtudeOppDTO saveEtudeOppWithAffectation(EtudeOppDTO etudeOppDTO, Long idOpportunite);
 }
