@@ -7,6 +7,7 @@ import biz.picosoft.demo.client.kernel.model.events.Event;
 import biz.picosoft.demo.client.kernel.model.global.*;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
+import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
@@ -45,6 +46,7 @@ import java.util.*;
 public class KernelService {
     public static final String anf_invoice_role_canCreatedemande = "canCreatedemande";
     public static final String anf_invoice_role_canCreateopp = "canCreateOffre";
+    public static final String anf_invoice_role_canCreateBC = "canCreateBC";
     public static final String anf_invoice_role_canReaddemande = "canReaddemande";
     public static final String anf_invoice_role_canEditdemande = "canEditdemande";
 
@@ -232,7 +234,33 @@ public class KernelService {
             log.error(e.toString());
         }
     }
+    @Bean
+    public void addClassBC() {
+        try {
+            InitClass initClass = new InitClass();
+            initClass.setSimpleName(BonDeCommande.class.getSimpleName());
+            initClass.setName(BonDeCommande.class.getName());
 
+            HashMap<String, String> event = new HashMap<>();
+            HashMap<String, String> state = new HashMap<>();
+
+            for (DemandeStatut s : DemandeStatut.values()) {
+                state.put(s.name(), s.getLabel());
+            }
+//            for (DemandeEvent s : DemandeEvent.values()) {
+//                event.put(s.name(), s.getLabel());
+//            }
+            initClass.setEvent(event);
+            initClass.setState(state);
+            initClass.setDefaultState(DemandeStatut.DRAFT.name());
+
+            String tableName = Class.forName(initClass.getName()).getAnnotation(Table.class).name();
+            String schemaName = Class.forName(initClass.getName()).getAnnotation(Table.class).schema();
+            initClass(initClass, tableName, schemaName);
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+    }
 
 //    @Bean
 //    public void addClassOffre() {

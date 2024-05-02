@@ -5,6 +5,7 @@ import biz.picosoft.demo.domain.enumeration.StatutBC;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,7 @@ public class BonDeCommandeDTO implements Serializable {
 
     private Float montantTotal;
 
-    private Instant dateCommande;
+    private ZonedDateTime dateCommande;
 
     private String description;
 
@@ -42,11 +43,11 @@ public class BonDeCommandeDTO implements Serializable {
         this.montantTotal = montantTotal;
     }
 
-    public Instant getDateCommande() {
+    public ZonedDateTime getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(Instant dateCommande) {
+    public void setDateCommande(ZonedDateTime dateCommande) {
         this.dateCommande = dateCommande;
     }
 

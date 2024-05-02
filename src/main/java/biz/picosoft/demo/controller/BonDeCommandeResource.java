@@ -1,12 +1,22 @@
 package biz.picosoft.demo.controller;
 
+import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
+import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.BonDeCommande;
+import biz.picosoft.demo.domain.BonDeCommande_;
+import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.repository.BonDeCommandeRepository;
 import biz.picosoft.demo.service.BonDeCommandeQueryService;
 import biz.picosoft.demo.service.BonDeCommandeService;
 import biz.picosoft.demo.service.criteria.BonDeCommandeCriteria;
+import biz.picosoft.demo.service.dto.BCOutputDTO;
 import biz.picosoft.demo.service.dto.BonDeCommandeDTO;
 
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+import biz.picosoft.demo.service.impl.BonDeCommandeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +57,27 @@ public class BonDeCommandeResource {
     private final BonDeCommandeRepository bonDeCommandeRepository;
 
     private final BonDeCommandeQueryService bonDeCommandeQueryService;
+    private final CurrentUser currentUser;
+    private final KernelInterface kernelInterface;
+    private final KernelService kernelService;
+    private final BonDeCommandeServiceImpl bcServiceImp;
 
     public BonDeCommandeResource(
         BonDeCommandeService bonDeCommandeService,
         BonDeCommandeRepository bonDeCommandeRepository,
-        BonDeCommandeQueryService bonDeCommandeQueryService
+        BonDeCommandeQueryService bonDeCommandeQueryService,
+        CurrentUser currentUser,
+        KernelService kernelService ,
+        KernelInterface kernelInterface,
+        BonDeCommandeServiceImpl demandeServiceImp
     ) {
         this.bonDeCommandeService = bonDeCommandeService;
         this.bonDeCommandeRepository = bonDeCommandeRepository;
         this.bonDeCommandeQueryService = bonDeCommandeQueryService;
+        this.currentUser = currentUser;
+        this.kernelInterface = kernelInterface;
+        this.kernelService = kernelService;
+        this.bcServiceImp = demandeServiceImp;
     }
 
     /**
@@ -205,5 +227,18 @@ public class BonDeCommandeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PatchMapping("/initBC")
+    public BCOutputDTO initBC() throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        bonDeCommandeService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateBC);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(BonDeCommande.class.getName());
+
+        return bcServiceImp.initProcessBC(aclClass);
+
     }
 }

@@ -44,7 +44,7 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
 
     private FloatFilter montantTotal;
 
-    private InstantFilter dateCommande;
+    private ZonedDateTimeFilter dateCommande;
 
     private StringFilter description;
 
@@ -104,18 +104,18 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
         this.montantTotal = montantTotal;
     }
 
-    public InstantFilter getDateCommande() {
+    public ZonedDateTimeFilter getDateCommande() {
         return dateCommande;
     }
 
-    public InstantFilter dateCommande() {
+    public ZonedDateTimeFilter dateCommande() {
         if (dateCommande == null) {
-            dateCommande = new InstantFilter();
+            dateCommande = new ZonedDateTimeFilter();
         }
         return dateCommande;
     }
 
-    public void setDateCommande(InstantFilter dateCommande) {
+    public void setDateCommande(ZonedDateTimeFilter dateCommande) {
         this.dateCommande = dateCommande;
     }
 

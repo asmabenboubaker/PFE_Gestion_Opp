@@ -1,6 +1,8 @@
 package biz.picosoft.demo.service;
 
-import biz.picosoft.demo.service.dto.BonDeCommandeDTO;
+import biz.picosoft.demo.domain.BonDeCommande;
+import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.service.dto.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,4 +59,12 @@ public interface BonDeCommandeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+
+    Page<BonDeCommande> findAllDemande(Pageable pageable);
+    BonDeCommande getById(Long id);
+   // BonDeCommandeDTO updateAndAssignToClient(Long demandeId, Long clientId, DemandeDTO updatedDemandeDTO);
+    Boolean checkRole(String profile, String roleName);
+    BCOutputDTO getbyideDTO(Long id);
+    BCOutputDTO update(BCInputDTO RequestCaseDTO,Long idclient);
 }

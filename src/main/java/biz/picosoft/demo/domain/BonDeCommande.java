@@ -7,8 +7,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * A BonDeCommande.
@@ -29,7 +31,7 @@ public class BonDeCommande implements Serializable {
     private Float montantTotal;
 
     @Column(name = "date_commande")
-    private Instant dateCommande;
+    private ZonedDateTime dateCommande;
 
     @Column(name = "description")
     private String description;
@@ -37,6 +39,120 @@ public class BonDeCommande implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
     private StatutBC statut;
+
+    @Size(min = 0, max = 50)
+    @Column(name = "identifiant", length = 50, nullable = true)
+    private String identifiant;
+    @Column(name = "activity_name")
+    private String activityName;
+    @Column(name = "number_of_attachments")
+    private Long numberOfattachments = 0L;
+    @Column(name = "exclude_from_view")
+    private Boolean excludeFromView = true;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "wf_process_id")
+    private String wfProcessID;
+    @Column(name = "statut_demande")
+    private String statutDemande;
+    @Column(name = "securite_level")
+    private Integer securiteLevel;
+    @Column(name = "assignee")
+    private String assignee;
+
+    @Column(name = "end_process")
+    private Boolean endProcess;
+    @Column(name = "demande_number")
+    private String demandeNumber;
+    public Boolean isExcludeFromView() {
+        return excludeFromView;
+    }
+
+    public void setExcludeFromView(Boolean excludeFromView) {
+        this.excludeFromView = excludeFromView;
+    }
+
+
+    public String getDemandeNumber() {
+        return demandeNumber;
+    }
+
+    public void setDemandeNumber(String demandeNumber) {
+        this.demandeNumber = demandeNumber;
+    }
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Long getNumberOfattachments() {
+        return numberOfattachments;
+    }
+
+    public void setNumberOfattachments(Long numberOfattachments) {
+        this.numberOfattachments = numberOfattachments;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getWfProcessID() {
+        return wfProcessID;
+    }
+
+    public void setWfProcessID(String wfProcessID) {
+        this.wfProcessID = wfProcessID;
+    }
+
+    public String getStatutDemande() {
+        return statutDemande;
+    }
+
+    public void setStatutDemande(String statutDemande) {
+        this.statutDemande = statutDemande;
+    }
+
+    public Integer getSecuriteLevel() {
+        return securiteLevel;
+    }
+
+    public void setSecuriteLevel(Integer securiteLevel) {
+        this.securiteLevel = securiteLevel;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public Boolean getEndProcess() {
+        return endProcess;
+    }
+
+    public void setEndProcess(Boolean endProcess) {
+        this.endProcess = endProcess;
+    }
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "bondecommandes", "opportunite" }, allowSetters = true)
@@ -74,16 +190,16 @@ public class BonDeCommande implements Serializable {
         this.montantTotal = montantTotal;
     }
 
-    public Instant getDateCommande() {
+    public ZonedDateTime getDateCommande() {
         return this.dateCommande;
     }
 
-    public BonDeCommande dateCommande(Instant dateCommande) {
+    public BonDeCommande dateCommande(ZonedDateTime dateCommande) {
         this.setDateCommande(dateCommande);
         return this;
     }
 
-    public void setDateCommande(Instant dateCommande) {
+    public void setDateCommande(ZonedDateTime dateCommande) {
         this.dateCommande = dateCommande;
     }
 
