@@ -188,9 +188,7 @@ public class DemandeServiceImpl implements DemandeService {
 
         // Update the demand with new information
         Demande updatedDemande = demandeMapper.toEntity(updatedDemandeDTO);
-        updatedDemande.setId(demandeId); // Ensure the ID is set to the correct value
-
-        // Assign the demand to the fetched client
+        updatedDemande.setId(demandeId);
         updatedDemande.setClient(client);
 
         // Save the updated demand

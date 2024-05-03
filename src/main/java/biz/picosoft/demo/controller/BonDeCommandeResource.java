@@ -12,10 +12,8 @@ import biz.picosoft.demo.repository.BonDeCommandeRepository;
 import biz.picosoft.demo.service.BonDeCommandeQueryService;
 import biz.picosoft.demo.service.BonDeCommandeService;
 import biz.picosoft.demo.service.criteria.BonDeCommandeCriteria;
-import biz.picosoft.demo.service.dto.BCOutputDTO;
-import biz.picosoft.demo.service.dto.BonDeCommandeDTO;
+import biz.picosoft.demo.service.dto.*;
 
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.BonDeCommandeServiceImpl;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -247,6 +245,40 @@ public class BonDeCommandeResource {
     BCOutputDTO getBCDTO(@PathVariable Long id) throws IOException, TemplateException {
 
         return bonDeCommandeService.getbyideDTO(id);
+    }
+
+    @PatchMapping(value = {"/submitBC"})
+    public BCOutputDTO submitRequestCase(@RequestBody BCInputDTO requestCaseInputDTO) throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        bonDeCommandeService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateBC);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(BonDeCommande.class.getName());
+
+        BCOutputDTO result = bcServiceImp.submitProcessBC(requestCaseInputDTO, aclClass);
+
+        return result;
+    }
+
+    @PatchMapping("/bc/assignoffre/{id}/{bcId}")
+    public ResponseEntity<BonDeCommandeDTO> updateAndAssignToOffre(
+            @PathVariable Long id,
+            @PathVariable Long bcId,
+            @RequestBody BonDeCommandeDTO bc
+    ) throws URISyntaxException {
+        log.debug("REST request to update Demande with ID {} and assign to Client with ID {}", id, bcId);
+
+
+        if (!bonDeCommandeRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        BonDeCommandeDTO result = bcServiceImp.updateAndAssignTOffre(id, bcId, bc);
+        return ResponseEntity
+                .ok()
+
+                .body(result);
     }
 
 }

@@ -4,6 +4,7 @@ import biz.picosoft.demo.Workflow.domain.BpmJob;
 import biz.picosoft.demo.Workflow.service.WorkflowService;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
+import biz.picosoft.demo.client.kernel.model.RulesDTO;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.acl.Permission;
 import biz.picosoft.demo.client.kernel.model.acl.enumeration.Access;
@@ -16,13 +17,14 @@ import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
 import biz.picosoft.demo.domain.BonDeCommande;
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.repository.BonDeCommandeRepository;
+import biz.picosoft.demo.repository.OffreRepository;
 import biz.picosoft.demo.service.BonDeCommandeService;
-import biz.picosoft.demo.service.dto.BCInputDTO;
-import biz.picosoft.demo.service.dto.BCOutputDTO;
-import biz.picosoft.demo.service.dto.BonDeCommandeDTO;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+import biz.picosoft.demo.service.dto.*;
+import biz.picosoft.demo.service.mapper.BCInputMapper;
 import biz.picosoft.demo.service.mapper.BCOutputMapper;
 import biz.picosoft.demo.service.mapper.BonDeCommandeMapper;
 
@@ -34,6 +36,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -61,9 +65,13 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
     //add kernelService
     private final KernelService kernelService;
     private final KernelInterface  kernelInterface;
+    private final BCInputMapper bcInputMapper;
+    private final OffreRepository offreRepository;
+    private final BonDeCommandeMapper bcMapper;
 
     public BonDeCommandeServiceImpl(BonDeCommandeRepository bonDeCommandeRepository, BonDeCommandeMapper bonDeCommandeMapper, BCOutputMapper bcOutputMapper, WorkflowService workflowService,
-                                    CurrentUser currentUser, KernelService kernelService, KernelInterface kernelInterface) {
+                                    CurrentUser currentUser, KernelService kernelService, KernelInterface kernelInterface
+                            , BCInputMapper bcInputMapper, OffreRepository offreRepository, BonDeCommandeMapper bcMapper) {
         this.bonDeCommandeRepository = bonDeCommandeRepository;
         this.bonDeCommandeMapper = bonDeCommandeMapper;
         this.bcOutputMapper = bcOutputMapper;
@@ -71,6 +79,9 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
         this.currentUser = currentUser;
         this.kernelService = kernelService;
         this.kernelInterface = kernelInterface;
+        this.bcInputMapper = bcInputMapper;
+        this.offreRepository = offreRepository;
+        this.bcMapper = bcMapper;
     }
 
     @Override
@@ -156,7 +167,17 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
 
     @Override
     public BCOutputDTO update(BCInputDTO RequestCaseDTO, Long idclient) {
-        return null;
+        log.debug("Request to update Meeting : {}", RequestCaseDTO);
+        Offre offre = offreRepository.findById(idclient)
+                .orElseThrow(() -> new IllegalArgumentException("Offre with id " + idclient + " not found."));
+        BonDeCommande originalRequestCase = bonDeCommandeRepository.findById(RequestCaseDTO.getId()).get();
+        originalRequestCase.setOffre(offre);
+        bcInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+
+        originalRequestCase = bonDeCommandeRepository.save(originalRequestCase);
+        bonDeCommandeRepository.save(originalRequestCase);
+
+        return bcOutputMapper.toDto(originalRequestCase);
     }
 
 //workflow
@@ -439,6 +460,134 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
         return requestCaseOutputDTO;
     }
 
+
+    @PersistenceContext(unitName = "externDSEmFactory")
+    private EntityManager entityManager;
+    // submit methods
+    @Transactional
+    public BCOutputDTO submitProcessBC(BCInputDTO bcInputDTO, AclClass aclClass) throws Exception {
+
+        entityManager.clear();
+        // extract object by id from data base
+        Optional<BonDeCommande> bcOptional = bonDeCommandeRepository.findById(bcInputDTO.getId());
+
+        // extract courrier
+        BonDeCommande requestCase = bcOptional.get();
+
+        // check if the object exist in database
+        if (!bcOptional.isPresent())
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_requestCase_null, RCErrors.Entity_requestCase, RCErrors.ERR_Key_requestCase_null);
+
+        // extract permission of the authentifier from kernel
+        String permission = kernelService.checkSecurity(aclClass.getSimpleName(), bcInputDTO.getId(), currentUser.getSid());
+
+        // check if the authentifier has permission WRITE
+        if (!permission.equals(Permission.WRITE.name()) && !permission.equals(Permission.INH_WRITE.name()))
+            throw new BadRequestAlertException(RCErrors.ERR_Msg_not_authorized, RCErrors.Entity_requestCase, RCErrors.ERR_Key_not_authorized);
+
+        // validate attributes courrier
+        this.validateRequestCase(aclClass, bcInputDTO);
+
+        // extract activity name from courrier
+        String activityName = requestCase.getActivityName();
+
+        // fusion the input object and the object from database
+        bcInputMapper.partialUpdate(requestCase, bcInputDTO);
+
+        // map object courrier to courrier by id DTO
+        BCOutputDTO requestCaseOutputDTO = bcOutputMapper.toDto(requestCase);
+
+        requestCaseOutputDTO.setClassId(aclClass.getId());
+
+        requestCaseOutputDTO.setClassName(aclClass.getClasse());
+
+        requestCaseOutputDTO.setLabelClass(aclClass.getLabel());
+
+        requestCaseOutputDTO.setSimpleClassName(aclClass.getSimpleName());
+
+        // initialize workflow information
+        WFDTO workflow = new WFDTO();
+        workflow.setWfProcessID(requestCase.getWfProcessID());
+        workflow.setActivityName(requestCase.getActivityName());
+        requestCaseOutputDTO.setWorkflow(workflow);
+
+        BpmJob bpmJob = workflowService._nextTaskWithoutEvent(requestCase.getWfProcessID(), bcInputDTO.getDecision(), bcInputDTO.getWfComment(), requestCaseOutputDTO, aclClass);
+
+        List<String> authors = bpmJob.getAuthors();
+
+        List<String> readers = bpmJob.getReaders();
+
+        requestCaseOutputDTO = (BCOutputDTO) bpmJob.getDataObject();
+
+        requestCase = bcOutputMapper.toEntity(requestCaseOutputDTO);
+
+        requestCase.setWfProcessID(bpmJob.getProcessID());
+
+        requestCase.setActivityName(bpmJob.getActivityName());
+
+        requestCase.setEndProcess(bpmJob.getEndProcess());
+
+        requestCase.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
+
+        requestCase = saveBC(requestCase, authors, readers, aclClass, false);
+
+        return bcOutputMapper.toDto(requestCase);
+
+    }
+
+    public Boolean validateRequestCase(AclClass aclClass, BCInputDTO bcInputDTO) {
+
+        String nameRule = "save-" + aclClass.getSimpleName();
+
+        RulesDTO rulesDTO = kernelService.rulesByName(nameRule);
+        if (rulesDTO != null && rulesDTO.getSrcCode() != null) {
+            List<Object> objectList = new ArrayList<>();
+            objectList.add(bcInputDTO);
+            try {
+
+                //rulesService.executeRules(objectList, rulesDTO.getSrcCode());
+            } catch (Exception e) {
+                throw new BadRequestAlertException(
+                        RCErrors.ERR_Msg_drools + ": " + nameRule,
+                        aclClass.getSimpleName(),
+                        RCErrors.ERR_Key_drools);
+            }
+
+        }
+
+        if (bcInputDTO.getMsg() == null)
+            return true;
+        else
+            throw new BadRequestAlertException(
+                    bcInputDTO.getMsg(),
+                    aclClass.getSimpleName(),
+                    bcInputDTO.getMsg());
+
+
+    }
+
+    public BonDeCommandeDTO updateAndAssignTOffre(Long bcId, Long offreId, BonDeCommandeDTO updatedBCDTO) {
+        log.debug("Request to update Demande with ID {} and assign to Client with ID {}", bcId, offreId);
+
+        // Fetch the existing demand from the database
+        BonDeCommande existingDemande = bonDeCommandeRepository.findById(bcId)
+                .orElseThrow(() -> new IllegalArgumentException("Demande with id " + bcId + " not found."));
+
+        // Fetch the client from the database
+        Offre offre = offreRepository.findById(offreId)
+                .orElseThrow(() -> new IllegalArgumentException("Client with id " + offreId + " not found."));
+
+        // Update the demand with new information
+        BonDeCommande updatedDemande = bcMapper.toEntity(updatedBCDTO);
+        updatedDemande.setId(bcId);
+        updatedDemande.setOffre(offre);
+
+        // Save the updated demand
+        updatedDemande = bonDeCommandeRepository.save(updatedDemande);
+
+        // Map the updated entity back to DTO and return
+        return bcMapper.toDto(updatedDemande);
+    }
 
 
 }

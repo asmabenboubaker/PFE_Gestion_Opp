@@ -32,6 +32,24 @@ public class BCInputDTO  implements Serializable {
     private String status;
 
     private String  fileAccessToken;
+    private String wfComment;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getWfComment() {
+        return wfComment;
+    }
+
+    public void setWfComment(String wfComment) {
+        this.wfComment = wfComment;
+    }
 
     public String getDecision() {
         return decision;
