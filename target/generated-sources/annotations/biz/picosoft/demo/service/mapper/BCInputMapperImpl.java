@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-02T18:22:06+0200",
+    date = "2024-05-02T22:03:18+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -63,6 +63,21 @@ public class BCInputMapperImpl extends BCInputMapper {
             return;
         }
 
+        if ( dto.getActivityName() != null ) {
+            entity.setActivityName( dto.getActivityName() );
+        }
+        if ( dto.getStatus() != null ) {
+            entity.setStatus( dto.getStatus() );
+        }
+        if ( dto.getWfProcessID() != null ) {
+            entity.setWfProcessID( dto.getWfProcessID() );
+        }
+        if ( dto.getAssignee() != null ) {
+            entity.setAssignee( dto.getAssignee() );
+        }
+        if ( dto.getEndProcess() != null ) {
+            entity.setEndProcess( dto.getEndProcess() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -100,6 +115,11 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         BonDeCommande bonDeCommande = new BonDeCommande();
 
+        bonDeCommande.setActivityName( bcInputDTO.getActivityName() );
+        bonDeCommande.setStatus( bcInputDTO.getStatus() );
+        bonDeCommande.setWfProcessID( bcInputDTO.getWfProcessID() );
+        bonDeCommande.setAssignee( bcInputDTO.getAssignee() );
+        bonDeCommande.setEndProcess( bcInputDTO.getEndProcess() );
         bonDeCommande.setId( bcInputDTO.getId() );
         bonDeCommande.setMontantTotal( bcInputDTO.getMontantTotal() );
         bonDeCommande.setDateCommande( bcInputDTO.getDateCommande() );
@@ -119,6 +139,11 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         BCInputDTO bCInputDTO = new BCInputDTO();
 
+        bCInputDTO.setActivityName( bc.getActivityName() );
+        bCInputDTO.setEndProcess( bc.getEndProcess() );
+        bCInputDTO.setWfProcessID( bc.getWfProcessID() );
+        bCInputDTO.setAssignee( bc.getAssignee() );
+        bCInputDTO.setStatus( bc.getStatus() );
         bCInputDTO.setId( bc.getId() );
         bCInputDTO.setMontantTotal( bc.getMontantTotal() );
         bCInputDTO.setDateCommande( bc.getDateCommande() );

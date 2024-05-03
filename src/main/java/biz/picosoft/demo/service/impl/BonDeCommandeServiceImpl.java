@@ -5,8 +5,14 @@ import biz.picosoft.demo.Workflow.service.WorkflowService;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.intercomm.KernelService;
 import biz.picosoft.demo.client.kernel.model.acl.AclClass;
+import biz.picosoft.demo.client.kernel.model.acl.Permission;
+import biz.picosoft.demo.client.kernel.model.acl.enumeration.Access;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectDTO;
 import biz.picosoft.demo.client.kernel.model.objects.ObjectState;
+import biz.picosoft.demo.client.kernel.model.objects.ObjectsDTO;
+import biz.picosoft.demo.client.kernel.model.objects.WFDTO;
+import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
 import biz.picosoft.demo.domain.BonDeCommande;
@@ -20,6 +26,7 @@ import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.mapper.BCOutputMapper;
 import biz.picosoft.demo.service.mapper.BonDeCommandeMapper;
 
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,10 +34,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing {@link BonDeCommande}.
@@ -131,7 +141,17 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
 
     @Override
     public BCOutputDTO getbyideDTO(Long id) {
-        return null;
+        BCOutputDTO result = null;
+        try {
+            result = proceedGetBCId(id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (TemplateException e) {
+            throw new RuntimeException(e);
+        }
+        kernelInterface.addUserActivity(ActivityType.READ, id, result.getClassName(), "", "");
+        return result;
+
     }
 
     @Override
@@ -305,5 +325,120 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
         }
         return bc;
     }
+
+
+    public BCOutputDTO proceedGetBCId(Long id) throws IOException, TemplateException {
+        log.debug("Request to get MmInbound : {}", id);
+
+        BCOutputDTO bcOutputDTO = new BCOutputDTO();
+
+        // check request case existance
+        Optional<BonDeCommande> o = bonDeCommandeRepository.findById(id);
+        if (!o.isPresent())
+            throw new BadRequestAlertException(
+                    RCErrors.ERR_Key_requestCase_null,
+                    RCErrors.Entity_requestCase,
+                    RCErrors.ERR_Msg_requestCase_null);
+
+        // check acl class existance
+        AclClass aclClass = kernelInterface.getaclClassByClassName(BonDeCommande.class.getName());
+        if (aclClass == null)
+            throw new BadRequestAlertException(
+                    RCErrors.ERR_Msg_requestCase_null,
+                    RCErrors.Entity_requestCase,
+                    RCErrors.ERR_Key_requestCase_null);
+
+
+        List<String> authorsSid = new ArrayList<>();
+        List<String> readersSid = new ArrayList<>();
+        Set<String> authorsSet = kernelInterface.findAllWhriteSids(aclClass.getId(), o.get().getId());
+        Set<String> readersSet = kernelInterface.findAllReadSids(aclClass.getId(), o.get().getId());
+        Set<String> tempReadersSet = kernelInterface.findAllTempReadSids(aclClass.getId(), o.get().getId());
+
+        authorsSid = new ArrayList<>(authorsSet);
+        List<String> readers = new ArrayList<>(readersSet);
+        List<String> tempReaders = new ArrayList<>(tempReadersSet);
+        readersSid.addAll(readers);
+        readersSid.addAll(tempReaders);
+
+        String permission = Permission.NONE.name();
+        permission = kernelInterface.checkSecurity(aclClass.getSimpleName(), id, currentUser.getSid());
+        Access access = Access.Direct;
+        if (permission.equals(Permission.NONE.name()))
+            access = kernelInterface.checkAccess(authorsSid, readersSid, o.get().getSecuriteLevel());
+
+        if (permission.equals(Permission.NONE.name()) && access.equals(Access.NoAccess) && o.get().getSecuriteLevel().equals(0)) {
+            permission = Permission.READ.name();
+        } else if (permission.equals(Permission.NONE.name()) && access.equals(Access.NoAccess) && !o.get().getSecuriteLevel().equals(0)) {
+            throw new BadRequestAlertException(
+                    RCErrors.ERR_Msg_not_authorized,
+                    RCErrors.Entity_requestCase,
+                    RCErrors.ERR_Key_not_authorized);
+        } else if (permission.equals(Permission.NONE.name()) && access.equals(Access.AuthorIndirect)) {
+            permission = Permission.WRITE.name();
+        } else if (permission.equals(Permission.NONE.name()) && access.equals(Access.ReaderIndirect)) {
+            permission = Permission.READ.name();
+        }
+        //set file access token
+        String datetimeExpiry = LocalDateTime.now().plusHours(1).toString();
+        String objectId = o.get().getId().toString();
+        String classId = aclClass.getId().toString();
+        String userSecurityLevel = currentUser.getProfileSecuriteLevel().toString();
+        String strToEncrypt = datetimeExpiry + "," + objectId + "," + classId + "," + userSecurityLevel + "," + permission;
+        String accesToken = kernelService.encryptFileAccessToken(strToEncrypt);
+
+        //input for globalObject
+        ObjectDTO objectDTO = new ObjectDTO();
+        objectDTO.setObjectId(o.get().getId());
+        objectDTO.setObject(o.get());
+        objectDTO.setWfProcessId(o.get().getWfProcessID());
+        objectDTO.setAccessToken(accesToken);
+        if ((aclClass != null)) {
+            objectDTO.setClassId(aclClass.getId());
+            ObjectsDTO g = kernelInterface.getobjectsDto(objectDTO);
+
+            bcOutputDTO = bcOutputMapper.toDto(o.get());
+            bcOutputDTO = this.setObjectInOutPutDTO(g, bcOutputDTO);
+            bcOutputDTO.setUserPermission(permission);
+            if (!permission.equals((Permission.WRITE.name()))) {
+                WFDTO wfdtoWithOutDecision = bcOutputDTO.getWorkflow();
+                if (bcOutputDTO.getWorkflow() != null) {
+                    wfdtoWithOutDecision.setDecisionsWF(new ArrayList<>());
+                    bcOutputDTO.setWorkflow(wfdtoWithOutDecision);
+                    bcOutputDTO.setWfProcessName(bcOutputDTO.getWorkflow().getWfProcessName());
+                }
+            }
+
+        }
+        return bcOutputDTO;
+
+    }
+    public BCOutputDTO setObjectInOutPutDTO(ObjectsDTO g, BCOutputDTO requestCaseOutputDTO) throws IOException, TemplateException {
+        requestCaseOutputDTO.setClassName(g.getClassName());
+        requestCaseOutputDTO.setClassId(g.getClassId());
+        requestCaseOutputDTO.setLabelClass(g.getLabelClass());
+        requestCaseOutputDTO.setSimpleClassName(g.getSimpleClassName());
+        requestCaseOutputDTO.setAttachements(g.getAttachements());
+        requestCaseOutputDTO.setEvents(g.getEvents());
+        requestCaseOutputDTO.setUserActivity(g.getUserActivity());
+        requestCaseOutputDTO.setUserPermission(g.getUserPermission());
+        requestCaseOutputDTO.setCurrentState(g.getCurrentState());
+        requestCaseOutputDTO.setFormSource(g.getFormSource());
+        requestCaseOutputDTO.setWorkflow(g.getWorkflow());
+        requestCaseOutputDTO.setRemaingRequestFileDefinitions(g.getRemaingRequestFileDefinitions());
+
+        requestCaseOutputDTO.setMandatoryTemplateFileName(g.getMandatoryTemplateFileName());
+        requestCaseOutputDTO.setDefaultTemplateFileName(g.getDefaultTemplateFileName());
+        requestCaseOutputDTO.setEmailTemplateFileName(g.getEmailTemplateFileName());
+        requestCaseOutputDTO.setOfficeTemplateFileName(g.getOfficeTemplateFileName());
+        requestCaseOutputDTO.setOptionalTemplateFileName(g.getOptionalTemplateFileName());
+
+        requestCaseOutputDTO.setSecurity(g.getSecurity());
+        requestCaseOutputDTO.setComponents(g.getComponents());
+
+        return requestCaseOutputDTO;
+    }
+
+
 
 }

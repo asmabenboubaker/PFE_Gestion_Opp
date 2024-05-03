@@ -26,6 +26,73 @@ public class BonDeCommandeDTO implements Serializable {
     private OffreDTO offre;
 
     private ProjetDTO projet;
+    private String decision;
+
+    private String activityName;
+
+    private Boolean endProcess;
+    private String wfProcessID;
+    private String assignee;
+
+    private String status;
+
+    private String  fileAccessToken;
+
+    public String getDecision() {
+        return decision;
+    }
+
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public Boolean getEndProcess() {
+        return endProcess;
+    }
+
+    public void setEndProcess(Boolean endProcess) {
+        this.endProcess = endProcess;
+    }
+
+    public String getWfProcessID() {
+        return wfProcessID;
+    }
+
+    public void setWfProcessID(String wfProcessID) {
+        this.wfProcessID = wfProcessID;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFileAccessToken() {
+        return fileAccessToken;
+    }
+
+    public void setFileAccessToken(String fileAccessToken) {
+        this.fileAccessToken = fileAccessToken;
+    }
 
     public Long getId() {
         return id;

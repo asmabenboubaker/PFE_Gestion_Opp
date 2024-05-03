@@ -17,6 +17,7 @@ import biz.picosoft.demo.service.dto.BonDeCommandeDTO;
 
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.BonDeCommandeServiceImpl;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -241,4 +243,10 @@ public class BonDeCommandeResource {
         return bcServiceImp.initProcessBC(aclClass);
 
     }
+    @GetMapping("/BondecommandeByid/{id}")
+    BCOutputDTO getBCDTO(@PathVariable Long id) throws IOException, TemplateException {
+
+        return bonDeCommandeService.getbyideDTO(id);
+    }
+
 }
