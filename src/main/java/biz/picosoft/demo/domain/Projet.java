@@ -45,6 +45,22 @@ public class Projet implements Serializable {
     @Column(name = "participants")
     private String participants;
 
+    @ManyToMany
+    @JoinTable(
+            name = "equipe_projet",
+            joinColumns = @JoinColumn(name = "projet_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipe_id")
+    )
+    private Set<Equipe> equipes;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
     @OneToMany(mappedBy = "projet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "offre", "projet" }, allowSetters = true)

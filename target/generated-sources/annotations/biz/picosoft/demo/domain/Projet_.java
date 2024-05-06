@@ -19,6 +19,7 @@ public abstract class Projet_ {
 	public static volatile SingularAttribute<Projet, String> nom;
 	public static volatile SetAttribute<Projet, BonDeCommande> bondecommandes;
 	public static volatile SingularAttribute<Projet, ZonedDateTime> dateDebut;
+	public static volatile SetAttribute<Projet, Equipe> equipes;
 	public static volatile SingularAttribute<Projet, ZonedDateTime> derniereMiseAJour;
 	public static volatile SingularAttribute<Projet, String> objectif;
 	public static volatile SingularAttribute<Projet, Integer> priorite;
@@ -39,6 +40,7 @@ public abstract class Projet_ {
 	public static final String NOM = "nom";
 	public static final String BONDECOMMANDES = "bondecommandes";
 	public static final String DATE_DEBUT = "dateDebut";
+	public static final String EQUIPES = "equipes";
 	public static final String DERNIERE_MISE_AJOUR = "derniereMiseAJour";
 	public static final String OBJECTIF = "objectif";
 	public static final String PRIORITE = "priorite";
