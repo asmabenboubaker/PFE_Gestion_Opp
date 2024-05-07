@@ -116,6 +116,19 @@ public class BonDeCommandeQueryService extends QueryService<BonDeCommande> {
                         buildSpecification(criteria.getProjetId(), root -> root.join(BonDeCommande_.projet, JoinType.LEFT).get(Projet_.id))
                     );
             }
+            //add  LocalDate Datedelivraison;
+            // String Servicecommande;
+            // String Methodedepaiement;
+            if(criteria.getDatedelivraison() != null){
+                specification = specification.and(buildRangeSpecification(criteria.getDatedelivraison(), BonDeCommande_.Datedelivraison));
+            }
+            if(criteria.getServicecommande() != null){
+                specification = specification.and(buildStringSpecification(criteria.getServicecommande(), BonDeCommande_.Servicecommande));
+            }
+            if(criteria.getMethodedepaiement() != null){
+                specification = specification.and(buildStringSpecification(criteria.getMethodedepaiement(), BonDeCommande_.Methodedepaiement));
+            }
+
         }
         return specification;
     }

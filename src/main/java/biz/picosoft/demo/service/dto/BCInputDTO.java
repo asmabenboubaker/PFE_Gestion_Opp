@@ -3,6 +3,7 @@ package biz.picosoft.demo.service.dto;
 import biz.picosoft.demo.domain.enumeration.StatutBC;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -34,6 +35,33 @@ public class BCInputDTO  implements Serializable {
     private String  fileAccessToken;
     private String wfComment;
     private String msg;
+    private LocalDate Datedelivraison;
+    private String Servicecommande;
+    private String Methodedepaiement;
+
+    public LocalDate getDatedelivraison() {
+        return Datedelivraison;
+    }
+
+    public void setDatedelivraison(LocalDate datedelivraison) {
+        Datedelivraison = datedelivraison;
+    }
+
+    public String getServicecommande() {
+        return Servicecommande;
+    }
+
+    public void setServicecommande(String servicecommande) {
+        Servicecommande = servicecommande;
+    }
+
+    public String getMethodedepaiement() {
+        return Methodedepaiement;
+    }
+
+    public void setMethodedepaiement(String methodedepaiement) {
+        Methodedepaiement = methodedepaiement;
+    }
 
     public String getMsg() {
         return msg;

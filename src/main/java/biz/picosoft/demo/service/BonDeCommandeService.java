@@ -67,4 +67,5 @@ public interface BonDeCommandeService {
     Boolean checkRole(String profile, String roleName);
     BCOutputDTO getbyideDTO(Long id);
     BCOutputDTO update(BCInputDTO RequestCaseDTO,Long idclient);
+
 }

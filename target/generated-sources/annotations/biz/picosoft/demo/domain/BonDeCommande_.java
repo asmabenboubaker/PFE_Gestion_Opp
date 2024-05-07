@@ -1,6 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutBC;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
@@ -11,8 +12,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class BonDeCommande_ {
 
 	public static volatile SingularAttribute<BonDeCommande, String> statutDemande;
+	public static volatile SingularAttribute<BonDeCommande, LocalDate> Datedelivraison;
 	public static volatile SingularAttribute<BonDeCommande, Float> montantTotal;
+	public static volatile SingularAttribute<BonDeCommande, String> Servicecommande;
 	public static volatile SingularAttribute<BonDeCommande, String> identifiant;
+	public static volatile SingularAttribute<BonDeCommande, String> Methodedepaiement;
 	public static volatile SingularAttribute<BonDeCommande, String> activityName;
 	public static volatile SingularAttribute<BonDeCommande, Boolean> endProcess;
 	public static volatile SingularAttribute<BonDeCommande, String> description;
@@ -28,10 +32,18 @@ public abstract class BonDeCommande_ {
 	public static volatile SingularAttribute<BonDeCommande, Long> numberOfattachments;
 	public static volatile SingularAttribute<BonDeCommande, StatutBC> statut;
 	public static volatile SingularAttribute<BonDeCommande, String> status;
+	//add
+	// LocalDate Datedelivraison;
+	// String Servicecommande;
+	// String Methodedepaiement;
+
 
 	public static final String STATUT_DEMANDE = "statutDemande";
+	public static final String DATEDELIVRAISON = "Datedelivraison";
 	public static final String MONTANT_TOTAL = "montantTotal";
+	public static final String SERVICECOMMANDE = "Servicecommande";
 	public static final String IDENTIFIANT = "identifiant";
+	public static final String METHODEDEPAIEMENT = "Methodedepaiement";
 	public static final String ACTIVITY_NAME = "activityName";
 	public static final String END_PROCESS = "endProcess";
 	public static final String DESCRIPTION = "description";

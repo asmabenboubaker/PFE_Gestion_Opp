@@ -8,10 +8,13 @@ import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.BonDeCommande_;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.enumeration.StatutBC;
+import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import biz.picosoft.demo.repository.BonDeCommandeRepository;
 import biz.picosoft.demo.service.BonDeCommandeQueryService;
 import biz.picosoft.demo.service.BonDeCommandeService;
 import biz.picosoft.demo.service.criteria.BonDeCommandeCriteria;
+import biz.picosoft.demo.service.criteria.ClientCriteria;
 import biz.picosoft.demo.service.dto.*;
 
 import biz.picosoft.demo.service.impl.BonDeCommandeServiceImpl;
@@ -33,9 +36,11 @@ import tech.jhipster.web.util.ResponseUtil;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link biz.picosoft.demo.domain.BonDeCommande}.
@@ -178,15 +183,25 @@ public class BonDeCommandeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bonDeCommandes in body.
      */
     @GetMapping("/bon-de-commandes")
-    public ResponseEntity<List<BonDeCommandeDTO>> getAllBonDeCommandes(
+    public ResponseEntity<Page<BonDeCommandeDTO>> getAllBonDeCommandes(
         BonDeCommandeCriteria criteria,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
         log.debug("REST request to get BonDeCommandes by criteria: {}", criteria);
         Page<BonDeCommandeDTO> page = bonDeCommandeQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        return ResponseEntity.ok().headers(headers).body(page);
     }
+//    @GetMapping("/clients")
+//    public ResponseEntity<Page<ClientDTO>> getAllClients(
+//            ClientCriteria criteria,
+//            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+//    ) {
+//        log.debug("REST request to get Clients by criteria: {}", criteria);
+//        Page<ClientDTO> page = clientQueryService.findByCriteria(criteria, pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+//        return ResponseEntity.ok().headers(headers).body(page);
+//    }
 
     /**
      * {@code GET  /bon-de-commandes/count} : count all the bonDeCommandes.
@@ -280,5 +295,15 @@ public class BonDeCommandeResource {
 
                 .body(result);
     }
+    @GetMapping("/listbc")
+    public ResponseEntity<List<String>> getStatusList() {
+        List<String> statusList = Arrays.stream(StatutBC.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(statusList);
+    }
+
+
 
 }

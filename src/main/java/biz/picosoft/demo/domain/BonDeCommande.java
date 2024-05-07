@@ -10,7 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 /**
  * A BonDeCommande.
@@ -35,6 +37,40 @@ public class BonDeCommande implements Serializable {
 
     @Column(name = "description")
     private String description;
+    @Column(name = "datedelivraison")
+private LocalDate Datedelivraison;
+    @Column(name = "servicecommande")
+private String Servicecommande;
+    @Column(name = "methodedepaiement")
+private String Methodedepaiement;
+
+    public LocalDate getDatedelivraison() {
+        return Datedelivraison;
+    }
+
+    public void setDatedelivraison(LocalDate datedelivraison) {
+        Datedelivraison = datedelivraison;
+    }
+
+    public String getServicecommande() {
+        return Servicecommande;
+    }
+
+    public void setServicecommande(String servicecommande) {
+        Servicecommande = servicecommande;
+    }
+
+    public String getMethodedepaiement() {
+        return Methodedepaiement;
+    }
+
+    public void setMethodedepaiement(String methodedepaiement) {
+        Methodedepaiement = methodedepaiement;
+    }
+
+    public Boolean getExcludeFromView() {
+        return excludeFromView;
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
@@ -255,34 +291,43 @@ public class BonDeCommande implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    @Override
+    public String toString() {
+        return "BonDeCommande{" +
+                "id=" + id +
+                ", montantTotal=" + montantTotal +
+                ", dateCommande=" + dateCommande +
+                ", description='" + description + '\'' +
+                ", Datedelivraison=" + Datedelivraison +
+                ", Servicecommande='" + Servicecommande + '\'' +
+                ", Methodedepaiement='" + Methodedepaiement + '\'' +
+                ", statut=" + statut +
+                ", identifiant='" + identifiant + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", numberOfattachments=" + numberOfattachments +
+                ", excludeFromView=" + excludeFromView +
+                ", status='" + status + '\'' +
+                ", wfProcessID='" + wfProcessID + '\'' +
+                ", statutDemande='" + statutDemande + '\'' +
+                ", securiteLevel=" + securiteLevel +
+                ", assignee='" + assignee + '\'' +
+                ", endProcess=" + endProcess +
+                ", demandeNumber='" + demandeNumber + '\'' +
+                ", offre=" + offre +
+                ", projet=" + projet +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof BonDeCommande)) {
-            return false;
-        }
-        return id != null && id.equals(((BonDeCommande) o).id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BonDeCommande that = (BonDeCommande) o;
+        return Objects.equals(id, that.id) && Objects.equals(montantTotal, that.montantTotal) && Objects.equals(dateCommande, that.dateCommande) && Objects.equals(description, that.description) && Objects.equals(Datedelivraison, that.Datedelivraison) && Objects.equals(Servicecommande, that.Servicecommande) && Objects.equals(Methodedepaiement, that.Methodedepaiement) && statut == that.statut && Objects.equals(identifiant, that.identifiant) && Objects.equals(activityName, that.activityName) && Objects.equals(numberOfattachments, that.numberOfattachments) && Objects.equals(excludeFromView, that.excludeFromView) && Objects.equals(status, that.status) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(statutDemande, that.statutDemande) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(assignee, that.assignee) && Objects.equals(endProcess, that.endProcess) && Objects.equals(demandeNumber, that.demandeNumber) && Objects.equals(offre, that.offre) && Objects.equals(projet, that.projet);
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "BonDeCommande{" +
-            "id=" + getId() +
-            ", montantTotal=" + getMontantTotal() +
-            ", dateCommande='" + getDateCommande() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", statut='" + getStatut() + "'" +
-            "}";
+        return Objects.hash(id, montantTotal, dateCommande, description, Datedelivraison, Servicecommande, Methodedepaiement, statut, identifiant, activityName, numberOfattachments, excludeFromView, status, wfProcessID, statutDemande, securiteLevel, assignee, endProcess, demandeNumber, offre, projet);
     }
 }

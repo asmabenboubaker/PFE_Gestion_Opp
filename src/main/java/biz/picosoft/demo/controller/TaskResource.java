@@ -52,4 +52,16 @@ public class TaskResource {
         taskService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Update task status endpoint
+    @PutMapping("/{id}/{status}/status")
+    public ResponseEntity<Task> updateTaskStatus(@PathVariable Long id, @PathVariable String status) {
+        Task task = taskService.findById(id);
+        if (task == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        task.setStatus(status);
+        Task updatedTask = taskService.save(task);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    }
 }

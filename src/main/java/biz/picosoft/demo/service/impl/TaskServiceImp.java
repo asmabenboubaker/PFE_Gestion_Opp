@@ -36,4 +36,15 @@ public class TaskServiceImp implements TaskService {
     public void deleteById(Long id) {
         taskRepository.deleteById(id);
     }
+
+    @Override
+    public Task updateTaskStatus(Long id, String status) {
+        Task task = taskRepository.findById(id).orElse(null);
+        if (task != null) {
+            task.setStatus(status);
+            return taskRepository.save(task);
+        } else {
+            return null; // Handle task not found case
+        }
+    }
 }

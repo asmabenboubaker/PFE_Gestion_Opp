@@ -1,6 +1,6 @@
 package biz.picosoft.demo.domain;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -9,14 +9,14 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Task.class)
 public abstract class Task_ {
 
-	public static volatile SingularAttribute<Task, ZonedDateTime> end_date;
+	public static volatile SingularAttribute<Task, LocalDate> end_date;
 	public static volatile SingularAttribute<Task, String> subject;
 	public static volatile SingularAttribute<Task, String> details;
 	public static volatile SingularAttribute<Task, Long> id;
 	public static volatile SingularAttribute<Task, String> assignee;
 	public static volatile SingularAttribute<Task, String> priority;
 	public static volatile SingularAttribute<Task, String> status;
-	public static volatile SingularAttribute<Task, ZonedDateTime> start_date;
+	public static volatile SingularAttribute<Task, LocalDate> start_date;
 
 	public static final String END_DATE = "end_date";
 	public static final String SUBJECT = "subject";

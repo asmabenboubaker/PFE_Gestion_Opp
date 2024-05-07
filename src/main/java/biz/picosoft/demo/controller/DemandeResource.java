@@ -13,10 +13,8 @@ import biz.picosoft.demo.service.ClientService;
 import biz.picosoft.demo.service.DemandeQueryService;
 import biz.picosoft.demo.service.DemandeService;
 import biz.picosoft.demo.service.criteria.DemandeCriteria;
-import biz.picosoft.demo.service.dto.DemandeDTO;
+import biz.picosoft.demo.service.dto.*;
 
-import biz.picosoft.demo.service.dto.DemandeInputDTO;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import biz.picosoft.demo.service.impl.DemandeServiceImpl;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -428,4 +426,8 @@ public class DemandeResource {
         DemandeOutputDTO result = demandeService.update(requestCaseInputDTO,idclient);
         return result;
     }
+
+
+
+
 }

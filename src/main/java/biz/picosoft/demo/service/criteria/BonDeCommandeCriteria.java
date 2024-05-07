@@ -55,7 +55,38 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
     private LongFilter projetId;
 
     private Boolean distinct;
+    // add private LocalDate Datedelivraison;
+    //private String Servicecommande;
+    //private String Methodedepaiement;
 
+
+    public StringFilter getServicecommande() {
+        return Servicecommande;
+    }
+
+    public void setServicecommande(StringFilter servicecommande) {
+        Servicecommande = servicecommande;
+    }
+
+    public StringFilter getMethodedepaiement() {
+        return Methodedepaiement;
+    }
+
+    public void setMethodedepaiement(StringFilter methodedepaiement) {
+        Methodedepaiement = methodedepaiement;
+    }
+
+    public LocalDateFilter getDatedelivraison() {
+        return Datedelivraison;
+    }
+
+    public void setDatedelivraison(LocalDateFilter datedelivraison) {
+        Datedelivraison = datedelivraison;
+    }
+
+    private StringFilter Servicecommande;
+    private StringFilter Methodedepaiement;
+    private LocalDateFilter Datedelivraison;
     public BonDeCommandeCriteria() {}
 
     public BonDeCommandeCriteria(BonDeCommandeCriteria other) {
@@ -67,6 +98,9 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
         this.offreId = other.offreId == null ? null : other.offreId.copy();
         this.projetId = other.projetId == null ? null : other.projetId.copy();
         this.distinct = other.distinct;
+        this.Servicecommande = other.Servicecommande == null ? null : other.Servicecommande.copy();
+        this.Methodedepaiement = other.Methodedepaiement == null ? null : other.Methodedepaiement.copy();
+        this.Datedelivraison = other.Datedelivraison == null ? null : other.Datedelivraison.copy();
     }
 
     @Override
@@ -204,13 +238,16 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
             Objects.equals(statut, that.statut) &&
             Objects.equals(offreId, that.offreId) &&
             Objects.equals(projetId, that.projetId) &&
-            Objects.equals(distinct, that.distinct)
+            Objects.equals(distinct, that.distinct) &&
+            Objects.equals(Servicecommande, that.Servicecommande) &&
+            Objects.equals(Methodedepaiement, that.Methodedepaiement) &&
+            Objects.equals(Datedelivraison, that.Datedelivraison)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, montantTotal, dateCommande, description, statut, offreId, projetId, distinct);
+        return Objects.hash(id, montantTotal, dateCommande, description, statut, offreId, projetId, distinct, Servicecommande, Methodedepaiement, Datedelivraison);
     }
 
     // prettier-ignore
@@ -225,6 +262,9 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
             (offreId != null ? "offreId=" + offreId + ", " : "") +
             (projetId != null ? "projetId=" + projetId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
+            (Servicecommande != null ? "Servicecommande=" + Servicecommande + ", " : "") +
+            (Methodedepaiement != null ? "Methodedepaiement=" + Methodedepaiement + ", " : "") +
+            (Datedelivraison != null ? "Datedelivraison=" + Datedelivraison + ", " : "") +
             "}";
     }
 }

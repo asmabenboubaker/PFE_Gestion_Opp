@@ -5,6 +5,7 @@ import biz.picosoft.demo.domain.enumeration.StatutBC;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -37,6 +38,33 @@ public class BonDeCommandeDTO implements Serializable {
     private String status;
 
     private String  fileAccessToken;
+    private LocalDate Datedelivraison;
+    private String Servicecommande;
+    private String Methodedepaiement;
+
+    public LocalDate getDatedelivraison() {
+        return Datedelivraison;
+    }
+
+    public void setDatedelivraison(LocalDate datedelivraison) {
+        Datedelivraison = datedelivraison;
+    }
+
+    public String getServicecommande() {
+        return Servicecommande;
+    }
+
+    public void setServicecommande(String servicecommande) {
+        Servicecommande = servicecommande;
+    }
+
+    public String getMethodedepaiement() {
+        return Methodedepaiement;
+    }
+
+    public void setMethodedepaiement(String methodedepaiement) {
+        Methodedepaiement = methodedepaiement;
+    }
 
     public String getDecision() {
         return decision;

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -22,8 +23,8 @@ public class Task implements Serializable {
     private String details ;
     private String priority;
     private String status;
-    private ZonedDateTime start_date;
-    private ZonedDateTime end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
     private String assignee;
 
     public Long getId() {
@@ -66,19 +67,19 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public ZonedDateTime getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(ZonedDateTime start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
-    public ZonedDateTime getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(ZonedDateTime end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 
