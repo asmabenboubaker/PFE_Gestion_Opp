@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-02T18:22:05+0200",
+    date = "2024-05-08T11:05:46+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -37,6 +37,11 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         BonDeCommande bonDeCommande = new BonDeCommande();
 
+        bonDeCommande.setActivityName( dto.getActivityName() );
+        bonDeCommande.setStatus( dto.getStatus() );
+        bonDeCommande.setWfProcessID( dto.getWfProcessID() );
+        bonDeCommande.setAssignee( dto.getAssignee() );
+        bonDeCommande.setEndProcess( dto.getEndProcess() );
         bonDeCommande.setId( dto.getId() );
         bonDeCommande.setMontantTotal( dto.getMontantTotal() );
         bonDeCommande.setDateCommande( dto.getDateCommande() );
@@ -44,6 +49,13 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         bonDeCommande.setStatut( dto.getStatut() );
         bonDeCommande.offre( offreDTOToOffre( dto.getOffre() ) );
         bonDeCommande.projet( projetDTOToProjet( dto.getProjet() ) );
+
+        bonDeCommande.setServicecommande(dto.getServicecommande());
+        //add methodedepaiement
+        bonDeCommande.setMethodedepaiement(dto.getMethodedepaiement());
+        //add datedelivraison
+        bonDeCommande.setDatedelivraison(dto.getDatedelivraison());
+
 
         return bonDeCommande;
     }
@@ -82,6 +94,21 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( dto.getActivityName() != null ) {
+            entity.setActivityName( dto.getActivityName() );
+        }
+        if ( dto.getStatus() != null ) {
+            entity.setStatus( dto.getStatus() );
+        }
+        if ( dto.getWfProcessID() != null ) {
+            entity.setWfProcessID( dto.getWfProcessID() );
+        }
+        if ( dto.getAssignee() != null ) {
+            entity.setAssignee( dto.getAssignee() );
+        }
+        if ( dto.getEndProcess() != null ) {
+            entity.setEndProcess( dto.getEndProcess() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -109,6 +136,15 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             }
             projetDTOToProjet1( dto.getProjet(), entity.getProjet() );
         }
+        if(dto.getServicecommande() != null){
+            entity.setServicecommande(dto.getServicecommande());
+        }
+        if(dto.getMethodedepaiement() != null){
+            entity.setMethodedepaiement(dto.getMethodedepaiement());
+        }
+        if(dto.getDatedelivraison() != null){
+            entity.setDatedelivraison(dto.getDatedelivraison());
+        }
     }
 
     @Override
@@ -121,11 +157,19 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         bonDeCommandeDTO.setOffre( toDtoOffreId( s.getOffre() ) );
         bonDeCommandeDTO.setProjet( toDtoProjetId( s.getProjet() ) );
+        bonDeCommandeDTO.setActivityName( s.getActivityName() );
+        bonDeCommandeDTO.setEndProcess( s.getEndProcess() );
+        bonDeCommandeDTO.setWfProcessID( s.getWfProcessID() );
+        bonDeCommandeDTO.setAssignee( s.getAssignee() );
+        bonDeCommandeDTO.setStatus( s.getStatus() );
         bonDeCommandeDTO.setId( s.getId() );
         bonDeCommandeDTO.setMontantTotal( s.getMontantTotal() );
         bonDeCommandeDTO.setDateCommande( s.getDateCommande() );
         bonDeCommandeDTO.setDescription( s.getDescription() );
         bonDeCommandeDTO.setStatut( s.getStatut() );
+        bonDeCommandeDTO.setServicecommande(s.getServicecommande());
+        bonDeCommandeDTO.setMethodedepaiement(s.getMethodedepaiement());
+        bonDeCommandeDTO.setDatedelivraison(s.getDatedelivraison());
 
         return bonDeCommandeDTO;
     }
@@ -227,6 +271,7 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         demande.setStatut( demandeDTO.getStatut() );
         demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
         demande.client( clientDTOToClient( demandeDTO.getClient() ) );
+
 
         return demande;
     }

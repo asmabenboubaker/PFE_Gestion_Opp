@@ -18,14 +18,13 @@ import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
-import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteService;
 import biz.picosoft.demo.service.dto.*;
-import biz.picosoft.demo.service.mapper.DemandeOutputMapper;
 import biz.picosoft.demo.service.mapper.OpportuniteInputMapper;
 import biz.picosoft.demo.service.mapper.OpportuniteMapper;
 import biz.picosoft.demo.service.mapper.OpportuniteOutputMapper;
@@ -615,5 +614,17 @@ public class OpportuniteServiceImpl implements OpportuniteService {
         return oppOutputMapper.toDto(originalRequestCase);
 
 
+    }
+
+    @Override
+    public List<Equipe> getEquipesAffectees(Long opportuniteId) {
+        Opportunite opportunite = opportuniteRepository.findById(opportuniteId).orElse(null);
+System.out.println("zazazazazazaaz"+opportunite);
+System.out.println("getEquipe"+opportunite.getEquipes());
+        if (opportunite == null) {
+            throw new RuntimeException("Opportunite not found with id: " + opportuniteId);
+        }
+
+        return List.copyOf(opportunite.getEquipes());
     }
 }

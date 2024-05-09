@@ -64,4 +64,16 @@ public class TaskResource {
         Task updatedTask = taskService.save(task);
         return new ResponseEntity<>(updatedTask, HttpStatus.OK);
     }
+    //update task
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
+        Task existingTask = taskService.findById(id);
+        if (existingTask == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+      task.setId(id);
+
+        Task updatedTask = taskService.save(task);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    }
 }

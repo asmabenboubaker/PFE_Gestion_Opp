@@ -12,4 +12,5 @@ public interface EquipeService {
     List<Equipe> getAllEquipes();
     void affecterProjets(Long equipeId, List<Long> projetIds);
     void affecterEquipes(Long projetId, List<Long> equipeIds);
+    void affecteroppEquipes(Long oppId, List<Long> equipeIds);
 }

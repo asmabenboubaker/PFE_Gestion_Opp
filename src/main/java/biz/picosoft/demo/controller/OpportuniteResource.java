@@ -7,6 +7,7 @@ import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteQueryService;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -289,6 +291,11 @@ public class OpportuniteResource {
 
         OpportuniteOutputDTO result = opportuniteService.update(requestCaseInputDTO,idOpp);
         return result;
+    }
+    @GetMapping("/{opportuniteId}/allequipes")
+    public ResponseEntity<List<Equipe>> getEquipesAffectees(@PathVariable Long opportuniteId) {
+        List<Equipe> equipes = opportuniteService.getEquipesAffectees(opportuniteId);
+        return new ResponseEntity<>(equipes, HttpStatus.OK);
     }
 
 }

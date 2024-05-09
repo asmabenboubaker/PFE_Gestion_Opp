@@ -2,8 +2,10 @@ package biz.picosoft.demo.service.impl;
 
 
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.Projet;
 import biz.picosoft.demo.repository.EquipeRepository;
+import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.repository.ProjetRepository;
 import biz.picosoft.demo.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class EquipeServiceImp implements EquipeService {
     private EquipeRepository equipeRepository;
 @Autowired
 private ProjetRepository projectRepository;
+@Autowired
+private OpportuniteRepository opportuniterepository;
 
     @Override
     public Equipe createEquipe(Equipe equipe) {
@@ -67,6 +71,17 @@ private ProjetRepository projectRepository;
             Set<Equipe> equipes = new HashSet<>(equipeList);
             project.setEquipes(equipes);
             projectRepository.save(project);
+        }
+    }
+
+    @Override
+    public void affecteroppEquipes(Long oppId, List<Long> equipeIds) {
+        Opportunite op = opportuniterepository.findById(oppId).orElse(null);
+        if (op != null) {
+            List<Equipe> equipeList = equipeRepository.findAllById(equipeIds);
+            Set<Equipe> equipes = new HashSet<>(equipeList);
+            op.setEquipes(equipes);
+            opportuniterepository.save(op);
         }
     }
 }

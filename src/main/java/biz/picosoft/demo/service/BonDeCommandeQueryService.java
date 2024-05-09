@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
 
 import javax.persistence.criteria.JoinType;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -116,17 +117,19 @@ public class BonDeCommandeQueryService extends QueryService<BonDeCommande> {
                         buildSpecification(criteria.getProjetId(), root -> root.join(BonDeCommande_.projet, JoinType.LEFT).get(Projet_.id))
                     );
             }
-            //add  LocalDate Datedelivraison;
-            // String Servicecommande;
-            // String Methodedepaiement;
-            if(criteria.getDatedelivraison() != null){
-                specification = specification.and(buildRangeSpecification(criteria.getDatedelivraison(), BonDeCommande_.Datedelivraison));
+//           add private LocalDate datedelivraison;
+//            private String servicecommande;
+//            private String methodedepaiement;
+
+
+            if (criteria.getDatedelivraison() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDatedelivraison(), BonDeCommande_.datedelivraison));
             }
-            if(criteria.getServicecommande() != null){
-                specification = specification.and(buildStringSpecification(criteria.getServicecommande(), BonDeCommande_.Servicecommande));
+            if (criteria.getServicecommande() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getServicecommande(), BonDeCommande_.servicecommande));
             }
-            if(criteria.getMethodedepaiement() != null){
-                specification = specification.and(buildStringSpecification(criteria.getMethodedepaiement(), BonDeCommande_.Methodedepaiement));
+            if (criteria.getMethodedepaiement() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getMethodedepaiement(), BonDeCommande_.methodedepaiement));
             }
 
         }

@@ -1,12 +1,13 @@
 package biz.picosoft.demo.service;
 
 
-import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -67,4 +68,5 @@ public interface OpportuniteService {
     Boolean checkRole(String profile, String roleName);
     OpportuniteOutputDTO getbyideDTO(Long id);
     OpportuniteOutputDTO update(OpportuniteInputDTO demandeInputDTO, Long iddemande);
+    List<Equipe> getEquipesAffectees(Long opportuniteId);
 }

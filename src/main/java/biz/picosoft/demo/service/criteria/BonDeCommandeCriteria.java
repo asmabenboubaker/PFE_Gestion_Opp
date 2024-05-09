@@ -61,32 +61,32 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
 
 
     public StringFilter getServicecommande() {
-        return Servicecommande;
+        return servicecommande;
     }
 
     public void setServicecommande(StringFilter servicecommande) {
-        Servicecommande = servicecommande;
+        this.servicecommande = servicecommande;
     }
 
     public StringFilter getMethodedepaiement() {
-        return Methodedepaiement;
+        return methodedepaiement;
     }
 
     public void setMethodedepaiement(StringFilter methodedepaiement) {
-        Methodedepaiement = methodedepaiement;
+        this.methodedepaiement = methodedepaiement;
     }
 
     public LocalDateFilter getDatedelivraison() {
-        return Datedelivraison;
+        return datedelivraison;
     }
 
     public void setDatedelivraison(LocalDateFilter datedelivraison) {
-        Datedelivraison = datedelivraison;
+        this.datedelivraison = datedelivraison;
     }
 
-    private StringFilter Servicecommande;
-    private StringFilter Methodedepaiement;
-    private LocalDateFilter Datedelivraison;
+    private StringFilter servicecommande;
+    private StringFilter methodedepaiement;
+    private LocalDateFilter datedelivraison;
     public BonDeCommandeCriteria() {}
 
     public BonDeCommandeCriteria(BonDeCommandeCriteria other) {
@@ -98,9 +98,9 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
         this.offreId = other.offreId == null ? null : other.offreId.copy();
         this.projetId = other.projetId == null ? null : other.projetId.copy();
         this.distinct = other.distinct;
-        this.Servicecommande = other.Servicecommande == null ? null : other.Servicecommande.copy();
-        this.Methodedepaiement = other.Methodedepaiement == null ? null : other.Methodedepaiement.copy();
-        this.Datedelivraison = other.Datedelivraison == null ? null : other.Datedelivraison.copy();
+        this.servicecommande = other.servicecommande == null ? null : other.servicecommande.copy();
+        this.methodedepaiement = other.methodedepaiement == null ? null : other.methodedepaiement.copy();
+        this.datedelivraison = other.datedelivraison == null ? null : other.datedelivraison.copy();
     }
 
     @Override
@@ -239,15 +239,19 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
             Objects.equals(offreId, that.offreId) &&
             Objects.equals(projetId, that.projetId) &&
             Objects.equals(distinct, that.distinct) &&
-            Objects.equals(Servicecommande, that.Servicecommande) &&
-            Objects.equals(Methodedepaiement, that.Methodedepaiement) &&
-            Objects.equals(Datedelivraison, that.Datedelivraison)
+
+            Objects.equals(servicecommande, that.servicecommande) &&
+            Objects.equals(methodedepaiement, that.methodedepaiement) &&
+            Objects.equals(datedelivraison, that.datedelivraison)
+
+
+
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, montantTotal, dateCommande, description, statut, offreId, projetId, distinct, Servicecommande, Methodedepaiement, Datedelivraison);
+        return Objects.hash(id, montantTotal, dateCommande, description, statut, offreId, projetId, distinct, servicecommande, methodedepaiement, datedelivraison);
     }
 
     // prettier-ignore
@@ -262,9 +266,12 @@ public class BonDeCommandeCriteria implements Serializable, Criteria {
             (offreId != null ? "offreId=" + offreId + ", " : "") +
             (projetId != null ? "projetId=" + projetId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
-            (Servicecommande != null ? "Servicecommande=" + Servicecommande + ", " : "") +
-            (Methodedepaiement != null ? "Methodedepaiement=" + Methodedepaiement + ", " : "") +
-            (Datedelivraison != null ? "Datedelivraison=" + Datedelivraison + ", " : "") +
+//            (Servicecommande != null ? "Servicecommande=" + Servicecommande + ", " : "") +
+//            (Methodedepaiement != null ? "Methodedepaiement=" + Methodedepaiement + ", " : "") +
+//            (Datedelivraison != null ? "Datedelivraison=" + Datedelivraison + ", " : "") +
+                (servicecommande != null ? "servicecommande=" + servicecommande + ", " : "") +
+                (methodedepaiement != null ? "methodedepaiement=" + methodedepaiement + ", " : "") +
+                (datedelivraison != null ? "datedelivraison=" + datedelivraison + ", " : "") +
             "}";
     }
 }

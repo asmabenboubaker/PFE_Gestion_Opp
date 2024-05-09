@@ -10,6 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Equipe_ {
 
 	public static volatile SetAttribute<Equipe, Projet> projects;
+	public static volatile SetAttribute<Equipe, Opportunite> opportunites;
 	public static volatile SingularAttribute<Equipe, String> chef;
 	public static volatile SingularAttribute<Equipe, String> description;
 	public static volatile SingularAttribute<Equipe, String> telephone;
@@ -18,6 +19,7 @@ public abstract class Equipe_ {
 	public static volatile SingularAttribute<Equipe, String> email;
 
 	public static final String PROJECTS = "projects";
+	public static final String OPPORTUNITES = "opportunites";
 	public static final String CHEF = "chef";
 	public static final String DESCRIPTION = "description";
 	public static final String TELEPHONE = "telephone";

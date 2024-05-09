@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-02T18:22:05+0200",
+    date = "2024-05-08T11:05:45+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -63,6 +63,21 @@ public class BCOutputMapperImpl extends BCOutputMapper {
             return;
         }
 
+        if ( dto.getActivityName() != null ) {
+            entity.setActivityName( dto.getActivityName() );
+        }
+        if ( dto.getStatus() != null ) {
+            entity.setStatus( dto.getStatus() );
+        }
+        if ( dto.getWfProcessID() != null ) {
+            entity.setWfProcessID( dto.getWfProcessID() );
+        }
+        if ( dto.getAssignee() != null ) {
+            entity.setAssignee( dto.getAssignee() );
+        }
+        if ( dto.getEndProcess() != null ) {
+            entity.setEndProcess( dto.getEndProcess() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -100,6 +115,11 @@ public class BCOutputMapperImpl extends BCOutputMapper {
 
         BonDeCommande bonDeCommande = new BonDeCommande();
 
+        bonDeCommande.setActivityName( BCOutputDTO.getActivityName() );
+        bonDeCommande.setStatus( BCOutputDTO.getStatus() );
+        bonDeCommande.setWfProcessID( BCOutputDTO.getWfProcessID() );
+        bonDeCommande.setAssignee( BCOutputDTO.getAssignee() );
+        bonDeCommande.setEndProcess( BCOutputDTO.getEndProcess() );
         bonDeCommande.setId( BCOutputDTO.getId() );
         bonDeCommande.setMontantTotal( BCOutputDTO.getMontantTotal() );
         bonDeCommande.setDateCommande( BCOutputDTO.getDateCommande() );
@@ -119,6 +139,11 @@ public class BCOutputMapperImpl extends BCOutputMapper {
 
         BCOutputDTO bCOutputDTO = new BCOutputDTO();
 
+        bCOutputDTO.setActivityName( bc.getActivityName() );
+        bCOutputDTO.setEndProcess( bc.getEndProcess() );
+        bCOutputDTO.setWfProcessID( bc.getWfProcessID() );
+        bCOutputDTO.setAssignee( bc.getAssignee() );
+        bCOutputDTO.setStatus( bc.getStatus() );
         bCOutputDTO.setId( bc.getId() );
         bCOutputDTO.setMontantTotal( bc.getMontantTotal() );
         bCOutputDTO.setDateCommande( bc.getDateCommande() );

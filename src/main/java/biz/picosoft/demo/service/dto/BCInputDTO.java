@@ -35,32 +35,32 @@ public class BCInputDTO  implements Serializable {
     private String  fileAccessToken;
     private String wfComment;
     private String msg;
-    private LocalDate Datedelivraison;
-    private String Servicecommande;
-    private String Methodedepaiement;
+    private LocalDate datedelivraison;
+    private String servicecommande;
+    private String methodedepaiement;
 
     public LocalDate getDatedelivraison() {
-        return Datedelivraison;
+        return datedelivraison;
     }
 
     public void setDatedelivraison(LocalDate datedelivraison) {
-        Datedelivraison = datedelivraison;
+        this.datedelivraison = datedelivraison;
     }
 
     public String getServicecommande() {
-        return Servicecommande;
+        return servicecommande;
     }
 
     public void setServicecommande(String servicecommande) {
-        Servicecommande = servicecommande;
+        this.servicecommande = servicecommande;
     }
 
     public String getMethodedepaiement() {
-        return Methodedepaiement;
+        return methodedepaiement;
     }
 
     public void setMethodedepaiement(String methodedepaiement) {
-        Methodedepaiement = methodedepaiement;
+        this.methodedepaiement = methodedepaiement;
     }
 
     public String getMsg() {

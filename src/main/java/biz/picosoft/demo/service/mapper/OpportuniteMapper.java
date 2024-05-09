@@ -16,10 +16,12 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface OpportuniteMapper extends EntityMapper<OpportuniteDTO, Opportunite> {
     @Mapping(target = "demande", source = "demande", qualifiedByName = "demandeId")
+    @Mapping(target = "equipes", source = "equipes")
     OpportuniteDTO toDto(Opportunite s);
 
     @Named("demandeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     DemandeDTO toDtoDemandeId(Demande demande);
+
 }

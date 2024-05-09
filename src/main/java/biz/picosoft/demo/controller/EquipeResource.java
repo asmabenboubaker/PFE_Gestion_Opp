@@ -50,4 +50,8 @@ public class EquipeResource {
     public void affecterEquipes(@PathVariable Long projectId, @RequestBody List<Long> equipeIds) {
         equipeService.affecterEquipes(projectId, equipeIds);
     }
+    @PostMapping("/{oppId}/oppequipes")
+    public void affecteroppEquipes(@PathVariable Long oppId, @RequestBody List<Long> equipeIds) {
+        equipeService.affecteroppEquipes(oppId, equipeIds);
+    }
 }

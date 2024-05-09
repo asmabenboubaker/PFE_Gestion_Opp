@@ -7,6 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
@@ -37,36 +38,8 @@ public class BonDeCommande implements Serializable {
 
     @Column(name = "description")
     private String description;
-    @Column(name = "datedelivraison")
-private LocalDate Datedelivraison;
-    @Column(name = "servicecommande")
-private String Servicecommande;
-    @Column(name = "methodedepaiement")
-private String Methodedepaiement;
 
-    public LocalDate getDatedelivraison() {
-        return Datedelivraison;
-    }
 
-    public void setDatedelivraison(LocalDate datedelivraison) {
-        Datedelivraison = datedelivraison;
-    }
-
-    public String getServicecommande() {
-        return Servicecommande;
-    }
-
-    public void setServicecommande(String servicecommande) {
-        Servicecommande = servicecommande;
-    }
-
-    public String getMethodedepaiement() {
-        return Methodedepaiement;
-    }
-
-    public void setMethodedepaiement(String methodedepaiement) {
-        Methodedepaiement = methodedepaiement;
-    }
 
     public Boolean getExcludeFromView() {
         return excludeFromView;
@@ -100,6 +73,38 @@ private String Methodedepaiement;
     private Boolean endProcess;
     @Column(name = "demande_number")
     private String demandeNumber;
+
+
+    private LocalDate datedelivraison;
+
+    private String servicecommande;
+
+    private String methodedepaiement;
+
+    public LocalDate getDatedelivraison() {
+        return datedelivraison;
+    }
+
+    public void setDatedelivraison(LocalDate datedelivraison) {
+        this.datedelivraison = datedelivraison;
+    }
+
+    public String getServicecommande() {
+        return servicecommande;
+    }
+
+    public void setServicecommande(String servicecommande) {
+        this.servicecommande = servicecommande;
+    }
+
+    public String getMethodedepaiement() {
+        return methodedepaiement;
+    }
+
+    public void setMethodedepaiement(String methodedepaiement) {
+        this.methodedepaiement = methodedepaiement;
+    }
+
     public Boolean isExcludeFromView() {
         return excludeFromView;
     }
@@ -298,9 +303,7 @@ private String Methodedepaiement;
                 ", montantTotal=" + montantTotal +
                 ", dateCommande=" + dateCommande +
                 ", description='" + description + '\'' +
-                ", Datedelivraison=" + Datedelivraison +
-                ", Servicecommande='" + Servicecommande + '\'' +
-                ", Methodedepaiement='" + Methodedepaiement + '\'' +
+
                 ", statut=" + statut +
                 ", identifiant='" + identifiant + '\'' +
                 ", activityName='" + activityName + '\'' +
@@ -323,11 +326,11 @@ private String Methodedepaiement;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BonDeCommande that = (BonDeCommande) o;
-        return Objects.equals(id, that.id) && Objects.equals(montantTotal, that.montantTotal) && Objects.equals(dateCommande, that.dateCommande) && Objects.equals(description, that.description) && Objects.equals(Datedelivraison, that.Datedelivraison) && Objects.equals(Servicecommande, that.Servicecommande) && Objects.equals(Methodedepaiement, that.Methodedepaiement) && statut == that.statut && Objects.equals(identifiant, that.identifiant) && Objects.equals(activityName, that.activityName) && Objects.equals(numberOfattachments, that.numberOfattachments) && Objects.equals(excludeFromView, that.excludeFromView) && Objects.equals(status, that.status) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(statutDemande, that.statutDemande) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(assignee, that.assignee) && Objects.equals(endProcess, that.endProcess) && Objects.equals(demandeNumber, that.demandeNumber) && Objects.equals(offre, that.offre) && Objects.equals(projet, that.projet);
+        return Objects.equals(id, that.id) && Objects.equals(montantTotal, that.montantTotal) && Objects.equals(dateCommande, that.dateCommande) && Objects.equals(description, that.description) && statut == that.statut && Objects.equals(identifiant, that.identifiant) && Objects.equals(activityName, that.activityName) && Objects.equals(numberOfattachments, that.numberOfattachments) && Objects.equals(excludeFromView, that.excludeFromView) && Objects.equals(status, that.status) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(statutDemande, that.statutDemande) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(assignee, that.assignee) && Objects.equals(endProcess, that.endProcess) && Objects.equals(demandeNumber, that.demandeNumber) && Objects.equals(offre, that.offre) && Objects.equals(projet, that.projet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, montantTotal, dateCommande, description, Datedelivraison, Servicecommande, Methodedepaiement, statut, identifiant, activityName, numberOfattachments, excludeFromView, status, wfProcessID, statutDemande, securiteLevel, assignee, endProcess, demandeNumber, offre, projet);
+        return Objects.hash(id, montantTotal, dateCommande, description, statut, identifiant, activityName, numberOfattachments, excludeFromView, status, wfProcessID, statutDemande, securiteLevel, assignee, endProcess, demandeNumber, offre, projet);
     }
 }

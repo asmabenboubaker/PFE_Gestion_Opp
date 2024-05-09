@@ -12,11 +12,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class BonDeCommande_ {
 
 	public static volatile SingularAttribute<BonDeCommande, String> statutDemande;
-	public static volatile SingularAttribute<BonDeCommande, LocalDate> Datedelivraison;
+	public static volatile SingularAttribute<BonDeCommande, String> methodedepaiement;
 	public static volatile SingularAttribute<BonDeCommande, Float> montantTotal;
-	public static volatile SingularAttribute<BonDeCommande, String> Servicecommande;
 	public static volatile SingularAttribute<BonDeCommande, String> identifiant;
-	public static volatile SingularAttribute<BonDeCommande, String> Methodedepaiement;
 	public static volatile SingularAttribute<BonDeCommande, String> activityName;
 	public static volatile SingularAttribute<BonDeCommande, Boolean> endProcess;
 	public static volatile SingularAttribute<BonDeCommande, String> description;
@@ -25,25 +23,20 @@ public abstract class BonDeCommande_ {
 	public static volatile SingularAttribute<BonDeCommande, Integer> securiteLevel;
 	public static volatile SingularAttribute<BonDeCommande, Boolean> excludeFromView;
 	public static volatile SingularAttribute<BonDeCommande, Offre> offre;
+	public static volatile SingularAttribute<BonDeCommande, LocalDate> datedelivraison;
 	public static volatile SingularAttribute<BonDeCommande, Projet> projet;
 	public static volatile SingularAttribute<BonDeCommande, String> wfProcessID;
+	public static volatile SingularAttribute<BonDeCommande, String> servicecommande;
 	public static volatile SingularAttribute<BonDeCommande, Long> id;
 	public static volatile SingularAttribute<BonDeCommande, String> assignee;
 	public static volatile SingularAttribute<BonDeCommande, Long> numberOfattachments;
 	public static volatile SingularAttribute<BonDeCommande, StatutBC> statut;
 	public static volatile SingularAttribute<BonDeCommande, String> status;
-	//add
-	// LocalDate Datedelivraison;
-	// String Servicecommande;
-	// String Methodedepaiement;
-
 
 	public static final String STATUT_DEMANDE = "statutDemande";
-	public static final String DATEDELIVRAISON = "Datedelivraison";
+	public static final String METHODEDEPAIEMENT = "methodedepaiement";
 	public static final String MONTANT_TOTAL = "montantTotal";
-	public static final String SERVICECOMMANDE = "Servicecommande";
 	public static final String IDENTIFIANT = "identifiant";
-	public static final String METHODEDEPAIEMENT = "Methodedepaiement";
 	public static final String ACTIVITY_NAME = "activityName";
 	public static final String END_PROCESS = "endProcess";
 	public static final String DESCRIPTION = "description";
@@ -52,8 +45,10 @@ public abstract class BonDeCommande_ {
 	public static final String SECURITE_LEVEL = "securiteLevel";
 	public static final String EXCLUDE_FROM_VIEW = "excludeFromView";
 	public static final String OFFRE = "offre";
+	public static final String DATEDELIVRAISON = "datedelivraison";
 	public static final String PROJET = "projet";
 	public static final String WF_PROCESS_ID = "wfProcessID";
+	public static final String SERVICECOMMANDE = "servicecommande";
 	public static final String ID = "id";
 	public static final String ASSIGNEE = "assignee";
 	public static final String NUMBER_OFATTACHMENTS = "numberOfattachments";

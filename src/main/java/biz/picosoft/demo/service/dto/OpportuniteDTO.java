@@ -1,8 +1,11 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Equipe;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Opportunite} entity.
@@ -22,6 +25,15 @@ public class OpportuniteDTO implements Serializable {
     private Float montantEstime;
 
     private DemandeDTO demande;
+    private Set<Equipe> equipes;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
 
     public Long getId() {
         return id;
