@@ -9,6 +9,7 @@ import biz.picosoft.demo.config.SecurityConstants;
 import biz.picosoft.demo.client.kernel.intercomm.KernelInterface;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.InstantTypeAdapter;
 import biz.picosoft.demo.domain.LocalDateTypeAdapter;
 import biz.picosoft.demo.domain.ZonedDateTimeTypeAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -267,7 +268,9 @@ public class WorkflowService {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter())
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                 .create();
+        System.out.println("zezezez");
         object.putAll((Map) new JSONParser().parse(gson.toJson(taskService.getVariable(task.getId(), "data"))));
 
         // recuperate list of authors

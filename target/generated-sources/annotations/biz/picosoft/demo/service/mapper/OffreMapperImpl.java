@@ -3,6 +3,7 @@ package biz.picosoft.demo.service.mapper;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-08T11:05:46+0200",
+    date = "2024-05-09T22:48:23+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -258,6 +259,10 @@ public class OffreMapperImpl implements OffreMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        Set<Equipe> set = opportuniteDTO.getEquipes();
+        if ( set != null ) {
+            opportunite.setEquipes( new HashSet<Equipe>( set ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -379,6 +384,19 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        if ( mappingTarget.getEquipes() != null ) {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.getEquipes().clear();
+                mappingTarget.getEquipes().addAll( set );
+            }
+        }
+        else {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }

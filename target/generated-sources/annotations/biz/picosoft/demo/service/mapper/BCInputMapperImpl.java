@@ -4,6 +4,7 @@ import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.Projet;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-08T11:05:45+0200",
+    date = "2024-05-09T22:48:23+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -63,6 +64,15 @@ public class BCInputMapperImpl extends BCInputMapper {
             return;
         }
 
+        if ( dto.getDatedelivraison() != null ) {
+            entity.setDatedelivraison( dto.getDatedelivraison() );
+        }
+        if ( dto.getServicecommande() != null ) {
+            entity.setServicecommande( dto.getServicecommande() );
+        }
+        if ( dto.getMethodedepaiement() != null ) {
+            entity.setMethodedepaiement( dto.getMethodedepaiement() );
+        }
         if ( dto.getActivityName() != null ) {
             entity.setActivityName( dto.getActivityName() );
         }
@@ -115,6 +125,9 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         BonDeCommande bonDeCommande = new BonDeCommande();
 
+        bonDeCommande.setDatedelivraison( bcInputDTO.getDatedelivraison() );
+        bonDeCommande.setServicecommande( bcInputDTO.getServicecommande() );
+        bonDeCommande.setMethodedepaiement( bcInputDTO.getMethodedepaiement() );
         bonDeCommande.setActivityName( bcInputDTO.getActivityName() );
         bonDeCommande.setStatus( bcInputDTO.getStatus() );
         bonDeCommande.setWfProcessID( bcInputDTO.getWfProcessID() );
@@ -139,6 +152,9 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         BCInputDTO bCInputDTO = new BCInputDTO();
 
+        bCInputDTO.setDatedelivraison( bc.getDatedelivraison() );
+        bCInputDTO.setServicecommande( bc.getServicecommande() );
+        bCInputDTO.setMethodedepaiement( bc.getMethodedepaiement() );
         bCInputDTO.setActivityName( bc.getActivityName() );
         bCInputDTO.setEndProcess( bc.getEndProcess() );
         bCInputDTO.setWfProcessID( bc.getWfProcessID() );
@@ -292,6 +308,19 @@ public class BCInputMapperImpl extends BCInputMapper {
             return;
         }
 
+        if ( mappingTarget.getEquipes() != null ) {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.getEquipes().clear();
+                mappingTarget.getEquipes().addAll( set );
+            }
+        }
+        else {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }
@@ -479,6 +508,10 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        Set<Equipe> set = opportuniteDTO.getEquipes();
+        if ( set != null ) {
+            opportunite.setEquipes( new HashSet<Equipe>( set ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -625,6 +658,10 @@ public class BCInputMapperImpl extends BCInputMapper {
 
         OpportuniteDTO opportuniteDTO = new OpportuniteDTO();
 
+        Set<Equipe> set = opportunite.getEquipes();
+        if ( set != null ) {
+            opportuniteDTO.setEquipes( new HashSet<Equipe>( set ) );
+        }
         opportuniteDTO.setId( opportunite.getId() );
         opportuniteDTO.setDescription( opportunite.getDescription() );
         opportuniteDTO.setNom( opportunite.getNom() );

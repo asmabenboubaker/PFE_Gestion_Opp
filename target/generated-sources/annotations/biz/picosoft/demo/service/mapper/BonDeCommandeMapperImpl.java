@@ -4,6 +4,7 @@ import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.Projet;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-08T11:05:46+0200",
+    date = "2024-05-09T22:48:24+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -37,6 +38,9 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         BonDeCommande bonDeCommande = new BonDeCommande();
 
+        bonDeCommande.setDatedelivraison( dto.getDatedelivraison() );
+        bonDeCommande.setServicecommande( dto.getServicecommande() );
+        bonDeCommande.setMethodedepaiement( dto.getMethodedepaiement() );
         bonDeCommande.setActivityName( dto.getActivityName() );
         bonDeCommande.setStatus( dto.getStatus() );
         bonDeCommande.setWfProcessID( dto.getWfProcessID() );
@@ -49,13 +53,6 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         bonDeCommande.setStatut( dto.getStatut() );
         bonDeCommande.offre( offreDTOToOffre( dto.getOffre() ) );
         bonDeCommande.projet( projetDTOToProjet( dto.getProjet() ) );
-
-        bonDeCommande.setServicecommande(dto.getServicecommande());
-        //add methodedepaiement
-        bonDeCommande.setMethodedepaiement(dto.getMethodedepaiement());
-        //add datedelivraison
-        bonDeCommande.setDatedelivraison(dto.getDatedelivraison());
-
 
         return bonDeCommande;
     }
@@ -94,6 +91,15 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( dto.getDatedelivraison() != null ) {
+            entity.setDatedelivraison( dto.getDatedelivraison() );
+        }
+        if ( dto.getServicecommande() != null ) {
+            entity.setServicecommande( dto.getServicecommande() );
+        }
+        if ( dto.getMethodedepaiement() != null ) {
+            entity.setMethodedepaiement( dto.getMethodedepaiement() );
+        }
         if ( dto.getActivityName() != null ) {
             entity.setActivityName( dto.getActivityName() );
         }
@@ -136,15 +142,6 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             }
             projetDTOToProjet1( dto.getProjet(), entity.getProjet() );
         }
-        if(dto.getServicecommande() != null){
-            entity.setServicecommande(dto.getServicecommande());
-        }
-        if(dto.getMethodedepaiement() != null){
-            entity.setMethodedepaiement(dto.getMethodedepaiement());
-        }
-        if(dto.getDatedelivraison() != null){
-            entity.setDatedelivraison(dto.getDatedelivraison());
-        }
     }
 
     @Override
@@ -157,6 +154,9 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         bonDeCommandeDTO.setOffre( toDtoOffreId( s.getOffre() ) );
         bonDeCommandeDTO.setProjet( toDtoProjetId( s.getProjet() ) );
+        bonDeCommandeDTO.setDatedelivraison( s.getDatedelivraison() );
+        bonDeCommandeDTO.setServicecommande( s.getServicecommande() );
+        bonDeCommandeDTO.setMethodedepaiement( s.getMethodedepaiement() );
         bonDeCommandeDTO.setActivityName( s.getActivityName() );
         bonDeCommandeDTO.setEndProcess( s.getEndProcess() );
         bonDeCommandeDTO.setWfProcessID( s.getWfProcessID() );
@@ -167,9 +167,6 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         bonDeCommandeDTO.setDateCommande( s.getDateCommande() );
         bonDeCommandeDTO.setDescription( s.getDescription() );
         bonDeCommandeDTO.setStatut( s.getStatut() );
-        bonDeCommandeDTO.setServicecommande(s.getServicecommande());
-        bonDeCommandeDTO.setMethodedepaiement(s.getMethodedepaiement());
-        bonDeCommandeDTO.setDatedelivraison(s.getDatedelivraison());
 
         return bonDeCommandeDTO;
     }
@@ -272,7 +269,6 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
         demande.client( clientDTOToClient( demandeDTO.getClient() ) );
 
-
         return demande;
     }
 
@@ -283,6 +279,10 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        Set<Equipe> set = opportuniteDTO.getEquipes();
+        if ( set != null ) {
+            opportunite.setEquipes( new HashSet<Equipe>( set ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -457,6 +457,19 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( mappingTarget.getEquipes() != null ) {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.getEquipes().clear();
+                mappingTarget.getEquipes().addAll( set );
+            }
+        }
+        else {
+            Set<Equipe> set = opportuniteDTO.getEquipes();
+            if ( set != null ) {
+                mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }
