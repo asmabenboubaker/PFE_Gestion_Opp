@@ -20,6 +20,7 @@ import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.DemandeRepository;
 import biz.picosoft.demo.repository.OpportuniteRepository;
@@ -626,5 +627,12 @@ System.out.println("getEquipe"+opportunite.getEquipes());
         }
 
         return List.copyOf(opportunite.getEquipes());
+    }
+
+    @Override
+    public Set<EtudeOpp> getEtude(Long id) {
+
+        Opportunite opportunite = opportuniteRepository.findById(id).orElse(null);
+        return (Set<EtudeOpp>) opportunite.getEtudeOpps();
     }
 }

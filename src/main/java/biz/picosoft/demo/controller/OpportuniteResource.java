@@ -8,6 +8,7 @@ import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteQueryService;
@@ -37,6 +38,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link biz.picosoft.demo.domain.Opportunite}.
@@ -296,6 +298,11 @@ public class OpportuniteResource {
     public ResponseEntity<List<Equipe>> getEquipesAffectees(@PathVariable Long opportuniteId) {
         List<Equipe> equipes = opportuniteService.getEquipesAffectees(opportuniteId);
         return new ResponseEntity<>(equipes, HttpStatus.OK);
+    }
+    //get etude from opportunite
+    @GetMapping("/etude/{id}")
+    public Set<EtudeOpp> getEtude(@PathVariable Long id) {
+        return (Set<EtudeOpp>) opportuniteService.getEtude(id);
     }
 
 }
