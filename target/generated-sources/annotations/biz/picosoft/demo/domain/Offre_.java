@@ -1,7 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -22,10 +22,10 @@ public abstract class Offre_ {
 	public static volatile SingularAttribute<Offre, Float> montant;
 	public static volatile SingularAttribute<Offre, Integer> securiteLevel;
 	public static volatile SingularAttribute<Offre, Boolean> excludeFromView;
-	public static volatile SingularAttribute<Offre, ZonedDateTime> valideJusquA;
+	public static volatile SingularAttribute<Offre, LocalDate> valideJusquA;
 	public static volatile SetAttribute<Offre, BonDeCommande> bondecommandes;
-	public static volatile SingularAttribute<Offre, ZonedDateTime> dateOffre;
-	public static volatile SingularAttribute<Offre, ZonedDateTime> dateLivraison;
+	public static volatile SingularAttribute<Offre, LocalDate> dateOffre;
+	public static volatile SingularAttribute<Offre, LocalDate> dateLivraison;
 	public static volatile SingularAttribute<Offre, String> wfProcessID;
 	public static volatile SingularAttribute<Offre, Long> id;
 	public static volatile SingularAttribute<Offre, String> assignee;

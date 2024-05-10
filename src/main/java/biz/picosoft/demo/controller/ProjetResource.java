@@ -159,6 +159,16 @@ public class ProjetResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page);
     }
+    @GetMapping("/projetslist")
+    public ResponseEntity<List<ProjetDTO>> getAllProjetslist(
+            ProjetCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Projets by criteria: {}", criteria);
+        Page<ProjetDTO> page = projetQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * {@code GET  /projets/count} : count all the projets.

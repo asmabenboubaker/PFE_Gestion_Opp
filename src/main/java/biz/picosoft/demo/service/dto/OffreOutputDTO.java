@@ -5,6 +5,7 @@ import biz.picosoft.demo.domain.enumeration.StatutOffre;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -14,11 +15,11 @@ public class OffreOutputDTO extends ObjectsDTO implements Serializable {
 
     private Float montant;
 
-    private ZonedDateTime dateOffre;
+    private LocalDate dateOffre;
 
     private String description;
 
-    private ZonedDateTime valideJusquA;
+    private LocalDate valideJusquA;
 
     private OpportuniteDTO opportunite;
     // process
@@ -40,7 +41,7 @@ public class OffreOutputDTO extends ObjectsDTO implements Serializable {
     private String wfCurrentComment;
     private String modePaiement;
 
-    private ZonedDateTime dateLivraison;
+    private LocalDate dateLivraison;
 
 
     private StatutOffre statutOffre;
@@ -53,11 +54,11 @@ public class OffreOutputDTO extends ObjectsDTO implements Serializable {
         this.modePaiement = modePaiement;
     }
 
-    public ZonedDateTime getDateLivraison() {
+    public LocalDate getDateLivraison() {
         return dateLivraison;
     }
 
-    public void setDateLivraison(ZonedDateTime dateLivraison) {
+    public void setDateLivraison(LocalDate dateLivraison) {
         this.dateLivraison = dateLivraison;
     }
 
@@ -165,11 +166,11 @@ public class OffreOutputDTO extends ObjectsDTO implements Serializable {
         this.montant = montant;
     }
 
-    public ZonedDateTime getDateOffre() {
+    public LocalDate getDateOffre() {
         return dateOffre;
     }
 
-    public void setDateOffre(ZonedDateTime dateOffre) {
+    public void setDateOffre(LocalDate dateOffre) {
         this.dateOffre = dateOffre;
     }
 
@@ -181,11 +182,11 @@ public class OffreOutputDTO extends ObjectsDTO implements Serializable {
         this.description = description;
     }
 
-    public ZonedDateTime getValideJusquA() {
+    public LocalDate getValideJusquA() {
         return valideJusquA;
     }
 
-    public void setValideJusquA(ZonedDateTime valideJusquA) {
+    public void setValideJusquA(LocalDate valideJusquA) {
         this.valideJusquA = valideJusquA;
     }
 

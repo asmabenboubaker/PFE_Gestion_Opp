@@ -177,6 +177,17 @@ public class OffreResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page);
     }
+    @GetMapping("/offresList")
+    public ResponseEntity<List<OffreDTO>> getAllOffreslist(
+            OffreCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Offres by criteria: {}", criteria);
+        Page<OffreDTO> page = offreQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
 
     /**
      * {@code GET  /offres/count} : count all the offres.

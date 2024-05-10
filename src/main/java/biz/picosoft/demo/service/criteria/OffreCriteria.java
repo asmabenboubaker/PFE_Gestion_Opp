@@ -25,11 +25,11 @@ public class OffreCriteria implements Serializable, Criteria {
 
     private FloatFilter montant;
 
-    private ZonedDateTimeFilter dateOffre;
+    private LocalDateFilter dateOffre;
 
     private StringFilter description;
 
-    private ZonedDateTimeFilter valideJusquA;
+    private LocalDateFilter valideJusquA;
 
     private LongFilter bondecommandeId;
 
@@ -85,18 +85,18 @@ public class OffreCriteria implements Serializable, Criteria {
         this.montant = montant;
     }
 
-    public ZonedDateTimeFilter getDateOffre() {
+    public LocalDateFilter getDateOffre() {
         return dateOffre;
     }
 
-    public ZonedDateTimeFilter dateOffre() {
+    public LocalDateFilter dateOffre() {
         if (dateOffre == null) {
-            dateOffre = new ZonedDateTimeFilter();
+            dateOffre = new LocalDateFilter();
         }
         return dateOffre;
     }
 
-    public void setDateOffre(ZonedDateTimeFilter dateOffre) {
+    public void setDateOffre(LocalDateFilter dateOffre) {
         this.dateOffre = dateOffre;
     }
 
@@ -115,18 +115,18 @@ public class OffreCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public ZonedDateTimeFilter getValideJusquA() {
+    public LocalDateFilter getValideJusquA() {
         return valideJusquA;
     }
 
-    public ZonedDateTimeFilter valideJusquA() {
+    public LocalDateFilter valideJusquA() {
         if (valideJusquA == null) {
-            valideJusquA = new ZonedDateTimeFilter();
+            valideJusquA = new LocalDateFilter();
         }
         return valideJusquA;
     }
 
-    public void setValideJusquA(ZonedDateTimeFilter valideJusquA) {
+    public void setValideJusquA(LocalDateFilter valideJusquA) {
         this.valideJusquA = valideJusquA;
     }
 

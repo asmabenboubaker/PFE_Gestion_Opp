@@ -1073,6 +1073,7 @@ public class WorkflowService {
           Gson gson = new GsonBuilder()
                   .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter())
                   .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                  .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                   .create();
           // recuperate the object from flowable
           object.putAll((Map) new JSONParser().parse(gson.toJson(dataObj)));
@@ -1099,6 +1100,7 @@ public class WorkflowService {
           Gson gson = new GsonBuilder()
                   .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter())
                   .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                  .registerTypeAdapter(Instant.class, new InstantTypeAdapter())
                   .create();
 
           // recuperate the object from flowable

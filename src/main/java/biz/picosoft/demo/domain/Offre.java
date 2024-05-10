@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,13 +33,13 @@ public class Offre implements Serializable {
     private Float montant;
 
     @Column(name = "date_offre")
-    private ZonedDateTime dateOffre;
+    private LocalDate dateOffre;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "valide_jusqu_a")
-    private ZonedDateTime valideJusquA;
+    private LocalDate valideJusquA;
 
     @OneToMany(mappedBy = "offre")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -75,7 +76,7 @@ public class Offre implements Serializable {
     @Column(name = "mode_paiement")
     private String modePaiement;
     @Column(name = "date_livraison")
-    private ZonedDateTime dateLivraison;
+    private LocalDate dateLivraison;
     @Column(name = "statut_offre")
     @Enumerated(EnumType.STRING)
     private StatutOffre statutOffre;
@@ -88,11 +89,11 @@ public class Offre implements Serializable {
         this.modePaiement = modePaiement;
     }
 
-    public ZonedDateTime getDateLivraison() {
+    public LocalDate getDateLivraison() {
         return dateLivraison;
     }
 
-    public void setDateLivraison(ZonedDateTime dateLivraison) {
+    public void setDateLivraison(LocalDate dateLivraison) {
         this.dateLivraison = dateLivraison;
     }
 
@@ -217,16 +218,16 @@ public class Offre implements Serializable {
         this.montant = montant;
     }
 
-    public ZonedDateTime getDateOffre() {
+    public LocalDate getDateOffre() {
         return this.dateOffre;
     }
 
-    public Offre dateOffre(ZonedDateTime dateOffre) {
+    public Offre dateOffre(LocalDate dateOffre) {
         this.setDateOffre(dateOffre);
         return this;
     }
 
-    public void setDateOffre(ZonedDateTime dateOffre) {
+    public void setDateOffre(LocalDate dateOffre) {
         this.dateOffre = dateOffre;
     }
 
@@ -243,16 +244,16 @@ public class Offre implements Serializable {
         this.description = description;
     }
 
-    public ZonedDateTime getValideJusquA() {
+    public LocalDate getValideJusquA() {
         return this.valideJusquA;
     }
 
-    public Offre valideJusquA(ZonedDateTime valideJusquA) {
+    public Offre valideJusquA(LocalDate valideJusquA) {
         this.setValideJusquA(valideJusquA);
         return this;
     }
 
-    public void setValideJusquA(ZonedDateTime valideJusquA) {
+    public void setValideJusquA(LocalDate valideJusquA) {
         this.valideJusquA = valideJusquA;
     }
 

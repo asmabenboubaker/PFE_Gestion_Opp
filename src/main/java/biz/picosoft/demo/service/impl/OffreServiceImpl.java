@@ -41,6 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -152,8 +153,9 @@ public class OffreServiceImpl implements OffreService {
 
         // initiate new object Courrier
         Offre offre = new Offre();
+// set date offre to current date localdate
+        offre.setDateOffre(LocalDate.now());
 
-        offre.setDateOffre(ZonedDateTime.now());
 
         // persite the object
         offre = offreRepository.save(offre);
