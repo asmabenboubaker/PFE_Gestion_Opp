@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -38,18 +39,18 @@ public class DemandeDTO  implements Serializable {
     private Boolean draft;
     private String wfCurrentComment;
     private String nom;
-    private ZonedDateTime deadline;
+    private LocalDate deadline;
 
     private String source;
 
 
     private String commentaires;
 
-    public ZonedDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(ZonedDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

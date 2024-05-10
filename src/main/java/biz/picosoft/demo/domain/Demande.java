@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import java.util.HashSet;
@@ -60,13 +61,13 @@ public class Demande implements Serializable {
    //add deadline att
 
     @Column(name = "deadline")
-    private ZonedDateTime deadline;
+    private LocalDate deadline;
     @Column(name = "source")
     private String source;
 
     @Column(name = "commentaires")
     private String commentaires;
-    public ZonedDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 // add Source de la demande
@@ -88,7 +89,7 @@ public class Demande implements Serializable {
         this.commentaires = commentaires;
     }
 
-    public void setDeadline(ZonedDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

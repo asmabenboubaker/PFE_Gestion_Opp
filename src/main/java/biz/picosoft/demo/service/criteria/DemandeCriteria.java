@@ -49,7 +49,7 @@ public class DemandeCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
-    private ZonedDateTimeFilter dateDeCreation;
+    private LocalDateFilter dateDeCreation;
 
     private StatutDemandeFilter statut;
 
@@ -141,18 +141,18 @@ public class DemandeCriteria implements Serializable, Criteria {
         this.nom = nom;
     }
 
-    public ZonedDateTimeFilter getDateDeCreation() {
+    public LocalDateFilter getDateDeCreation() {
         return dateDeCreation;
     }
 
-    public ZonedDateTimeFilter dateDeCreation() {
+    public LocalDateFilter dateDeCreation() {
         if (dateDeCreation == null) {
-            dateDeCreation = new ZonedDateTimeFilter();
+            dateDeCreation = new LocalDateFilter();
         }
         return dateDeCreation;
     }
 
-    public void setDateDeCreation(ZonedDateTimeFilter dateDeCreation) {
+    public void setDateDeCreation(LocalDateFilter dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
     }
 

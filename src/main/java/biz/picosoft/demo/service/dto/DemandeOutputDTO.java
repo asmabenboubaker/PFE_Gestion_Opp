@@ -1,11 +1,13 @@
 package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.client.kernel.model.objects.ObjectsDTO;
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,18 +27,18 @@ public class DemandeOutputDTO  extends ObjectsDTO implements Serializable {
     private String status;
 
     private String  fileAccessToken;
-    private ZonedDateTime deadline;
+    private LocalDate deadline;
 
     private String source;
 
 
     private String commentaires;
 
-    public ZonedDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(ZonedDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
@@ -70,6 +72,16 @@ public class DemandeOutputDTO  extends ObjectsDTO implements Serializable {
 
 
     private ClientDTO client;
+    private Set<Equipe> equipes;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
     public String getWfProcessID() {
         return wfProcessID;
     }

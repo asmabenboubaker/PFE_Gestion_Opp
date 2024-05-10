@@ -1,6 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
@@ -30,7 +31,7 @@ public abstract class Demande_ {
 	public static volatile SingularAttribute<Demande, Long> id;
 	public static volatile SingularAttribute<Demande, String> assignee;
 	public static volatile SingularAttribute<Demande, Long> numberOfattachments;
-	public static volatile SingularAttribute<Demande, ZonedDateTime> deadline;
+	public static volatile SingularAttribute<Demande, LocalDate> deadline;
 	public static volatile SingularAttribute<Demande, StatutDemande> statut;
 	public static volatile SingularAttribute<Demande, String> status;
 

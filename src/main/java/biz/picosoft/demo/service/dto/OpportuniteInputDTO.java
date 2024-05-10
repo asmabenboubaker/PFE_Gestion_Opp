@@ -1,9 +1,12 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Equipe;
+
 import java.io.Serializable;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class OpportuniteInputDTO implements Serializable {
     private Long id;
@@ -52,6 +55,15 @@ public class OpportuniteInputDTO implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
+    private Set<Equipe> equipes;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
 
     public Long getId() {
         return id;

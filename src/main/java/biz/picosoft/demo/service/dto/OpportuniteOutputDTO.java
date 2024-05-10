@@ -1,11 +1,13 @@
 package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.client.kernel.model.objects.ObjectsDTO;
+import biz.picosoft.demo.domain.Equipe;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
     private Long id;
@@ -54,6 +56,16 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
+
+    private Set<Equipe> equipes;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
 
     public Long getId() {
         return id;

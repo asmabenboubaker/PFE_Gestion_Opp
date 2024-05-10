@@ -1,5 +1,6 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class OffreInputDTO  implements Serializable {
 
@@ -50,6 +52,10 @@ public class OffreInputDTO  implements Serializable {
 
 
     private StatutOffre statutOffre;
+
+
+
+
 
     public String getModePaiement() {
         return modePaiement;

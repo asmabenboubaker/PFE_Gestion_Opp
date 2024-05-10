@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.Column;
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,18 +19,18 @@ public class DemandeInputDTO  implements Serializable {
     private String statutDemande;
     private String activityName;
 
-    private ZonedDateTime deadline;
+    private LocalDate deadline;
 
     private String source;
 
 
     private String commentaires;
 
-    public ZonedDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(ZonedDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
