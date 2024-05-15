@@ -635,4 +635,21 @@ System.out.println("getEquipe"+opportunite.getEquipes());
         Opportunite opportunite = opportuniteRepository.findById(id).orElse(null);
         return (Set<EtudeOpp>) opportunite.getEtudeOpps();
     }
+
+    @Override
+    public Optional<OpportuniteDTO> affecterOpportuniteADemande(Long opportuniteId, Long demandeId) {
+        Optional<Opportunite> opportuniteOptional = opportuniteRepository.findById(opportuniteId);
+        Optional<Demande> demandeOptional = demandeRepository.findById(demandeId);
+
+        if (opportuniteOptional.isPresent() && demandeOptional.isPresent()) {
+            Opportunite opportunite = opportuniteOptional.get();
+            Demande demande = demandeOptional.get();
+            opportunite.setDemande(demande);
+            Opportunite updatedOpportunite = opportuniteRepository.save(opportunite);
+            return Optional.of(opportuniteMapper.toDto(updatedOpportunite));
+        } else {
+            return Optional.empty(); // Opportunité ou demande introuvable
+        }
+
+    }
 }

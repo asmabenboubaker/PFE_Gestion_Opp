@@ -305,4 +305,11 @@ public class OpportuniteResource {
         return (Set<EtudeOpp>) opportuniteService.getEtude(id);
     }
 
+
+    @PostMapping("/opportunites/affectation/{opportuniteId}/{demandeId}")
+    public ResponseEntity<OpportuniteDTO> affecterOpportuniteADemande(@PathVariable Long opportuniteId,
+                                                                      @PathVariable Long demandeId) {
+        Optional<OpportuniteDTO> result = opportuniteService.affecterOpportuniteADemande(opportuniteId, demandeId);
+        return result.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 }

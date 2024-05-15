@@ -73,4 +73,6 @@ public interface OpportuniteService {
     List<Equipe> getEquipesAffectees(Long opportuniteId);
     // get etude from opportunite
     Set<EtudeOpp> getEtude(Long id);
+
+    Optional<OpportuniteDTO> affecterOpportuniteADemande(Long opportuniteId, Long demandeId);
 }
