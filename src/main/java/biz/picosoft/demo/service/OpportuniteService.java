@@ -76,4 +76,5 @@ public interface OpportuniteService {
 
     Optional<OpportuniteDTO> affecterOpportuniteADemande(Long opportuniteId, Long demandeId);
     void setCreateOffreTrue(Long demandeId);
+    Optional<Opportunite> affecterOffre(Long opportuniteId, Long offreId);
 }

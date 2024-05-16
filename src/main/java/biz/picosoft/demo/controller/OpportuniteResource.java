@@ -315,4 +315,11 @@ public class OpportuniteResource {
         opportuniteService.setCreateOffreTrue(demandeId);
         return ResponseEntity.ok("createOpp set to true for opp: " + demandeId);
     }
+
+    @PutMapping("/{opportuniteId}/affecter-offre/{offreId}")
+    public ResponseEntity<Opportunite> affecterOffre(@PathVariable Long opportuniteId, @PathVariable Long offreId) {
+        return opportuniteService.affecterOffre(opportuniteId, offreId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

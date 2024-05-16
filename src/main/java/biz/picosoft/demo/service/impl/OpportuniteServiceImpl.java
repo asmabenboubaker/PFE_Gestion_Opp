@@ -18,11 +18,9 @@ import biz.picosoft.demo.client.kernel.model.pm.ActivityType;
 import biz.picosoft.demo.client.kernel.model.pm.Role;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
-import biz.picosoft.demo.domain.Demande;
-import biz.picosoft.demo.domain.Equipe;
-import biz.picosoft.demo.domain.EtudeOpp;
-import biz.picosoft.demo.domain.Opportunite;
+import biz.picosoft.demo.domain.*;
 import biz.picosoft.demo.repository.DemandeRepository;
+import biz.picosoft.demo.repository.OffreRepository;
 import biz.picosoft.demo.repository.OpportuniteRepository;
 import biz.picosoft.demo.service.OpportuniteService;
 import biz.picosoft.demo.service.dto.*;
@@ -67,11 +65,13 @@ public class OpportuniteServiceImpl implements OpportuniteService {
     private final KernelInterface kernelInterface;
     private final OpportuniteInputMapper oppInputMapper;
     private final DemandeRepository demandeRepository;
+    private final OffreRepository offreRepository;
     public OpportuniteServiceImpl(OpportuniteRepository opportuniteRepository, OpportuniteMapper opportuniteMapper,OpportuniteOutputMapper oppOutputMapper,
     WorkflowService workflowService, CurrentUser currentUser,
     KernelService kernelService,
     KernelInterface kernelInterface,OpportuniteInputMapper oppInputMapper,
-    DemandeRepository demandeRepository
+    DemandeRepository demandeRepository,
+    OffreRepository offreRepository
 
     ) {
         this.opportuniteRepository = opportuniteRepository;
@@ -83,6 +83,7 @@ public class OpportuniteServiceImpl implements OpportuniteService {
         this.kernelInterface = kernelInterface;
         this.oppInputMapper = oppInputMapper;
         this.demandeRepository = demandeRepository;
+        this.offreRepository = offreRepository;
     }
 
     @Override
@@ -660,6 +661,23 @@ System.out.println("getEquipe"+opportunite.getEquipes());
             opportunite.setCreateoffre(true);
             opportuniteRepository.save(opportunite);
         }
+    }
+
+    @Override
+    public Optional<Opportunite> affecterOffre(Long opportuniteId, Long offreId) {
+        Optional<Opportunite> optionalOpportunite = opportuniteRepository.findById(opportuniteId);
+        Optional<Offre> optionalOffre = offreRepository.findById(offreId);
+
+        optionalOpportunite.ifPresent(opportunite -> {
+            optionalOffre.ifPresent(offre -> {
+                opportunite.addOffre(offre);
+                offre.setOpportunite(opportunite);
+                opportuniteRepository.save(opportunite);
+                offreRepository.save(offre);
+            });
+        });
+
+        return optionalOpportunite;
     }
 
 
