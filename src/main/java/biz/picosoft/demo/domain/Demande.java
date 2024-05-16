@@ -64,6 +64,17 @@ public class Demande implements Serializable {
     private LocalDate deadline;
     @Column(name = "source")
     private String source;
+    @Column(name = "createOpp")
+
+    private Boolean createOpp;
+
+    public boolean isCreateOpp() {
+        return createOpp != null && createOpp.booleanValue();
+    }
+
+    public void setCreateOpp(boolean createOpp) {
+        this.createOpp = createOpp;
+    }
 
     @Column(name = "commentaires")
     private String commentaires;
@@ -88,6 +99,7 @@ public class Demande implements Serializable {
     public void setCommentaires(String commentaires) {
         this.commentaires = commentaires;
     }
+
 
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;

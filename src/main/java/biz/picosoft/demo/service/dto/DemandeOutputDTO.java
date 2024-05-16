@@ -70,6 +70,15 @@ public class DemandeOutputDTO  extends ObjectsDTO implements Serializable {
 
     private Set<DomaineDTO> domaines = new HashSet<>();
 
+    private boolean createOpp;
+
+    public boolean isCreateOpp() {
+        return createOpp;
+    }
+
+    public void setCreateOpp(boolean createOpp) {
+        this.createOpp = createOpp;
+    }
 
     private ClientDTO client;
     private Set<Equipe> equipes;

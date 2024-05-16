@@ -25,6 +25,15 @@ public class DemandeInputDTO  implements Serializable {
 
 
     private String commentaires;
+    private boolean createOpp;
+
+    public boolean isCreateOpp() {
+        return createOpp;
+    }
+
+    public void setCreateOpp(boolean createOpp) {
+        this.createOpp = createOpp;
+    }
 
     public LocalDate getDeadline() {
         return deadline;

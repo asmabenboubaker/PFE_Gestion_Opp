@@ -63,6 +63,8 @@ public class DemandeResource {
     private final KernelService kernelService;
     private final DemandeServiceImpl demandeServiceImp;
 
+
+
     public DemandeResource(DemandeService demandeService, KernelInterface kernelInterface, DemandeRepository demandeRepository,
                            DemandeQueryService demandeQueryService,ClientService clientService,CurrentUser currentUser,
                            KernelService kernelService,DemandeServiceImpl demandeServiceImp) {
@@ -428,6 +430,10 @@ public class DemandeResource {
     }
 
 
-
+    @PutMapping("/{demandeId}/setCreateOppTrue")
+    public ResponseEntity<String> setCreateOppTrue(@PathVariable Long demandeId) {
+        demandeService.setCreateOppTrue(demandeId);
+        return ResponseEntity.ok("createOpp set to true for demandeId: " + demandeId);
+    }
 
 }

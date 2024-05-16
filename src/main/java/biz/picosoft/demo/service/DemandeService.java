@@ -76,4 +76,6 @@ public interface DemandeService {
      DemandeOutputDTO getbyideDTO(Long id);
      DemandeOutputDTO update(DemandeInputDTO RequestCaseDTO,Long idclient);
 
+
+    void setCreateOppTrue(Long demandeId);
 }

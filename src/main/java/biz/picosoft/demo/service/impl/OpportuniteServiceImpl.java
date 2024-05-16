@@ -652,4 +652,15 @@ System.out.println("getEquipe"+opportunite.getEquipes());
         }
 
     }
+
+    @Override
+    public void setCreateOffreTrue(Long demandeId) {
+        Opportunite opportunite = opportuniteRepository.findById(demandeId).get();
+        if (opportunite != null) {
+            opportunite.setCreateoffre(true);
+            opportuniteRepository.save(opportunite);
+        }
+    }
+
+
 }

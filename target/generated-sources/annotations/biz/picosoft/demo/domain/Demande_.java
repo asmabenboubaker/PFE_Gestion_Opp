@@ -26,6 +26,7 @@ public abstract class Demande_ {
 	public static volatile SingularAttribute<Demande, ZonedDateTime> dateDeCreation;
 	public static volatile SetAttribute<Demande, Opportunite> opportunites;
 	public static volatile SingularAttribute<Demande, String> wfProcessID;
+	public static volatile SingularAttribute<Demande, Boolean> createOpp;
 	public static volatile SingularAttribute<Demande, Client> client;
 	public static volatile SingularAttribute<Demande, String> commentaires;
 	public static volatile SingularAttribute<Demande, Long> id;
@@ -49,6 +50,7 @@ public abstract class Demande_ {
 	public static final String DATE_DE_CREATION = "dateDeCreation";
 	public static final String OPPORTUNITES = "opportunites";
 	public static final String WF_PROCESS_ID = "wfProcessID";
+	public static final String CREATE_OPP = "createOpp";
 	public static final String CLIENT = "client";
 	public static final String COMMENTAIRES = "commentaires";
 	public static final String ID = "id";

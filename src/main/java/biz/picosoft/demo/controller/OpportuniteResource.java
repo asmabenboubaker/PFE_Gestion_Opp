@@ -227,7 +227,12 @@ public class OpportuniteResource {
         Optional<OpportuniteDTO> opportuniteDTO = opportuniteService.findOne(id);
         return ResponseUtil.wrapOrNotFound(opportuniteDTO);
     }
-
+    @GetMapping("/opportunitesid/{id}")
+    public ResponseEntity<Opportunite> getOpportuniteid(@PathVariable Long id) {
+        log.debug("REST request to get Opportunite : {}", id);
+        Optional<Opportunite> opportuniteDTO = opportuniteRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(opportuniteDTO);
+    }
     /**
      * {@code DELETE  /opportunites/:id} : delete the "id" opportunite.
      *
@@ -274,21 +279,14 @@ public class OpportuniteResource {
 
         return result;
     }
-    @PutMapping("/updateOpp/{id}/{idOpp}")
+    @PutMapping("/updateOpp/{idOpp}")
     public OpportuniteOutputDTO updateOpp(
-            @PathVariable(value = "id", required = false) final Long id,
+
             @PathVariable(value = "idOpp", required = false) final Long idOpp,
             @RequestBody OpportuniteInputDTO requestCaseInputDTO) throws URISyntaxException {
-        log.debug("REST request to update RequestCase : {}, {}", id, requestCaseInputDTO);
+
         if (requestCaseInputDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, requestCaseInputDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!opportuniteRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
         OpportuniteOutputDTO result = opportuniteService.update(requestCaseInputDTO,idOpp);
@@ -311,5 +309,10 @@ public class OpportuniteResource {
                                                                       @PathVariable Long demandeId) {
         Optional<OpportuniteDTO> result = opportuniteService.affecterOpportuniteADemande(opportuniteId, demandeId);
         return result.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+    @PutMapping("/{demandeId}/setCreateOffreTrue")
+    public ResponseEntity<String> setCreateOppTrue(@PathVariable Long demandeId) {
+        opportuniteService.setCreateOffreTrue(demandeId);
+        return ResponseEntity.ok("createOpp set to true for opp: " + demandeId);
     }
 }

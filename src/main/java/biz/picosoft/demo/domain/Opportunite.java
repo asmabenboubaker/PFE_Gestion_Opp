@@ -65,6 +65,16 @@ public class Opportunite implements Serializable {
     private String assignee;
     @Column(name = "end_process")
     private Boolean endProcess;
+    @Column(name = "createoffre")
+    private Boolean createoffre;
+
+    public Boolean getCreateoffre() {
+        return createoffre != null && createoffre.booleanValue();
+    }
+
+    public void setCreateoffre(Boolean createoffre) {
+        this.createoffre = createoffre;
+    }
 
     @ManyToMany
     @JoinTable(

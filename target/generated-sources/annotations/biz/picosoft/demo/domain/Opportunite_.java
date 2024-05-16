@@ -14,6 +14,7 @@ public abstract class Opportunite_ {
 	public static volatile SingularAttribute<Opportunite, String> identifiant;
 	public static volatile SingularAttribute<Opportunite, String> activityName;
 	public static volatile SingularAttribute<Opportunite, Boolean> endProcess;
+	public static volatile SingularAttribute<Opportunite, Boolean> createoffre;
 	public static volatile SingularAttribute<Opportunite, String> description;
 	public static volatile SingularAttribute<Opportunite, Integer> securiteLevel;
 	public static volatile SingularAttribute<Opportunite, Boolean> excludeFromView;
@@ -35,6 +36,7 @@ public abstract class Opportunite_ {
 	public static final String IDENTIFIANT = "identifiant";
 	public static final String ACTIVITY_NAME = "activityName";
 	public static final String END_PROCESS = "endProcess";
+	public static final String CREATEOFFRE = "createoffre";
 	public static final String DESCRIPTION = "description";
 	public static final String SECURITE_LEVEL = "securiteLevel";
 	public static final String EXCLUDE_FROM_VIEW = "excludeFromView";

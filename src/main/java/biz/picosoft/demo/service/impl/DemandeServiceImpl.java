@@ -248,6 +248,14 @@ System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
         return demandeOutputMapper.toDto(originalRequestCase);
     }
 
+    @Override
+    public void setCreateOppTrue(Long demandeId) {
+        demandeRepository.findById(demandeId).ifPresent(demandeDTO -> {
+            demandeDTO.setCreateOpp(true);
+            demandeRepository.save(demandeDTO); // Assuming you have a method to convert demandeDTO to demande
+        });
+    }
+
     public DemandeOutputDTO proceedGetDemandeId(Long id) throws IOException, TemplateException {
         log.debug("Request to get MmInbound : {}", id);
 

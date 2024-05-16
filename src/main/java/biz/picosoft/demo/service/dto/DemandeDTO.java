@@ -25,6 +25,15 @@ public class DemandeDTO  implements Serializable {
     private String decision;
     private String statutDemande;
     private String activityName;
+    private boolean createOpp;
+
+    public boolean isCreateOpp() {
+        return createOpp;
+    }
+
+    public void setCreateOpp(boolean createOpp) {
+        this.createOpp = createOpp;
+    }
 
     private Boolean endProcess;
     private String wfProcessID;
