@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -76,13 +77,14 @@ public class Opportunite implements Serializable {
         this.createoffre = createoffre;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "equipe_opp",
             joinColumns = @JoinColumn(name = "opp_id"),
             inverseJoinColumns = @JoinColumn(name = "equipe_id")
+
     )
-    private Set<Equipe> equipes;
+    private Set<Equipe> equipes = new HashSet<>();
 
     public Set<Equipe> getEquipes() {
         return equipes;
@@ -324,31 +326,26 @@ public class Opportunite implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Opportunite)) {
-            return false;
-        }
-        return id != null && id.equals(((Opportunite) o).id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Opportunite that = (Opportunite) o;
+        return Objects.equals(id, that.id);
     }
-
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+        return Objects.hash(id);
     }
 
     // prettier-ignore
     @Override
     public String toString() {
         return "Opportunite{" +
-            "id=" + getId() +
-            ", description='" + getDescription() + "'" +
-            ", nom='" + getNom() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createAt='" + getCreateAt() + "'" +
-            ", montantEstime=" + getMontantEstime() +
-            "}";
+                "id=" + id +
+                ", description='" + description + "'" +
+                ", nom='" + nom + "'" +
+                ", createdBy='" + createdBy + "'" +
+                ", createAt='" + createAt + "'" +
+                ", montantEstime=" + montantEstime +
+                "}";
     }
 }

@@ -603,17 +603,14 @@ public class OpportuniteServiceImpl implements OpportuniteService {
     @Override
     public OpportuniteOutputDTO update(OpportuniteInputDTO demandeInputDTO, Long iddemande) {
 
-        log.debug("Request to update Meeting : {}", demandeInputDTO);
-        Demande demande = demandeRepository.findById(iddemande)
-                .orElseThrow(() -> new IllegalArgumentException("Client with id " + iddemande + " not found."));
-        Opportunite originalRequestCase = opportuniteRepository.findById(demandeInputDTO.getId()).get();
-        originalRequestCase.setDemande(demande);
-        oppInputMapper.partialUpdate(originalRequestCase, demandeInputDTO);
+        Opportunite originalOpportunite = opportuniteRepository.findById(demandeInputDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Opportunite with id " + demandeInputDTO.getId() + " not found."));
 
-        originalRequestCase = opportuniteRepository.save(originalRequestCase);
-       // opportuniteRepository.save(originalRequestCase);
+        oppInputMapper.partialUpdate(originalOpportunite, demandeInputDTO);
 
-        return oppOutputMapper.toDto(originalRequestCase);
+        originalOpportunite = opportuniteRepository.save(originalOpportunite);
+
+        return oppOutputMapper.toDto(originalOpportunite);
 
 
     }

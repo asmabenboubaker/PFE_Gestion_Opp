@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,13 +30,13 @@ public class Equipe implements Serializable {
           inverseJoinColumns = @JoinColumn(name = "projet_id")
   )
   private Set<Projet> projects;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "equipe_opp",
             joinColumns = @JoinColumn(name = "equipe_id"),
             inverseJoinColumns = @JoinColumn(name = "opp_id")
     )
-    private Set<Opportunite> opportunites;
+    private Set<Opportunite> opportunites = new HashSet<>();
 
     public Set<Opportunite> getOpportunites() {
         return opportunites;
