@@ -55,15 +55,6 @@ public class OpportuniteInputDTO implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
-    private Set<Equipe> equipes;
-
-    public Set<Equipe> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(Set<Equipe> equipes) {
-        this.equipes = equipes;
-    }
 
     public Long getId() {
         return id;

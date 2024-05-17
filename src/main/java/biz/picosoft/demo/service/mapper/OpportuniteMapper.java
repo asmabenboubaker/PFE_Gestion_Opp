@@ -28,24 +28,5 @@ public interface OpportuniteMapper extends EntityMapper<OpportuniteDTO, Opportun
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     DemandeDTO toDtoDemandeId(Demande demande);
-    // add equipes
-
-    @Named("equipesToEquipeDTOs")
-    default Set<EquipeDTO> equipesToEquipeDTOs(Set<Equipe> equipes) {
-        return equipes.stream()
-                .map(this::equipeToEquipeDTO)
-                .collect(Collectors.toSet());
-    }
-
-    default EquipeDTO equipeToEquipeDTO(Equipe equipe) {
-        if (equipe == null) {
-            return null;
-        }
-        EquipeDTO equipeDTO = new EquipeDTO();
-        // Map the fields from Equipe to EquipeDTO here
-        equipeDTO.setId(equipe.getId());
-        // Map other fields similarly
-        return equipeDTO;
-    }
 
 }

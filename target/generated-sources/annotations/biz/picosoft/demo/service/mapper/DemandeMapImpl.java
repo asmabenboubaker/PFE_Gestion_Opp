@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T15:01:29+0200",
+    date = "2024-05-17T23:05:01+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -55,6 +55,7 @@ public class DemandeMapImpl extends DemandeMap {
             return;
         }
 
+        entity.setCreateOpp( dto.isCreateOpp() );
         if ( dto.getSource() != null ) {
             entity.setSource( dto.getSource() );
         }
@@ -129,6 +130,7 @@ public class DemandeMapImpl extends DemandeMap {
 
         DemandeDTO demandeDTO = new DemandeDTO();
 
+        demandeDTO.setCreateOpp( demande.isCreateOpp() );
         demandeDTO.setDeadline( demande.getDeadline() );
         demandeDTO.setSource( demande.getSource() );
         demandeDTO.setCommentaires( demande.getCommentaires() );
@@ -158,6 +160,7 @@ public class DemandeMapImpl extends DemandeMap {
 
         Demande demande = new Demande();
 
+        demande.setCreateOpp( demandeDTO.isCreateOpp() );
         demande.setSource( demandeDTO.getSource() );
         demande.setCommentaires( demandeDTO.getCommentaires() );
         demande.setDeadline( demandeDTO.getDeadline() );

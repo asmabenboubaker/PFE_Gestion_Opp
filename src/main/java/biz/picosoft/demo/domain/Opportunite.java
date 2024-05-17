@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -77,13 +78,14 @@ public class Opportunite implements Serializable {
         this.createoffre = createoffre;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "equipe_opp",
             joinColumns = @JoinColumn(name = "opp_id"),
             inverseJoinColumns = @JoinColumn(name = "equipe_id")
 
     )
+    @JsonIgnore
     private Set<Equipe> equipes = new HashSet<>();
 
     public Set<Equipe> getEquipes() {

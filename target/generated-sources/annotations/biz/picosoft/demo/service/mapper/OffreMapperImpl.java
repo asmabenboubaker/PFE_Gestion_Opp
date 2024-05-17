@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T15:01:29+0200",
+    date = "2024-05-17T23:05:00+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -231,6 +231,7 @@ public class OffreMapperImpl implements OffreMapper {
 
         Demande demande = new Demande();
 
+        demande.setCreateOpp( demandeDTO.isCreateOpp() );
         demande.setSource( demandeDTO.getSource() );
         demande.setCommentaires( demandeDTO.getCommentaires() );
         demande.setDeadline( demandeDTO.getDeadline() );
@@ -313,6 +314,7 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        mappingTarget.setCreateOpp( demandeDTO.isCreateOpp() );
         if ( demandeDTO.getSource() != null ) {
             mappingTarget.setSource( demandeDTO.getSource() );
         }

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T15:01:30+0200",
+    date = "2024-05-17T23:05:01+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -173,6 +173,7 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         Demande demande = new Demande();
 
+        demande.setCreateOpp( demandeInputDTO.isCreateOpp() );
         demande.setSource( demandeInputDTO.getSource() );
         demande.setCommentaires( demandeInputDTO.getCommentaires() );
         demande.setDeadline( demandeInputDTO.getDeadline() );
@@ -202,6 +203,7 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         DemandeInputDTO demandeInputDTO = new DemandeInputDTO();
 
+        demandeInputDTO.setCreateOpp( demande.isCreateOpp() );
         demandeInputDTO.setDeadline( demande.getDeadline() );
         demandeInputDTO.setSource( demande.getSource() );
         demandeInputDTO.setCommentaires( demande.getCommentaires() );
@@ -277,6 +279,7 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         Demande demande = new Demande();
 
+        demande.setCreateOpp( demandeDTO.isCreateOpp() );
         demande.setSource( demandeDTO.getSource() );
         demande.setCommentaires( demandeDTO.getCommentaires() );
         demande.setDeadline( demandeDTO.getDeadline() );
@@ -374,6 +377,7 @@ public class OffreInputMapperImpl extends OffreInputMapper {
 
         DemandeDTO demandeDTO = new DemandeDTO();
 
+        demandeDTO.setCreateOpp( demande.isCreateOpp() );
         demandeDTO.setDeadline( demande.getDeadline() );
         demandeDTO.setSource( demande.getSource() );
         demandeDTO.setCommentaires( demande.getCommentaires() );
@@ -456,6 +460,7 @@ public class OffreInputMapperImpl extends OffreInputMapper {
             return;
         }
 
+        mappingTarget.setCreateOpp( demandeDTO.isCreateOpp() );
         if ( demandeDTO.getSource() != null ) {
             mappingTarget.setSource( demandeDTO.getSource() );
         }

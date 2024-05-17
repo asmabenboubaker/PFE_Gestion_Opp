@@ -3,7 +3,6 @@ package biz.picosoft.demo.service.mapper;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
-import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T15:01:29+0200",
+    date = "2024-05-17T23:05:01+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -60,19 +59,6 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         if ( dto.getStatus() != null ) {
             entity.setStatus( dto.getStatus() );
-        }
-        if ( entity.getEquipes() != null ) {
-            Set<Equipe> set = dto.getEquipes();
-            if ( set != null ) {
-                entity.getEquipes().clear();
-                entity.getEquipes().addAll( set );
-            }
-        }
-        else {
-            Set<Equipe> set = dto.getEquipes();
-            if ( set != null ) {
-                entity.setEquipes( new HashSet<Equipe>( set ) );
-            }
         }
         if ( dto.getActivityName() != null ) {
             entity.setActivityName( dto.getActivityName() );
@@ -124,10 +110,6 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
         Opportunite opportunite = new Opportunite();
 
         opportunite.setStatus( oppOutputDTO.getStatus() );
-        Set<Equipe> set = oppOutputDTO.getEquipes();
-        if ( set != null ) {
-            opportunite.setEquipes( new HashSet<Equipe>( set ) );
-        }
         opportunite.setActivityName( oppOutputDTO.getActivityName() );
         opportunite.setWfProcessID( oppOutputDTO.getWfProcessID() );
         opportunite.setSecuriteLevel( oppOutputDTO.getSecuriteLevel() );
@@ -152,10 +134,6 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         OpportuniteOutputDTO opportuniteOutputDTO = new OpportuniteOutputDTO();
 
-        Set<Equipe> set = opp.getEquipes();
-        if ( set != null ) {
-            opportuniteOutputDTO.setEquipes( new HashSet<Equipe>( set ) );
-        }
         opportuniteOutputDTO.setId( opp.getId() );
         opportuniteOutputDTO.setDescription( opp.getDescription() );
         opportuniteOutputDTO.setNom( opp.getNom() );
@@ -239,6 +217,7 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
             return;
         }
 
+        mappingTarget.setCreateOpp( demandeDTO.isCreateOpp() );
         if ( demandeDTO.getSource() != null ) {
             mappingTarget.setSource( demandeDTO.getSource() );
         }
@@ -332,6 +311,7 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         Demande demande = new Demande();
 
+        demande.setCreateOpp( demandeDTO.isCreateOpp() );
         demande.setSource( demandeDTO.getSource() );
         demande.setCommentaires( demandeDTO.getCommentaires() );
         demande.setDeadline( demandeDTO.getDeadline() );
@@ -407,6 +387,7 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         DemandeDTO demandeDTO = new DemandeDTO();
 
+        demandeDTO.setCreateOpp( demande.isCreateOpp() );
         demandeDTO.setDeadline( demande.getDeadline() );
         demandeDTO.setSource( demande.getSource() );
         demandeDTO.setCommentaires( demande.getCommentaires() );
