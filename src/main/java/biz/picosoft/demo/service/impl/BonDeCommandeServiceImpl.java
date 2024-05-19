@@ -180,7 +180,22 @@ public class BonDeCommandeServiceImpl implements BonDeCommandeService {
         return bcOutputMapper.toDto(originalRequestCase);
     }
 
-//workflow
+    @Override
+    public BonDeCommandeDTO assignBonDeCommandeToOffre(Long bonDeCommandeId, Long offreId) {
+        BonDeCommande bonDeCommande = bonDeCommandeRepository.findById(bonDeCommandeId)
+                .orElseThrow(() -> new IllegalArgumentException("Bon de commande with id " + bonDeCommandeId + " not found."));
+
+        Offre offre = offreRepository.findById(offreId)
+                .orElseThrow(() -> new IllegalArgumentException("Offre with id " + offreId + " not found."));
+
+        bonDeCommande.setOffre(offre);
+        bonDeCommande = bonDeCommandeRepository.save(bonDeCommande);
+
+        return bonDeCommandeMapper.toDto(bonDeCommande);
+
+    }
+
+    //workflow
     @Transactional
     public BCOutputDTO initProcessBC(AclClass aclClass) throws Exception {
 

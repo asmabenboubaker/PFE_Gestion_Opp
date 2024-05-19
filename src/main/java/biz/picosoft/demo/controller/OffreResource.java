@@ -249,6 +249,12 @@ public class OffreResource {
 
         return offreServiceImp.getbyideDTO(id);
     }
+    @GetMapping("/offre/byid/{id}")
+    public ResponseEntity<Offre> getoffrebyid(@PathVariable Long id) {
+        log.debug("REST request to get Demande : {}", id);
+        Offre offre = offreServiceImp.getById(id);
+        return ResponseEntity.ok().body(offre);
+    }
 
     @PatchMapping(value = {"/submitOffre"})
     public OffreOutputDTO submitRequestCase(@RequestBody OffreInputDTO requestCaseInputDTO) throws Exception {
@@ -272,16 +278,14 @@ public class OffreResource {
         if (requestCaseInputDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, requestCaseInputDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
 
-        if (!offreRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-//        System.out.println("updateeeeeeeeeeeee====getSource"+requestCaseInputDTO.getSource());
-//        System.out.println("updateeeeeeeeeeeee====setCommentaires"+requestCaseInputDTO.getCommentaires());
-        OffreOutputDTO result = offreServiceImp.update(requestCaseInputDTO,idOpp);
+
+        OffreOutputDTO result = offreServiceImp.update(requestCaseInputDTO);
         return result;
+    }
+    @PutMapping("/{demandeId}/setCreateBCTrue")
+    public ResponseEntity<String> setCreateOppTrue(@PathVariable Long demandeId) {
+        offreService.setCreateBCTrue(demandeId);
+        return ResponseEntity.ok("createOpp set to true for demandeId: " + demandeId);
     }
 }

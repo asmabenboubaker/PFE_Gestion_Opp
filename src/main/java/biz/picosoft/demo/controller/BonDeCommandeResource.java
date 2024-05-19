@@ -303,7 +303,11 @@ public class BonDeCommandeResource {
 
         return ResponseEntity.ok(statusList);
     }
-
+    @PostMapping("{bonDeCommandeId}/assign-to-offre/{offreId}")
+    public ResponseEntity<BonDeCommandeDTO> assignBonDeCommandeToOffre(@PathVariable Long bonDeCommandeId, @PathVariable Long offreId) {
+        BonDeCommandeDTO result = bonDeCommandeService.assignBonDeCommandeToOffre(bonDeCommandeId, offreId);
+        return ResponseEntity.ok(result);
+    }
 
 
 }

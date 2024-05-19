@@ -31,6 +31,17 @@ public class Offre implements Serializable {
 
     @Column(name = "montant")
     private Float montant;
+    @Column(name = "createBC")
+    private Boolean createBC;
+//return createOpp != null && createOpp.booleanValue();
+
+    public Boolean getCreateBC() {
+        return createBC != null && createBC.booleanValue();
+    }
+
+    public void setCreateBC(Boolean createBC) {
+        this.createBC = createBC;
+    }
 
     @Column(name = "date_offre")
     private LocalDate dateOffre;

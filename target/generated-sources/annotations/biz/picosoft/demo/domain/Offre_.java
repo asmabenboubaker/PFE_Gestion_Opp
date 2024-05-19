@@ -29,6 +29,7 @@ public abstract class Offre_ {
 	public static volatile SingularAttribute<Offre, String> wfProcessID;
 	public static volatile SingularAttribute<Offre, Long> id;
 	public static volatile SingularAttribute<Offre, String> assignee;
+	public static volatile SingularAttribute<Offre, Boolean> createBC;
 	public static volatile SingularAttribute<Offre, Long> numberOfattachments;
 	public static volatile SingularAttribute<Offre, String> status;
 
@@ -50,6 +51,7 @@ public abstract class Offre_ {
 	public static final String WF_PROCESS_ID = "wfProcessID";
 	public static final String ID = "id";
 	public static final String ASSIGNEE = "assignee";
+	public static final String CREATE_BC = "createBC";
 	public static final String NUMBER_OFATTACHMENTS = "numberOfattachments";
 	public static final String STATUS = "status";
 

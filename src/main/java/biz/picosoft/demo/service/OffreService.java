@@ -63,5 +63,5 @@ public interface OffreService {
     void delete(Long id);
 
     Boolean checkRole(String profile, String roleName);
-
+    public void setCreateBCTrue(Long offreId);
 }

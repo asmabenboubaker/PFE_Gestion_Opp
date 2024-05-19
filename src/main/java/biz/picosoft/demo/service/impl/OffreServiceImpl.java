@@ -329,6 +329,21 @@ public class OffreServiceImpl implements OffreService {
                     RCErrors.ERR_Key_not_authorized);
         return true;
     }
+
+    @Override
+    public void setCreateBCTrue(Long offreId) {
+        offreRepository.findById(offreId).ifPresent(demandeDTO -> {
+            demandeDTO.setCreateBC(true);
+            offreRepository.save(demandeDTO);
+        });
+    }
+    public Offre getById(Long id) {
+        log.debug("Request to get Demande : {}", id);
+        return offreRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("offre with id " + id + " not found."));
+
+    }
+
     public OffreOutputDTO getbyideDTO(Long id) {
         OffreOutputDTO result = null;
         try {
@@ -559,17 +574,18 @@ public class OffreServiceImpl implements OffreService {
     }
 
 
-    public OffreOutputDTO update(OffreInputDTO RequestCaseDTO,Long idOpp) {
-        log.debug("Request to update Meeting : {}", RequestCaseDTO);
-        Opportunite opp = oppRepository.findById(idOpp)
-                .orElseThrow(() -> new IllegalArgumentException("Client with id " + idOpp + " not found."));
-        Offre originalRequestCase = offreRepository.findById(RequestCaseDTO.getId()).get();
-        originalRequestCase.setOpportunite(opp);
-        offreInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+    public OffreOutputDTO update(OffreInputDTO requestCaseDTO) {
+        log.debug("Request to update Offer : {}", requestCaseDTO);
 
+        // Récupérer l'offre existante à partir de l'ID fourni dans requestCaseDTO
+        Offre originalRequestCase = offreRepository.findById(requestCaseDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Offer with id " + requestCaseDTO.getId() + " not found."));
 
+        // Utiliser le mapper pour mettre à jour les champs de l'offre sans toucher à l'opportunité
+        offreInputMapper.partialUpdate(originalRequestCase, requestCaseDTO);
+
+        // Sauvegarder les modifications
         originalRequestCase = offreRepository.save(originalRequestCase);
-        offreRepository.save(originalRequestCase);
 
         return offreOutputMapper.toDto(originalRequestCase);
     }
