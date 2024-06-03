@@ -85,6 +85,7 @@ public class Opportunite implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "equipe_id")
 
     )
+
     @JsonIgnore
     private Set<Equipe> equipes = new HashSet<>();
 

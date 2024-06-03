@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
  */
 @Mapper(componentModel = "spring")
 public interface DemandeMapper extends EntityMapper<DemandeDTO, Demande> {
-    @Mapping(target = "domaines", source = "domaines", qualifiedByName = "domaineIdSet")
+
     @Mapping(target = "client", source = "client", qualifiedByName = "clientId")
     DemandeDTO toDto(Demande s);
 
-    @Mapping(target = "removeDomaine", ignore = true)
+
     Demande toEntity(DemandeDTO demandeDTO);
 
     @Named("domaineId")

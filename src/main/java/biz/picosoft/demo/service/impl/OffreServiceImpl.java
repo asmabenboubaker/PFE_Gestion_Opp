@@ -337,6 +337,12 @@ public class OffreServiceImpl implements OffreService {
             offreRepository.save(demandeDTO);
         });
     }
+
+    @Override
+    public List<MonthlyOffreCountDTO> getMonthlyOffreCounts() {
+        return offreRepository.findMonthlyOffreCount();
+    }
+
     public Offre getById(Long id) {
         log.debug("Request to get Demande : {}", id);
         return offreRepository.findById(id)

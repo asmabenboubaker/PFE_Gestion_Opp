@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -435,5 +436,25 @@ public class DemandeResource {
         demandeService.setCreateOppTrue(demandeId);
         return ResponseEntity.ok("createOpp set to true for demandeId: " + demandeId);
     }
+
+    @PostMapping("/demandes/{demandeId}/domaines")
+    public ResponseEntity<Demande> affecterDomaines(@PathVariable Long demandeId, @RequestBody Set<Long> domaineIds) {
+        Demande result = demandeService.affecterDomaines(demandeId, domaineIds);
+        return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping("/demandes/count2")
+    public ResponseEntity<Map<String, Long>> countDemandesByDomaine() {
+        Map<String, Long> demandeCountMap = demandeServiceImp.countDemandesByDomaine();
+        return new ResponseEntity<>(demandeCountMap, HttpStatus.OK);
+    }
+
+    @GetMapping("/validation")
+    public ResponseEntity<Page<DemandeOutputDTO>> getValidationDemandes(Pageable pageable) {
+        Page<DemandeOutputDTO> page = demandeService.getValidationDemandes(pageable);
+        return ResponseEntity.ok().body(page);
+    }
+
 
 }

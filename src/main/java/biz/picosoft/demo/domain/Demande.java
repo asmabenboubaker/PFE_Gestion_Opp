@@ -137,14 +137,14 @@ public class Demande implements Serializable {
     @JsonIgnoreProperties(value = { "offres", "demande" }, allowSetters = true)
     private Set<Opportunite> opportunites = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
         name = "rel_demande__domaine",
         joinColumns = @JoinColumn(name = "demande_id"),
         inverseJoinColumns = @JoinColumn(name = "domaine_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "demandes" }, allowSetters = true)
+    @JsonIgnore
     private Set<Domaine> domaines = new HashSet<>();
 
     @ManyToOne
@@ -336,17 +336,17 @@ public class Demande implements Serializable {
         return this;
     }
 
-    public Demande addDomaine(Domaine domaine) {
-        this.domaines.add(domaine);
-        domaine.getDemandes().add(this);
-        return this;
-    }
-
-    public Demande removeDomaine(Domaine domaine) {
-        this.domaines.remove(domaine);
-        domaine.getDemandes().remove(this);
-        return this;
-    }
+//    public Demande addDomaine(Domaine domaine) {
+//        this.domaines.add(domaine);
+//        domaine.getDemandes().add(this);
+//        return this;
+//    }
+//
+//    public Demande removeDomaine(Domaine domaine) {
+//        this.domaines.remove(domaine);
+//        domaine.getDemandes().remove(this);
+//        return this;
+//    }
 
     public Client getClient() {
         return this.client;

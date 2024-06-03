@@ -288,4 +288,9 @@ public class OffreResource {
         offreService.setCreateBCTrue(demandeId);
         return ResponseEntity.ok("createOpp set to true for demandeId: " + demandeId);
     }
+
+    @GetMapping("/offres/monthly-count")
+    public List<MonthlyOffreCountDTO> getMonthlyOffreCounts() {
+        return offreService.getMonthlyOffreCounts();
+    }
 }

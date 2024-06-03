@@ -2,10 +2,14 @@ package biz.picosoft.demo.repository;
 
 
 import biz.picosoft.demo.domain.Demande;
+
+import biz.picosoft.demo.domain.Domaine;
+import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +32,12 @@ public interface DemandeRepository
     default Page<Demande> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+    // count demande by domaine
+//method to find the number demande in each domaine
+
+  Long countByDomainesContains(Domaine domaine);
+
+
+    Page<DemandeOutputDTO> findByActivityName(String activiteName, Pageable pageable);
+
 }

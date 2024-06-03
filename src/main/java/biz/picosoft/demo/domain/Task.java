@@ -26,6 +26,17 @@ public class Task implements Serializable {
     private LocalDate start_date;
     private LocalDate end_date;
     private String assignee;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Projet project;
+
+    public Projet getProject() {
+        return project;
+    }
+
+    public void setProject(Projet project) {
+        this.project = project;
+    }
 
     public Long getId() {
         return id;

@@ -27,6 +27,7 @@ public abstract class Projet_ {
 	public static volatile SingularAttribute<Projet, String> commentaires;
 	public static volatile SingularAttribute<Projet, Long> id;
 	public static volatile SingularAttribute<Projet, ZonedDateTime> dateFin;
+	public static volatile SetAttribute<Projet, Task> tasks;
 	public static volatile SingularAttribute<Projet, String> participants;
 	public static volatile SingularAttribute<Projet, Float> budget;
 	public static volatile SingularAttribute<Projet, String> lieu;
@@ -48,6 +49,7 @@ public abstract class Projet_ {
 	public static final String COMMENTAIRES = "commentaires";
 	public static final String ID = "id";
 	public static final String DATE_FIN = "dateFin";
+	public static final String TASKS = "tasks";
 	public static final String PARTICIPANTS = "participants";
 	public static final String BUDGET = "budget";
 	public static final String LIEU = "lieu";

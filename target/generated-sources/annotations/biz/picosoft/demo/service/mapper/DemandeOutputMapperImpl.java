@@ -5,7 +5,6 @@ import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
-import biz.picosoft.demo.service.dto.DomaineDTO;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:16+0200",
+    date = "2024-05-28T22:39:24+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -102,16 +101,16 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
             entity.setStatut( dto.getStatut() );
         }
         if ( entity.getDomaines() != null ) {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( dto.getDomaines() );
+            Set<Domaine> set = dto.getDomaines();
             if ( set != null ) {
                 entity.getDomaines().clear();
                 entity.getDomaines().addAll( set );
             }
         }
         else {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( dto.getDomaines() );
+            Set<Domaine> set = dto.getDomaines();
             if ( set != null ) {
-                entity.domaines( set );
+                entity.domaines( new HashSet<Domaine>( set ) );
             }
         }
         if ( dto.getClient() != null ) {
@@ -146,7 +145,10 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
         demande.setNom( demandeOutputDTO.getNom() );
         demande.setDateDeCreation( demandeOutputDTO.getDateDeCreation() );
         demande.setStatut( demandeOutputDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeOutputDTO.getDomaines() ) );
+        Set<Domaine> set = demandeOutputDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient1( demandeOutputDTO.getClient() ) );
 
         return demande;
@@ -176,37 +178,13 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
         demandeOutputDTO.setNom( demande.getNom() );
         demandeOutputDTO.setDateDeCreation( demande.getDateDeCreation() );
         demandeOutputDTO.setStatut( demande.getStatut() );
-        demandeOutputDTO.setDomaines( domaineSetToDomaineDTOSet( demande.getDomaines() ) );
+        Set<Domaine> set = demande.getDomaines();
+        if ( set != null ) {
+            demandeOutputDTO.setDomaines( new HashSet<Domaine>( set ) );
+        }
         demandeOutputDTO.setClient( clientToClientDTO( demande.getClient() ) );
 
         return demandeOutputDTO;
-    }
-
-    protected Domaine domaineDTOToDomaine(DomaineDTO domaineDTO) {
-        if ( domaineDTO == null ) {
-            return null;
-        }
-
-        Domaine domaine = new Domaine();
-
-        domaine.setId( domaineDTO.getId() );
-        domaine.setNom( domaineDTO.getNom() );
-        domaine.setDescription( domaineDTO.getDescription() );
-
-        return domaine;
-    }
-
-    protected Set<Domaine> domaineDTOSetToDomaineSet(Set<DomaineDTO> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<Domaine> set1 = new HashSet<Domaine>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( DomaineDTO domaineDTO : set ) {
-            set1.add( domaineDTOToDomaine( domaineDTO ) );
-        }
-
-        return set1;
     }
 
     protected void clientDTOToClient(ClientDTO clientDTO, Client mappingTarget) {
@@ -261,33 +239,6 @@ public class DemandeOutputMapperImpl extends DemandeOutputMapper {
         client.setNotes( clientDTO.getNotes() );
 
         return client;
-    }
-
-    protected DomaineDTO domaineToDomaineDTO(Domaine domaine) {
-        if ( domaine == null ) {
-            return null;
-        }
-
-        DomaineDTO domaineDTO = new DomaineDTO();
-
-        domaineDTO.setId( domaine.getId() );
-        domaineDTO.setNom( domaine.getNom() );
-        domaineDTO.setDescription( domaine.getDescription() );
-
-        return domaineDTO;
-    }
-
-    protected Set<DomaineDTO> domaineSetToDomaineDTOSet(Set<Domaine> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<DomaineDTO> set1 = new HashSet<DomaineDTO>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( Domaine domaine : set ) {
-            set1.add( domaineToDomaineDTO( domaine ) );
-        }
-
-        return set1;
     }
 
     protected ClientDTO clientToClientDTO(Client client) {

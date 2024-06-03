@@ -19,13 +19,16 @@ import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.controller.errors.RCErrors;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
+import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.repository.ClientRepository;
 import biz.picosoft.demo.repository.DemandeRepository;
+import biz.picosoft.demo.repository.DomaineRepository;
 import biz.picosoft.demo.service.DemandeService;
 
 import biz.picosoft.demo.service.dto.DemandeDTO;
 import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+
 import biz.picosoft.demo.service.mapper.DemandeInputMapper;
 import biz.picosoft.demo.service.mapper.DemandeMapper;
 
@@ -43,10 +46,8 @@ import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Demande}.
@@ -69,12 +70,14 @@ public class DemandeServiceImpl implements DemandeService {
     private final CurrentUser currentUser;
 
 //    private RulesService rulesService;
+    private DomaineRepository domaineRepository;
 
 
     public DemandeServiceImpl(DemandeRepository demandeRepository, DemandeMapper demandeMapper,ClientRepository clientRepository,DemandeOutputMapper demandeOutputMapper,
                               WorkflowService workflowService,CurrentUser currentUser,KernelService kernelService,KernelInterface kernelInterface,
-                              DemandeInputMapper demandeInputMapper
-//                             , RulesService rulesService
+                              DemandeInputMapper demandeInputMapper,
+//                             , RulesService rulesService,
+                           DomaineRepository domaineRepository
     ) {
         this.demandeRepository = demandeRepository;
         this.demandeMapper = demandeMapper;
@@ -85,6 +88,7 @@ public class DemandeServiceImpl implements DemandeService {
         this.kernelInterface=kernelInterface;
         this.kernelService=kernelService;
         this.demandeInputMapper=demandeInputMapper;
+        this.domaineRepository=domaineRepository;
 
     }
 
@@ -231,22 +235,51 @@ public class DemandeServiceImpl implements DemandeService {
         return result;
 
     }
-
     @Override
-    public DemandeOutputDTO update(DemandeInputDTO RequestCaseDTO,Long idclient) {
-        log.debug("Request to update Meeting : {}", RequestCaseDTO);
+    public DemandeOutputDTO update(DemandeInputDTO requestCaseDTO, Long idclient) {
+        log.debug("Request to update Demande : {}", requestCaseDTO);
+
         Client client = clientRepository.findById(idclient)
                 .orElseThrow(() -> new IllegalArgumentException("Client with id " + idclient + " not found."));
-        Demande originalRequestCase = demandeRepository.findById(RequestCaseDTO.getId()).get();
+
+        Demande originalRequestCase = demandeRepository.findById(requestCaseDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Demande with id " + requestCaseDTO.getId() + " not found."));
+
         originalRequestCase.setClient(client);
-        demandeInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
-System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
+
+        // Explicitly handle domaines if necessary
+        if (requestCaseDTO.getDomaines() != null) {
+            Set<Domaine> domaines = requestCaseDTO.getDomaines().stream()
+                    .map(domaineDTO -> domaineRepository.findById(domaineDTO.getId())
+                            .orElseThrow(() -> new IllegalArgumentException("Domaine with id " + domaineDTO.getId() + " not found.")))
+                    .collect(Collectors.toSet());
+            originalRequestCase.setDomaines(domaines);
+        }
+
+        // Use the mapper to update other fields
+        demandeInputMapper.partialUpdate(originalRequestCase, requestCaseDTO);
 
         originalRequestCase = demandeRepository.save(originalRequestCase);
-        demandeRepository.save(originalRequestCase);
 
         return demandeOutputMapper.toDto(originalRequestCase);
     }
+
+
+//    @Override
+//    public DemandeOutputDTO update(DemandeInputDTO RequestCaseDTO,Long idclient) {
+//        log.debug("Request to update Meeting : {}", RequestCaseDTO);
+//        Client client = clientRepository.findById(idclient)
+//                .orElseThrow(() -> new IllegalArgumentException("Client with id " + idclient + " not found."));
+//        Demande originalRequestCase = demandeRepository.findById(RequestCaseDTO.getId()).get();
+//        originalRequestCase.setClient(client);
+//        demandeInputMapper.partialUpdate(originalRequestCase, RequestCaseDTO);
+//System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
+//
+//        originalRequestCase = demandeRepository.save(originalRequestCase);
+//        demandeRepository.save(originalRequestCase);
+//
+//        return demandeOutputMapper.toDto(originalRequestCase);
+//    }
 
     @Override
     public void setCreateOppTrue(Long demandeId) {
@@ -255,6 +288,28 @@ System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
             demandeRepository.save(demandeDTO); // Assuming you have a method to convert demandeDTO to demande
         });
     }
+
+    @Override
+    public Demande affecterDomaines(Long demandeId, Set<Long> domaineIds) {
+        Demande demande = demandeRepository.findById(demandeId)
+                .orElseThrow(() -> new IllegalArgumentException("Demande not found with id: " + demandeId));
+
+        Set<Domaine> domaines = new HashSet<>();
+        for (Long domaineId : domaineIds) {
+            Domaine domaine = domaineRepository.findById(domaineId)
+                    .orElseThrow(() -> new IllegalArgumentException("Domaine not found with id: " + domaineId));
+            domaines.add(domaine);
+        }
+
+        demande.setDomaines(domaines);
+        return demandeRepository.save(demande);
+    }
+
+    @Override
+    public Page<DemandeOutputDTO> getValidationDemandes(Pageable pageable) {
+        return demandeRepository.findByActivityName("Validation", pageable);
+    }
+
 
     public DemandeOutputDTO proceedGetDemandeId(Long id) throws IOException, TemplateException {
         log.debug("Request to get MmInbound : {}", id);
@@ -383,7 +438,7 @@ System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
         Demande demande = new Demande();
 
         demande.setDateDeCreation(ZonedDateTime.now());
-
+        demande.setAssignee(currentUser.getProfileName());
         // persite the object
         demande = demandeRepository.save(demande);
 
@@ -628,9 +683,12 @@ System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
         requestCase.setActivityName(bpmJob.getActivityName());
 
         requestCase.setEndProcess(bpmJob.getEndProcess());
-
+System.out.println("bpmJob.getAssignee()"+currentUser.getNameCurrentUser());
+        System.out.println("bpmJob.getAssignee()"+currentUser.getSid());
+        System.out.println("bpmJob.getAssignee()"+currentUser.getEmployeSid());
+        System.out.println("bpmJob.getAssignee()"+currentUser.getProfileName());
         requestCase.setAssignee(bpmJob.getAssignee() != null ? bpmJob.getAssignee() : null);
-
+        requestCase.setAssignee(currentUser.getEmployeSid());
         requestCase = saveDemande(requestCase, authors, readers, aclClass, false);
 
         return demandeOutputMapper.toDto(requestCase);
@@ -667,7 +725,17 @@ System.out.println("sourceeeeeeeeeee=="+originalRequestCase.getSource());
 
 
     }
+    public Map<String, Long> countDemandesByDomaine() {
+        Map<String, Long> demandeCountMap = new HashMap<>();
+        List<Domaine> domaines = domaineRepository.findAll();
 
+        for (Domaine domaine : domaines) {
+        Long demandeCount = demandeRepository.countByDomainesContains(domaine);
+          demandeCountMap.put(domaine.getNom(), demandeCount);
+        }
+
+        return demandeCountMap;
+    }
 
 
 }

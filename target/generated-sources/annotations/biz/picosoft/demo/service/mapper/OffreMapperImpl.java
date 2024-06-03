@@ -8,7 +8,6 @@ import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
-import biz.picosoft.demo.service.dto.DomaineDTO;
 import biz.picosoft.demo.service.dto.OffreDTO;
 import biz.picosoft.demo.service.dto.OpportuniteDTO;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:16+0200",
+    date = "2024-05-28T22:39:25+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -177,33 +176,6 @@ public class OffreMapperImpl implements OffreMapper {
         return opportuniteDTO;
     }
 
-    protected Domaine domaineDTOToDomaine(DomaineDTO domaineDTO) {
-        if ( domaineDTO == null ) {
-            return null;
-        }
-
-        Domaine domaine = new Domaine();
-
-        domaine.setId( domaineDTO.getId() );
-        domaine.setNom( domaineDTO.getNom() );
-        domaine.setDescription( domaineDTO.getDescription() );
-
-        return domaine;
-    }
-
-    protected Set<Domaine> domaineDTOSetToDomaineSet(Set<DomaineDTO> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<Domaine> set1 = new HashSet<Domaine>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( DomaineDTO domaineDTO : set ) {
-            set1.add( domaineDTOToDomaine( domaineDTO ) );
-        }
-
-        return set1;
-    }
-
     protected Client clientDTOToClient(ClientDTO clientDTO) {
         if ( clientDTO == null ) {
             return null;
@@ -247,7 +219,10 @@ public class OffreMapperImpl implements OffreMapper {
         demande.setNom( demandeDTO.getNom() );
         demande.setDateDeCreation( demandeDTO.getDateDeCreation() );
         demande.setStatut( demandeDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
+        Set<Domaine> set = demandeDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient( demandeDTO.getClient() ) );
 
         return demande;
@@ -361,16 +336,16 @@ public class OffreMapperImpl implements OffreMapper {
             mappingTarget.setStatut( demandeDTO.getStatut() );
         }
         if ( mappingTarget.getDomaines() != null ) {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
                 mappingTarget.getDomaines().clear();
                 mappingTarget.getDomaines().addAll( set );
             }
         }
         else {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
-                mappingTarget.domaines( set );
+                mappingTarget.domaines( new HashSet<Domaine>( set ) );
             }
         }
         if ( demandeDTO.getClient() != null ) {

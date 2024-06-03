@@ -1,5 +1,6 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,6 +21,7 @@ public class DemandeInputDTO  implements Serializable {
     private String activityName;
 
     private LocalDate deadline;
+
 
     private String source;
 
@@ -78,7 +80,7 @@ public class DemandeInputDTO  implements Serializable {
     private StatutDemande statut;
     private String wfComment;
     private String msg;
-    private Set<DomaineDTO> domaines = new HashSet<>();
+    private Set<Domaine> domaines;
 
 
     private ClientDTO client;
@@ -208,11 +210,11 @@ public class DemandeInputDTO  implements Serializable {
         this.statut = statut;
     }
 
-    public Set<DomaineDTO> getDomaines() {
+    public Set<Domaine> getDomaines() {
         return domaines;
     }
 
-    public void setDomaines(Set<DomaineDTO> domaines) {
+    public void setDomaines(Set<Domaine> domaines) {
         this.domaines = domaines;
     }
 

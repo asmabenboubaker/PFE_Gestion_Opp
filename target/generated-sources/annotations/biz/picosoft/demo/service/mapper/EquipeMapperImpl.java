@@ -1,18 +1,15 @@
 package biz.picosoft.demo.service.mapper;
 
 import biz.picosoft.demo.domain.Equipe;
-import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.EquipeDTO;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:15+0200",
+    date = "2024-05-28T22:39:24+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -26,10 +23,6 @@ public class EquipeMapperImpl implements EquipeMapper {
 
         Equipe equipe = new Equipe();
 
-        Set<Opportunite> set = dto.getOpportunites();
-        if ( set != null ) {
-            equipe.setOpportunites( new HashSet<Opportunite>( set ) );
-        }
         equipe.setId( dto.getId() );
         equipe.setNom( dto.getNom() );
         equipe.setDescription( dto.getDescription() );
@@ -54,10 +47,6 @@ public class EquipeMapperImpl implements EquipeMapper {
         equipeDTO.setChef( entity.getChef() );
         equipeDTO.setEmail( entity.getEmail() );
         equipeDTO.setTelephone( entity.getTelephone() );
-        Set<Opportunite> set = entity.getOpportunites();
-        if ( set != null ) {
-            equipeDTO.setOpportunites( new HashSet<Opportunite>( set ) );
-        }
 
         return equipeDTO;
     }
@@ -96,19 +85,6 @@ public class EquipeMapperImpl implements EquipeMapper {
             return;
         }
 
-        if ( entity.getOpportunites() != null ) {
-            Set<Opportunite> set = dto.getOpportunites();
-            if ( set != null ) {
-                entity.getOpportunites().clear();
-                entity.getOpportunites().addAll( set );
-            }
-        }
-        else {
-            Set<Opportunite> set = dto.getOpportunites();
-            if ( set != null ) {
-                entity.setOpportunites( new HashSet<Opportunite>( set ) );
-            }
-        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }

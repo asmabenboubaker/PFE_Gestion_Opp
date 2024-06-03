@@ -36,14 +36,18 @@ public class JWTAutorizationFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,PUT,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers",
-                "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Contol-Request-Headers,authorization");
+                "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,authorization, Upgrade, Connection");
         response.addHeader("Access-Control-Expose-Headers",
-                "Access-Controle-Allow-Origin, Access-Controle-Allow-Credentials, authorization");
+                "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, authorization");
 
         if (request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpServletResponse.SC_OK);
         }
 
+        if("websocket".equalsIgnoreCase(request.getHeader("Upgrade"))){
+            chain.doFilter(request, response);
+            return;
+        }
 
         String jwt = request.getHeader(SecurityConstants.HEADER_STRING_AUTHORIZATION);
         String username = "system";

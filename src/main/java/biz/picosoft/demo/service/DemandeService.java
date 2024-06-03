@@ -5,10 +5,13 @@ import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 import biz.picosoft.demo.service.dto.DemandeInputDTO;
 import biz.picosoft.demo.service.dto.DemandeOutputDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link  biz.picosoft.demo.domain.Demande}.
@@ -78,4 +81,8 @@ public interface DemandeService {
 
 
     void setCreateOppTrue(Long demandeId);
+    Demande affecterDomaines(Long demandeId, Set<Long> domaineIds);
+
+    Page<DemandeOutputDTO> getValidationDemandes(Pageable pageable);
+
 }

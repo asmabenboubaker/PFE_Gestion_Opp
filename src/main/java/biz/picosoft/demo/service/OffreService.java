@@ -2,13 +2,11 @@ package biz.picosoft.demo.service;
 
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Offre;
-import biz.picosoft.demo.service.dto.DemandeDTO;
-import biz.picosoft.demo.service.dto.DemandeInputDTO;
-import biz.picosoft.demo.service.dto.DemandeOutputDTO;
-import biz.picosoft.demo.service.dto.OffreDTO;
+import biz.picosoft.demo.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -64,4 +62,5 @@ public interface OffreService {
 
     Boolean checkRole(String profile, String roleName);
     public void setCreateBCTrue(Long offreId);
+    List<MonthlyOffreCountDTO> getMonthlyOffreCounts();
 }

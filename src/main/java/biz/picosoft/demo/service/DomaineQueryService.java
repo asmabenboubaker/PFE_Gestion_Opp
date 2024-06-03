@@ -99,12 +99,12 @@ public class DomaineQueryService extends QueryService<Domaine> {
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Domaine_.description));
             }
-            if (criteria.getDemandeId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(criteria.getDemandeId(), root -> root.join(Domaine_.demandes, JoinType.LEFT).get(Demande_.id))
-                    );
-            }
+//            if (criteria.getDemandeId() != null) {
+//                specification =
+//                    specification.and(
+//                        buildSpecification(criteria.getDemandeId(), root -> root.join(Domaine_.demandes, JoinType.LEFT).get(Demande_.id))
+//                    );
+//            }
         }
         return specification;
     }

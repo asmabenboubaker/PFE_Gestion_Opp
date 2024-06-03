@@ -58,7 +58,7 @@ private OpportuniteRepository opportuniterepository;
         Equipe equipe = equipeRepository.findById(equipeId).orElse(null);
         if (equipe != null) {
             List<Projet> projets = projectRepository.findAllById(projetIds);
-            equipe.setProjects(new HashSet<>(projets));
+            //equipe.setProjects(new HashSet<>(projets));
             equipeRepository.save(equipe);
         }
     }

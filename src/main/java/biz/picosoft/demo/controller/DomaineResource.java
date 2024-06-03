@@ -159,7 +159,16 @@ public class DomaineResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page);
     }
-
+    @GetMapping("/domaines/list")
+    public ResponseEntity<List<DomaineDTO>> getAllDomaineslist(
+            DomaineCriteria criteria,
+            @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Domaines by criteria: {}", criteria);
+        Page<DomaineDTO> page = domaineQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
     /**
      * {@code GET  /domaines/count} : count all the domaines.
      *

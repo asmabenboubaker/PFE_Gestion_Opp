@@ -249,8 +249,21 @@ public class OpportuniteResource {
             .build();
     }
 
-    @PatchMapping("/initOpp")
+    @PatchMapping("/initOppold")
     public OpportuniteOutputDTO initOpp() throws Exception {
+
+        // check if the conneceted person have role can create inbound
+        opportuniteService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateopp);
+
+        // extract acl class
+        AclClass aclClass = kernelInterface.getaclClassByClassName(Opportunite.class.getName());
+
+        return oppServiceImp.initProcessOpp(aclClass);
+
+    }
+
+    @PostMapping ("/initOpp")
+    public OpportuniteOutputDTO initOppurtinute() throws Exception {
 
         // check if the conneceted person have role can create inbound
         opportuniteService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreateopp);

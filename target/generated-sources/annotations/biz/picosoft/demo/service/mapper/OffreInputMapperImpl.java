@@ -9,7 +9,6 @@ import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
 import biz.picosoft.demo.service.dto.DemandeInputDTO;
-import biz.picosoft.demo.service.dto.DomaineDTO;
 import biz.picosoft.demo.service.dto.OffreInputDTO;
 import biz.picosoft.demo.service.dto.OpportuniteDTO;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:17+0200",
+    date = "2024-05-28T22:39:24+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -189,7 +188,10 @@ public class OffreInputMapperImpl extends OffreInputMapper {
         demande.setNom( demandeInputDTO.getNom() );
         demande.setDateDeCreation( demandeInputDTO.getDateDeCreation() );
         demande.setStatut( demandeInputDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeInputDTO.getDomaines() ) );
+        Set<Domaine> set = demandeInputDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient( demandeInputDTO.getClient() ) );
 
         return demande;
@@ -219,37 +221,13 @@ public class OffreInputMapperImpl extends OffreInputMapper {
         demandeInputDTO.setNom( demande.getNom() );
         demandeInputDTO.setDateDeCreation( demande.getDateDeCreation() );
         demandeInputDTO.setStatut( demande.getStatut() );
-        demandeInputDTO.setDomaines( domaineSetToDomaineDTOSet( demande.getDomaines() ) );
+        Set<Domaine> set = demande.getDomaines();
+        if ( set != null ) {
+            demandeInputDTO.setDomaines( new HashSet<Domaine>( set ) );
+        }
         demandeInputDTO.setClient( clientToClientDTO( demande.getClient() ) );
 
         return demandeInputDTO;
-    }
-
-    protected Domaine domaineDTOToDomaine(DomaineDTO domaineDTO) {
-        if ( domaineDTO == null ) {
-            return null;
-        }
-
-        Domaine domaine = new Domaine();
-
-        domaine.setId( domaineDTO.getId() );
-        domaine.setNom( domaineDTO.getNom() );
-        domaine.setDescription( domaineDTO.getDescription() );
-
-        return domaine;
-    }
-
-    protected Set<Domaine> domaineDTOSetToDomaineSet(Set<DomaineDTO> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<Domaine> set1 = new HashSet<Domaine>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( DomaineDTO domaineDTO : set ) {
-            set1.add( domaineDTOToDomaine( domaineDTO ) );
-        }
-
-        return set1;
     }
 
     protected Client clientDTOToClient(ClientDTO clientDTO) {
@@ -295,7 +273,10 @@ public class OffreInputMapperImpl extends OffreInputMapper {
         demande.setNom( demandeDTO.getNom() );
         demande.setDateDeCreation( demandeDTO.getDateDeCreation() );
         demande.setStatut( demandeDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
+        Set<Domaine> set = demandeDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient( demandeDTO.getClient() ) );
 
         return demande;
@@ -321,33 +302,6 @@ public class OffreInputMapperImpl extends OffreInputMapper {
         opportunite.demande( demandeDTOToDemande( opportuniteDTO.getDemande() ) );
 
         return opportunite;
-    }
-
-    protected DomaineDTO domaineToDomaineDTO(Domaine domaine) {
-        if ( domaine == null ) {
-            return null;
-        }
-
-        DomaineDTO domaineDTO = new DomaineDTO();
-
-        domaineDTO.setId( domaine.getId() );
-        domaineDTO.setNom( domaine.getNom() );
-        domaineDTO.setDescription( domaine.getDescription() );
-
-        return domaineDTO;
-    }
-
-    protected Set<DomaineDTO> domaineSetToDomaineDTOSet(Set<Domaine> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<DomaineDTO> set1 = new HashSet<DomaineDTO>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( Domaine domaine : set ) {
-            set1.add( domaineToDomaineDTO( domaine ) );
-        }
-
-        return set1;
     }
 
     protected ClientDTO clientToClientDTO(Client client) {
@@ -393,7 +347,10 @@ public class OffreInputMapperImpl extends OffreInputMapper {
         demandeDTO.setNom( demande.getNom() );
         demandeDTO.setDateDeCreation( demande.getDateDeCreation() );
         demandeDTO.setStatut( demande.getStatut() );
-        demandeDTO.setDomaines( domaineSetToDomaineDTOSet( demande.getDomaines() ) );
+        Set<Domaine> set = demande.getDomaines();
+        if ( set != null ) {
+            demandeDTO.setDomaines( new HashSet<Domaine>( set ) );
+        }
         demandeDTO.setClient( clientToClientDTO( demande.getClient() ) );
 
         return demandeDTO;
@@ -507,16 +464,16 @@ public class OffreInputMapperImpl extends OffreInputMapper {
             mappingTarget.setStatut( demandeDTO.getStatut() );
         }
         if ( mappingTarget.getDomaines() != null ) {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
                 mappingTarget.getDomaines().clear();
                 mappingTarget.getDomaines().addAll( set );
             }
         }
         else {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
-                mappingTarget.domaines( set );
+                mappingTarget.domaines( new HashSet<Domaine>( set ) );
             }
         }
         if ( demandeDTO.getClient() != null ) {

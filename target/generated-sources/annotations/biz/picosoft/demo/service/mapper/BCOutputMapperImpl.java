@@ -11,7 +11,6 @@ import biz.picosoft.demo.domain.Projet;
 import biz.picosoft.demo.service.dto.BCOutputDTO;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
-import biz.picosoft.demo.service.dto.DomaineDTO;
 import biz.picosoft.demo.service.dto.OffreDTO;
 import biz.picosoft.demo.service.dto.OpportuniteDTO;
 import biz.picosoft.demo.service.dto.ProjetDTO;
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:16+0200",
+    date = "2024-05-28T22:39:25+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -171,33 +170,6 @@ public class BCOutputMapperImpl extends BCOutputMapper {
         return bCOutputDTO;
     }
 
-    protected Domaine domaineDTOToDomaine(DomaineDTO domaineDTO) {
-        if ( domaineDTO == null ) {
-            return null;
-        }
-
-        Domaine domaine = new Domaine();
-
-        domaine.setId( domaineDTO.getId() );
-        domaine.setNom( domaineDTO.getNom() );
-        domaine.setDescription( domaineDTO.getDescription() );
-
-        return domaine;
-    }
-
-    protected Set<Domaine> domaineDTOSetToDomaineSet(Set<DomaineDTO> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<Domaine> set1 = new HashSet<Domaine>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( DomaineDTO domaineDTO : set ) {
-            set1.add( domaineDTOToDomaine( domaineDTO ) );
-        }
-
-        return set1;
-    }
-
     protected void clientDTOToClient(ClientDTO clientDTO, Client mappingTarget) {
         if ( clientDTO == null ) {
             return;
@@ -284,16 +256,16 @@ public class BCOutputMapperImpl extends BCOutputMapper {
             mappingTarget.setStatut( demandeDTO.getStatut() );
         }
         if ( mappingTarget.getDomaines() != null ) {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
                 mappingTarget.getDomaines().clear();
                 mappingTarget.getDomaines().addAll( set );
             }
         }
         else {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( demandeDTO.getDomaines() );
+            Set<Domaine> set = demandeDTO.getDomaines();
             if ( set != null ) {
-                mappingTarget.domaines( set );
+                mappingTarget.domaines( new HashSet<Domaine>( set ) );
             }
         }
         if ( demandeDTO.getClient() != null ) {
@@ -497,7 +469,10 @@ public class BCOutputMapperImpl extends BCOutputMapper {
         demande.setNom( demandeDTO.getNom() );
         demande.setDateDeCreation( demandeDTO.getDateDeCreation() );
         demande.setStatut( demandeDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
+        Set<Domaine> set = demandeDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient1( demandeDTO.getClient() ) );
 
         return demande;
@@ -578,33 +553,6 @@ public class BCOutputMapperImpl extends BCOutputMapper {
         return projet;
     }
 
-    protected DomaineDTO domaineToDomaineDTO(Domaine domaine) {
-        if ( domaine == null ) {
-            return null;
-        }
-
-        DomaineDTO domaineDTO = new DomaineDTO();
-
-        domaineDTO.setId( domaine.getId() );
-        domaineDTO.setNom( domaine.getNom() );
-        domaineDTO.setDescription( domaine.getDescription() );
-
-        return domaineDTO;
-    }
-
-    protected Set<DomaineDTO> domaineSetToDomaineDTOSet(Set<Domaine> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<DomaineDTO> set1 = new HashSet<DomaineDTO>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( Domaine domaine : set ) {
-            set1.add( domaineToDomaineDTO( domaine ) );
-        }
-
-        return set1;
-    }
-
     protected ClientDTO clientToClientDTO(Client client) {
         if ( client == null ) {
             return null;
@@ -648,7 +596,10 @@ public class BCOutputMapperImpl extends BCOutputMapper {
         demandeDTO.setNom( demande.getNom() );
         demandeDTO.setDateDeCreation( demande.getDateDeCreation() );
         demandeDTO.setStatut( demande.getStatut() );
-        demandeDTO.setDomaines( domaineSetToDomaineDTOSet( demande.getDomaines() ) );
+        Set<Domaine> set = demande.getDomaines();
+        if ( set != null ) {
+            demandeDTO.setDomaines( new HashSet<Domaine>( set ) );
+        }
         demandeDTO.setClient( clientToClientDTO( demande.getClient() ) );
 
         return demandeDTO;

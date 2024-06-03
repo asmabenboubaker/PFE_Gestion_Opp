@@ -44,6 +44,16 @@ public class Projet implements Serializable {
 
     @Column(name = "participants")
     private String participants;
+    @OneToMany(mappedBy = "project")
+    private Set<Task> tasks = new HashSet<>();
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     @ManyToMany
     @JoinTable(

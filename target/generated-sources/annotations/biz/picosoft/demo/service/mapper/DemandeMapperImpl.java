@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T13:48:17+0200",
+    date = "2024-05-28T22:39:25+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -102,16 +102,16 @@ public class DemandeMapperImpl implements DemandeMapper {
             entity.setStatut( dto.getStatut() );
         }
         if ( entity.getDomaines() != null ) {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( dto.getDomaines() );
+            Set<Domaine> set = dto.getDomaines();
             if ( set != null ) {
                 entity.getDomaines().clear();
                 entity.getDomaines().addAll( set );
             }
         }
         else {
-            Set<Domaine> set = domaineDTOSetToDomaineSet( dto.getDomaines() );
+            Set<Domaine> set = dto.getDomaines();
             if ( set != null ) {
-                entity.domaines( set );
+                entity.domaines( new HashSet<Domaine>( set ) );
             }
         }
         if ( dto.getClient() != null ) {
@@ -130,7 +130,6 @@ public class DemandeMapperImpl implements DemandeMapper {
 
         DemandeDTO demandeDTO = new DemandeDTO();
 
-        demandeDTO.setDomaines( toDtoDomaineIdSet( s.getDomaines() ) );
         demandeDTO.setClient( toDtoClientId( s.getClient() ) );
         demandeDTO.setCreateOpp( s.isCreateOpp() );
         demandeDTO.setDeadline( s.getDeadline() );
@@ -148,6 +147,10 @@ public class DemandeMapperImpl implements DemandeMapper {
         demandeDTO.setNom( s.getNom() );
         demandeDTO.setDateDeCreation( s.getDateDeCreation() );
         demandeDTO.setStatut( s.getStatut() );
+        Set<Domaine> set = s.getDomaines();
+        if ( set != null ) {
+            demandeDTO.setDomaines( new HashSet<Domaine>( set ) );
+        }
 
         return demandeDTO;
     }
@@ -176,7 +179,10 @@ public class DemandeMapperImpl implements DemandeMapper {
         demande.setNom( demandeDTO.getNom() );
         demande.setDateDeCreation( demandeDTO.getDateDeCreation() );
         demande.setStatut( demandeDTO.getStatut() );
-        demande.domaines( domaineDTOSetToDomaineSet( demandeDTO.getDomaines() ) );
+        Set<Domaine> set = demandeDTO.getDomaines();
+        if ( set != null ) {
+            demande.domaines( new HashSet<Domaine>( set ) );
+        }
         demande.client( clientDTOToClient1( demandeDTO.getClient() ) );
 
         return demande;
@@ -206,33 +212,6 @@ public class DemandeMapperImpl implements DemandeMapper {
         clientDTO.setId( client.getId() );
 
         return clientDTO;
-    }
-
-    protected Domaine domaineDTOToDomaine(DomaineDTO domaineDTO) {
-        if ( domaineDTO == null ) {
-            return null;
-        }
-
-        Domaine domaine = new Domaine();
-
-        domaine.setId( domaineDTO.getId() );
-        domaine.setNom( domaineDTO.getNom() );
-        domaine.setDescription( domaineDTO.getDescription() );
-
-        return domaine;
-    }
-
-    protected Set<Domaine> domaineDTOSetToDomaineSet(Set<DomaineDTO> set) {
-        if ( set == null ) {
-            return null;
-        }
-
-        Set<Domaine> set1 = new HashSet<Domaine>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
-        for ( DomaineDTO domaineDTO : set ) {
-            set1.add( domaineDTOToDomaine( domaineDTO ) );
-        }
-
-        return set1;
     }
 
     protected void clientDTOToClient(ClientDTO clientDTO, Client mappingTarget) {

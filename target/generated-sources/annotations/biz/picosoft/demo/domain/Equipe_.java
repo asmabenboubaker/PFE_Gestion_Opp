@@ -1,7 +1,6 @@
 package biz.picosoft.demo.domain;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -9,8 +8,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Equipe.class)
 public abstract class Equipe_ {
 
-	public static volatile SetAttribute<Equipe, Projet> projects;
-	public static volatile SetAttribute<Equipe, Opportunite> opportunites;
 	public static volatile SingularAttribute<Equipe, String> chef;
 	public static volatile SingularAttribute<Equipe, String> description;
 	public static volatile SingularAttribute<Equipe, String> telephone;
@@ -18,8 +15,6 @@ public abstract class Equipe_ {
 	public static volatile SingularAttribute<Equipe, String> nom;
 	public static volatile SingularAttribute<Equipe, String> email;
 
-	public static final String PROJECTS = "projects";
-	public static final String OPPORTUNITES = "opportunites";
 	public static final String CHEF = "chef";
 	public static final String DESCRIPTION = "description";
 	public static final String TELEPHONE = "telephone";

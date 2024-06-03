@@ -40,6 +40,17 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
         this.wfComment = wfComment;
     }
 
+
+    private Set<Equipe> equipes ;
+
+    public Set<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(Set<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
     private DemandeDTO demande;
     private String decision;
     private String activityName;
@@ -197,25 +208,28 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof OpportuniteOutputDTO)) return false;
         OpportuniteOutputDTO that = (OpportuniteOutputDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(nom, that.nom) && Objects.equals(msg, that.msg) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createAt, that.createAt) && Objects.equals(montantEstime, that.montantEstime) && Objects.equals(wfComment, that.wfComment) && Objects.equals(demande, that.demande) && Objects.equals(decision, that.decision) && Objects.equals(activityName, that.activityName) && Objects.equals(endProcess, that.endProcess) && Objects.equals(wfProcessID, that.wfProcessID) && Objects.equals(assignee, that.assignee) && Objects.equals(status, that.status) && Objects.equals(fileAccessToken, that.fileAccessToken) && Objects.equals(securiteLevel, that.securiteLevel) && Objects.equals(draft, that.draft) && Objects.equals(wfCurrentComment, that.wfCurrentComment);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getNom(), that.getNom()) && Objects.equals(getMsg(), that.getMsg()) && Objects.equals(getCreatedBy(), that.getCreatedBy()) && Objects.equals(getCreateAt(), that.getCreateAt()) && Objects.equals(getMontantEstime(), that.getMontantEstime()) && Objects.equals(getWfComment(), that.getWfComment()) && Objects.equals(getEquipes(), that.getEquipes()) && Objects.equals(getDemande(), that.getDemande()) && Objects.equals(getDecision(), that.getDecision()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getFileAccessToken(), that.getFileAccessToken()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getDraft(), that.getDraft()) && Objects.equals(getWfCurrentComment(), that.getWfCurrentComment());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, nom, msg, createdBy, createAt, montantEstime, wfComment, demande, decision, activityName, endProcess, wfProcessID, assignee, status, fileAccessToken, securiteLevel, draft, wfCurrentComment);
+        return Objects.hash(getId(), getDescription(), getNom(), getMsg(), getCreatedBy(), getCreateAt(), getMontantEstime(), getWfComment(), getEquipes(), getDemande(), getDecision(), getActivityName(), getEndProcess(), getWfProcessID(), getAssignee(), getStatus(), getFileAccessToken(), getSecuriteLevel(), getDraft(), getWfCurrentComment());
     }
 
     @Override
     public String toString() {
-        return "OpportuniteInputDTO{" +
+        return "OpportuniteOutputDTO{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", nom='" + nom + '\'' +
+                ", msg='" + msg + '\'' +
                 ", createdBy=" + createdBy +
                 ", createAt=" + createAt +
                 ", montantEstime=" + montantEstime +
+                ", wfComment='" + wfComment + '\'' +
+                ", equipes=" + equipes +
                 ", demande=" + demande +
                 ", decision='" + decision + '\'' +
                 ", activityName='" + activityName + '\'' +

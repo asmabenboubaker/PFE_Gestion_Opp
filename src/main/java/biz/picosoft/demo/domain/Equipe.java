@@ -25,27 +25,29 @@ public class Equipe implements Serializable {
     private String email;
     private String telephone;
   // many to many with project
-  @ManyToMany
-  @JoinTable(
-          name = "equipe_projet",
-          joinColumns = @JoinColumn(name = "equipe_id"),
-          inverseJoinColumns = @JoinColumn(name = "projet_id")
-  )
-  private Set<Projet> projects;
-    @ManyToMany
-    @JoinTable(
-            name = "equipe_opp",
-            joinColumns = @JoinColumn(name = "equipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "opp_id")
-    )
-    private Set<Opportunite> opportunites = new HashSet<>();
-    public Set<Opportunite> getOpportunites() {
-        return opportunites;
-    }
-
-    public void setOpportunites(Set<Opportunite> opportunites) {
-        this.opportunites = opportunites;
-    }
+//    @JsonIgnore
+//  @ManyToMany
+//  @JoinTable(
+//          name = "equipe_projet",
+//          joinColumns = @JoinColumn(name = "equipe_id"),
+//          inverseJoinColumns = @JoinColumn(name = "projet_id")
+//  )
+//  private Set<Projet> projects;
+//    @JsonIgnore
+//    @ManyToMany
+//    @JoinTable(
+//            name = "equipe_opp",
+//            joinColumns = @JoinColumn(name = "equipe_id"),
+//            inverseJoinColumns = @JoinColumn(name = "opp_id")
+//    )
+//    private Set<Opportunite> opportunites = new HashSet<>();
+//    public Set<Opportunite> getOpportunites() {
+//        return opportunites;
+//    }
+//
+//    public void setOpportunites(Set<Opportunite> opportunites) {
+//        this.opportunites = opportunites;
+//    }
 
     public Long getId() {
         return id;
@@ -95,25 +97,26 @@ public class Equipe implements Serializable {
         this.telephone = telephone;
     }
 
-    public Set<Projet> getProjects() {
-        return projects;
-    }
+//    public Set<Projet> getProjects() {
+//        return projects;
+//    }
+//
+//    public void setProjects(Set<Projet> projects) {
+//        this.projects = projects;
+//    }
 
-    public void setProjects(Set<Projet> projects) {
-        this.projects = projects;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Equipe)) return false;
         Equipe equipe = (Equipe) o;
-        return Objects.equals(id, equipe.id) && Objects.equals(nom, equipe.nom) && Objects.equals(description, equipe.description) && Objects.equals(chef, equipe.chef) && Objects.equals(email, equipe.email) && Objects.equals(telephone, equipe.telephone) && Objects.equals(projects, equipe.projects);
+        return Objects.equals(getId(), equipe.getId()) && Objects.equals(getNom(), equipe.getNom()) && Objects.equals(getDescription(), equipe.getDescription()) && Objects.equals(getChef(), equipe.getChef()) && Objects.equals(getEmail(), equipe.getEmail()) && Objects.equals(getTelephone(), equipe.getTelephone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, description, chef, email, telephone, projects);
+        return Objects.hash(getId(), getNom(), getDescription(), getChef(), getEmail(), getTelephone());
     }
 
     @Override
@@ -125,7 +128,6 @@ public class Equipe implements Serializable {
                 ", chef='" + chef + '\'' +
                 ", email='" + email + '\'' +
                 ", telephone='" + telephone + '\'' +
-                ", projects=" + projects +
                 '}';
     }
 }

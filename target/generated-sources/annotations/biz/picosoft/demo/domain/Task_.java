@@ -11,6 +11,7 @@ public abstract class Task_ {
 
 	public static volatile SingularAttribute<Task, LocalDate> end_date;
 	public static volatile SingularAttribute<Task, String> subject;
+	public static volatile SingularAttribute<Task, Projet> project;
 	public static volatile SingularAttribute<Task, String> details;
 	public static volatile SingularAttribute<Task, Long> id;
 	public static volatile SingularAttribute<Task, String> assignee;
@@ -20,6 +21,7 @@ public abstract class Task_ {
 
 	public static final String END_DATE = "end_date";
 	public static final String SUBJECT = "subject";
+	public static final String PROJECT = "project";
 	public static final String DETAILS = "details";
 	public static final String ID = "id";
 	public static final String ASSIGNEE = "assignee";
