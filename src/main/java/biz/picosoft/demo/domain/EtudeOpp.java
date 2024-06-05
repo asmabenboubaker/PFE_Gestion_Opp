@@ -1,10 +1,14 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * A EtudeOpp.
@@ -21,11 +25,11 @@ public class EtudeOpp implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nom_equipe")
-    private String nomEquipe;
+    @Column(name = "nature")
+    private String nature;
 
-    @Column(name = "membres")
-    private String membres;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "specialite")
     private String specialite;
@@ -33,14 +37,25 @@ public class EtudeOpp implements Serializable {
     @Column(name = "nbre_hours")
     private Long nbreHours;
 
-    @Column(name = "evaluation")
-    private String evaluation;
-
+    @Column(name = "responsableEtude")
+    private String responsableEtude;
+    private LocalDate dateDebut;
     @Column(name = "complexite")
     private String complexite;
+    @OneToMany(mappedBy = "etudeOpp", cascade = CascadeType.ALL)
+    private Set<TacheOpp> tachesOpp;
+
+    public Set<TacheOpp> getTachesOpp() {
+        return tachesOpp;
+    }
+
+    public void setTachesOpp(Set<TacheOpp> tachesOpp) {
+        this.tachesOpp = tachesOpp;
+    }
 
     // one to many relationship with Opportunite
     // chaque opp peut avoir plusieurs etudes
+    @JsonIgnore
     @ManyToOne
     private Opportunite opportunite;
 
@@ -66,31 +81,10 @@ public class EtudeOpp implements Serializable {
         this.id = id;
     }
 
-    public String getNomEquipe() {
-        return this.nomEquipe;
-    }
 
-    public EtudeOpp nomEquipe(String nomEquipe) {
-        this.setNomEquipe(nomEquipe);
-        return this;
-    }
 
-    public void setNomEquipe(String nomEquipe) {
-        this.nomEquipe = nomEquipe;
-    }
 
-    public String getMembres() {
-        return this.membres;
-    }
 
-    public EtudeOpp membres(String membres) {
-        this.setMembres(membres);
-        return this;
-    }
-
-    public void setMembres(String membres) {
-        this.membres = membres;
-    }
 
     public String getSpecialite() {
         return this.specialite;
@@ -118,18 +112,10 @@ public class EtudeOpp implements Serializable {
         this.nbreHours = nbreHours;
     }
 
-    public String getEvaluation() {
-        return this.evaluation;
-    }
 
-    public EtudeOpp evaluation(String evaluation) {
-        this.setEvaluation(evaluation);
-        return this;
-    }
 
-    public void setEvaluation(String evaluation) {
-        this.evaluation = evaluation;
-    }
+
+
 
     public String getComplexite() {
         return this.complexite;
@@ -146,34 +132,64 @@ public class EtudeOpp implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EtudeOpp)) {
-            return false;
-        }
-        return id != null && id.equals(((EtudeOpp) o).id);
+        if (this == o) return true;
+        if (!(o instanceof EtudeOpp)) return false;
+        EtudeOpp etudeOpp = (EtudeOpp) o;
+        return Objects.equals(getId(), etudeOpp.getId()) && Objects.equals(getNature(), etudeOpp.getNature()) && Objects.equals(getDescription(), etudeOpp.getDescription()) && Objects.equals(getSpecialite(), etudeOpp.getSpecialite()) && Objects.equals(getNbreHours(), etudeOpp.getNbreHours()) && Objects.equals(getResponsableEtude(), etudeOpp.getResponsableEtude()) && Objects.equals(getDateDebut(), etudeOpp.getDateDebut()) && Objects.equals(getComplexite(), etudeOpp.getComplexite()) && Objects.equals(getTachesOpp(), etudeOpp.getTachesOpp()) && Objects.equals(getOpportunite(), etudeOpp.getOpportunite());
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+        return Objects.hash(getId(), getNature(), getDescription(), getSpecialite(), getNbreHours(), getResponsableEtude(), getDateDebut(), getComplexite());
     }
 
-    // prettier-ignore
+    public String getNature() {
+        return nature;
+    }
+
+    public void setNature(String nature) {
+        this.nature = nature;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getResponsableEtude() {
+        return responsableEtude;
+    }
+
+    public void setResponsableEtude(String responsableEtude) {
+        this.responsableEtude = responsableEtude;
+    }
+
+    public LocalDate getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(LocalDate dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
     @Override
     public String toString() {
         return "EtudeOpp{" +
-            "id=" + getId() +
-            ", nomEquipe='" + getNomEquipe() + "'" +
-            ", membres='" + getMembres() + "'" +
-            ", specialite='" + getSpecialite() + "'" +
-            ", nbreHours=" + getNbreHours() +
-            ", evaluation='" + getEvaluation() + "'" +
-            ", complexite='" + getComplexite() + "'" +
-            "}";
+                "id=" + id +
+                ", nature='" + nature + '\'' +
+                ", description='" + description + '\'' +
+                ", specialite='" + specialite + '\'' +
+                ", nbreHours=" + nbreHours +
+                ", responsableEtude='" + responsableEtude + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", complexite='" + complexite + '\'' +
+                ", opportunite=" + opportunite +
+                '}';
     }
 }

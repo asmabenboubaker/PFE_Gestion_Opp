@@ -91,11 +91,11 @@ public class EtudeOppQueryService extends QueryService<EtudeOpp> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), EtudeOpp_.id));
             }
-            if (criteria.getNomEquipe() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNomEquipe(), EtudeOpp_.nomEquipe));
+            if (criteria.getNature() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNature(), EtudeOpp_.nature));
             }
-            if (criteria.getMembres() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getMembres(), EtudeOpp_.membres));
+            if (criteria.getDescription() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDescription(), EtudeOpp_.description));
             }
             if (criteria.getSpecialite() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSpecialite(), EtudeOpp_.specialite));
@@ -103,8 +103,12 @@ public class EtudeOppQueryService extends QueryService<EtudeOpp> {
             if (criteria.getNbreHours() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNbreHours(), EtudeOpp_.nbreHours));
             }
-            if (criteria.getEvaluation() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getEvaluation(), EtudeOpp_.evaluation));
+            if (criteria.getResponsableEtude() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getResponsableEtude(), EtudeOpp_.responsableEtude));
+            }
+            // datedebut
+            if (criteria.getDateDebut() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDateDebut(), EtudeOpp_.dateDebut));
             }
             if (criteria.getComplexite() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getComplexite(), EtudeOpp_.complexite));

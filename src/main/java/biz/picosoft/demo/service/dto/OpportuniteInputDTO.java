@@ -1,6 +1,7 @@
 package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 
 import java.io.Serializable;
 
@@ -60,6 +61,28 @@ public class OpportuniteInputDTO implements Serializable {
     private String wfCurrentComment;
     private String nomDepartement;
     private String sidDepartement;
+    private Set<EtudeOpp> etudeOpps;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OpportuniteInputDTO)) return false;
+        OpportuniteInputDTO that = (OpportuniteInputDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getNom(), that.getNom()) && Objects.equals(getMsg(), that.getMsg()) && Objects.equals(getCreatedBy(), that.getCreatedBy()) && Objects.equals(getCreateAt(), that.getCreateAt()) && Objects.equals(getMontantEstime(), that.getMontantEstime()) && Objects.equals(getWfComment(), that.getWfComment()) && Objects.equals(getEquipes(), that.getEquipes()) && Objects.equals(getDemande(), that.getDemande()) && Objects.equals(getDecision(), that.getDecision()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getFileAccessToken(), that.getFileAccessToken()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getDraft(), that.getDraft()) && Objects.equals(getWfCurrentComment(), that.getWfCurrentComment()) && Objects.equals(getNomDepartement(), that.getNomDepartement()) && Objects.equals(getSidDepartement(), that.getSidDepartement()) && Objects.equals(getEtudeOpps(), that.getEtudeOpps());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getDescription(), getNom(), getMsg(), getCreatedBy(), getCreateAt(), getMontantEstime(), getWfComment(), getEquipes(), getDemande(), getDecision(), getActivityName(), getEndProcess(), getWfProcessID(), getAssignee(), getStatus(), getFileAccessToken(), getSecuriteLevel(), getDraft(), getWfCurrentComment(), getNomDepartement(), getSidDepartement(), getEtudeOpps());
+    }
+
+    public Set<EtudeOpp> getEtudeOpps() {
+        return etudeOpps;
+    }
+
+    public void setEtudeOpps(Set<EtudeOpp> etudeOpps) {
+        this.etudeOpps = etudeOpps;
+    }
 
     public String getNomDepartement() {
         return nomDepartement;
@@ -219,19 +242,6 @@ public class OpportuniteInputDTO implements Serializable {
 
     public void setWfCurrentComment(String wfCurrentComment) {
         this.wfCurrentComment = wfCurrentComment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OpportuniteInputDTO)) return false;
-        OpportuniteInputDTO that = (OpportuniteInputDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getNom(), that.getNom()) && Objects.equals(getMsg(), that.getMsg()) && Objects.equals(getCreatedBy(), that.getCreatedBy()) && Objects.equals(getCreateAt(), that.getCreateAt()) && Objects.equals(getMontantEstime(), that.getMontantEstime()) && Objects.equals(getWfComment(), that.getWfComment()) && Objects.equals(getEquipes(), that.getEquipes()) && Objects.equals(getDemande(), that.getDemande()) && Objects.equals(getDecision(), that.getDecision()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getFileAccessToken(), that.getFileAccessToken()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getDraft(), that.getDraft()) && Objects.equals(getWfCurrentComment(), that.getWfCurrentComment());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getDescription(), getNom(), getMsg(), getCreatedBy(), getCreateAt(), getMontantEstime(), getWfComment(), getEquipes(), getDemande(), getDecision(), getActivityName(), getEndProcess(), getWfProcessID(), getAssignee(), getStatus(), getFileAccessToken(), getSecuriteLevel(), getDraft(), getWfCurrentComment());
     }
 
     @Override

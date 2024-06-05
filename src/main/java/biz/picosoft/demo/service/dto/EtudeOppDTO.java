@@ -1,6 +1,10 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Opportunite;
+
+import javax.persistence.Column;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -10,17 +14,52 @@ public class EtudeOppDTO implements Serializable {
 
     private Long id;
 
-    private String nomEquipe;
 
-    private String membres;
+    private String nature;
+
+
+    private String description;
+
 
     private String specialite;
 
+
     private Long nbreHours;
 
-    private String evaluation;
+
+    private String responsableEtude;
+    private LocalDate dateDebut;
 
     private String complexite;
+    private Opportunite opportunite;
+
+    @Override
+    public String toString() {
+        return "EtudeOppDTO{" +
+                "id=" + id +
+                ", nature='" + nature + '\'' +
+                ", description='" + description + '\'' +
+                ", specialite='" + specialite + '\'' +
+                ", nbreHours=" + nbreHours +
+                ", responsableEtude='" + responsableEtude + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", complexite='" + complexite + '\'' +
+                ", opportunite=" + opportunite +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EtudeOppDTO)) return false;
+        EtudeOppDTO that = (EtudeOppDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getNature(), that.getNature()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getSpecialite(), that.getSpecialite()) && Objects.equals(getNbreHours(), that.getNbreHours()) && Objects.equals(getResponsableEtude(), that.getResponsableEtude()) && Objects.equals(getDateDebut(), that.getDateDebut()) && Objects.equals(getComplexite(), that.getComplexite()) && Objects.equals(getOpportunite(), that.getOpportunite());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNature(), getDescription(), getSpecialite(), getNbreHours(), getResponsableEtude(), getDateDebut(), getComplexite(), getOpportunite());
+    }
 
     public Long getId() {
         return id;
@@ -30,20 +69,20 @@ public class EtudeOppDTO implements Serializable {
         this.id = id;
     }
 
-    public String getNomEquipe() {
-        return nomEquipe;
+    public String getNature() {
+        return nature;
     }
 
-    public void setNomEquipe(String nomEquipe) {
-        this.nomEquipe = nomEquipe;
+    public void setNature(String nature) {
+        this.nature = nature;
     }
 
-    public String getMembres() {
-        return membres;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMembres(String membres) {
-        this.membres = membres;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getSpecialite() {
@@ -62,12 +101,20 @@ public class EtudeOppDTO implements Serializable {
         this.nbreHours = nbreHours;
     }
 
-    public String getEvaluation() {
-        return evaluation;
+    public String getResponsableEtude() {
+        return responsableEtude;
     }
 
-    public void setEvaluation(String evaluation) {
-        this.evaluation = evaluation;
+    public void setResponsableEtude(String responsableEtude) {
+        this.responsableEtude = responsableEtude;
+    }
+
+    public LocalDate getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(LocalDate dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
     public String getComplexite() {
@@ -78,38 +125,11 @@ public class EtudeOppDTO implements Serializable {
         this.complexite = complexite;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EtudeOppDTO)) {
-            return false;
-        }
-
-        EtudeOppDTO etudeOppDTO = (EtudeOppDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, etudeOppDTO.id);
+    public Opportunite getOpportunite() {
+        return opportunite;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "EtudeOppDTO{" +
-            "id=" + getId() +
-            ", nomEquipe='" + getNomEquipe() + "'" +
-            ", membres='" + getMembres() + "'" +
-            ", specialite='" + getSpecialite() + "'" +
-            ", nbreHours=" + getNbreHours() +
-            ", evaluation='" + getEvaluation() + "'" +
-            ", complexite='" + getComplexite() + "'" +
-            "}";
+    public void setOpportunite(Opportunite opportunite) {
+        this.opportunite = opportunite;
     }
 }

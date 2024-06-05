@@ -356,7 +356,7 @@ private String sidDepartement;
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getExcludeFromView(), getOppNumber(), getStatus(), getNomDepartement(), getSidDepartement(), getIdentifiant(), getActivityName(), getNumberOfattachments(), getWfProcessID(), getSecuriteLevel(), getAssignee(), getEndProcess(), getCreateoffre(), getEquipes(), getDescription(), getNom(), getCreatedBy(), getCreateAt(), getMontantEstime(), getOffres(), getDemande(), getEtudeOpps());
+        return Objects.hash(getId(), getExcludeFromView(), getOppNumber(), getStatus(), getNomDepartement(), getSidDepartement(), getIdentifiant(), getActivityName(), getNumberOfattachments(), getWfProcessID(), getSecuriteLevel(), getAssignee(), getEndProcess(), getCreateoffre(), getEquipes(), getDescription(), getNom(), getCreatedBy(), getCreateAt(), getMontantEstime(), getOffres(), getDemande());
     }
 
     @Override

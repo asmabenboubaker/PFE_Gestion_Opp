@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T11:56:31+0200",
+    date = "2024-06-05T14:51:51+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -23,13 +23,15 @@ public class EtudeOppMapperImpl implements EtudeOppMapper {
 
         EtudeOpp etudeOpp = new EtudeOpp();
 
+        etudeOpp.setOpportunite( dto.getOpportunite() );
         etudeOpp.setId( dto.getId() );
-        etudeOpp.setNomEquipe( dto.getNomEquipe() );
-        etudeOpp.setMembres( dto.getMembres() );
         etudeOpp.setSpecialite( dto.getSpecialite() );
         etudeOpp.setNbreHours( dto.getNbreHours() );
-        etudeOpp.setEvaluation( dto.getEvaluation() );
         etudeOpp.setComplexite( dto.getComplexite() );
+        etudeOpp.setNature( dto.getNature() );
+        etudeOpp.setDescription( dto.getDescription() );
+        etudeOpp.setResponsableEtude( dto.getResponsableEtude() );
+        etudeOpp.setDateDebut( dto.getDateDebut() );
 
         return etudeOpp;
     }
@@ -43,12 +45,14 @@ public class EtudeOppMapperImpl implements EtudeOppMapper {
         EtudeOppDTO etudeOppDTO = new EtudeOppDTO();
 
         etudeOppDTO.setId( entity.getId() );
-        etudeOppDTO.setNomEquipe( entity.getNomEquipe() );
-        etudeOppDTO.setMembres( entity.getMembres() );
+        etudeOppDTO.setNature( entity.getNature() );
+        etudeOppDTO.setDescription( entity.getDescription() );
         etudeOppDTO.setSpecialite( entity.getSpecialite() );
         etudeOppDTO.setNbreHours( entity.getNbreHours() );
-        etudeOppDTO.setEvaluation( entity.getEvaluation() );
+        etudeOppDTO.setResponsableEtude( entity.getResponsableEtude() );
+        etudeOppDTO.setDateDebut( entity.getDateDebut() );
         etudeOppDTO.setComplexite( entity.getComplexite() );
+        etudeOppDTO.setOpportunite( entity.getOpportunite() );
 
         return etudeOppDTO;
     }
@@ -87,14 +91,11 @@ public class EtudeOppMapperImpl implements EtudeOppMapper {
             return;
         }
 
+        if ( dto.getOpportunite() != null ) {
+            entity.setOpportunite( dto.getOpportunite() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
-        }
-        if ( dto.getNomEquipe() != null ) {
-            entity.setNomEquipe( dto.getNomEquipe() );
-        }
-        if ( dto.getMembres() != null ) {
-            entity.setMembres( dto.getMembres() );
         }
         if ( dto.getSpecialite() != null ) {
             entity.setSpecialite( dto.getSpecialite() );
@@ -102,11 +103,20 @@ public class EtudeOppMapperImpl implements EtudeOppMapper {
         if ( dto.getNbreHours() != null ) {
             entity.setNbreHours( dto.getNbreHours() );
         }
-        if ( dto.getEvaluation() != null ) {
-            entity.setEvaluation( dto.getEvaluation() );
-        }
         if ( dto.getComplexite() != null ) {
             entity.setComplexite( dto.getComplexite() );
+        }
+        if ( dto.getNature() != null ) {
+            entity.setNature( dto.getNature() );
+        }
+        if ( dto.getDescription() != null ) {
+            entity.setDescription( dto.getDescription() );
+        }
+        if ( dto.getResponsableEtude() != null ) {
+            entity.setResponsableEtude( dto.getResponsableEtude() );
+        }
+        if ( dto.getDateDebut() != null ) {
+            entity.setDateDebut( dto.getDateDebut() );
         }
     }
 }

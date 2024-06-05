@@ -1,10 +1,12 @@
 package biz.picosoft.demo.service;
 
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.service.dto.EtudeOppDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -60,4 +62,6 @@ public interface EtudeOppService {
 
     // ajouter EtudeOpp acec affectation opportunité
     EtudeOppDTO saveEtudeOppWithAffectation(EtudeOppDTO etudeOppDTO, Long idOpportunite);
+
+    List<EtudeOpp> findAllByOpportuniteId(Long opportuniteId);
 }

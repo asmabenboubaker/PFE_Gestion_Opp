@@ -1,11 +1,14 @@
 package biz.picosoft.demo.controller;
 
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.EtudeOpp;
+import biz.picosoft.demo.domain.TacheOpp;
 import biz.picosoft.demo.repository.EtudeOppRepository;
 import biz.picosoft.demo.service.EtudeOppQueryService;
 import biz.picosoft.demo.service.EtudeOppService;
 import biz.picosoft.demo.service.criteria.EtudeOppCriteria;
 import biz.picosoft.demo.service.dto.EtudeOppDTO;
+import biz.picosoft.demo.service.impl.TacheServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +43,7 @@ public class EtudeOppResource {
     private String applicationName;
 
     private final EtudeOppService etudeOppService;
-
+private final TacheServiceImp tacheServiceImp;
     private final EtudeOppRepository etudeOppRepository;
 
     private final EtudeOppQueryService etudeOppQueryService;
@@ -48,11 +51,13 @@ public class EtudeOppResource {
     public EtudeOppResource(
             EtudeOppService etudeOppService,
             EtudeOppRepository etudeOppRepository,
-            EtudeOppQueryService etudeOppQueryService
+            EtudeOppQueryService etudeOppQueryService,
+            TacheServiceImp tacheServiceImp
     ) {
         this.etudeOppService = etudeOppService;
         this.etudeOppRepository = etudeOppRepository;
         this.etudeOppQueryService = etudeOppQueryService;
+        this.tacheServiceImp = tacheServiceImp;
     }
 
     /**
@@ -217,5 +222,23 @@ public class EtudeOppResource {
                 .created(new URI("/api/etude-opps/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                 .body(result);
+    }
+
+
+    @GetMapping("/opportunite/{opportuniteId}/etudes")
+    public List<EtudeOpp> getAllEtudesByOpportuniteId(@PathVariable Long opportuniteId) {
+        return etudeOppService.findAllByOpportuniteId(opportuniteId);
+    }
+    @PostMapping("/etudes/{etudeId}/taches")
+    public ResponseEntity<Void> addTacheToEtude(@PathVariable Long etudeId, @RequestBody TacheOpp tacheOpp) {
+        log.debug("REST request to add TacheOpp : {} to EtudeOpp : {}", tacheOpp, etudeId);
+        tacheServiceImp.addTacheToEtude(etudeId, tacheOpp);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/etudes/{etudeId}/taches")
+    public ResponseEntity<List<TacheOpp>> getTachesByEtudeId(@PathVariable Long etudeId) {
+        List<TacheOpp> taches = tacheServiceImp.findTachesByEtudeId(etudeId);
+        return ResponseEntity.ok(taches);
     }
 }

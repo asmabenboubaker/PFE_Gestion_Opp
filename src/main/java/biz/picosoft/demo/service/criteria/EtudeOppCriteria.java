@@ -3,6 +3,7 @@ package biz.picosoft.demo.service.criteria;
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.LocalDateFilter;
 import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.service.filter.StringFilter;
 
@@ -25,15 +26,17 @@ public class EtudeOppCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter nomEquipe;
+    private StringFilter nature;;
 
-    private StringFilter membres;
+    private StringFilter description;;
 
     private StringFilter specialite;
 
     private LongFilter nbreHours;
 
-    private StringFilter evaluation;
+    private StringFilter responsableEtude;
+    //dateDebut;
+    private LocalDateFilter dateDebut;
 
     private StringFilter complexite;
 
@@ -43,12 +46,14 @@ public class EtudeOppCriteria implements Serializable, Criteria {
 
     public EtudeOppCriteria(EtudeOppCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.nomEquipe = other.nomEquipe == null ? null : other.nomEquipe.copy();
-        this.membres = other.membres == null ? null : other.membres.copy();
+        this.nature = other.nature == null ? null : other.nature.copy();
+        this.description = other.description == null ? null : other.description.copy();
         this.specialite = other.specialite == null ? null : other.specialite.copy();
         this.nbreHours = other.nbreHours == null ? null : other.nbreHours.copy();
-        this.evaluation = other.evaluation == null ? null : other.evaluation.copy();
+        this.responsableEtude = other.responsableEtude == null ? null : other.responsableEtude.copy();
         this.complexite = other.complexite == null ? null : other.complexite.copy();
+        // date
+        this.dateDebut = other.dateDebut == null ? null : other.dateDebut.copy();
         this.distinct = other.distinct;
     }
 
@@ -61,55 +66,27 @@ public class EtudeOppCriteria implements Serializable, Criteria {
         return id;
     }
 
-    public LongFilter id() {
-        if (id == null) {
-            id = new LongFilter();
-        }
-        return id;
-    }
-
     public void setId(LongFilter id) {
         this.id = id;
     }
 
-    public StringFilter getNomEquipe() {
-        return nomEquipe;
+    public StringFilter getNature() {
+        return nature;
     }
 
-    public StringFilter nomEquipe() {
-        if (nomEquipe == null) {
-            nomEquipe = new StringFilter();
-        }
-        return nomEquipe;
+    public void setNature(StringFilter nature) {
+        this.nature = nature;
     }
 
-    public void setNomEquipe(StringFilter nomEquipe) {
-        this.nomEquipe = nomEquipe;
+    public StringFilter getDescription() {
+        return description;
     }
 
-    public StringFilter getMembres() {
-        return membres;
-    }
-
-    public StringFilter membres() {
-        if (membres == null) {
-            membres = new StringFilter();
-        }
-        return membres;
-    }
-
-    public void setMembres(StringFilter membres) {
-        this.membres = membres;
+    public void setDescription(StringFilter description) {
+        this.description = description;
     }
 
     public StringFilter getSpecialite() {
-        return specialite;
-    }
-
-    public StringFilter specialite() {
-        if (specialite == null) {
-            specialite = new StringFilter();
-        }
         return specialite;
     }
 
@@ -121,40 +98,27 @@ public class EtudeOppCriteria implements Serializable, Criteria {
         return nbreHours;
     }
 
-    public LongFilter nbreHours() {
-        if (nbreHours == null) {
-            nbreHours = new LongFilter();
-        }
-        return nbreHours;
-    }
-
     public void setNbreHours(LongFilter nbreHours) {
         this.nbreHours = nbreHours;
     }
 
-    public StringFilter getEvaluation() {
-        return evaluation;
+    public StringFilter getResponsableEtude() {
+        return responsableEtude;
     }
 
-    public StringFilter evaluation() {
-        if (evaluation == null) {
-            evaluation = new StringFilter();
-        }
-        return evaluation;
+    public void setResponsableEtude(StringFilter responsableEtude) {
+        this.responsableEtude = responsableEtude;
     }
 
-    public void setEvaluation(StringFilter evaluation) {
-        this.evaluation = evaluation;
+    public LocalDateFilter getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(LocalDateFilter dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
     public StringFilter getComplexite() {
-        return complexite;
-    }
-
-    public StringFilter complexite() {
-        if (complexite == null) {
-            complexite = new StringFilter();
-        }
         return complexite;
     }
 
@@ -171,43 +135,30 @@ public class EtudeOppCriteria implements Serializable, Criteria {
     }
 
     @Override
+    public String toString() {
+        return "EtudeOppCriteria{" +
+                "id=" + id +
+                ", nature=" + nature +
+                ", description=" + description +
+                ", specialite=" + specialite +
+                ", nbreHours=" + nbreHours +
+                ", responsableEtude=" + responsableEtude +
+                ", dateDebut=" + dateDebut +
+                ", complexite=" + complexite +
+                ", distinct=" + distinct +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final EtudeOppCriteria that = (EtudeOppCriteria) o;
-        return (
-            Objects.equals(id, that.id) &&
-            Objects.equals(nomEquipe, that.nomEquipe) &&
-            Objects.equals(membres, that.membres) &&
-            Objects.equals(specialite, that.specialite) &&
-            Objects.equals(nbreHours, that.nbreHours) &&
-            Objects.equals(evaluation, that.evaluation) &&
-            Objects.equals(complexite, that.complexite) &&
-            Objects.equals(distinct, that.distinct)
-        );
+        if (this == o) return true;
+        if (!(o instanceof EtudeOppCriteria)) return false;
+        EtudeOppCriteria that = (EtudeOppCriteria) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getNature(), that.getNature()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getSpecialite(), that.getSpecialite()) && Objects.equals(getNbreHours(), that.getNbreHours()) && Objects.equals(getResponsableEtude(), that.getResponsableEtude()) && Objects.equals(getDateDebut(), that.getDateDebut()) && Objects.equals(getComplexite(), that.getComplexite()) && Objects.equals(getDistinct(), that.getDistinct());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nomEquipe, membres, specialite, nbreHours, evaluation, complexite, distinct);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "EtudeOppCriteria{" +
-            (id != null ? "id=" + id + ", " : "") +
-            (nomEquipe != null ? "nomEquipe=" + nomEquipe + ", " : "") +
-            (membres != null ? "membres=" + membres + ", " : "") +
-            (specialite != null ? "specialite=" + specialite + ", " : "") +
-            (nbreHours != null ? "nbreHours=" + nbreHours + ", " : "") +
-            (evaluation != null ? "evaluation=" + evaluation + ", " : "") +
-            (complexite != null ? "complexite=" + complexite + ", " : "") +
-            (distinct != null ? "distinct=" + distinct + ", " : "") +
-            "}";
+        return Objects.hash(getId(), getNature(), getDescription(), getSpecialite(), getNbreHours(), getResponsableEtude(), getDateDebut(), getComplexite(), getDistinct());
     }
 }

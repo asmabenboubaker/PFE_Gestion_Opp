@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -100,5 +101,10 @@ public class EtudeOppServiceImpl implements EtudeOppService {
         etudeOpp = etudeOppRepository.save(etudeOpp);
         return etudeOppMapper.toDto(etudeOpp);
 
+    }
+
+    @Override
+    public List<EtudeOpp> findAllByOpportuniteId(Long opportuniteId) {
+        return etudeOppRepository.findAllByOpportuniteId(opportuniteId);
     }
 }
