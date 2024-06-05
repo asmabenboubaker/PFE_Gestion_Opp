@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-28T22:39:25+0200",
+    date = "2024-06-04T11:56:32+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -57,6 +57,12 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
             return;
         }
 
+        if ( dto.getNomDepartement() != null ) {
+            entity.setNomDepartement( dto.getNomDepartement() );
+        }
+        if ( dto.getSidDepartement() != null ) {
+            entity.setSidDepartement( dto.getSidDepartement() );
+        }
         if ( dto.getStatus() != null ) {
             entity.setStatus( dto.getStatus() );
         }
@@ -122,6 +128,8 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        opportunite.setNomDepartement( oppOutputDTO.getNomDepartement() );
+        opportunite.setSidDepartement( oppOutputDTO.getSidDepartement() );
         opportunite.setStatus( oppOutputDTO.getStatus() );
         Set<Equipe> set = oppOutputDTO.getEquipes();
         if ( set != null ) {
@@ -151,6 +159,8 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         OpportuniteOutputDTO opportuniteOutputDTO = new OpportuniteOutputDTO();
 
+        opportuniteOutputDTO.setNomDepartement( opp.getNomDepartement() );
+        opportuniteOutputDTO.setSidDepartement( opp.getSidDepartement() );
         Set<Equipe> set = opp.getEquipes();
         if ( set != null ) {
             opportuniteOutputDTO.setEquipes( new HashSet<Equipe>( set ) );

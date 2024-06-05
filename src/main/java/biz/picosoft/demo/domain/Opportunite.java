@@ -38,6 +38,24 @@ public class Opportunite implements Serializable {
     }
     @Column(name = "status")
     private String status;
+private String nomDepartement;
+private String sidDepartement;
+
+    public String getNomDepartement() {
+        return nomDepartement;
+    }
+
+    public void setNomDepartement(String nomDepartement) {
+        this.nomDepartement = nomDepartement;
+    }
+
+    public String getSidDepartement() {
+        return sidDepartement;
+    }
+
+    public void setSidDepartement(String sidDepartement) {
+        this.sidDepartement = sidDepartement;
+    }
 
     public String getStatus() {
         return status;
@@ -327,28 +345,46 @@ public class Opportunite implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Opportunite)) return false;
         Opportunite that = (Opportunite) o;
-        return Objects.equals(id, that.id);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getExcludeFromView(), that.getExcludeFromView()) && Objects.equals(getOppNumber(), that.getOppNumber()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getNomDepartement(), that.getNomDepartement()) && Objects.equals(getSidDepartement(), that.getSidDepartement()) && Objects.equals(getIdentifiant(), that.getIdentifiant()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getNumberOfattachments(), that.getNumberOfattachments()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getCreateoffre(), that.getCreateoffre()) && Objects.equals(getEquipes(), that.getEquipes()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getNom(), that.getNom()) && Objects.equals(getCreatedBy(), that.getCreatedBy()) && Objects.equals(getCreateAt(), that.getCreateAt()) && Objects.equals(getMontantEstime(), that.getMontantEstime()) && Objects.equals(getOffres(), that.getOffres()) && Objects.equals(getDemande(), that.getDemande()) && Objects.equals(getEtudeOpps(), that.getEtudeOpps());
     }
 
-    // prettier-ignore
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getExcludeFromView(), getOppNumber(), getStatus(), getNomDepartement(), getSidDepartement(), getIdentifiant(), getActivityName(), getNumberOfattachments(), getWfProcessID(), getSecuriteLevel(), getAssignee(), getEndProcess(), getCreateoffre(), getEquipes(), getDescription(), getNom(), getCreatedBy(), getCreateAt(), getMontantEstime(), getOffres(), getDemande(), getEtudeOpps());
+    }
+
     @Override
     public String toString() {
         return "Opportunite{" +
                 "id=" + id +
-                ", description='" + description + "'" +
-                ", nom='" + nom + "'" +
-                ", createdBy='" + createdBy + "'" +
-                ", createAt='" + createAt + "'" +
+                ", excludeFromView=" + excludeFromView +
+                ", oppNumber='" + oppNumber + '\'' +
+                ", status='" + status + '\'' +
+                ", nomDepartement='" + nomDepartement + '\'' +
+                ", cidDepartement='" + sidDepartement + '\'' +
+                ", identifiant='" + identifiant + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", numberOfattachments=" + numberOfattachments +
+                ", wfProcessID='" + wfProcessID + '\'' +
+                ", securiteLevel=" + securiteLevel +
+                ", assignee='" + assignee + '\'' +
+                ", endProcess=" + endProcess +
+                ", createoffre=" + createoffre +
+                ", equipes=" + equipes +
+                ", description='" + description + '\'' +
+                ", nom='" + nom + '\'' +
+                ", createdBy=" + createdBy +
+                ", createAt=" + createAt +
                 ", montantEstime=" + montantEstime +
-                "}";
+                ", offres=" + offres +
+                ", demande=" + demande +
+                ", etudeOpps=" + etudeOpps +
+                '}';
     }
 }

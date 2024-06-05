@@ -22,10 +22,12 @@ public abstract class Opportunite_ {
 	public static volatile SingularAttribute<Opportunite, String> nom;
 	public static volatile SingularAttribute<Opportunite, ZonedDateTime> createAt;
 	public static volatile SetAttribute<Opportunite, EtudeOpp> etudeOpps;
+	public static volatile SingularAttribute<Opportunite, String> nomDepartement;
 	public static volatile SetAttribute<Opportunite, Equipe> equipes;
 	public static volatile SingularAttribute<Opportunite, ZonedDateTime> createdBy;
 	public static volatile SingularAttribute<Opportunite, String> wfProcessID;
 	public static volatile SingularAttribute<Opportunite, Long> id;
+	public static volatile SingularAttribute<Opportunite, String> sidDepartement;
 	public static volatile SingularAttribute<Opportunite, String> assignee;
 	public static volatile SingularAttribute<Opportunite, Long> numberOfattachments;
 	public static volatile SingularAttribute<Opportunite, Float> montantEstime;
@@ -44,10 +46,12 @@ public abstract class Opportunite_ {
 	public static final String NOM = "nom";
 	public static final String CREATE_AT = "createAt";
 	public static final String ETUDE_OPPS = "etudeOpps";
+	public static final String NOM_DEPARTEMENT = "nomDepartement";
 	public static final String EQUIPES = "equipes";
 	public static final String CREATED_BY = "createdBy";
 	public static final String WF_PROCESS_ID = "wfProcessID";
 	public static final String ID = "id";
+	public static final String SID_DEPARTEMENT = "sidDepartement";
 	public static final String ASSIGNEE = "assignee";
 	public static final String NUMBER_OFATTACHMENTS = "numberOfattachments";
 	public static final String MONTANT_ESTIME = "montantEstime";

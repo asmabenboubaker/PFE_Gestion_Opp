@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-28T22:39:25+0200",
+    date = "2024-06-04T11:56:31+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -255,6 +255,8 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        opportunite.setNomDepartement( opportuniteDTO.getNomDepartement() );
+        opportunite.setSidDepartement( opportuniteDTO.getSidDepartement() );
         Set<Equipe> set = opportuniteDTO.getEquipes();
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
@@ -434,6 +436,12 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( opportuniteDTO.getNomDepartement() != null ) {
+            mappingTarget.setNomDepartement( opportuniteDTO.getNomDepartement() );
+        }
+        if ( opportuniteDTO.getSidDepartement() != null ) {
+            mappingTarget.setSidDepartement( opportuniteDTO.getSidDepartement() );
+        }
         if ( mappingTarget.getEquipes() != null ) {
             Set<Equipe> set = opportuniteDTO.getEquipes();
             if ( set != null ) {

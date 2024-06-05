@@ -16,6 +16,24 @@ public class OpportuniteOutputDTO extends ObjectsDTO implements Serializable {
 
     private String nom;
     private String msg;
+    private String nomDepartement;
+    private String sidDepartement;
+
+    public String getNomDepartement() {
+        return nomDepartement;
+    }
+
+    public void setNomDepartement(String nomDepartement) {
+        this.nomDepartement = nomDepartement;
+    }
+
+    public String getSidDepartement() {
+        return sidDepartement;
+    }
+
+    public void setSidDepartement(String sidDepartement) {
+        this.sidDepartement = sidDepartement;
+    }
 
     public String getMsg() {
         return msg;

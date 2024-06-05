@@ -58,6 +58,24 @@ public class OpportuniteInputDTO implements Serializable {
 
     private Boolean draft;
     private String wfCurrentComment;
+    private String nomDepartement;
+    private String sidDepartement;
+
+    public String getNomDepartement() {
+        return nomDepartement;
+    }
+
+    public void setNomDepartement(String nomDepartement) {
+        this.nomDepartement = nomDepartement;
+    }
+
+    public String getSidDepartement() {
+        return sidDepartement;
+    }
+
+    public void setSidDepartement(String sidDepartement) {
+        this.sidDepartement = sidDepartement;
+    }
 
     public Set<Equipe> getEquipes() {
         return equipes;

@@ -21,6 +21,24 @@ public class OpportuniteDTO implements Serializable {
     private ZonedDateTime createdBy;
 
     private ZonedDateTime createAt;
+    private String nomDepartement;
+    private String sidDepartement;
+
+    public String getNomDepartement() {
+        return nomDepartement;
+    }
+
+    public void setNomDepartement(String nomDepartement) {
+        this.nomDepartement = nomDepartement;
+    }
+
+    public String getSidDepartement() {
+        return sidDepartement;
+    }
+
+    public void setSidDepartement(String sidDepartement) {
+        this.sidDepartement = sidDepartement;
+    }
 
     private Float montantEstime;
 

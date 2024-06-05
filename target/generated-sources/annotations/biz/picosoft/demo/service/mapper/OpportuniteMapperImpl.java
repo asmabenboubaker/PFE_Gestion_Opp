@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-28T22:39:25+0200",
+    date = "2024-06-04T11:56:32+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -31,6 +31,8 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
 
         Opportunite opportunite = new Opportunite();
 
+        opportunite.setNomDepartement( dto.getNomDepartement() );
+        opportunite.setSidDepartement( dto.getSidDepartement() );
         Set<Equipe> set = dto.getEquipes();
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
@@ -80,6 +82,12 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
             return;
         }
 
+        if ( dto.getNomDepartement() != null ) {
+            entity.setNomDepartement( dto.getNomDepartement() );
+        }
+        if ( dto.getSidDepartement() != null ) {
+            entity.setSidDepartement( dto.getSidDepartement() );
+        }
         if ( entity.getEquipes() != null ) {
             Set<Equipe> set = dto.getEquipes();
             if ( set != null ) {
@@ -132,6 +140,8 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
         if ( set != null ) {
             opportuniteDTO.setEquipes( new HashSet<Equipe>( set ) );
         }
+        opportuniteDTO.setNomDepartement( s.getNomDepartement() );
+        opportuniteDTO.setSidDepartement( s.getSidDepartement() );
         opportuniteDTO.setId( s.getId() );
         opportuniteDTO.setDescription( s.getDescription() );
         opportuniteDTO.setNom( s.getNom() );
