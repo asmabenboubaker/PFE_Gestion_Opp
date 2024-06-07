@@ -1,6 +1,7 @@
 package biz.picosoft.demo.controller;
 
 
+import biz.picosoft.demo.domain.Attachment;
 import biz.picosoft.demo.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -42,5 +44,27 @@ public class FilesController {
         byte[] imageData = filesService.getFiles(fileName);
 
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+    }
+    @GetMapping("/getFilesByClassAndObject/{idClasse}/{idObject}")
+    public ResponseEntity<List<Attachment>> getFilesByClassAndObject(
+            @PathVariable Long idClasse, @PathVariable Long idObject) {
+        List<Attachment> files = filesService.getFilesByIdClasseAndIdObject(idClasse, idObject);
+
+        if (files.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(files, HttpStatus.OK);
+    }
+    @PostMapping("/addFile/{idClasse}/{idObject}")
+    public ResponseEntity<String> addFile(
+            @PathVariable Long idClasse, @PathVariable Long idObject,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            String message = filesService.addFile(idClasse, idObject, file);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("File upload failed: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -5,12 +5,14 @@ import biz.picosoft.demo.domain.Attachment;
 import biz.picosoft.demo.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class FilesService {
@@ -35,6 +37,7 @@ public class FilesService {
         return null;
     }
 
+    @Transactional(readOnly = true)
     public byte[] getFiles(String fileName) {
         return fileRepository.findByName(fileName).getImageData();
     }
@@ -69,5 +72,32 @@ public class FilesService {
 
         return java.nio.file.Files.readAllBytes(filePath);
     }
+    @Transactional
+    public List<Attachment> getFilesByIdClasseAndIdObject(Long idClasse, Long idObject) {
+        return fileRepository.findByIdClasseAndIdObject(idClasse, idObject);
+    }
 
+
+    public String addFile(Long idClasse, Long idObject, MultipartFile file) throws IOException {
+        String filePath = FILE_PATH + file.getOriginalFilename();
+
+        Attachment attachment = Attachment.builder()
+                .idClasse(idClasse)
+                .idObject(idObject)
+                .name(file.getOriginalFilename())
+                .path(filePath)
+                .type(file.getContentType())
+                .imageData(file.getBytes())
+                .build();
+
+        attachment = fileRepository.save(attachment);
+
+        file.transferTo(new File(filePath));
+
+        if (attachment.getId() != null) {
+            return "File uploaded successfully with idClasse and idObject";
+        }
+
+        return "File upload failed";
+    }
 }

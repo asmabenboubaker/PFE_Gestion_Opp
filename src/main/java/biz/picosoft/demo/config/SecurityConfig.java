@@ -44,7 +44,8 @@ public class SecurityConfig {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             http.authorizeRequests().antMatchers("/build-number").permitAll()
             .antMatchers("/ws/**").permitAll()
-               .antMatchers("/stomp").permitAll();
+               .antMatchers("/stomp").permitAll()
+                            .antMatchers("/api/**").permitAll();
             http.authorizeRequests().anyRequest().authenticated();
             http.addFilterBefore(new JWTAutorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 

@@ -32,6 +32,7 @@ public class Attachment implements Serializable {
     private String path;
 
     @Lob
+    @Column(name = "image_data")
     private byte[] imageData;
    public Attachment(String filePath) {
         this.path = filePath;
