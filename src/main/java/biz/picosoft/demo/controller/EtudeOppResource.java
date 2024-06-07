@@ -241,4 +241,15 @@ private final TacheServiceImp tacheServiceImp;
         List<TacheOpp> taches = tacheServiceImp.findTachesByEtudeId(etudeId);
         return ResponseEntity.ok(taches);
     }
+    // add tache
+    @PostMapping("/etudes/taches")
+    public ResponseEntity<TacheOpp> createTache(@RequestBody TacheOpp tacheOpp) throws URISyntaxException {
+        log.debug("REST request to save TacheOpp : {}", tacheOpp);
+
+        TacheOpp result = tacheServiceImp.save(tacheOpp);
+        return ResponseEntity
+                .created(new URI("/api/etudes/taches/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+    }
 }

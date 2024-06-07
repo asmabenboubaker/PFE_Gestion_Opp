@@ -39,4 +39,8 @@ private final EtudeOppRepository etudeOppRepository;
     public List<TacheOpp> findTachesByEtudeId(Long etudeId) {
         return tacheRepo.findByEtudeOppId(etudeId);
     }
+    //add tache
+    public TacheOpp save(TacheOpp tacheOpp) {
+        return tacheRepo.save(tacheOpp);
+    }
 }
