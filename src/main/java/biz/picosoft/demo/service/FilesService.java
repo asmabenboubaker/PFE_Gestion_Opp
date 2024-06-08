@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilesService {
@@ -48,7 +49,7 @@ public class FilesService {
         Attachment files = Attachment
                 .builder()
                 .name(file.getOriginalFilename())
-                .path(filePath)
+                .url(filePath)
                 .type(file.getContentType())
                 .imageData(file.getBytes())
                 .build();
@@ -65,7 +66,7 @@ public class FilesService {
     }
 
     public byte[] downloadFilesFromFileSystem(String fileName) throws IOException {
-        String path = fileRepository.findByName(fileName).getPath();
+        String path = fileRepository.findByName(fileName).getUrl();
 
         // Create a Path object from the file path string
         Path filePath = Paths.get(path);
@@ -85,7 +86,7 @@ public class FilesService {
                 .idClasse(idClasse)
                 .idObject(idObject)
                 .name(file.getOriginalFilename())
-                .path(filePath)
+                .url(filePath)
                 .type(file.getContentType())
                 .imageData(file.getBytes())
                 .build();
@@ -99,5 +100,23 @@ public class FilesService {
         }
 
         return "File upload failed";
+    }
+
+    @Transactional
+    public byte[] getFileContent(String fileName) {
+        // Retrieve the Attachment entity by file name
+        Optional<Attachment> optionalAttachment = Optional.ofNullable(fileRepository.findByName(fileName));
+
+        // Check if the Attachment exists
+        if (optionalAttachment.isPresent()) {
+            // Extract the imageData (file content) from the Attachment entity
+            Attachment attachment = optionalAttachment.get();
+            return attachment.getImageData();
+        } else {
+            // If the file with the specified name does not exist, return null or throw an exception
+            return null;
+            // Alternatively, you can throw an exception to handle the case where the file does not exist
+            // throw new FileNotFoundException("File not found: " + fileName);
+        }
     }
 }

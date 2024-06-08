@@ -4,6 +4,7 @@ package biz.picosoft.demo.controller;
 import biz.picosoft.demo.domain.Attachment;
 import biz.picosoft.demo.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -66,5 +67,20 @@ public class FilesController {
         } catch (IOException e) {
             return new ResponseEntity<>("File upload failed: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/downloadFile/{fileName}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName) {
+        // Retrieve the file content as byte array
+        byte[] fileContent = filesService.getFileContent(fileName);
+
+        // Set the appropriate content type for the file
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", fileName);
+
+        // Return the file content as a response
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(fileContent);
     }
 }

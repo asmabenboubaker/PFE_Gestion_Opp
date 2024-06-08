@@ -29,13 +29,13 @@ public class Attachment implements Serializable {
 
     private String type;
 
-    private String path;
+    private String url;
 
     @Lob
     @Column(name = "image_data")
     private byte[] imageData;
    public Attachment(String filePath) {
-        this.path = filePath;
+        this.url = filePath;
     }
     public void setId(Long id) {
         this.id = id;
@@ -57,39 +57,13 @@ public class Attachment implements Serializable {
         this.type = type;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
+
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
     }
 
-    @Override
-    public String toString() {
-        return "Attachment{" +
-                "id=" + id +
-                ", idClasse=" + idClasse +
-                ", idObject=" + idObject +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", path='" + path + '\'' +
-                ", imageData=" + Arrays.toString(imageData) +
-                '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Attachment)) return false;
-        Attachment that = (Attachment) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getIdClasse(), that.getIdClasse()) && Objects.equals(getIdObject(), that.getIdObject()) && Objects.equals(getName(), that.getName()) && Objects.equals(getType(), that.getType()) && Objects.equals(getPath(), that.getPath()) && Arrays.equals(getImageData(), that.getImageData());
-    }
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(getId(), getIdClasse(), getIdObject(), getName(), getType(), getPath());
-        result = 31 * result + Arrays.hashCode(getImageData());
-        return result;
-    }
+
 }
