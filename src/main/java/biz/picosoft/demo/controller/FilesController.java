@@ -83,4 +83,15 @@ public class FilesController {
                 .headers(headers)
                 .body(fileContent);
     }
+    @DeleteMapping("/deleteFile/{fileName}")
+    public ResponseEntity<String> deleteFile(@PathVariable String fileName) {
+        // Logic to delete the file with the given fileName
+        boolean success = filesService.deleteFile(fileName);
+
+        if (success) {
+            return ResponseEntity.ok().body("File deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

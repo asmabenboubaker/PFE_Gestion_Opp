@@ -104,19 +104,26 @@ public class FilesService {
 
     @Transactional
     public byte[] getFileContent(String fileName) {
-        // Retrieve the Attachment entity by file name
+
         Optional<Attachment> optionalAttachment = Optional.ofNullable(fileRepository.findByName(fileName));
 
-        // Check if the Attachment exists
         if (optionalAttachment.isPresent()) {
-            // Extract the imageData (file content) from the Attachment entity
+
             Attachment attachment = optionalAttachment.get();
             return attachment.getImageData();
         } else {
-            // If the file with the specified name does not exist, return null or throw an exception
+
             return null;
-            // Alternatively, you can throw an exception to handle the case where the file does not exist
-            // throw new FileNotFoundException("File not found: " + fileName);
+
         }
+    }
+
+    @Transactional
+    public boolean deleteFile(String fileName) {
+        //delete file from database
+        Attachment attachment = fileRepository.findByName(fileName);
+         fileRepository.delete(attachment);
+        return true;
+
     }
 }
