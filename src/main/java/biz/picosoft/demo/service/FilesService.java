@@ -27,6 +27,8 @@ public class FilesService {
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
                 .imageData(file.getBytes())
+                   .url(FILE_PATH + file.getOriginalFilename())
+
                 .build();
 
         files = fileRepository.save(files);
@@ -79,6 +81,7 @@ public class FilesService {
     }
 
 
+    @Transactional
     public String addFile(Long idClasse, Long idObject, MultipartFile file) throws IOException {
         String filePath = FILE_PATH + file.getOriginalFilename();
 
@@ -87,6 +90,7 @@ public class FilesService {
                 .idObject(idObject)
                 .name(file.getOriginalFilename())
                 .url(filePath)
+                .size(file.getSize())
                 .type(file.getContentType())
                 .imageData(file.getBytes())
                 .build();

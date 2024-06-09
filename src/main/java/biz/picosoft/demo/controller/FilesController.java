@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,6 +59,7 @@ public class FilesController {
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
     @PostMapping("/addFile/{idClasse}/{idObject}")
+    @Transactional
     public ResponseEntity<String> addFile(
             @PathVariable Long idClasse, @PathVariable Long idObject,
             @RequestParam("file") MultipartFile file) {
