@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Attachment.class)
 public abstract class Attachment_ {
 
-	public static volatile SingularAttribute<Attachment, Long> size;
+	public static volatile SingularAttribute<Attachment, Integer> size;
 	public static volatile SingularAttribute<Attachment, byte[]> imageData;
 	public static volatile SingularAttribute<Attachment, Long> idClasse;
 	public static volatile SingularAttribute<Attachment, String> name;
