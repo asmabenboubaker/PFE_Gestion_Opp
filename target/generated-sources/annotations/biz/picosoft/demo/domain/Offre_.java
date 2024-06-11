@@ -3,6 +3,7 @@ package biz.picosoft.demo.domain;
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
 import java.time.LocalDate;
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -31,6 +32,7 @@ public abstract class Offre_ {
 	public static volatile SingularAttribute<Offre, String> assignee;
 	public static volatile SingularAttribute<Offre, Boolean> createBC;
 	public static volatile SingularAttribute<Offre, Long> numberOfattachments;
+	public static volatile ListAttribute<Offre, Article> articles;
 	public static volatile SingularAttribute<Offre, String> status;
 
 	public static final String STATUT_OFFRE = "statutOffre";
@@ -53,6 +55,7 @@ public abstract class Offre_ {
 	public static final String ASSIGNEE = "assignee";
 	public static final String CREATE_BC = "createBC";
 	public static final String NUMBER_OFATTACHMENTS = "numberOfattachments";
+	public static final String ARTICLES = "articles";
 	public static final String STATUS = "status";
 
 }

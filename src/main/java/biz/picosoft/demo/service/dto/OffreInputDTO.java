@@ -1,5 +1,6 @@
 package biz.picosoft.demo.service.dto;
 
+import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class OffreInputDTO  implements Serializable {
     private Long id;
 
     private Float montant;
-
+    private List<Article> articles;
     private LocalDate dateOffre;
 
     private String description;
@@ -54,8 +56,13 @@ public class OffreInputDTO  implements Serializable {
     private StatutOffre statutOffre;
 
 
+    public List<Article> getArticles() {
+        return articles;
+    }
 
-
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     public String getModePaiement() {
         return modePaiement;
@@ -225,30 +232,44 @@ public class OffreInputDTO  implements Serializable {
         this.opportunite = opportunite;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof OffreInputDTO)) return false;
         OffreInputDTO that = (OffreInputDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(montant, that.montant) && Objects.equals(dateOffre, that.dateOffre) && Objects.equals(description, that.description) && Objects.equals(valideJusquA, that.valideJusquA) && Objects.equals(opportunite, that.opportunite);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getMontant(), that.getMontant()) && Objects.equals(getArticles(), that.getArticles()) && Objects.equals(getDateOffre(), that.getDateOffre()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getValideJusquA(), that.getValideJusquA()) && Objects.equals(getOpportunite(), that.getOpportunite()) && Objects.equals(getDecision(), that.getDecision()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getFileAccessToken(), that.getFileAccessToken()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getDraft(), that.getDraft()) && Objects.equals(getWfCurrentComment(), that.getWfCurrentComment()) && Objects.equals(getWfComment(), that.getWfComment()) && Objects.equals(getMsg(), that.getMsg()) && Objects.equals(getModePaiement(), that.getModePaiement()) && Objects.equals(getDateLivraison(), that.getDateLivraison()) && getStatutOffre() == that.getStatutOffre();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, montant, dateOffre, description, valideJusquA, opportunite);
+        return Objects.hash(getId(), getMontant(), getArticles(), getDateOffre(), getDescription(), getValideJusquA(), getOpportunite(), getDecision(), getActivityName(), getEndProcess(), getWfProcessID(), getAssignee(), getStatus(), getFileAccessToken(), getSecuriteLevel(), getDraft(), getWfCurrentComment(), getWfComment(), getMsg(), getModePaiement(), getDateLivraison(), getStatutOffre());
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "OffreDTO{" +
-                "id=" + getId() +
-                ", montant=" + getMontant() +
-                ", dateOffre='" + getDateOffre() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", valideJusquA='" + getValideJusquA() + "'" +
-                ", opportunite=" + getOpportunite() +
-                "}";
+        return "OffreInputDTO{" +
+                "id=" + id +
+                ", montant=" + montant +
+                ", articles=" + articles +
+                ", dateOffre=" + dateOffre +
+                ", description='" + description + '\'' +
+                ", valideJusquA=" + valideJusquA +
+                ", opportunite=" + opportunite +
+                ", decision='" + decision + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", endProcess=" + endProcess +
+                ", wfProcessID='" + wfProcessID + '\'' +
+                ", assignee='" + assignee + '\'' +
+                ", status='" + status + '\'' +
+                ", fileAccessToken='" + fileAccessToken + '\'' +
+                ", securiteLevel=" + securiteLevel +
+                ", draft=" + draft +
+                ", wfCurrentComment='" + wfCurrentComment + '\'' +
+                ", wfComment='" + wfComment + '\'' +
+                ", msg='" + msg + '\'' +
+                ", modePaiement='" + modePaiement + '\'' +
+                ", dateLivraison=" + dateLivraison +
+                ", statutOffre=" + statutOffre +
+                '}';
     }
 }

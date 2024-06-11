@@ -90,7 +90,7 @@ public class FilesService {
                 .idObject(idObject)
                 .name(file.getOriginalFilename())
                 .url(filePath)
-                .size((int) file.getSize())
+                .size(file.getSize())
                 .type(file.getContentType())
                 .imageData(file.getBytes())
                 .build();

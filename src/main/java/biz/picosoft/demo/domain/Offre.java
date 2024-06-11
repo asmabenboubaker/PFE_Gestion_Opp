@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,6 +29,16 @@ public class Offre implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @OneToMany(mappedBy = "offreDePrix", cascade = CascadeType.ALL)
+    private List<Article> articles;
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     @Column(name = "montant")
     private Float montant;

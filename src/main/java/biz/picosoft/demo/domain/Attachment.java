@@ -24,7 +24,7 @@ public class Attachment implements Serializable {
     private Long id;
     private Long idClasse;
     private Long idObject;
-private int size;
+private long size;
     private String name;
 
     private String type;
