@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
@@ -18,7 +19,7 @@ public abstract class Projet_ {
 	public static volatile SingularAttribute<Projet, String> lienJira;
 	public static volatile SingularAttribute<Projet, String> nom;
 	public static volatile SetAttribute<Projet, BonDeCommande> bondecommandes;
-	public static volatile SingularAttribute<Projet, ZonedDateTime> dateDebut;
+	public static volatile SingularAttribute<Projet, LocalDate> dateDebut;
 	public static volatile SetAttribute<Projet, Equipe> equipes;
 	public static volatile SingularAttribute<Projet, ZonedDateTime> derniereMiseAJour;
 	public static volatile SingularAttribute<Projet, String> objectif;
@@ -26,7 +27,7 @@ public abstract class Projet_ {
 	public static volatile SingularAttribute<Projet, String> idJira;
 	public static volatile SingularAttribute<Projet, String> commentaires;
 	public static volatile SingularAttribute<Projet, Long> id;
-	public static volatile SingularAttribute<Projet, ZonedDateTime> dateFin;
+	public static volatile SingularAttribute<Projet, LocalDate> dateFin;
 	public static volatile SetAttribute<Projet, Task> tasks;
 	public static volatile SingularAttribute<Projet, String> participants;
 	public static volatile SingularAttribute<Projet, Float> budget;

@@ -3,6 +3,7 @@ package biz.picosoft.demo.service.dto;
 import javax.persistence.Column;
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Objects;
@@ -16,9 +17,9 @@ public class ProjetDTO implements Serializable {
 
     private String nom;
 
-    private ZonedDateTime dateDebut;
+    private LocalDate dateDebut;
 
-    private ZonedDateTime dateFin;
+    private LocalDate dateFin;
 
     private String responsable;
 
@@ -132,19 +133,19 @@ public class ProjetDTO implements Serializable {
         this.nom = nom;
     }
 
-    public ZonedDateTime getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(ZonedDateTime dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public ZonedDateTime getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(ZonedDateTime dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 

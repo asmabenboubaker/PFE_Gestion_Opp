@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,10 +32,10 @@ public class Projet implements Serializable {
     private String nom;
 
     @Column(name = "date_debut")
-    private ZonedDateTime dateDebut;
+    private LocalDate dateDebut;
 
     @Column(name = "date_fin")
-    private ZonedDateTime dateFin;
+    private LocalDate dateFin;
 
     @Column(name = "responsable")
     private String responsable;
@@ -209,29 +210,29 @@ public class Projet implements Serializable {
         this.nom = nom;
     }
 
-    public ZonedDateTime getDateDebut() {
+    public LocalDate getDateDebut() {
         return this.dateDebut;
     }
 
-    public Projet dateDebut(ZonedDateTime dateDebut) {
+    public Projet dateDebut(LocalDate dateDebut) {
         this.setDateDebut(dateDebut);
         return this;
     }
 
-    public void setDateDebut(ZonedDateTime dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public ZonedDateTime getDateFin() {
+    public LocalDate getDateFin() {
         return this.dateFin;
     }
 
-    public Projet dateFin(ZonedDateTime dateFin) {
+    public Projet dateFin(LocalDate dateFin) {
         this.setDateFin(dateFin);
         return this;
     }
 
-    public void setDateFin(ZonedDateTime dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 

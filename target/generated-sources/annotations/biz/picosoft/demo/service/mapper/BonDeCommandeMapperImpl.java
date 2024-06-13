@@ -1,10 +1,12 @@
 package biz.picosoft.demo.service.mapper;
 
+import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.Projet;
@@ -23,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:52+0200",
+    date = "2024-06-13T23:56:05+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -261,6 +263,10 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
         }
+        Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -279,6 +285,10 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
 
         Offre offre = new Offre();
 
+        List<Article> list = offreDTO.getArticles();
+        if ( list != null ) {
+            offre.setArticles( new ArrayList<Article>( list ) );
+        }
         offre.setModePaiement( offreDTO.getModePaiement() );
         offre.setDateLivraison( offreDTO.getDateLivraison() );
         offre.setStatutOffre( offreDTO.getStatutOffre() );
@@ -455,6 +465,19 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
                 mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
             }
         }
+        if ( mappingTarget.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.getEtudeOpps().clear();
+                mappingTarget.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }
@@ -486,6 +509,19 @@ public class BonDeCommandeMapperImpl implements BonDeCommandeMapper {
             return;
         }
 
+        if ( mappingTarget.getArticles() != null ) {
+            List<Article> list = offreDTO.getArticles();
+            if ( list != null ) {
+                mappingTarget.getArticles().clear();
+                mappingTarget.getArticles().addAll( list );
+            }
+        }
+        else {
+            List<Article> list = offreDTO.getArticles();
+            if ( list != null ) {
+                mappingTarget.setArticles( new ArrayList<Article>( list ) );
+            }
+        }
         if ( offreDTO.getModePaiement() != null ) {
             mappingTarget.setModePaiement( offreDTO.getModePaiement() );
         }

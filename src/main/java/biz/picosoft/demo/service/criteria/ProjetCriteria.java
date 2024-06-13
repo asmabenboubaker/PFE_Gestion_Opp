@@ -25,9 +25,9 @@ public class ProjetCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
-    private ZonedDateTimeFilter dateDebut;
+    private LocalDateFilter dateDebut;
 
-    private ZonedDateTimeFilter dateFin;
+    private LocalDateFilter dateFin;
 
     private StringFilter responsable;
 
@@ -91,33 +91,33 @@ public class ProjetCriteria implements Serializable, Criteria {
         this.nom = nom;
     }
 
-    public ZonedDateTimeFilter getDateDebut() {
+    public LocalDateFilter getDateDebut() {
         return dateDebut;
     }
 
-    public ZonedDateTimeFilter dateDebut() {
+    public LocalDateFilter dateDebut() {
         if (dateDebut == null) {
-            dateDebut = new ZonedDateTimeFilter();
+            dateDebut = new LocalDateFilter();
         }
         return dateDebut;
     }
 
-    public void setDateDebut(ZonedDateTimeFilter dateDebut) {
+    public void setDateDebut(LocalDateFilter dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public ZonedDateTimeFilter getDateFin() {
+    public LocalDateFilter getDateFin() {
         return dateFin;
     }
 
-    public ZonedDateTimeFilter dateFin() {
+    public LocalDateFilter dateFin() {
         if (dateFin == null) {
-            dateFin = new ZonedDateTimeFilter();
+            dateFin = new LocalDateFilter();
         }
         return dateFin;
     }
 
-    public void setDateFin(ZonedDateTimeFilter dateFin) {
+    public void setDateFin(LocalDateFilter dateFin) {
         this.dateFin = dateFin;
     }
 
@@ -131,7 +131,6 @@ public class ProjetCriteria implements Serializable, Criteria {
         }
         return responsable;
     }
-
     public void setResponsable(StringFilter responsable) {
         this.responsable = responsable;
     }

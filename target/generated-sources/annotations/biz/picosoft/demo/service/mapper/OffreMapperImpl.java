@@ -1,9 +1,11 @@
 package biz.picosoft.demo.service.mapper;
 
+import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:52+0200",
+    date = "2024-06-13T23:56:04+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -33,6 +35,10 @@ public class OffreMapperImpl implements OffreMapper {
 
         Offre offre = new Offre();
 
+        List<Article> list = dto.getArticles();
+        if ( list != null ) {
+            offre.setArticles( new ArrayList<Article>( list ) );
+        }
         offre.setModePaiement( dto.getModePaiement() );
         offre.setDateLivraison( dto.getDateLivraison() );
         offre.setStatutOffre( dto.getStatutOffre() );
@@ -86,6 +92,19 @@ public class OffreMapperImpl implements OffreMapper {
             return;
         }
 
+        if ( entity.getArticles() != null ) {
+            List<Article> list = dto.getArticles();
+            if ( list != null ) {
+                entity.getArticles().clear();
+                entity.getArticles().addAll( list );
+            }
+        }
+        else {
+            List<Article> list = dto.getArticles();
+            if ( list != null ) {
+                entity.setArticles( new ArrayList<Article>( list ) );
+            }
+        }
         if ( dto.getModePaiement() != null ) {
             entity.setModePaiement( dto.getModePaiement() );
         }
@@ -145,6 +164,10 @@ public class OffreMapperImpl implements OffreMapper {
         OffreDTO offreDTO = new OffreDTO();
 
         offreDTO.setOpportunite( toDtoOpportuniteId( s.getOpportunite() ) );
+        List<Article> list = s.getArticles();
+        if ( list != null ) {
+            offreDTO.setArticles( new ArrayList<Article>( list ) );
+        }
         offreDTO.setModePaiement( s.getModePaiement() );
         offreDTO.setDateLivraison( s.getDateLivraison() );
         offreDTO.setStatutOffre( s.getStatutOffre() );
@@ -240,6 +263,10 @@ public class OffreMapperImpl implements OffreMapper {
         Set<Equipe> set = opportuniteDTO.getEquipes();
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
+        }
+        Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
         }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
@@ -380,6 +407,19 @@ public class OffreMapperImpl implements OffreMapper {
             Set<Equipe> set = opportuniteDTO.getEquipes();
             if ( set != null ) {
                 mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
+            }
+        }
+        if ( mappingTarget.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.getEtudeOpps().clear();
+                mappingTarget.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
             }
         }
         if ( opportuniteDTO.getId() != null ) {

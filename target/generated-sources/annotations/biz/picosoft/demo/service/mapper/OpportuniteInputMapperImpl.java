@@ -4,6 +4,7 @@ import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:53+0200",
+    date = "2024-06-13T23:56:04+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -94,6 +95,19 @@ public class OpportuniteInputMapperImpl extends OpportuniteInputMapper {
         if ( dto.getEndProcess() != null ) {
             entity.setEndProcess( dto.getEndProcess() );
         }
+        if ( entity.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = dto.getEtudeOpps();
+            if ( set1 != null ) {
+                entity.getEtudeOpps().clear();
+                entity.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = dto.getEtudeOpps();
+            if ( set1 != null ) {
+                entity.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+            }
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -140,6 +154,10 @@ public class OpportuniteInputMapperImpl extends OpportuniteInputMapper {
         opportunite.setSecuriteLevel( oppInputDTO.getSecuriteLevel() );
         opportunite.setAssignee( oppInputDTO.getAssignee() );
         opportunite.setEndProcess( oppInputDTO.getEndProcess() );
+        Set<EtudeOpp> set1 = oppInputDTO.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+        }
         opportunite.setId( oppInputDTO.getId() );
         opportunite.setDescription( oppInputDTO.getDescription() );
         opportunite.setNom( oppInputDTO.getNom() );
@@ -159,11 +177,15 @@ public class OpportuniteInputMapperImpl extends OpportuniteInputMapper {
 
         OpportuniteInputDTO opportuniteInputDTO = new OpportuniteInputDTO();
 
+        Set<EtudeOpp> set = opp.getEtudeOpps();
+        if ( set != null ) {
+            opportuniteInputDTO.setEtudeOpps( new HashSet<EtudeOpp>( set ) );
+        }
         opportuniteInputDTO.setNomDepartement( opp.getNomDepartement() );
         opportuniteInputDTO.setSidDepartement( opp.getSidDepartement() );
-        Set<Equipe> set = opp.getEquipes();
-        if ( set != null ) {
-            opportuniteInputDTO.setEquipes( new HashSet<Equipe>( set ) );
+        Set<Equipe> set1 = opp.getEquipes();
+        if ( set1 != null ) {
+            opportuniteInputDTO.setEquipes( new HashSet<Equipe>( set1 ) );
         }
         opportuniteInputDTO.setId( opp.getId() );
         opportuniteInputDTO.setDescription( opp.getDescription() );

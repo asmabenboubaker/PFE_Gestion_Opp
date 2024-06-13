@@ -5,11 +5,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
 @RestController
 public class JiraController {
     private final String jiraApiUrl = "https://boubaker-asma.atlassian.net";
@@ -25,6 +24,24 @@ public class JiraController {
         ResponseEntity<String> response = restTemplate.exchange(
                 jiraApiUrl + "/rest/api/2/project/",
                 HttpMethod.POST,
+                entity,
+                String.class
+        );
+        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+    }
+    @CrossOrigin(origins = "http://localhost.picosoft.biz:4302", allowCredentials = "true")
+    @GetMapping("/project/{projectIdOrKey}")
+    public ResponseEntity<String> getProjectDetails(@PathVariable String projectIdOrKey) {
+        HttpHeaders headers = createHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        String url = UriComponentsBuilder.fromHttpUrl(jiraApiUrl)
+                .path("/rest/api/3/project/{projectIdOrKey}")
+                .buildAndExpand(projectIdOrKey)
+                .toUriString();
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
                 entity,
                 String.class
         );

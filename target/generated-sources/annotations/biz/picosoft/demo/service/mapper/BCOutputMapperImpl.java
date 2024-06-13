@@ -1,10 +1,12 @@
 package biz.picosoft.demo.service.mapper;
 
+import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.BonDeCommande;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.domain.Projet;
@@ -23,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:50+0200",
+    date = "2024-06-13T23:56:04+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -300,6 +302,19 @@ public class BCOutputMapperImpl extends BCOutputMapper {
                 mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
             }
         }
+        if ( mappingTarget.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.getEtudeOpps().clear();
+                mappingTarget.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }
@@ -331,6 +346,19 @@ public class BCOutputMapperImpl extends BCOutputMapper {
             return;
         }
 
+        if ( mappingTarget.getArticles() != null ) {
+            List<Article> list = offreDTO.getArticles();
+            if ( list != null ) {
+                mappingTarget.getArticles().clear();
+                mappingTarget.getArticles().addAll( list );
+            }
+        }
+        else {
+            List<Article> list = offreDTO.getArticles();
+            if ( list != null ) {
+                mappingTarget.setArticles( new ArrayList<Article>( list ) );
+            }
+        }
         if ( offreDTO.getModePaiement() != null ) {
             mappingTarget.setModePaiement( offreDTO.getModePaiement() );
         }
@@ -497,6 +525,10 @@ public class BCOutputMapperImpl extends BCOutputMapper {
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
         }
+        Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -515,6 +547,10 @@ public class BCOutputMapperImpl extends BCOutputMapper {
 
         Offre offre = new Offre();
 
+        List<Article> list = offreDTO.getArticles();
+        if ( list != null ) {
+            offre.setArticles( new ArrayList<Article>( list ) );
+        }
         offre.setModePaiement( offreDTO.getModePaiement() );
         offre.setDateLivraison( offreDTO.getDateLivraison() );
         offre.setStatutOffre( offreDTO.getStatutOffre() );
@@ -620,11 +656,15 @@ public class BCOutputMapperImpl extends BCOutputMapper {
 
         OpportuniteDTO opportuniteDTO = new OpportuniteDTO();
 
+        Set<EtudeOpp> set = opportunite.getEtudeOpps();
+        if ( set != null ) {
+            opportuniteDTO.setEtudeOpps( new HashSet<EtudeOpp>( set ) );
+        }
         opportuniteDTO.setNomDepartement( opportunite.getNomDepartement() );
         opportuniteDTO.setSidDepartement( opportunite.getSidDepartement() );
-        Set<Equipe> set = opportunite.getEquipes();
-        if ( set != null ) {
-            opportuniteDTO.setEquipes( new HashSet<Equipe>( set ) );
+        Set<Equipe> set1 = opportunite.getEquipes();
+        if ( set1 != null ) {
+            opportuniteDTO.setEquipes( new HashSet<Equipe>( set1 ) );
         }
         opportuniteDTO.setId( opportunite.getId() );
         opportuniteDTO.setDescription( opportunite.getDescription() );
@@ -644,6 +684,10 @@ public class BCOutputMapperImpl extends BCOutputMapper {
 
         OffreDTO offreDTO = new OffreDTO();
 
+        List<Article> list = offre.getArticles();
+        if ( list != null ) {
+            offreDTO.setArticles( new ArrayList<Article>( list ) );
+        }
         offreDTO.setModePaiement( offre.getModePaiement() );
         offreDTO.setDateLivraison( offre.getDateLivraison() );
         offreDTO.setStatutOffre( offre.getStatutOffre() );

@@ -1,9 +1,11 @@
 package biz.picosoft.demo.service.mapper;
 
+import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Offre;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:53+0200",
+    date = "2024-06-13T23:56:05+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -59,6 +61,19 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
             return;
         }
 
+        if ( entity.getArticles() != null ) {
+            List<Article> list = dto.getArticles();
+            if ( list != null ) {
+                entity.getArticles().clear();
+                entity.getArticles().addAll( list );
+            }
+        }
+        else {
+            List<Article> list = dto.getArticles();
+            if ( list != null ) {
+                entity.setArticles( new ArrayList<Article>( list ) );
+            }
+        }
         if ( dto.getModePaiement() != null ) {
             entity.setModePaiement( dto.getModePaiement() );
         }
@@ -117,6 +132,10 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
 
         Offre offre = new Offre();
 
+        List<Article> list = oofreOutputDTO.getArticles();
+        if ( list != null ) {
+            offre.setArticles( new ArrayList<Article>( list ) );
+        }
         offre.setModePaiement( oofreOutputDTO.getModePaiement() );
         offre.setDateLivraison( oofreOutputDTO.getDateLivraison() );
         offre.setStatutOffre( oofreOutputDTO.getStatutOffre() );
@@ -144,6 +163,10 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
 
         OffreOutputDTO offreOutputDTO = new OffreOutputDTO();
 
+        List<Article> list = offre.getArticles();
+        if ( list != null ) {
+            offreOutputDTO.setArticles( new ArrayList<Article>( list ) );
+        }
         offreOutputDTO.setModePaiement( offre.getModePaiement() );
         offreOutputDTO.setDateLivraison( offre.getDateLivraison() );
         offreOutputDTO.setStatutOffre( offre.getStatutOffre() );
@@ -293,6 +316,19 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
                 mappingTarget.setEquipes( new HashSet<Equipe>( set ) );
             }
         }
+        if ( mappingTarget.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.getEtudeOpps().clear();
+                mappingTarget.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+            if ( set1 != null ) {
+                mappingTarget.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+            }
+        }
         if ( opportuniteDTO.getId() != null ) {
             mappingTarget.setId( opportuniteDTO.getId() );
         }
@@ -384,6 +420,10 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
         }
+        Set<EtudeOpp> set1 = opportuniteDTO.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+        }
         opportunite.setId( opportuniteDTO.getId() );
         opportunite.setDescription( opportuniteDTO.getDescription() );
         opportunite.setNom( opportuniteDTO.getNom() );
@@ -454,11 +494,15 @@ public class OffreOutputMapperImpl extends OffreOutputMapper {
 
         OpportuniteDTO opportuniteDTO = new OpportuniteDTO();
 
+        Set<EtudeOpp> set = opportunite.getEtudeOpps();
+        if ( set != null ) {
+            opportuniteDTO.setEtudeOpps( new HashSet<EtudeOpp>( set ) );
+        }
         opportuniteDTO.setNomDepartement( opportunite.getNomDepartement() );
         opportuniteDTO.setSidDepartement( opportunite.getSidDepartement() );
-        Set<Equipe> set = opportunite.getEquipes();
-        if ( set != null ) {
-            opportuniteDTO.setEquipes( new HashSet<Equipe>( set ) );
+        Set<Equipe> set1 = opportunite.getEquipes();
+        if ( set1 != null ) {
+            opportuniteDTO.setEquipes( new HashSet<Equipe>( set1 ) );
         }
         opportuniteDTO.setId( opportunite.getId() );
         opportuniteDTO.setDescription( opportunite.getDescription() );

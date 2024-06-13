@@ -4,6 +4,7 @@ import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.Equipe;
+import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.service.dto.ClientDTO;
 import biz.picosoft.demo.service.dto.DemandeDTO;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-05T14:51:53+0200",
+    date = "2024-06-13T23:56:05+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -36,6 +37,10 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
         Set<Equipe> set = dto.getEquipes();
         if ( set != null ) {
             opportunite.setEquipes( new HashSet<Equipe>( set ) );
+        }
+        Set<EtudeOpp> set1 = dto.getEtudeOpps();
+        if ( set1 != null ) {
+            opportunite.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
         }
         opportunite.setId( dto.getId() );
         opportunite.setDescription( dto.getDescription() );
@@ -101,6 +106,19 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
                 entity.setEquipes( new HashSet<Equipe>( set ) );
             }
         }
+        if ( entity.getEtudeOpps() != null ) {
+            Set<EtudeOpp> set1 = dto.getEtudeOpps();
+            if ( set1 != null ) {
+                entity.getEtudeOpps().clear();
+                entity.getEtudeOpps().addAll( set1 );
+            }
+        }
+        else {
+            Set<EtudeOpp> set1 = dto.getEtudeOpps();
+            if ( set1 != null ) {
+                entity.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
+            }
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -139,6 +157,10 @@ public class OpportuniteMapperImpl implements OpportuniteMapper {
         Set<Equipe> set = s.getEquipes();
         if ( set != null ) {
             opportuniteDTO.setEquipes( new HashSet<Equipe>( set ) );
+        }
+        Set<EtudeOpp> set1 = s.getEtudeOpps();
+        if ( set1 != null ) {
+            opportuniteDTO.setEtudeOpps( new HashSet<EtudeOpp>( set1 ) );
         }
         opportuniteDTO.setNomDepartement( s.getNomDepartement() );
         opportuniteDTO.setSidDepartement( s.getSidDepartement() );
