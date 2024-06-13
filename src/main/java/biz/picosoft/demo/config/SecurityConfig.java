@@ -12,6 +12,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +27,17 @@ public class SecurityConfig {
     @Configuration
     @Order(1)
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Bean
+        public CorsFilter corsFilter() {
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            CorsConfiguration config = new CorsConfiguration();
+            config.setAllowCredentials(true);
+            config.setAllowedOrigins(Arrays.asList("http://localhost.picosoft.biz:4302/", "https://boubaker-asma.atlassian.net")); // Add your allowed origins here
+            config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
+            config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            source.registerCorsConfiguration("/**", config);
+            return new CorsFilter(source);
+        }
 
         @Bean
         public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
@@ -46,8 +62,8 @@ public class SecurityConfig {
             .antMatchers("/ws/**").permitAll()
                .antMatchers("/stomp").permitAll()
                             .antMatchers("/api/**").permitAll()
-                    .anyRequest().authenticated();
-            //http.authorizeRequests().anyRequest().authenticated();
+                    .antMatchers("https://boubaker-asma.atlassian.net/rest/api/2/project/").permitAll();
+            http.authorizeRequests().anyRequest().authenticated();
             http.addFilterBefore(new JWTAutorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         }
