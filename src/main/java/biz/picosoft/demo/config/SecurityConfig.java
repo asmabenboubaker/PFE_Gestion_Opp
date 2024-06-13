@@ -45,8 +45,9 @@ public class SecurityConfig {
             http.authorizeRequests().antMatchers("/build-number").permitAll()
             .antMatchers("/ws/**").permitAll()
                .antMatchers("/stomp").permitAll()
-                            .antMatchers("/api/**").permitAll();
-            http.authorizeRequests().anyRequest().authenticated();
+                            .antMatchers("/api/**").permitAll()
+                    .anyRequest().authenticated();
+            //http.authorizeRequests().anyRequest().authenticated();
             http.addFilterBefore(new JWTAutorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         }

@@ -2,6 +2,8 @@ package biz.picosoft.demo.controller;
 
 
 import biz.picosoft.demo.domain.Article;
+import biz.picosoft.demo.domain.Offre;
+import biz.picosoft.demo.repository.OffreRepository;
 import biz.picosoft.demo.service.impl.ArticleServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,11 @@ import java.util.List;
 @RequestMapping("/api/articles")
 public class ArticleController {
     private final ArticleServiceImp articleService;
+private final OffreRepository offreRepository;
 
-
-    public ArticleController(ArticleServiceImp articleService) {
+    public ArticleController(ArticleServiceImp articleService, OffreRepository offreRepository) {
         this.articleService = articleService;
+        this.offreRepository = offreRepository;
     }
     @GetMapping
     public ResponseEntity<List<Article>> getAllArticles() {
@@ -52,5 +55,14 @@ public class ArticleController {
     public ResponseEntity<Article> createArticleAndAssignToOffreDePrix(@PathVariable Long offreDePrixId, @RequestBody Article article) {
         Article createdArticle = articleService.createArticleAndAssignToOffreDePrix(offreDePrixId, article);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdArticle);
+    }
+    @GetMapping("/offre/{offreId}/articles")
+    public ResponseEntity<List<Article>> getAllArticlesByOffre(@PathVariable Long offreId) {
+        Offre offreDePrix = offreRepository.findById(offreId).orElse(null);
+        if (offreDePrix == null) {
+            return ResponseEntity.notFound().build();
+        }
+        List<Article> articles = articleService.getArticlesByOffreDePrix(offreDePrix);
+        return ResponseEntity.ok().body(articles);
     }
 }

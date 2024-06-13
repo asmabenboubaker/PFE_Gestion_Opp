@@ -65,4 +65,7 @@ private final OffreRepository offreRepository;
 
         return articleRepository.save(article);
     }
+    public List<Article> getArticlesByOffreDePrix(Offre offreDePrix) {
+        return articleRepository.findByOffreDePrix(offreDePrix);
+    }
 }
