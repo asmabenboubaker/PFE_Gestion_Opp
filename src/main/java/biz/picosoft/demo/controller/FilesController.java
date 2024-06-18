@@ -96,4 +96,16 @@ public class FilesController {
             return ResponseEntity.notFound().build();
         }
     }
+    //delete file by id
+    @DeleteMapping("/deleteFileById/{id}")
+    public ResponseEntity<String> deleteFileById(@PathVariable Long id) {
+        // Logic to delete the file with the given fileName
+        boolean success = filesService.deleteFileById(id);
+
+        if (success) {
+            return ResponseEntity.ok().body("File deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

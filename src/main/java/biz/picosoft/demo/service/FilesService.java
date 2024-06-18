@@ -130,4 +130,11 @@ public class FilesService {
         return true;
 
     }
+    //delete file by id
+    @Transactional
+    public boolean deleteFileById(Long id) {
+        //delete file from database
+        fileRepository.deleteById(id);
+        return true;
+    }
 }
