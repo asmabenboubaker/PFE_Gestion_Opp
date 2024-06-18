@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,6 +28,7 @@ public class Article implements Serializable {
     private double prixTotal;
     @ManyToOne
     @JoinColumn(name = "offre_de_prix_id")
+    @JsonIgnore
     private Offre offreDePrix;
 
     public Offre getOffreDePrix() {

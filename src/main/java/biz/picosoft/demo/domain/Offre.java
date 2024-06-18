@@ -1,6 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -30,6 +31,7 @@ public class Offre implements Serializable {
     @Column(name = "id")
     private Long id;
     @OneToMany(mappedBy = "offreDePrix", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Article> articles;
 
     public List<Article> getArticles() {
