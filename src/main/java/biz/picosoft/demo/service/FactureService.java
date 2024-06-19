@@ -2,6 +2,7 @@ package biz.picosoft.demo.service;
 
 
 import biz.picosoft.demo.domain.Facture;
+import biz.picosoft.demo.domain.InvoiceItem;
 import biz.picosoft.demo.service.dto.FactureDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link biz.picosoft.demo.domain.Facture}.
@@ -65,5 +67,5 @@ public interface FactureService {
 
    // create methode to affect facture to PV
     ResponseEntity<String> affectFactureToPv(Facture facture, Long idPv);
-
+    Facture saveFactureWithItems(Facture facture, Set<InvoiceItem> invoiceItems);
 }

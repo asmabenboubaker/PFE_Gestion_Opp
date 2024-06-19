@@ -7,7 +7,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Facture.
@@ -25,14 +29,35 @@ public class Facture implements Serializable {
     private Long id;
 
     @Column(name = "date_facture")
-    private ZonedDateTime dateFacture;
+    private LocalDate dateFacture;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "service_fournis")
     private String serviceFournis;
+    @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("facture")
+    private Set<InvoiceItem> invoiceItems = new HashSet<>();
+    public Set<InvoiceItem> getInvoiceItems() {
+        return invoiceItems;
+    }
 
+    public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+        this.invoiceItems = invoiceItems;
+    }
+
+    public Facture addInvoiceItem(InvoiceItem invoiceItem) {
+        this.invoiceItems.add(invoiceItem);
+        invoiceItem.setFacture(this);
+        return this;
+    }
+
+    public Facture removeInvoiceItem(InvoiceItem invoiceItem) {
+        this.invoiceItems.remove(invoiceItem);
+        invoiceItem.setFacture(null);
+        return this;
+    }
     @Transient
     private boolean isGenerate;
     // getter and setter isGenerate
@@ -101,16 +126,16 @@ private String PaymentMethod;
         this.id = id;
     }
 
-    public ZonedDateTime getDateFacture() {
+    public LocalDate getDateFacture() {
         return this.dateFacture;
     }
 
-    public Facture dateFacture(ZonedDateTime dateFacture) {
+    public Facture dateFacture(LocalDate dateFacture) {
         this.setDateFacture(dateFacture);
         return this;
     }
 
-    public void setDateFacture(ZonedDateTime dateFacture) {
+    public void setDateFacture(LocalDate dateFacture) {
         this.dateFacture = dateFacture;
     }
 

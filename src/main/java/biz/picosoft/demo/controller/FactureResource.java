@@ -3,6 +3,7 @@ package biz.picosoft.demo.controller;
 
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.Facture;
+import biz.picosoft.demo.domain.InvoiceItem;
 import biz.picosoft.demo.repository.FactureRepository;
 import biz.picosoft.demo.service.FactureQueryService;
 import biz.picosoft.demo.service.FactureService;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -229,5 +231,21 @@ public class FactureResource {
         // return somthing wrong
         return ResponseEntity.ok().body("Something went wrong");
 
+    }
+
+    @PostMapping("/saveFactureWithItems")
+    public ResponseEntity<Facture> saveFactureWithItems(@RequestBody Facture facture) {
+        Facture savedFacture = factureService.saveFactureWithItems(facture, facture.getInvoiceItems());
+        return ResponseEntity.ok().body(savedFacture);
+    }
+    @PostMapping("/saveFactureWithItems2")
+    @Transactional
+    public ResponseEntity<Facture> createFacture(@RequestBody Facture facture) {
+        // Ensure invoice items are properly associated with the facture
+        for (InvoiceItem item : facture.getInvoiceItems()) {
+            item.setFacture(facture);
+        }
+        Facture savedFacture = factureRepository.save(facture);
+        return ResponseEntity.ok().body(savedFacture);
     }
 }

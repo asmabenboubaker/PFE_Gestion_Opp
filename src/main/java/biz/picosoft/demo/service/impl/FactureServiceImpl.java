@@ -2,6 +2,7 @@ package biz.picosoft.demo.service.impl;
 
 import biz.picosoft.demo.Constants.Constants;
 import biz.picosoft.demo.domain.Facture;
+import biz.picosoft.demo.domain.InvoiceItem;
 import biz.picosoft.demo.domain.PV;
 import biz.picosoft.demo.repository.FactureRepository;
 import biz.picosoft.demo.repository.PVRepository;
@@ -30,11 +31,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -178,6 +177,27 @@ public class FactureServiceImpl implements FactureService {
 
     }
 
+    @Override
+    @Transactional
+    public Facture saveFactureWithItems(Facture facture, Set<InvoiceItem> invoiceItems) {
+        try {
+            for (InvoiceItem item : invoiceItems) {
+                facture.addInvoiceItem(item);
+            }
+            facture.setInvoiceItems(invoiceItems);
+
+            // Logging des détails de facture et des items
+            log.info("Facture avant sauvegarde : {}", facture);
+            log.info("Items avant sauvegarde : {}", invoiceItems);
+
+            // Sauvegarde de la Facture avec les InvoiceItems
+            return factureRepository.save(facture);
+        } catch (Exception e) {
+            log.error("Erreur lors de la sauvegarde de la facture avec les items", e);
+            throw new RuntimeException("Erreur lors de la sauvegarde de la facture avec les items", e);
+        }
+    }
+
     private void addRows(PdfPTable table, Map<String, Object> mapFromJson) {
 
     log.info("Inside addRows");
@@ -245,7 +265,7 @@ public class FactureServiceImpl implements FactureService {
             facture.setServiceFournis((String) requestMap.get("serviceFournis"));
             // set date to date today
             ZonedDateTime now = ZonedDateTime.now();
-            facture.setDateFacture(now);
+            facture.setDateFacture(LocalDate.from(now));
 
             //facture.setDateFacture((Date) requestMap.get("dateFacture"));
             //facture.setPv((PV) requestMap.get("pv"));

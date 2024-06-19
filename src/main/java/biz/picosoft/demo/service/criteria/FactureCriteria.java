@@ -23,7 +23,7 @@ public class FactureCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private ZonedDateTimeFilter dateFacture;
+    private LocalDateFilter dateFacture;
 
     private StringFilter description;
 
@@ -64,18 +64,18 @@ public class FactureCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public ZonedDateTimeFilter getDateFacture() {
+    public LocalDateFilter getDateFacture() {
         return dateFacture;
     }
 
-    public ZonedDateTimeFilter dateFacture() {
+    public LocalDateFilter dateFacture() {
         if (dateFacture == null) {
-            dateFacture = new ZonedDateTimeFilter();
+            dateFacture = new LocalDateFilter();
         }
         return dateFacture;
     }
 
-    public void setDateFacture(ZonedDateTimeFilter dateFacture) {
+    public void setDateFacture(LocalDateFilter dateFacture) {
         this.dateFacture = dateFacture;
     }
 
