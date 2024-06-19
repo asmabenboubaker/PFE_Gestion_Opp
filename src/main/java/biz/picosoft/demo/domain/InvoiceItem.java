@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class InvoiceItem implements Serializable {
     private int itemQty;
 
     @ManyToOne
-    @JsonIgnoreProperties("invoiceItems")
+    @JsonIgnoreProperties(value = "invoiceItems", allowSetters = true)
     private Facture facture;
 
     public Long getId() {

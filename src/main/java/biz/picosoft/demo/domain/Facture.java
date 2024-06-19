@@ -1,6 +1,7 @@
 package biz.picosoft.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -37,7 +38,7 @@ public class Facture implements Serializable {
     @Column(name = "service_fournis")
     private String serviceFournis;
     @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("facture")
+
     private Set<InvoiceItem> invoiceItems = new HashSet<>();
     public Set<InvoiceItem> getInvoiceItems() {
         return invoiceItems;

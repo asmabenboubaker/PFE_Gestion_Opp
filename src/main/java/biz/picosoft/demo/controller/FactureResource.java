@@ -248,4 +248,10 @@ public class FactureResource {
         Facture savedFacture = factureRepository.save(facture);
         return ResponseEntity.ok().body(savedFacture);
     }
+    //getbyid
+    @GetMapping("/factures/invoiceItems/{id}")
+    public ResponseEntity<Facture> getFactureWithItems(@PathVariable Long id) {
+        Optional<Facture> facture = factureRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(facture);
+    }
 }
