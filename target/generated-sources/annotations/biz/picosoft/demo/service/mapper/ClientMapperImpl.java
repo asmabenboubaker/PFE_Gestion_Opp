@@ -47,6 +47,10 @@ public class ClientMapperImpl implements ClientMapper {
         clientDTO.setId( entity.getId() );
         clientDTO.setAdresse( entity.getAdresse() );
         clientDTO.setTelephne( entity.getTelephne() );
+        // pays
+
+            clientDTO.setPays( entity.getPays() );
+
         clientDTO.setEmail( entity.getEmail() );
         clientDTO.setDescription( entity.getDescription() );
         clientDTO.setNom( entity.getNom() );
@@ -118,5 +122,9 @@ public class ClientMapperImpl implements ClientMapper {
         if ( dto.getNotes() != null ) {
             entity.setNotes( dto.getNotes() );
         }
+        //pays
+            if ( dto.getPays() != null ) {
+                entity.setPays( dto.getPays() );
+            }
     }
 }

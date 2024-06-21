@@ -117,6 +117,10 @@ public class ClientQueryService extends QueryService<Client> {
             if (criteria.getNotes() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNotes(), Client_.notes));
             }
+            //pays
+            if (criteria.getPays() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPays(), Client_.pays));
+            }
             if (criteria.getDemandeId() != null) {
                 specification =
                     specification.and(

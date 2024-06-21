@@ -18,6 +18,15 @@ public class ClientDTO implements Serializable {
     private String adresse;
 
     private String telephne;
+    private String pays;
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
 
     private String email;
 
@@ -105,38 +114,30 @@ public class ClientDTO implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof ClientDTO)) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (!(o instanceof ClientDTO)) return false;
         ClientDTO clientDTO = (ClientDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, clientDTO.id);
+        return Objects.equals(getId(), clientDTO.getId()) && Objects.equals(getAdresse(), clientDTO.getAdresse()) && Objects.equals(getTelephne(), clientDTO.getTelephne()) && Objects.equals(getPays(), clientDTO.getPays()) && Objects.equals(getEmail(), clientDTO.getEmail()) && Objects.equals(getDescription(), clientDTO.getDescription()) && Objects.equals(getNom(), clientDTO.getNom()) && Objects.equals(getDateInscription(), clientDTO.getDateInscription()) && Objects.equals(getTypeClient(), clientDTO.getTypeClient()) && Objects.equals(getNotes(), clientDTO.getNotes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Objects.hash(getId(), getAdresse(), getTelephne(), getPays(), getEmail(), getDescription(), getNom(), getDateInscription(), getTypeClient(), getNotes());
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "ClientDTO{" +
-            "id=" + getId() +
-            ", adresse='" + getAdresse() + "'" +
-            ", telephne='" + getTelephne() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", nom='" + getNom() + "'" +
-            ", dateInscription='" + getDateInscription() + "'" +
-            ", typeClient='" + getTypeClient() + "'" +
-            ", notes='" + getNotes() + "'" +
-            "}";
+                "id=" + id +
+                ", adresse='" + adresse + '\'' +
+                ", telephne='" + telephne + '\'' +
+                ", pays='" + pays + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", nom='" + nom + '\'' +
+                ", dateInscription=" + dateInscription +
+                ", typeClient='" + typeClient + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 }

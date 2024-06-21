@@ -35,6 +35,15 @@ public class ClientCriteria implements Serializable, Criteria {
     private StringFilter description;
 
     private StringFilter nom;
+    private StringFilter pays;
+
+    public StringFilter getPays() {
+        return pays;
+    }
+
+    public void setPays(StringFilter pays) {
+        this.pays = pays;
+    }
 
     private InstantFilter dateInscription;
 
