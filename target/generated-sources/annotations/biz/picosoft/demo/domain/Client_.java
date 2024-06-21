@@ -20,6 +20,7 @@ public abstract class Client_ {
 	public static volatile SetAttribute<Client, Demande> demandes;
 	public static volatile SingularAttribute<Client, String> nom;
 	public static volatile SingularAttribute<Client, String> email;
+	public static volatile SingularAttribute<Client, String> pays;
 
 	public static final String NOTES = "notes";
 	public static final String TELEPHNE = "telephne";
@@ -31,6 +32,7 @@ public abstract class Client_ {
 	public static final String DEMANDES = "demandes";
 	public static final String NOM = "nom";
 	public static final String EMAIL = "email";
+	public static final String PAYS = "pays";
 
 }
 

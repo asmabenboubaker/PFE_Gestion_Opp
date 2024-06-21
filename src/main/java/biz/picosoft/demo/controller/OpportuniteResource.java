@@ -11,6 +11,7 @@ import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.EtudeOpp;
 import biz.picosoft.demo.domain.Opportunite;
 import biz.picosoft.demo.repository.OpportuniteRepository;
+import biz.picosoft.demo.repository.TacheRepo;
 import biz.picosoft.demo.service.OpportuniteQueryService;
 import biz.picosoft.demo.service.OpportuniteService;
 import biz.picosoft.demo.service.criteria.OpportuniteCriteria;
@@ -48,7 +49,7 @@ import java.util.Set;
 public class OpportuniteResource {
 
     private final Logger log = LoggerFactory.getLogger(OpportuniteResource.class);
-
+private final TacheRepo tach;
     private static final String ENTITY_NAME = "opportunite";
 
     //@Value("${jhipster.clientApp.name}")
@@ -74,7 +75,8 @@ public class OpportuniteResource {
         KernelService kernelService,
         OpportuniteServiceImpl oppServiceImp,
         KernelInterface kernelInterface,
-        OpportuniteServiceImpl opportuniteServiceImpl
+        OpportuniteServiceImpl opportuniteServiceImpl,
+        TacheRepo tach
     ) {
         this.opportuniteService = opportuniteService;
         this.opportuniteRepository = opportuniteRepository;
@@ -84,6 +86,7 @@ public class OpportuniteResource {
         this.oppServiceImp = oppServiceImp;
         this.kernelInterface = kernelInterface;
         this.opportuniteServiceImpl = opportuniteServiceImpl;
+        this.tach = tach;
     }
 
     /**
@@ -355,5 +358,12 @@ public class OpportuniteResource {
         return opportuniteService.affecterOffre(opportuniteId, offreId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+    //delete details
+    @DeleteMapping("/details/{id}")
+    public ResponseEntity<Void> deleteTach(@PathVariable Long id) {
+        log.debug("REST request to delete Opportunite : {}", id);
+        tach.deleteById(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

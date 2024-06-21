@@ -41,6 +41,15 @@ public class Client implements Serializable {
 
     @Column(name = "nom")
     private String nom;
+private String pays;
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
 
     @Column(name = "date_inscription")
 //    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
