@@ -273,4 +273,36 @@ public class FactureResource {
         Facture facture = factureService.assignClientToFacture(factureId, clientId);
         return ResponseEntity.ok().body(facture);
     }
+    //update Facture
+    @PutMapping("/factures/updateFacture/{factureId}/{clientId}")
+    @Transactional
+    public ResponseEntity<Facture> updateFacture(@RequestBody Facture updatedFacture,
+                                                 @PathVariable Long factureId,
+                                                 @PathVariable Long clientId) {
+        // Find client and facture by their IDs
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client not found with id: " + clientId));
+        Facture existingFacture = factureRepository.findById(factureId)
+                .orElseThrow(() -> new RuntimeException("Facture not found with id: " + factureId));
+
+        // Update the facture entity with the new data
+        existingFacture.setDescription(updatedFacture.getDescription());
+        existingFacture.setDateFacture(updatedFacture.getDateFacture());
+        existingFacture.setServiceFournis(updatedFacture.getServiceFournis());
+
+        // Update invoice items
+        // Clear existing items and set new ones
+        existingFacture.getInvoiceItems().clear();
+        for (InvoiceItem item : updatedFacture.getInvoiceItems()) {
+            item.setFacture(existingFacture);
+            existingFacture.getInvoiceItems().add(item);
+        }
+
+        // Associate client with facture
+        existingFacture.setClient(client);
+
+        // Save and return the updated facture
+        Facture savedFacture = factureRepository.save(existingFacture);
+        return ResponseEntity.ok().body(savedFacture);
+    }
 }
