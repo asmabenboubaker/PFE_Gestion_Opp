@@ -68,4 +68,6 @@ public interface FactureService {
    // create methode to affect facture to PV
     ResponseEntity<String> affectFactureToPv(Facture facture, Long idPv);
     Facture saveFactureWithItems(Facture facture, Set<InvoiceItem> invoiceItems);
+    // get list item by id facture
+    Set<InvoiceItem> getItemsByFactureId(Long id);
 }

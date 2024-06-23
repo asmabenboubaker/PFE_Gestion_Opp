@@ -198,6 +198,22 @@ public class FactureServiceImpl implements FactureService {
         }
     }
 
+    @Override
+    public Set<InvoiceItem> getItemsByFactureId(Long id) {
+        try {
+            Optional<Facture> facture = factureRepository.findById(id);
+            if (facture.isPresent()) {
+                return facture.get().getInvoiceItems();
+            } else {
+                return new HashSet<>();
+            }
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération des items de la facture", e);
+            throw new RuntimeException("Erreur lors de la récupération des items de la facture", e);
+        }
+
+    }
+
     private void addRows(PdfPTable table, Map<String, Object> mapFromJson) {
 
     log.info("Inside addRows");

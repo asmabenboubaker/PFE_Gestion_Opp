@@ -25,10 +25,7 @@ import tech.jhipster.web.util.ResponseUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing {@link biz.picosoft.demo.domain.Facture}.
@@ -253,5 +250,11 @@ public class FactureResource {
     public ResponseEntity<Facture> getFactureWithItems(@PathVariable Long id) {
         Optional<Facture> facture = factureRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(facture);
+    }
+    //get list item by id facture
+    @GetMapping("/factures/items/{id}")
+    public ResponseEntity<Set<InvoiceItem>> getItemsByFactureId(@PathVariable Long id) {
+        Set<InvoiceItem> items = factureService.getItemsByFactureId(id);
+        return ResponseEntity.ok().body(items);
     }
 }
