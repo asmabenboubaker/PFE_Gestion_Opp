@@ -17,6 +17,7 @@ public abstract class Facture_ {
 	public static volatile SingularAttribute<Facture, LocalDate> dateFacture;
 	public static volatile SingularAttribute<Facture, String> contactNumber;
 	public static volatile SingularAttribute<Facture, String> description;
+	public static volatile SingularAttribute<Facture, Client> client;
 	public static volatile SingularAttribute<Facture, String> PaymentMethod;
 	public static volatile SingularAttribute<Facture, Long> id;
 	public static volatile SingularAttribute<Facture, String> nom;
@@ -29,6 +30,7 @@ public abstract class Facture_ {
 	public static final String DATE_FACTURE = "dateFacture";
 	public static final String CONTACT_NUMBER = "contactNumber";
 	public static final String DESCRIPTION = "description";
+	public static final String CLIENT = "client";
 	public static final String PAYMENT_METHOD = "PaymentMethod";
 	public static final String ID = "id";
 	public static final String NOM = "nom";

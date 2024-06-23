@@ -2,8 +2,10 @@ package biz.picosoft.demo.controller;
 
 
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Facture;
 import biz.picosoft.demo.domain.InvoiceItem;
+import biz.picosoft.demo.repository.ClientRepository;
 import biz.picosoft.demo.repository.FactureRepository;
 import biz.picosoft.demo.service.FactureQueryService;
 import biz.picosoft.demo.service.FactureService;
@@ -46,11 +48,15 @@ public class FactureResource {
     private final FactureRepository factureRepository;
 
     private final FactureQueryService factureQueryService;
+    private final ClientRepository clientRepository;
 
-    public FactureResource(FactureService factureService, FactureRepository factureRepository, FactureQueryService factureQueryService) {
+    public FactureResource(FactureService factureService, FactureRepository factureRepository, FactureQueryService factureQueryService,
+                            ClientRepository clientRepository
+    ) {
         this.factureService = factureService;
         this.factureRepository = factureRepository;
         this.factureQueryService = factureQueryService;
+        this.clientRepository = clientRepository;
     }
 
     /**
@@ -235,16 +241,20 @@ public class FactureResource {
         Facture savedFacture = factureService.saveFactureWithItems(facture, facture.getInvoiceItems());
         return ResponseEntity.ok().body(savedFacture);
     }
-    @PostMapping("/saveFactureWithItems2")
+    @PostMapping("/saveFactureWithItems2/{clientId}")
     @Transactional
-    public ResponseEntity<Facture> createFacture(@RequestBody Facture facture) {
+    public ResponseEntity<Facture> createFacture(@RequestBody Facture facture, @PathVariable Long clientId) {
         // Ensure invoice items are properly associated with the facture
         for (InvoiceItem item : facture.getInvoiceItems()) {
             item.setFacture(facture);
         }
+        //find client by id
+        Client client = clientRepository.findById(clientId).orElseThrow();
+        facture.setClient(client);
         Facture savedFacture = factureRepository.save(facture);
         return ResponseEntity.ok().body(savedFacture);
     }
+
     //getbyid
     @GetMapping("/factures/invoiceItems/{id}")
     public ResponseEntity<Facture> getFactureWithItems(@PathVariable Long id) {
@@ -256,5 +266,11 @@ public class FactureResource {
     public ResponseEntity<Set<InvoiceItem>> getItemsByFactureId(@PathVariable Long id) {
         Set<InvoiceItem> items = factureService.getItemsByFactureId(id);
         return ResponseEntity.ok().body(items);
+    }
+    //assignClientToFacture
+    @PostMapping("/factures/assignClient/{factureId}/{clientId}")
+    public ResponseEntity<Facture> assignClientToFacture(@PathVariable Long factureId, @PathVariable Long clientId) {
+        Facture facture = factureService.assignClientToFacture(factureId, clientId);
+        return ResponseEntity.ok().body(facture);
     }
 }

@@ -1,9 +1,11 @@
 package biz.picosoft.demo.service.impl;
 
 import biz.picosoft.demo.Constants.Constants;
+import biz.picosoft.demo.domain.Client;
 import biz.picosoft.demo.domain.Facture;
 import biz.picosoft.demo.domain.InvoiceItem;
 import biz.picosoft.demo.domain.PV;
+import biz.picosoft.demo.repository.ClientRepository;
 import biz.picosoft.demo.repository.FactureRepository;
 import biz.picosoft.demo.repository.PVRepository;
 import biz.picosoft.demo.service.FactureService;
@@ -47,16 +49,18 @@ public class FactureServiceImpl implements FactureService {
     private final Logger log = LoggerFactory.getLogger(FactureServiceImpl.class);
 
     private final FactureRepository factureRepository;
+    private final ClientRepository clientRepository;
 
     private final FactureMapper factureMapper;
     private final PVRepository pvRepository;
 
     public FactureServiceImpl(FactureRepository factureRepository, FactureMapper factureMapper,
-    PVRepository pvRepository
+    PVRepository pvRepository, ClientRepository clientRepository
     ) {
         this.factureRepository = factureRepository;
         this.factureMapper = factureMapper;
         this.pvRepository= pvRepository;
+        this.clientRepository=clientRepository;
     }
 
     @Override
@@ -212,6 +216,26 @@ public class FactureServiceImpl implements FactureService {
             throw new RuntimeException("Erreur lors de la récupération des items de la facture", e);
         }
 
+    }
+
+    @Override
+    public Facture assignClientToFacture(Long factureId, Long clientId) {
+        try {
+            Optional<Facture> facture = factureRepository.findById(factureId);
+            if (facture.isPresent()) {
+                // Récupération du client
+                 Client client = clientRepository.findById(clientId).get();
+                // Affectation du client à la facture
+                 facture.get().setClient(client);
+                // Sauvegarde de la facture
+                return factureRepository.save(facture.get());
+            } else {
+                return new Facture();
+            }
+        } catch (Exception e) {
+            log.error("Erreur lors de l'affectation du client à la facture", e);
+            throw new RuntimeException("Erreur lors de l'affectation du client à la facture", e);
+        }
     }
 
     private void addRows(PdfPTable table, Map<String, Object> mapFromJson) {

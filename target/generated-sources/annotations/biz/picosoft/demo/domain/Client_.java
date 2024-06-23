@@ -16,6 +16,7 @@ public abstract class Client_ {
 	public static volatile SingularAttribute<Client, String> typeClient;
 	public static volatile SingularAttribute<Client, String> adresse;
 	public static volatile SingularAttribute<Client, String> description;
+	public static volatile SetAttribute<Client, Facture> factures;
 	public static volatile SingularAttribute<Client, Long> id;
 	public static volatile SetAttribute<Client, Demande> demandes;
 	public static volatile SingularAttribute<Client, String> nom;
@@ -28,6 +29,7 @@ public abstract class Client_ {
 	public static final String TYPE_CLIENT = "typeClient";
 	public static final String ADRESSE = "adresse";
 	public static final String DESCRIPTION = "description";
+	public static final String FACTURES = "factures";
 	public static final String ID = "id";
 	public static final String DEMANDES = "demandes";
 	public static final String NOM = "nom";

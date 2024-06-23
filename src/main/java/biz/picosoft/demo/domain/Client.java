@@ -42,6 +42,18 @@ public class Client implements Serializable {
     @Column(name = "nom")
     private String nom;
 private String pays;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "client" }, allowSetters = true)
+    private Set<Facture> factures = new HashSet<>();
+
+    public Set<Facture> getFactures() {
+        return factures;
+    }
+
+    public void setFactures(Set<Facture> factures) {
+        this.factures = factures;
+    }
 
     public String getPays() {
         return pays;

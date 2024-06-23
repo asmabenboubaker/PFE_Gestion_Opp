@@ -40,6 +40,19 @@ public class Facture implements Serializable {
     @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, orphanRemoval = true)
 
     private Set<InvoiceItem> invoiceItems = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "factures" }, allowSetters = true)
+    private Client client;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public Set<InvoiceItem> getInvoiceItems() {
         return invoiceItems;
     }
