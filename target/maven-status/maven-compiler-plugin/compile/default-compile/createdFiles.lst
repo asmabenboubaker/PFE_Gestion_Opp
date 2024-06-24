@@ -25,6 +25,7 @@ biz\picosoft\demo\client\kernel\model\objects\Security.class
 biz\picosoft\demo\controller\EtudeOppResource.class
 biz\picosoft\demo\client\kernel\model\acl\AclSid.class
 biz\picosoft\demo\config\logging\AopLoggingService.class
+biz\picosoft\demo\service\dto\MonthlyOffreCountDTO.class
 biz\picosoft\demo\service\dto\PVDTO.class
 biz\picosoft\demo\Workflow\service\mapper\BpmJobMapper.class
 biz\picosoft\demo\service\criteria\FactureCriteria.class
@@ -32,9 +33,11 @@ biz\picosoft\demo\service\dto\ClientDTO.class
 biz\picosoft\demo\service\impl\FactureServiceImpl$1.class
 biz\picosoft\demo\controller\errors\ECErrors.class
 biz\picosoft\demo\client\kernel\model\objects\ObjectDTO.class
+biz\picosoft\demo\domain\InvoiceItem_.class
 biz\picosoft\demo\service\mapper\BonDeCommandeMapper.class
 biz\picosoft\demo\service\FactureQueryService.class
 biz\picosoft\demo\domain\InstantTypeAdapter.class
+biz\picosoft\demo\repository\FileRepository.class
 biz\picosoft\demo\service\dto\BCOutputDTO.class
 biz\picosoft\demo\controller\BonDeCommandeResource.class
 biz\picosoft\demo\service\ProjetQueryService.class
@@ -61,11 +64,13 @@ biz\picosoft\demo\domain\Facture_.class
 biz\picosoft\demo\config\DateConfig.class
 biz\picosoft\demo\service\criteria\DemandeCriteria$StatutDemandeFilter.class
 biz\picosoft\demo\client\kernel\model\global\Language.class
+biz\picosoft\demo\domain\TacheOpp.class
 biz\picosoft\demo\repository\PVRepository.class
 biz\picosoft\demo\Workflow\service\SubTaskListenerEventService.class
 biz\picosoft\demo\service\mapper\DemandeInputMapper.class
 biz\picosoft\demo\client\kernel\model\global\StateWorkflow.class
 biz\picosoft\demo\client\kernel\model\global\InitClass.class
+biz\picosoft\demo\domain\Article.class
 biz\picosoft\demo\domain\Client.class
 biz\picosoft\demo\domain\Client_.class
 biz\picosoft\demo\client\kernel\model\enumeration\TypeSID.class
@@ -86,6 +91,7 @@ biz\picosoft\demo\service\criteria\EtudeOppCriteria.class
 biz\picosoft\demo\config\BeanConfiguration.class
 biz\picosoft\demo\service\criteria\PVCriteria$StatutProjetFilter.class
 biz\picosoft\demo\service\dto\BCInputDTO.class
+biz\picosoft\demo\controller\JiraController.class
 biz\picosoft\demo\service\impl\ProjetServiceImpl.class
 biz\picosoft\demo\client\kernel\model\pm\ActivityType.class
 biz\picosoft\demo\Workflow\helper\MapBuilder.class
@@ -103,6 +109,7 @@ biz\picosoft\demo\Workflow\service\BpmJobService.class
 biz\picosoft\demo\repository\OpportuniteRepository.class
 biz\picosoft\demo\client\kernel\model\global\AuthUser.class
 biz\picosoft\demo\controller\errors\ErrorConstants.class
+biz\picosoft\demo\domain\InvoiceItem.class
 biz\picosoft\demo\service\criteria\BonDeCommandeCriteria.class
 biz\picosoft\demo\service\impl\DemandeServiceImpl.class
 biz\picosoft\demo\service\mapper\EquipeMapper.class
@@ -131,6 +138,7 @@ biz\picosoft\demo\service\mapper\BCOutputMapper.class
 biz\picosoft\demo\service\dto\OpportuniteOutputDTO.class
 biz\picosoft\demo\service\mapper\OffreInputMapper.class
 biz\picosoft\demo\controller\OpportuniteResource.class
+biz\picosoft\demo\service\FilesService.class
 biz\picosoft\demo\domain\enumeration\StatutDemande.class
 biz\picosoft\demo\domain\EtudeOpp.class
 biz\picosoft\demo\service\mapper\DemandeMapper.class
@@ -143,10 +151,13 @@ biz\picosoft\demo\service\mapper\PVMapper.class
 biz\picosoft\demo\Workflow\domain\BpmJob_.class
 biz\picosoft\demo\service\mapper\OpportuniteMapperImpl.class
 biz\picosoft\demo\config\logging\AopLoggingQueryService.class
+biz\picosoft\demo\controller\ArticleController.class
 biz\picosoft\demo\controller\errors\FieldErrorVM.class
+biz\picosoft\demo\service\impl\ArticleServiceImp.class
 biz\picosoft\demo\client\kernel\model\global\CurrentUser.class
 biz\picosoft\demo\service\mapper\FactureMapperImpl.class
 biz\picosoft\demo\service\criteria\ClientCriteria.class
+biz\picosoft\demo\domain\Attachment.class
 biz\picosoft\demo\domain\Greeting.class
 biz\picosoft\demo\service\OffreService.class
 biz\picosoft\demo\client\config\FeignConfig.class
@@ -196,8 +207,10 @@ biz\picosoft\demo\service\mapper\OpportuniteOutputMapper.class
 biz\picosoft\demo\client\kernel\model\acl\enumeration\OrganismeNature.class
 biz\picosoft\demo\config\logging\AopLoggingCriteria.class
 biz\picosoft\demo\Workflow\config\FlowableConfig.class
+biz\picosoft\demo\domain\Attachment_.class
 biz\picosoft\demo\service\mapper\DemandeOutputMapperImpl.class
 biz\picosoft\demo\controller\DemandeResource.class
+biz\picosoft\demo\domain\Article_.class
 biz\picosoft\demo\config\slf4j\Slf4jMDCFilterConfiguration.class
 biz\picosoft\demo\service\criteria\DomaineCriteria.class
 biz\picosoft\demo\config\logging\AopLoggingMapper.class
@@ -237,6 +250,7 @@ biz\picosoft\demo\client\kernel\model\common\criteria\KeyWordCriteria.class
 biz\picosoft\demo\service\mapper\BCInputMapper.class
 biz\picosoft\demo\controller\ProjetResource.class
 biz\picosoft\demo\service\DomaineQueryService.class
+biz\picosoft\demo\repository\ArticleRepository.class
 biz\picosoft\demo\service\mapper\DomaineMapper.class
 biz\picosoft\demo\domain\ZonedDateTimeTypeAdapter.class
 biz\picosoft\demo\service\mapper\ClientMapperImpl.class
@@ -252,11 +266,13 @@ biz\picosoft\demo\client\kernel\model\acl\AclClass.class
 biz\picosoft\demo\service\mapper\EtudeOppMapperImpl.class
 biz\picosoft\demo\controller\errors\BadRequestAlertException.class
 biz\picosoft\demo\repository\NotificationRepo.class
+biz\picosoft\demo\service\impl\TacheServiceImp.class
 biz\picosoft\demo\client\kernel\model\common\dto\KeyWordCriteriaDTO.class
 biz\picosoft\demo\client\kernel\model\common\dto\PostAttachementDTO.class
 biz\picosoft\demo\domain\Offre.class
 biz\picosoft\demo\service\ClientService.class
 biz\picosoft\demo\service\criteria\ProjetCriteria.class
+biz\picosoft\demo\domain\TacheOpp_.class
 biz\picosoft\demo\domain\Offre_.class
 biz\picosoft\demo\service\impl\OffreServiceImpl.class
 biz\picosoft\demo\config\audit\AuditRevisionEntity.class
@@ -280,8 +296,10 @@ biz\picosoft\demo\client\kernel\model\objects\HistoricWF.class
 biz\picosoft\demo\domain\Equipe.class
 biz\picosoft\demo\ServletInitializer.class
 biz\picosoft\demo\domain\Task_.class
+biz\picosoft\demo\repository\TacheRepo.class
 biz\picosoft\demo\Constants\Constants.class
 biz\picosoft\demo\client\kernel\model\common\dto\FilesTypeDTO.class
+biz\picosoft\demo\controller\FilesController.class
 biz\picosoft\demo\service\TaskService.class
 biz\picosoft\demo\service\criteria\OpportuniteCriteria.class
 biz\picosoft\demo\Workflow\service\ServiceTaskCalculeDecision.class
@@ -294,6 +312,7 @@ biz\picosoft\demo\Workflow\service\WorkflowService.class
 biz\picosoft\demo\client\kernel\model\common\dto\AttachementDTO.class
 biz\picosoft\demo\client\kernel\model\pm\User.class
 biz\picosoft\demo\domain\FileModel.class
+biz\picosoft\demo\domain\Attachment$AttachmentBuilder.class
 biz\picosoft\demo\service\dto\FactureDTO.class
 biz\picosoft\demo\repository\FactureRepository.class
 biz\picosoft\demo\client\kernel\model\global\Address.class

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-19T16:17:29+0200",
+    date = "2024-06-24T21:20:49+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -209,6 +209,9 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
             return;
         }
 
+        if ( clientDTO.getPays() != null ) {
+            mappingTarget.setPays( clientDTO.getPays() );
+        }
         if ( clientDTO.getId() != null ) {
             mappingTarget.setId( clientDTO.getId() );
         }
@@ -317,6 +320,7 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         Client client = new Client();
 
+        client.setPays( clientDTO.getPays() );
         client.setId( clientDTO.getId() );
         client.setAdresse( clientDTO.getAdresse() );
         client.setTelephne( clientDTO.getTelephne() );
@@ -369,6 +373,7 @@ public class OpportuniteOutputMapperImpl extends OpportuniteOutputMapper {
 
         ClientDTO clientDTO = new ClientDTO();
 
+        clientDTO.setPays( client.getPays() );
         clientDTO.setId( client.getId() );
         clientDTO.setAdresse( client.getAdresse() );
         clientDTO.setTelephne( client.getTelephne() );

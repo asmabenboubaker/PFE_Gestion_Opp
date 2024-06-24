@@ -665,14 +665,14 @@ System.out.println("getEquipe"+opportunite.getEquipes());
         Optional<Opportunite> optionalOpportunite = opportuniteRepository.findById(opportuniteId);
         Optional<Offre> optionalOffre = offreRepository.findById(offreId);
 
-        optionalOpportunite.ifPresent(opportunite -> {
-            optionalOffre.ifPresent(offre -> {
-                opportunite.addOffre(offre);
-                offre.setOpportunite(opportunite);
-                opportuniteRepository.save(opportunite);
-                offreRepository.save(offre);
-            });
-        });
+        if (optionalOpportunite.isPresent() && optionalOffre.isPresent()) {
+            Opportunite opportunite = optionalOpportunite.get();
+            Offre offre = optionalOffre.get();
+
+            opportunite.addOffre(offre);
+            opportuniteRepository.save(opportunite);
+
+        }
 
         return optionalOpportunite;
     }

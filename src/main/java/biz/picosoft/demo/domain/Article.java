@@ -1,5 +1,6 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -28,7 +29,7 @@ public class Article implements Serializable {
     private double prixTotal;
     @ManyToOne
     @JoinColumn(name = "offre_de_prix_id")
-    @JsonIgnore
+    @JsonBackReference
     private Offre offreDePrix;
 
     public Offre getOffreDePrix() {
@@ -101,15 +102,5 @@ public class Article implements Serializable {
         return Objects.hash(getId(), getNom(), getDescription(), getQuantite(), getPrixUnitaire(), getPrixTotal());
     }
 
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", quantite=" + quantite +
-                ", prixUnitaire=" + prixUnitaire +
-                ", prixTotal=" + prixTotal +
-                '}';
-    }
+
 }

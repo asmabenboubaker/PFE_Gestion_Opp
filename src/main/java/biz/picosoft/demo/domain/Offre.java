@@ -1,8 +1,10 @@
 package biz.picosoft.demo.domain;
 
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -30,8 +33,8 @@ public class Offre implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @OneToMany(mappedBy = "offreDePrix", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    //@JsonManagedReference
     private List<Article> articles;
 
     public List<Article> getArticles() {
@@ -71,7 +74,8 @@ public class Offre implements Serializable {
     private Set<BonDeCommande> bondecommandes = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "offres", "demande" }, allowSetters = true)
+    @JsonBackReference
+    @JsonIgnore
     private Opportunite opportunite;
 
     // process
@@ -324,35 +328,45 @@ public class Offre implements Serializable {
         this.setOpportunite(opportunite);
         return this;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Offre)) {
-            return false;
-        }
-        return id != null && id.equals(((Offre) o).id);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Offre that = (Offre) o;
+        return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
+
     @Override
     public String toString() {
         return "Offre{" +
-            "id=" + getId() +
-            ", montant=" + getMontant() +
-            ", dateOffre='" + getDateOffre() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", valideJusquA='" + getValideJusquA() + "'" +
-            "}";
+                "id=" + id +
+                ", articles=" + articles +
+                ", montant=" + montant +
+                ", createBC=" + createBC +
+                ", dateOffre=" + dateOffre +
+                ", description='" + description + '\'' +
+                ", valideJusquA=" + valideJusquA +
+                ", bondecommandes=" + bondecommandes +
+                ", opportunite=" + opportunite +
+                ", identifiant='" + identifiant + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", numberOfattachments=" + numberOfattachments +
+                ", excludeFromView=" + excludeFromView +
+                ", status='" + status + '\'' +
+                ", wfProcessID='" + wfProcessID + '\'' +
+                ", securiteLevel=" + securiteLevel +
+                ", assignee='" + assignee + '\'' +
+                ", endProcess=" + endProcess +
+                ", modePaiement='" + modePaiement + '\'' +
+                ", dateLivraison=" + dateLivraison +
+                ", statutOffre=" + statutOffre +
+                ", offreNumber='" + offreNumber + '\'' +
+                '}';
     }
 }

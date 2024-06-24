@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-19T16:17:29+0200",
+    date = "2024-06-24T21:20:47+0200",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -23,6 +23,7 @@ public class ClientMapperImpl implements ClientMapper {
 
         Client client = new Client();
 
+        client.setPays( dto.getPays() );
         client.setId( dto.getId() );
         client.setAdresse( dto.getAdresse() );
         client.setTelephne( dto.getTelephne() );
@@ -44,13 +45,10 @@ public class ClientMapperImpl implements ClientMapper {
 
         ClientDTO clientDTO = new ClientDTO();
 
+        clientDTO.setPays( entity.getPays() );
         clientDTO.setId( entity.getId() );
         clientDTO.setAdresse( entity.getAdresse() );
         clientDTO.setTelephne( entity.getTelephne() );
-        // pays
-
-            clientDTO.setPays( entity.getPays() );
-
         clientDTO.setEmail( entity.getEmail() );
         clientDTO.setDescription( entity.getDescription() );
         clientDTO.setNom( entity.getNom() );
@@ -95,6 +93,9 @@ public class ClientMapperImpl implements ClientMapper {
             return;
         }
 
+        if ( dto.getPays() != null ) {
+            entity.setPays( dto.getPays() );
+        }
         if ( dto.getId() != null ) {
             entity.setId( dto.getId() );
         }
@@ -122,9 +123,5 @@ public class ClientMapperImpl implements ClientMapper {
         if ( dto.getNotes() != null ) {
             entity.setNotes( dto.getNotes() );
         }
-        //pays
-            if ( dto.getPays() != null ) {
-                entity.setPays( dto.getPays() );
-            }
     }
 }

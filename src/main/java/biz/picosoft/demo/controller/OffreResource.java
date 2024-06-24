@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -257,12 +258,11 @@ public class OffreResource {
     }
 
     @PatchMapping(value = {"/submitOffre"})
+    @Transactional
     public OffreOutputDTO submitRequestCase(@RequestBody OffreInputDTO requestCaseInputDTO) throws Exception {
 
-        // check if the conneceted person have role can create inbound
         offreService.checkRole(currentUser.getProfileName(), kernelService.anf_invoice_role_canCreatedemande);
 
-        // extract acl class
         AclClass aclClass = kernelInterface.getaclClassByClassName(Offre.class.getName());
 
         OffreOutputDTO result = offreServiceImp.submitProcessOffre(requestCaseInputDTO, aclClass);

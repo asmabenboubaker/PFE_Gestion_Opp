@@ -2,6 +2,7 @@ package biz.picosoft.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -197,9 +198,8 @@ private String sidDepartement;
     @Column(name = "montant_estime")
     private Float montantEstime;
 
-    @OneToMany(mappedBy = "opportunite")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "bondecommandes", "opportunite" }, allowSetters = true)
+    @OneToMany(mappedBy = "opportunite", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Offre> offres = new HashSet<>();
 
     @ManyToOne
@@ -349,14 +349,14 @@ private String sidDepartement;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Opportunite)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Opportunite that = (Opportunite) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getExcludeFromView(), that.getExcludeFromView()) && Objects.equals(getOppNumber(), that.getOppNumber()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getNomDepartement(), that.getNomDepartement()) && Objects.equals(getSidDepartement(), that.getSidDepartement()) && Objects.equals(getIdentifiant(), that.getIdentifiant()) && Objects.equals(getActivityName(), that.getActivityName()) && Objects.equals(getNumberOfattachments(), that.getNumberOfattachments()) && Objects.equals(getWfProcessID(), that.getWfProcessID()) && Objects.equals(getSecuriteLevel(), that.getSecuriteLevel()) && Objects.equals(getAssignee(), that.getAssignee()) && Objects.equals(getEndProcess(), that.getEndProcess()) && Objects.equals(getCreateoffre(), that.getCreateoffre()) && Objects.equals(getEquipes(), that.getEquipes()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getNom(), that.getNom()) && Objects.equals(getCreatedBy(), that.getCreatedBy()) && Objects.equals(getCreateAt(), that.getCreateAt()) && Objects.equals(getMontantEstime(), that.getMontantEstime()) && Objects.equals(getOffres(), that.getOffres()) && Objects.equals(getDemande(), that.getDemande()) && Objects.equals(getEtudeOpps(), that.getEtudeOpps());
+        return id != null && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getExcludeFromView(), getOppNumber(), getStatus(), getNomDepartement(), getSidDepartement(), getIdentifiant(), getActivityName(), getNumberOfattachments(), getWfProcessID(), getSecuriteLevel(), getAssignee(), getEndProcess(), getCreateoffre(), getEquipes(), getDescription(), getNom(), getCreatedBy(), getCreateAt(), getMontantEstime(), getOffres(), getDemande());
+        return getClass().hashCode();
     }
 
     @Override

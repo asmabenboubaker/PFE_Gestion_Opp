@@ -1,5 +1,6 @@
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DemandeDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\logging\AopLoggingResource.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Article.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\BonDeCommande.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\logging\AopLoggingMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\OpportuniteCriteria.java
@@ -29,8 +30,10 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\F
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\dto\AddFileDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\OffreInputMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\PVResource.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Attachment.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\ProjetCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\DemandeServiceImpl.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\ArticleServiceImp.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\logging\AopLoggingQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\OffreRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\intercomm\KernelService.java
@@ -38,6 +41,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\ProjetR
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\FactureMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\pm\ActivityType.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DomaineService.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\ArticleRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\criteria\KeyWordCriteria.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\TaskListenerEventService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\FactureRepository.java
@@ -45,9 +49,11 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\P
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\EtudeOppRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\errors\FieldErrorVM.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\acl\enumeration\OrganismeNature.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\FilesController.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\OpportuniteInputMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\ProjetMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\enumeration\StatutDemande.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\JiraController.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\BonDeCommandeResource.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\createEvent.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Facture.java
@@ -85,6 +91,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\logging\Aop
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\dto\BpmJobDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\FactureDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\OffreInputDTO.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\TacheServiceImp.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\acl\enumeration\Access.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\DomaineQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\global\RefSequenceFormat.java
@@ -131,9 +138,11 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\BeanConfiguration.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\config\FlowableConfig.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\mapper\BpmJobMapper.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\FilesService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\TaskResource.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\OffreOutputDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\ProjetService.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\FileRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\objects\ObjectState.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\audit\AuditRevisionListener.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\SubTaskListenerEventService.java
@@ -153,6 +162,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\package-info.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\enumeration\package-info.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\criteria\OffreCriteria.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\InvoiceItem.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\DemandeRepositoryWithBagRelationships.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\LocalDateTypeAdapter.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\JacksonConfiguration.java
@@ -184,8 +194,10 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\Controller.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\DomaineRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\dto\GetRequestFileDefinitionDTO.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\TacheRepo.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\JWTAutorizationFilter.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\FactureService.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\MonthlyOffreCountDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\Opportunite.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\PVQueryService.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\dto\KeyWordCriteriaDTO.java
@@ -213,6 +225,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\B
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\common\dto\FilesTypeDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\PV.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\impl\OpportuniteServiceImpl.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\ArticleController.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\mapper\ClientMapper.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\model\objects\StateMetric.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\Workflow\service\BpmJobService.java
@@ -238,6 +251,7 @@ D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\client\kernel\mode
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\config\BeanUtil.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\ClientRepository.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\repository\BonDeCommandeRepository.java
+D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\domain\TacheOpp.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DemandeInputDTO.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\controller\OffreResource.java
 D:\PFE\templatebackend-master\src\main\java\biz\picosoft\demo\service\dto\DemandeOutputDTO.java
