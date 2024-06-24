@@ -44,7 +44,14 @@ public class Facture implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "factures" }, allowSetters = true)
     private Client client;
-
+ private Boolean isPaid;
+    // getter and setter isPaid
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
     public Client getClient() {
         return client;
     }

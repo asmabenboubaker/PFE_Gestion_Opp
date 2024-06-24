@@ -21,6 +21,15 @@ public class FactureDTO implements Serializable {
     private String serviceFournis;
 
     private PVDTO pv;
+    private Boolean isPaid;
+
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
+    }
 
     public Long getId() {
         return id;
@@ -64,34 +73,26 @@ public class FactureDTO implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof FactureDTO)) {
-            return false;
-        }
-
-        FactureDTO factureDTO = (FactureDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, factureDTO.id);
+        if (this == o) return true;
+        if (!(o instanceof FactureDTO)) return false;
+        FactureDTO that = (FactureDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getDateFacture(), that.getDateFacture()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getServiceFournis(), that.getServiceFournis()) && Objects.equals(getPv(), that.getPv()) && Objects.equals(isPaid, that.isPaid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Objects.hash(getId(), getDateFacture(), getDescription(), getServiceFournis(), getPv(), isPaid);
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "FactureDTO{" +
-            "id=" + getId() +
-            ", dateFacture='" + getDateFacture() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", serviceFournis='" + getServiceFournis() + "'" +
-            ", pv=" + getPv() +
-            "}";
+                "id=" + id +
+                ", dateFacture=" + dateFacture +
+                ", description='" + description + '\'' +
+                ", serviceFournis='" + serviceFournis + '\'' +
+                ", pv=" + pv +
+                ", isPaid=" + isPaid +
+                '}';
     }
 }

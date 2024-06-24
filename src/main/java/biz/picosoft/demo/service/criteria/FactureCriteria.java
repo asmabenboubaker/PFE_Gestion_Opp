@@ -26,6 +26,15 @@ public class FactureCriteria implements Serializable, Criteria {
     private LocalDateFilter dateFacture;
 
     private StringFilter description;
+    private BooleanFilter isPaid;
+
+    public BooleanFilter getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(BooleanFilter isPaid) {
+        this.isPaid = isPaid;
+    }
 
     private StringFilter serviceFournis;
 
@@ -40,6 +49,8 @@ public class FactureCriteria implements Serializable, Criteria {
         this.dateFacture = other.dateFacture == null ? null : other.dateFacture.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.serviceFournis = other.serviceFournis == null ? null : other.serviceFournis.copy();
+        // ispaid
+        this.isPaid = other.isPaid == null ? null : other.isPaid.copy();
         this.pvId = other.pvId == null ? null : other.pvId.copy();
         this.distinct = other.distinct;
     }
@@ -147,6 +158,8 @@ public class FactureCriteria implements Serializable, Criteria {
             Objects.equals(description, that.description) &&
             Objects.equals(serviceFournis, that.serviceFournis) &&
             Objects.equals(pvId, that.pvId) &&
+                    //ispaid
+            Objects.equals(isPaid, that.isPaid) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -164,6 +177,8 @@ public class FactureCriteria implements Serializable, Criteria {
             (dateFacture != null ? "dateFacture=" + dateFacture + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
             (serviceFournis != null ? "serviceFournis=" + serviceFournis + ", " : "") +
+                //ispaid
+            (isPaid != null ? "isPaid=" + isPaid + ", " : "") +
             (pvId != null ? "pvId=" + pvId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";

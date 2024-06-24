@@ -31,6 +31,8 @@ public class FactureMapperImpl implements FactureMapper {
         facture.setDateFacture( dto.getDateFacture() );
         facture.setDescription( dto.getDescription() );
         facture.setServiceFournis( dto.getServiceFournis() );
+        // ispaid is not mapped
+     facture.setIsPaid( dto.getPaid());
         facture.pv( pVDTOToPV( dto.getPv() ) );
 
         return facture;
@@ -79,6 +81,9 @@ public class FactureMapperImpl implements FactureMapper {
         if ( dto.getDescription() != null ) {
             entity.setDescription( dto.getDescription() );
         }
+        if (dto.getPaid()!=null){
+            entity.setIsPaid(dto.getPaid());
+        }
         if ( dto.getServiceFournis() != null ) {
             entity.setServiceFournis( dto.getServiceFournis() );
         }
@@ -102,6 +107,7 @@ public class FactureMapperImpl implements FactureMapper {
         factureDTO.setId( s.getId() );
         factureDTO.setDateFacture( s.getDateFacture() );
         factureDTO.setDescription( s.getDescription() );
+        factureDTO.setPaid( s.getIsPaid() );
         factureDTO.setServiceFournis( s.getServiceFournis() );
 
         return factureDTO;

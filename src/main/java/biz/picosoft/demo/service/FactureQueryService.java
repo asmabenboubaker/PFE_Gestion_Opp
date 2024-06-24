@@ -96,6 +96,12 @@ public class FactureQueryService extends QueryService<Facture> {
             if (criteria.getDateFacture() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateFacture(), Facture_.dateFacture));
             }
+            if (criteria.getIsPaid() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsPaid(), Facture_.isPaid));
+            }
+            if (criteria.getIsPaid() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsPaid(), Facture_.isPaid));
+            }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Facture_.description));
             }
