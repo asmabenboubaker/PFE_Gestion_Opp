@@ -1,6 +1,9 @@
 package biz.picosoft.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -16,6 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "etude_opp",schema = "opportunite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
 public class EtudeOpp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +27,7 @@ public class EtudeOpp implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     @Column(name = "nature")
@@ -55,8 +60,9 @@ public class EtudeOpp implements Serializable {
 
     // one to many relationship with Opportunite
     // chaque opp peut avoir plusieurs etudes
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
+    @JsonBackReference
     private Opportunite opportunite;
 
     public Opportunite getOpportunite() {

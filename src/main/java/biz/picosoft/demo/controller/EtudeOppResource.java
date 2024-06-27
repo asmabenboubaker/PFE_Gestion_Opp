@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -210,7 +211,7 @@ private final TacheServiceImp tacheServiceImp;
     }
 
     // // ajouter EtudeOpp acec affectation opportunité
-    @PostMapping("/createEtudeOppWithAffectation/{idOpportunite}")
+    @PutMapping(value="/createEtudeOppWithAffectation/{idOpportunite}")
     public ResponseEntity<EtudeOppDTO> createEtudeOppWithAffectation(
             @PathVariable(value = "idOpportunite", required = false) final Long idOpportunite,
             @RequestBody EtudeOppDTO etudeOppDTO

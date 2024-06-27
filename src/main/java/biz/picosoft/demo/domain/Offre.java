@@ -34,6 +34,7 @@ public class Offre implements Serializable {
     @Column(name = "id")
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     //@JsonManagedReference
     private List<Article> articles;
 
@@ -75,7 +76,7 @@ public class Offre implements Serializable {
 
     @ManyToOne
     @JsonBackReference
-    @JsonIgnore
+//    @JsonIgnore
     private Opportunite opportunite;
 
     // process

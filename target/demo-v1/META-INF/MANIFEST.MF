@@ -2,4 +2,8 @@ Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
 Built-By: Asma Ben Boubaker
 Build-Jdk: Oracle OpenJDK version 21.0.1
+Implementation-Title: demo
+Implementation-Version: v1
+Implementation-Vendor-Id: biz.picosoft
+Main-Class: ${start-class}
 

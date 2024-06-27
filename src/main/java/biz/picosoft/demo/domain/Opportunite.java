@@ -3,6 +3,7 @@ package biz.picosoft.demo.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,6 +29,7 @@ public class Opportunite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+
     private Long id;
     @Column(name = "exclude_from_view")
     private Boolean excludeFromView = true;
@@ -198,7 +200,8 @@ private String sidDepartement;
     @Column(name = "montant_estime")
     private Float montantEstime;
 
-    @OneToMany(mappedBy = "opportunite", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "opportunite", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JsonIgnore
     @JsonManagedReference
     private Set<Offre> offres = new HashSet<>();
 
@@ -208,7 +211,7 @@ private String sidDepartement;
     // relation one to many avec etude
     @OneToMany(mappedBy = "opportunite")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "opportunite" }, allowSetters = true)
+    @JsonManagedReference
     private Set<EtudeOpp> etudeOpps = new HashSet<>();
 
     public Set<EtudeOpp> getEtudeOpps() {

@@ -134,7 +134,7 @@ public class Demande implements Serializable {
 
     @OneToMany(mappedBy = "demande")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "offres", "demande" }, allowSetters = true)
+    @JsonIgnore
     private Set<Opportunite> opportunites = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
