@@ -245,7 +245,7 @@ public class DemandeServiceImpl implements DemandeService {
         Demande originalRequestCase = demandeRepository.findById(requestCaseDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Demande with id " + requestCaseDTO.getId() + " not found."));
 
-        originalRequestCase.setClient(client);
+
 
         // Explicitly handle domaines if necessary
         if (requestCaseDTO.getDomaines() != null) {
@@ -255,7 +255,8 @@ public class DemandeServiceImpl implements DemandeService {
                     .collect(Collectors.toSet());
             originalRequestCase.setDomaines(domaines);
         }
-
+        //client.setDemandes(new HashSet<>(Collections.singletonList(originalRequestCase)));
+        originalRequestCase.setClient(client);
         // Use the mapper to update other fields
         demandeInputMapper.partialUpdate(originalRequestCase, requestCaseDTO);
 

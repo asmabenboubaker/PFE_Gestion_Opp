@@ -322,8 +322,8 @@ public class DemandeResource {
 //    }
 
 
-    @PostMapping("/demandes/client")
-    public Demande createDemandeAndAssignToClient(@RequestBody Demande demandeDTO, @RequestParam Long clientId) throws URISyntaxException {
+    @PostMapping("/demandes/client/{clientId}")
+    public Demande createDemandeAndAssignToClient(@RequestBody Demande demandeDTO, @PathVariable Long clientId) throws URISyntaxException {
         log.debug("REST request to save Demande and assign to Client: {}", demandeDTO);
         if (demandeDTO.getId() != null) {
             throw new BadRequestAlertException("A new demande cannot already have an ID", ENTITY_NAME, "idexists");
