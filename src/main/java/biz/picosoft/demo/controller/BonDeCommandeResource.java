@@ -6,7 +6,7 @@ import biz.picosoft.demo.client.kernel.model.acl.AclClass;
 import biz.picosoft.demo.client.kernel.model.global.CurrentUser;
 import biz.picosoft.demo.controller.errors.BadRequestAlertException;
 import biz.picosoft.demo.domain.BonDeCommande;
-import biz.picosoft.demo.domain.BonDeCommande_;
+
 import biz.picosoft.demo.domain.Demande;
 import biz.picosoft.demo.domain.enumeration.StatutBC;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;

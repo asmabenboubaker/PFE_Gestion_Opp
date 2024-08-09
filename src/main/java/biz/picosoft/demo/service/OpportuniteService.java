@@ -8,7 +8,9 @@ import biz.picosoft.demo.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -77,4 +79,5 @@ public interface OpportuniteService {
     Optional<OpportuniteDTO> affecterOpportuniteADemande(Long opportuniteId, Long demandeId);
     void setCreateOffreTrue(Long demandeId);
     Optional<Opportunite> affecterOffre(Long opportuniteId, Long offreId);
+    Map<ZonedDateTime, Long> getOpportuniteGroupedByDate();
 }

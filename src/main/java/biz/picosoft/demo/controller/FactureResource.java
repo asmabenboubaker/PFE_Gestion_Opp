@@ -69,6 +69,7 @@ public class FactureResource {
     @PostMapping("/factures")
     public ResponseEntity<FactureDTO> createFacture(@RequestBody FactureDTO factureDTO) throws URISyntaxException {
         log.debug("REST request to save Facture : {}", factureDTO);
+
         if (factureDTO.getId() != null) {
             throw new BadRequestAlertException("A new facture cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -305,7 +306,7 @@ public class FactureResource {
     public ResponseEntity<Facture> setIsPaid(@PathVariable Long factureId) {
         Facture facture = factureRepository.findById(factureId)
                 .orElseThrow(() -> new RuntimeException("Facture not found with id: " + factureId));
-        facture.setIsPaid(!facture.getIsPaid());
+        facture.setIsPaid(facture.getIsPaid() == null || !facture.getIsPaid());
         Facture savedFacture = factureRepository.save(facture);
         return ResponseEntity.ok().body(savedFacture);
     }
@@ -315,6 +316,12 @@ public class FactureResource {
         Facture facture = factureRepository.findById(factureId)
                 .orElseThrow(() -> new RuntimeException("Facture not found with id: " + factureId));
         return ResponseEntity.ok().body(facture.getIsPaid());
+    }
+    // somme total des montants des factures
+    @GetMapping("/factures/totalAmount")
+    public ResponseEntity<Double> getTotalAmount() {
+        Double totalAmount = factureService.getTotalAmount();
+        return ResponseEntity.ok().body(totalAmount);
     }
 
 }

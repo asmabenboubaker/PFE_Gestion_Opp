@@ -94,6 +94,9 @@ public class DemandeQueryService extends QueryService<Demande> {
             if (criteria.getStatutDemande() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatutDemande(), Demande_.statutDemande));
             }
+            if (criteria.getActivityName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getActivityName(), Demande_.activityName));
+            }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Demande_.description));
             }

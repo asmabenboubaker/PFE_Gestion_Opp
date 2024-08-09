@@ -36,10 +36,8 @@ import tech.jhipster.web.util.ResponseUtil;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 /**
  * REST controller for managing {@link biz.picosoft.demo.domain.Opportunite}.
@@ -365,5 +363,11 @@ private final TacheRepo tach;
         log.debug("REST request to delete Opportunite : {}", id);
         tach.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/opportunites/by-date")
+    public ResponseEntity<Map<ZonedDateTime, Long>> getDemandesByDate() {
+        log.debug("REST request to get Demandes grouped by date");
+        Map<ZonedDateTime, Long> demandesByDate = opportuniteService.getOpportuniteGroupedByDate();
+        return ResponseEntity.ok(demandesByDate);
     }
 }

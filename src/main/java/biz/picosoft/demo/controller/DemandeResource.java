@@ -34,6 +34,8 @@ import tech.jhipster.web.util.ResponseUtil;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -454,6 +456,13 @@ public class DemandeResource {
     public ResponseEntity<Page<DemandeOutputDTO>> getValidationDemandes(Pageable pageable) {
         Page<DemandeOutputDTO> page = demandeService.getValidationDemandes(pageable);
         return ResponseEntity.ok().body(page);
+    }
+
+    @GetMapping("/demandes/by-date")
+    public ResponseEntity<Map<ZonedDateTime, Long>> getDemandesByDate() {
+        log.debug("REST request to get Demandes grouped by date");
+        Map<ZonedDateTime, Long> demandesByDate = demandeService.getDemandesGroupedByDate();
+        return ResponseEntity.ok(demandesByDate);
     }
 
 

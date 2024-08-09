@@ -39,5 +39,8 @@ public interface DemandeRepository
 
 
     Page<DemandeOutputDTO> findByActivityName(String activiteName, Pageable pageable);
+    @Query("SELECT DATE_TRUNC('day', d.dateDeCreation) AS day, COUNT(d) FROM Demande d GROUP BY day")
+    List<Object[]> findDemandesGroupedByDate();
+
 
 }

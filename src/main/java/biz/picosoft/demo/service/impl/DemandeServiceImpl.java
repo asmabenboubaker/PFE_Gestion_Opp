@@ -44,7 +44,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -310,6 +313,21 @@ public class DemandeServiceImpl implements DemandeService {
     public Page<DemandeOutputDTO> getValidationDemandes(Pageable pageable) {
         return demandeRepository.findByActivityName("Validation", pageable);
     }
+
+    @Override
+    public Map<ZonedDateTime, Long> getDemandesGroupedByDate() {
+        List<Object[]> results = demandeRepository.findDemandesGroupedByDate();
+        Map<ZonedDateTime, Long> demandesByDate = new HashMap<>();
+
+        for (Object[] result : results) {
+            ZonedDateTime date = ((Timestamp) result[0]).toLocalDateTime().atZone(ZoneId.systemDefault());
+            demandesByDate.put(date, (Long) result[1]);
+        }
+
+        return demandesByDate;
+    }
+
+
 
 
     public DemandeOutputDTO proceedGetDemandeId(Long id) throws IOException, TemplateException {

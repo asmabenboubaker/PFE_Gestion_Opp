@@ -38,12 +38,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Service Implementation for managing {@link Opportunite}.
@@ -675,6 +674,19 @@ System.out.println("getEquipe"+opportunite.getEquipes());
         }
 
         return optionalOpportunite;
+    }
+
+    @Override
+    public Map<ZonedDateTime, Long> getOpportuniteGroupedByDate() {
+        List<Object[]> results = opportuniteRepository.findOpportuniteGroupedByDate();
+        Map<ZonedDateTime, Long> demandesByDate = new HashMap<>();
+
+        for (Object[] result : results) {
+            ZonedDateTime date = ((Timestamp) result[0]).toLocalDateTime().atZone(ZoneId.systemDefault());
+            demandesByDate.put(date, (Long) result[1]);
+        }
+
+        return demandesByDate;
     }
 
 

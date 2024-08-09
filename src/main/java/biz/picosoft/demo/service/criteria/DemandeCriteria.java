@@ -48,6 +48,7 @@ public class DemandeCriteria implements Serializable, Criteria {
     private StringFilter description;
 
     private StringFilter nom;
+    private StringFilter activityName;
 
     private LocalDateFilter dateDeCreation;
 
@@ -68,6 +69,7 @@ public class DemandeCriteria implements Serializable, Criteria {
         this.statutDemande = other.statutDemande == null ? null : other.statutDemande.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.nom = other.nom == null ? null : other.nom.copy();
+        this.activityName = other.activityName == null ? null : other.activityName.copy();
         this.dateDeCreation = other.dateDeCreation == null ? null : other.dateDeCreation.copy();
         this.statut = other.statut == null ? null : other.statut.copy();
         this.opportuniteId = other.opportuniteId == null ? null : other.opportuniteId.copy();
@@ -135,6 +137,15 @@ public class DemandeCriteria implements Serializable, Criteria {
             nom = new StringFilter();
         }
         return nom;
+    }
+
+
+    public StringFilter getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(StringFilter activityName) {
+        this.activityName = activityName;
     }
 
     public void setNom(StringFilter nom) {

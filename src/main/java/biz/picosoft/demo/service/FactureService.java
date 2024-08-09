@@ -71,4 +71,6 @@ public interface FactureService {
     // get list item by id facture
     Set<InvoiceItem> getItemsByFactureId(Long id);
     Facture assignClientToFacture(Long factureId, Long clientId);
+    //getTotalAmount
+    Double getTotalAmount();
 }

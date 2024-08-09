@@ -238,6 +238,16 @@ public class FactureServiceImpl implements FactureService {
         }
     }
 
+    @Override
+    public Double getTotalAmount() {
+        try {
+            return factureRepository.getTotalAmount();
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération du montant total", e);
+            throw new RuntimeException("Erreur lors de la récupération du montant total", e);
+        }
+    }
+
     private void addRows(PdfPTable table, Map<String, Object> mapFromJson) {
 
     log.info("Inside addRows");

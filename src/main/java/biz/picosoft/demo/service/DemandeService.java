@@ -9,7 +9,10 @@ import biz.picosoft.demo.service.dto.DemandeOutputDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -84,5 +87,6 @@ public interface DemandeService {
     Demande affecterDomaines(Long demandeId, Set<Long> domaineIds);
 
     Page<DemandeOutputDTO> getValidationDemandes(Pageable pageable);
+     Map<ZonedDateTime, Long> getDemandesGroupedByDate();
 
 }
