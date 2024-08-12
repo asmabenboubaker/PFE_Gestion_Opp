@@ -5,3 +5,4 @@ biz\picosoft\demo\config\TestUtil$NumberMatcher.class
 biz\picosoft\demo\config\TestUtil$ZonedDateTimeMatcher.class
 biz\picosoft\demo\config\AsyncSyncConfiguration.class
 biz\picosoft\demo\controller\ControllerTest.class
+biz\picosoft\demo\Repository\ClientRepositoryTest.class

@@ -80,6 +80,7 @@ biz\picosoft\demo\config\logging\AopLoggingResource.class
 biz\picosoft\demo\domain\HelloMessage.class
 biz\picosoft\demo\service\dto\DemandeDTO.class
 biz\picosoft\demo\client\kernel\model\objects\RequestFileOption.class
+biz\picosoft\demo\domain\Client$ClientBuilder.class
 biz\picosoft\demo\client\kernel\model\common\Keyword.class
 biz\picosoft\demo\service\mapper\OffreOutputMapper.class
 biz\picosoft\demo\service\mapper\OpportuniteInputMapper.class
