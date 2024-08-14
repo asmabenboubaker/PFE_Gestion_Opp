@@ -2,6 +2,9 @@ package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.domain.Article;
 import biz.picosoft.demo.domain.enumeration.StatutOffre;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -13,6 +16,9 @@ import java.util.Objects;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Offre} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OffreDTO implements Serializable {
 
     private Long id;

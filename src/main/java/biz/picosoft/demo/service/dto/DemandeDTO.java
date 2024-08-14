@@ -6,6 +6,9 @@ import biz.picosoft.demo.client.kernel.model.objects.ObjectsDTO;
 import biz.picosoft.demo.domain.Domaine;
 import biz.picosoft.demo.domain.enumeration.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -20,6 +23,9 @@ import java.util.Set;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Demande} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DemandeDTO  implements Serializable {
 
     private Long id;

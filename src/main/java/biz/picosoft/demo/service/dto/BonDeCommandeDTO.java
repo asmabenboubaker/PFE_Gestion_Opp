@@ -1,6 +1,9 @@
 package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.domain.enumeration.StatutBC;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 
 import java.io.Serializable;
@@ -12,6 +15,9 @@ import java.util.Objects;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.BonDeCommande} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BonDeCommandeDTO implements Serializable {
 
     private Long id;

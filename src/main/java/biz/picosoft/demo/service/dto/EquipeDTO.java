@@ -1,10 +1,16 @@
 package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.domain.Opportunite;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EquipeDTO implements Serializable {
 
     private Long id;

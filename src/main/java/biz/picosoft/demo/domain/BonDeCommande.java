@@ -3,6 +3,9 @@ package biz.picosoft.demo.domain;
 import biz.picosoft.demo.domain.enumeration.StatutBC;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,6 +22,9 @@ import java.util.Objects;
  * A BonDeCommande.
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "bon_de_commande",schema = "opportunite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BonDeCommande implements Serializable {

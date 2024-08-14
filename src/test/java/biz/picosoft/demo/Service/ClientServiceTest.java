@@ -133,7 +133,7 @@ public class ClientServiceTest {
         Assertions.assertThat(updateReturn.getNom()).isEqualTo("pikachu");
     }
     @Test
-    public void PokemonService_DeletePokemonById_ReturnVoid() {
+    public void DeleteById() {
         Long clientId = 1L;
         Client client = Client.builder().id(1L).nom("pikachu").adresse("electric").typeClient("this is a type").build();
 

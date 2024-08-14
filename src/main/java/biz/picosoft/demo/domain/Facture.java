@@ -2,6 +2,9 @@ package biz.picosoft.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,6 +21,9 @@ import java.util.Set;
  * A Facture.
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "facture",schema = "opportunite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Facture implements Serializable {

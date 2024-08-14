@@ -1,5 +1,9 @@
 package biz.picosoft.demo.service.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import java.io.Serializable;
 
@@ -11,6 +15,9 @@ import java.util.Objects;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Projet} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProjetDTO implements Serializable {
 
     private Long id;

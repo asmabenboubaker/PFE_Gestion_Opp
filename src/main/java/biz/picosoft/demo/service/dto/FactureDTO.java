@@ -1,5 +1,9 @@
 package biz.picosoft.demo.service.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 import java.time.LocalDate;
@@ -10,6 +14,9 @@ import java.util.Objects;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Facture} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FactureDTO implements Serializable {
 
     private Long id;

@@ -2,6 +2,9 @@ package biz.picosoft.demo.service.dto;
 
 import biz.picosoft.demo.domain.Equipe;
 import biz.picosoft.demo.domain.EtudeOpp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -12,6 +15,9 @@ import java.util.Set;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.Opportunite} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OpportuniteDTO implements Serializable {
 
     private Long id;

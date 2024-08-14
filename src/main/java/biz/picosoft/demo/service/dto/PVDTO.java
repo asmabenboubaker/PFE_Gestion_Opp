@@ -2,6 +2,9 @@ package biz.picosoft.demo.service.dto;
 
 
 import biz.picosoft.demo.domain.enumeration.StatutProjet;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,6 +14,9 @@ import java.util.Objects;
 /**
  * A DTO for the {@link biz.picosoft.demo.domain.PV} entity.
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PVDTO implements Serializable {
 
     private Long id;

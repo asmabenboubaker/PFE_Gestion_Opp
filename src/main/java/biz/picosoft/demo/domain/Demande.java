@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -22,6 +25,9 @@ import java.util.Set;
  * A Demande.
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "demande",schema = "opportunite")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Demande implements Serializable {
@@ -151,8 +157,6 @@ public class Demande implements Serializable {
     @JsonIgnoreProperties(value = { "demandes" }, allowSetters = true)
     private Client client;
 
-    public Demande() {
-    }
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
