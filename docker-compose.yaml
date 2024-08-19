@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  postgresdb:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=kernelExtPicoSoft
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psql
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  app:
+    depends_on:
+      - postgresdb
+    build: ./
+    ports:
+      - 8888:8888
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:postgresql://postgresdb:5432/kernelExtPicoSoft",
+        "spring.datasource.username" : "postgres",
+        "spring.datasource.password" : "psql",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+    restart: always
+
+volumes:
+  db:
