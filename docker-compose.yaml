@@ -9,33 +9,38 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=psql
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - db:/var/lib/postgresql/data
 
   app:
     depends_on:
       - postgresdb
-    build: ./
+    build: .
     ports:
-      - 8888:8888
+      - "8888:8888"
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgresql://office.picosoft.biz:10181/kernelExtPicoSoft",
-        "spring.datasource.username" : "postgres",
-        "spring.datasource.password" : "psql",
-        "spring.datasource.driver-class-name" : "org.postgresql.Driver",
-        "spring.datasource.initialSize" : "20",
-        "spring.datasource.maxWaitMillis" : "15000",
-        "spring.datasource.maxTotal" : "75",
-        "spring.datasource.maxIdle" : "20",
-        "spring.datasource.maxAge" : "7200000",
-        "spring.datasource.maxActive" : "150",
-        "spring.datasource.testOnBorrow" : "true",
-        "spring.datasource.validationQuery" : "select 1",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
+        "spring.datasource.url": "jdbc:postgresql://office.picosoft.biz:10181/kernelExtPicoSoft",
+        "spring.datasource.username": "postgres",
+        "spring.datasource.password": "psql",
+        "spring.datasource.driver-class-name": "org.postgresql.Driver",
+        "spring.datasource.initialSize": "20",
+        "spring.datasource.maxWaitMillis": "15000",
+        "spring.datasource.maxTotal": "75",
+        "spring.datasource.maxIdle": "20",
+        "spring.datasource.maxAge": "7200000",
+        "spring.datasource.maxActive": "150",
+        "spring.datasource.testOnBorrow": "true",
+        "spring.datasource.validationQuery": "select 1",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
       }'
     volumes:
       - .m2:/root/.m2
     stdin_open: true
+    tty: true
+    restart: always
+
+volumes:
+  db:
