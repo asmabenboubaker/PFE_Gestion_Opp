@@ -12,6 +12,11 @@ RUN mvn clean install
 # Use an official Tomcat image as the base
 FROM tomcat:9.0.79-jdk17-temurin
 
+
+# Print the contents of the /app directory
+RUN echo "Contents of /app:" && ls -la /app
+
+
 # Copy custom server.xml and context.xml into the appropriate directories
 COPY tomcat-conf/server.xml /usr/local/tomcat/conf/
 COPY tomcat-conf/context.xml /usr/local/tomcat/conf/
