@@ -16,6 +16,9 @@ FROM tomcat:9.0.79-jdk17-temurin
 COPY tomcat-conf/server.xml /usr/local/tomcat/conf/
 COPY tomcat-conf/context.xml /usr/local/tomcat/conf/
 
+# Add PostgreSQL JDBC driver
+COPY path/to/postgresql-<version>.jar /usr/local/tomcat/lib/
+
 # Copy the WAR file to the Tomcat webapps directory
 COPY --from=build /app/target/demo-v1.war /usr/local/tomcat/webapps/
 
