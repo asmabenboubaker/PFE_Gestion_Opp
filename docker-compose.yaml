@@ -1,46 +1,47 @@
-version: '3.3'
+version: "3.3"
 
 services:
-  app:
-    build: .
-    container_name: springboot-app
-    ports:
-      - "8889:8888"
-    volumes:
-      # Mount the Tomcat configuration files
-      - ./tomcat-conf/server.xml:/usr/local/tomcat/conf/server.xml
-      - ./tomcat-conf/context.xml:/usr/local/tomcat/conf/context.xml
-     environment:
-      SPRING_PROFILES_ACTIVE: "default"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kernelExtPicoSoft
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: psql
-      SPRING_JPA_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
-      SPRING_JPA_GENERATE_DDL: true
-      SPRING_APPLICATION_NAME: opportunite
-      FEIGN_KERNEL_URL: https://kernel.picosoft.biz/kernel-v1/api
-      FEIGN_KERNEL_NAME: mskernelkernelExtPicoSoft
-      SPRING_SECURITY_KEY: "&PICO_2024$apps//dev**"
-    networks:
-      - app-network
-
-  db:
-    image: postgres:14
-    container_name: postgres-db
+  postgresdb:
+    image: postgres
+    restart: always
     environment:
       POSTGRES_DB: kernelExtPicoSoft
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: psql
     ports:
-      - "5433:5432"
-    networks:
-      - app-network
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
-networks:
-  app-network:
-    driver: bridge
+  app:
+    depends_on:
+      - postgresdb
+    build: .
+    ports:
+      - "8888:8888"
+    environment:
+      SPRING_APPLICATION_JSON: |
+        {
+          "spring.datasource.url": "jdbc:postgresql://postgresdb:5432/kernelExtPicoSoft",
+          "spring.datasource.username": "postgres",
+          "spring.datasource.password": "psql",
+          "spring.datasource.driver-class-name": "org.postgresql.Driver",
+          "spring.datasource.initialSize": "20",
+          "spring.datasource.maxWaitMillis": "15000",
+          "spring.datasource.maxTotal": "75",
+          "spring.datasource.maxIdle": "20",
+          "spring.datasource.maxAge": "7200000",
+          "spring.datasource.maxActive": "150",
+          "spring.datasource.testOnBorrow": "true",
+          "spring.datasource.validationQuery": "select 1",
+          "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
+          "spring.jpa.hibernate.ddl-auto": "update"
+        }
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+    restart: always
 
 volumes:
-  pgdata:
+  db:
