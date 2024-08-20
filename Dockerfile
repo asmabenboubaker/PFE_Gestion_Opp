@@ -6,28 +6,21 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Build the Spring Boot application
+# Build the Spring Boot application and download dependencies
 RUN mvn clean install
 
 # Use an official Tomcat image as the base
 FROM tomcat:9.0.79-jdk17-temurin
 
-
-# Print the contents of the /app directory
-RUN ls -la /app || echo "Directory /app does not exist"
-
-
 # Copy custom server.xml and context.xml into the appropriate directories
 COPY tomcat-conf/server.xml /usr/local/tomcat/conf/
 COPY tomcat-conf/context.xml /usr/local/tomcat/conf/
 
-# Add PostgreSQL JDBC driver
-#COPY path/to/postgresql-<version>.jar /usr/local/tomcat/lib/
+# Copy the PostgreSQL JDBC driver from the Maven repository to Tomcat's lib directory
+COPY --from=build /root/.m2/repository/org/postgresql/postgresql/*/postgresql-*.jar /usr/local/tomcat/lib/
 
 # Copy the WAR file to the Tomcat webapps directory
-#COPY --from=build /app/target/demo-v1.war /usr/local/tomcat/webapps/
 COPY --from=build /app/target/demo-v1.war /usr/local/tomcat/webapps/
-COPY --from=build /app/dependency/*.jar /usr/local/tomcat/lib/
 
 # Expose the port your app runs on
 EXPOSE 8888
