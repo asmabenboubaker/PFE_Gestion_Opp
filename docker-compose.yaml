@@ -1,29 +1,37 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:15.4
-    container_name: postgres_container
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: psql
-      POSTGRES_DB: kernelExtPicoSoft
-    ports:
-      - "10181:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   app:
     build: .
-    container_name: springboot_app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/kernelExtPicoSoft
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: psql
+    container_name: springboot-app
     ports:
       - "8081:8081"
-    depends_on:
-      - postgres
+    volumes:
+      # Mount the Tomcat configuration files
+      - ./tomcat-conf/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./tomcat-conf/context.xml:/usr/local/tomcat/conf/context.xml
+    environment:
+      SPRING_PROFILES_ACTIVE: "default"
+    networks:
+      - app-network
+
+  db:
+    image: postgres:14
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: kernelExtPicoSoft
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: psql
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  pgdata:
