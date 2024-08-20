@@ -17,7 +17,7 @@ COPY tomcat-conf/server.xml /usr/local/tomcat/conf/
 COPY tomcat-conf/context.xml /usr/local/tomcat/conf/
 
 # Copy the WAR file to the Tomcat webapps directory
-COPY --from=build /app/target/your-app-name.war /usr/local/tomcat/webapps/
+COPY --from=build /app/target/demo-v1.war /usr/local/tomcat/webapps/
 
 # Expose the port your app runs on
 EXPOSE 8888
