@@ -14,7 +14,7 @@ FROM tomcat:9.0.79-jdk17-temurin
 
 
 # Print the contents of the /app directory
-RUN echo "Contents of /app:" && ls -la /app
+RUN ls -la /app || echo "Directory /app does not exist"
 
 
 # Copy custom server.xml and context.xml into the appropriate directories
