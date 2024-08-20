@@ -10,8 +10,17 @@ services:
       # Mount the Tomcat configuration files
       - ./tomcat-conf/server.xml:/usr/local/tomcat/conf/server.xml
       - ./tomcat-conf/context.xml:/usr/local/tomcat/conf/context.xml
-    environment:
+     environment:
       SPRING_PROFILES_ACTIVE: "default"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kernelExtPicoSoft
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: psql
+      SPRING_JPA_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_JPA_GENERATE_DDL: true
+      SPRING_APPLICATION_NAME: opportunite
+      FEIGN_KERNEL_URL: https://kernel.picosoft.biz/kernel-v1/api
+      FEIGN_KERNEL_NAME: mskernelkernelExtPicoSoft
+      SPRING_SECURITY_KEY: "&PICO_2024$apps//dev**"
     networks:
       - app-network
 
