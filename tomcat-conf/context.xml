@@ -26,7 +26,9 @@
 <ResourceLink name="jdbc/kernelExtPicoSoft"
          global="jdbc/kernelExtPicoSoft"
          type="javax.sql.DataSource"/>
-
+<ResourceLink name="UserDatabase"
+                  global="UserDatabase"
+                  type="org.apache.catalina.UserDatabase"/>
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     <!--
     <Manager pathname="" />
