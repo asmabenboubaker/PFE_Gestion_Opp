@@ -35,7 +35,12 @@ services:
           "spring.datasource.testOnBorrow": "true",
           "spring.datasource.validationQuery": "select 1",
           "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
-          "spring.jpa.hibernate.ddl-auto": "update"
+          "spring.jpa.hibernate.ddl-auto": "update",
+          "eureka.client.service-url.defaultZone": "http://eureka.picosoft.biz:8080/eureka-server/eureka/",
+          "eureka.instance.prefer-ip-address": "true",
+          "eureka.client.register-with-eureka": "true",
+          "eureka.client.fetch-registry": "true",
+          "spring.application.name": "demo-v1"
         }
     volumes:
       - .m2:/root/.m2
