@@ -5,8 +5,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 8888
-    targetPort: 30001
-    nodePort: 32412
+    - port: 8888
+      nodePort: 31624
+      protocol: TCP
   selector:
     app: springboot-app
