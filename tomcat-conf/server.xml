@@ -104,19 +104,20 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-			       <Connector port="8888" protocol="HTTP/1.1"
-               connectionTimeout="20000"
-			   useSendfile="false"
-               redirectPort="8444"
-			   maxHttpHeaderSize="8192"
-               maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
-               enableLookups="false" 
-		       acceptCount="100"
-               disableUploadTimeout="true"
-               compression="force"
-               compressionMinSize="1024"
-               noCompressionUserAgents=""
-               compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript"/>  
+		<Connector port="8888" protocol="HTTP/1.1"
+           connectionTimeout="20000"
+           useSendfile="false"
+           redirectPort="8444"
+           maxHttpHeaderSize="8192"
+           maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
+           enableLookups="false"
+           acceptCount="100"
+           disableUploadTimeout="true"
+           compression="force"
+           compressionMinSize="1024"
+           noCompressionUserAgents=""
+           compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript"
+           address="0.0.0.0"/> 
 
 
     <!-- A "Connector" using the shared thread pool-->
