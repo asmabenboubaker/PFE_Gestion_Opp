@@ -43,15 +43,16 @@ public class ClientServiceTest {
     public void CreateClient() {
         // Mocking dependencies
         Client client = Client.builder()
-                .nom("pikachu")
-                .adresse("electric").build();
+                .nom("nom")
+                .adresse("adresse").build();
         ClientDTO clientDto = ClientDTO.builder()
-                .nom("pikachu")
-                .adresse("electric").build();
+                .nom("nom")
+                .adresse("adresse").build();
 
         when(clientMapper.toEntity(clientDto)).thenReturn(client);
         when(clientMapper.toDto(client)).thenReturn(clientDto);
-        when(clientRepository.save(Mockito.any(Client.class))).thenReturn(client);
+        when(clientRepository.save(Mockito.any(Client.class)))
+                .thenReturn(client);
 
         // Method under test
         ClientDTO savedClient = clientServiceImpl.save(clientDto);
